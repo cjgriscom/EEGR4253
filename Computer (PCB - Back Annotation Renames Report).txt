@@ -1,0 +1,19 @@
+Back Annotation Renames Report
+------------------------------
+
+Report File:        Y:\Homeschool\Semester6\Microcomputer\Computer (PCB - Back Annotation Renames Report).txt
+Report Written:     Saturday, January 28, 2017
+Project Path:       Y:\Homeschool\Semester6\Microcomputer\Computer.prj
+Design Path:        Y:\Homeschool\Semester6\Microcomputer\Computer.pcb
+Design Title:       
+Created:            1/26/2017 12:31:38 AM
+Last Saved:         1/28/2017 12:12:14 PM
+Editing Time:       3523 min
+Units:              inches (precision 3)
+
+Outstanding PCB renames awaiting back annotation to the Schematics design.
+
+Rename Net from "N0342" to "DUART_CLK".
+Rename Component from "C3" to "C16".
+
+End Of Report.

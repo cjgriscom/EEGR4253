@@ -1,0 +1,63 @@
+Design Rule Check Report
+------------------------
+
+Report File:        Y:\Homeschool\Semester6\Microcomputer\Computer (PCB - Design Rule Check Report).txt
+Report Written:     Wednesday, February 01, 2017
+Project Path:       Y:\Homeschool\Semester6\Microcomputer\Computer.prj
+Design Path:        Y:\Homeschool\Semester6\Microcomputer\Computer.pcb
+Design Title:       
+Created:            1/26/2017 12:31:38 AM
+Last Saved:         2/1/2017 2:03:56 AM
+Editing Time:       6244 min
+Units:              inches (precision 3)
+
+
+Results
+=======
+
+Dangling Track from (5.925,11.975) to (5.900,12.000) on layer Top Copper
+
+Number of errors found : 1
+
+
+Settings
+========
+
+
+Spacings
+
+=========
+
+Tracks        Yes
+Pads and Vias Yes
+Shapes        Yes
+Text          Yes
+Board         Yes
+Drills        Yes
+Components    No
+
+
+Manufacturing
+
+==============
+
+Min Drill Hole Size  Yes
+Min Track Width      Yes
+Min Annular Ring     Yes
+Copper Text In Board Yes
+Mirrored Text        Yes
+Routing Areas        Yes
+Drill Breakout       Yes
+
+
+Nets
+
+=====
+
+Net Completion               Yes
+Dangling Tracks              Yes
+Net Track Length Differences No
+
+
+
+End Of Report.

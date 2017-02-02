@@ -1,0 +1,1127 @@
+
+Component libraries (*.cml)
+
+
+=============================
+
+
+Library : Apem_Switches    {C:\users\Public\Documents\PCB Artist\Library}
+
+
+===========================================================================
+
+Component   Ref Scm Symbol  Scm Library                                                  Package         Pcb Symbol      Pcb Library
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2554        U   SW2         Apem_Switches {C:\users\Public\Documents\PCB Artist\Library} SWITCH_25546NA  SWITCH_25546NA  Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+5232CDB     U   SW1_IXI     Apem_Switches {C:\users\Public\Documents\PCB Artist\Library} SWITCH_5232CDB  SWITCH_5232CDB  Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+5236CDB     U   SW1_IXI     Apem_Switches {C:\users\Public\Documents\PCB Artist\Library} SWITCH_5232CDB  SWITCH_5232CDB  Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+5237CDB     U   SW1_IXI     Apem_Switches {C:\users\Public\Documents\PCB Artist\Library} SWITCH_5232CDB  SWITCH_5232CDB  Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+9233CD      U   SW_2P       Switches {C:\users\Public\Documents\PCB Artist\Library}      SWITCH_9233CD   SWITCH_9233CD   Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+21136NA     U   SW1_IXI     Apem_Switches {C:\users\Public\Documents\PCB Artist\Library} SWITCH_21136    SWITCH_21136    Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+25136NAH    U   SW1_IXI     Apem_Switches {C:\users\Public\Documents\PCB Artist\Library} SWITCH_25136NAH SWITCH_25136NAH Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+25146NAH    U   SW2_IXI     Apem_Switches {C:\users\Public\Documents\PCB Artist\Library} SWITCH_25146NAH SWITCH_25146NAH Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+25336NA     U   SW1_IXI     Apem_Switches {C:\users\Public\Documents\PCB Artist\Library} SWITCH_25336NA  SWITCH_25336NA  Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+25546NA     U   SW2         Apem_Switches {C:\users\Public\Documents\PCB Artist\Library} SWITCH_25546NA  SWITCH_25546NA  Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+DS02        U   SW4_A       Apem_Switches {C:\users\Public\Documents\PCB Artist\Library} SWITCH_DS02V    SWITCH_DS02V    Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+DS02V       U   SW4_A       Apem_Switches {C:\users\Public\Documents\PCB Artist\Library} SWITCH_DS02V    SWITCH_DS02V    Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+DS04        U   SW6_A       Apem_Switches {C:\users\Public\Documents\PCB Artist\Library} SWITCH_DS04V    SWITCH_DS04V    Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+DS04V       U   SW6_A       Apem_Switches {C:\users\Public\Documents\PCB Artist\Library} SWITCH_DS04V    SWITCH_DS04V    Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+DS06        U   SW6_A       Apem_Switches {C:\users\Public\Documents\PCB Artist\Library} SWITCH_DS06V    SWITCH_DS06V    Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+DS06V       U   SW6_A       Apem_Switches {C:\users\Public\Documents\PCB Artist\Library} SWITCH_DS06V    SWITCH_DS06V    Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+DS08        U   SW8_A       Apem_Switches {C:\users\Public\Documents\PCB Artist\Library} SWITCH_DS08V    SWITCH_DS08V    Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+DS08V       U   SW8_A       Apem_Switches {C:\users\Public\Documents\PCB Artist\Library} SWITCH_DS08V    SWITCH_DS08V    Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+DS10        U   SW10_A      Apem_Switches {C:\users\Public\Documents\PCB Artist\Library} SWITCH_DS10V    SWITCH_DS10V    Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+DS10V       U   SW10_A      Apem_Switches {C:\users\Public\Documents\PCB Artist\Library} SWITCH_DS10V    SWITCH_DS10V    Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+NDI04S      U   SW4_A       Apem_Switches {C:\users\Public\Documents\PCB Artist\Library} SWITCH_NDI04SVX SWITCH_NDI04SVX Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+NDI04SVX    U   SW4_A       Apem_Switches {C:\users\Public\Documents\PCB Artist\Library} SWITCH_NDI04SVX SWITCH_NDI04SVX Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+NDI06S      U   SW6_A       Apem_Switches {C:\users\Public\Documents\PCB Artist\Library} SWITCH_NDI06SVX SWITCH_NDI06SVX Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+NDI06SVX    U   SW6_A       Apem_Switches {C:\users\Public\Documents\PCB Artist\Library} SWITCH_NDI06SVX SWITCH_NDI06SVX Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+NDI08S      U   SW8_A       Apem_Switches {C:\users\Public\Documents\PCB Artist\Library} SWITCH_NDI08SVX SWITCH_NDI08SVX Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+NDI08SVX    U   SW8_A       Apem_Switches {C:\users\Public\Documents\PCB Artist\Library} SWITCH_NDI08SVX SWITCH_NDI08SVX Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+NHDS04TV    U   SW4_A       Apem_Switches {C:\users\Public\Documents\PCB Artist\Library} SWITCH_NHDS04TV SWITCH_NHDS04TV Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+NHDS08TV    U   SW8_A       Apem_Switches {C:\users\Public\Documents\PCB Artist\Library} SWITCH_NHDS08TV SWITCH_NHDS08TV Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+NK236       U   SW1         Switches {C:\users\Public\Documents\PCB Artist\Library}      SWITCH_NK236    SWITCH_NK236    Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+P36S103     U   SWITCH_P36S Switches {C:\users\Public\Documents\PCB Artist\Library}      SWITCH_P36S     SWITCH_P36S     Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+P36S106     U   SWITCH_P36S Switches {C:\users\Public\Documents\PCB Artist\Library}      SWITCH_P36S     SWITCH_P36S     Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+PT65503     U   SWITCH_PT   Switches {C:\users\Public\Documents\PCB Artist\Library}      SWITCH_PT       SWITCH_PT       Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+TL36P0050   U   SW1_IXI     Apem_Switches {C:\users\Public\Documents\PCB Artist\Library} SWITCH_TL36P    SWITCH_TL36P    Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+TL36P005000 U   SW1_IXI     Apem_Switches {C:\users\Public\Documents\PCB Artist\Library} SWITCH_TL36P    SWITCH_TL36P    Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+TL36W0050   U   SW1_IXI     Apem_Switches {C:\users\Public\Documents\PCB Artist\Library} SWITCH_TL36W    SWITCH_TL36W    Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+TL36W005000 U   SW1_IXI     Apem_Switches {C:\users\Public\Documents\PCB Artist\Library} SWITCH_TL36W    SWITCH_TL36W    Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+TL36WW050   U   SW1_IXI     Apem_Switches {C:\users\Public\Documents\PCB Artist\Library} SWITCH_TL36WW   SWITCH_TL36WW   Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+TL36WW05000 U   SW1_IXI     Apem_Switches {C:\users\Public\Documents\PCB Artist\Library} SWITCH_TL36WW   SWITCH_TL36WW   Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+TL39WW050   U   SW1_IXI     Apem_Switches {C:\users\Public\Documents\PCB Artist\Library} SWITCH_TL36WW   SWITCH_TL36WW   Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+TL39WW05000 U   SW1_IXI     Apem_Switches {C:\users\Public\Documents\PCB Artist\Library} SWITCH_TL36WW   SWITCH_TL36WW   Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+TL46P0050   U   SW2_IXI     Apem_Switches {C:\users\Public\Documents\PCB Artist\Library} SWITCH_TL46P    SWITCH_TL46P    Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+TL46P005000 U   SW2_IXI     Apem_Switches {C:\users\Public\Documents\PCB Artist\Library} SWITCH_TL46P    SWITCH_TL46P    Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+TL46W0050   U   SW2_IXI     Apem_Switches {C:\users\Public\Documents\PCB Artist\Library} SWITCH_TL46W    SWITCH_TL46W    Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+TL46W005000 U   SW2_IXI     Apem_Switches {C:\users\Public\Documents\PCB Artist\Library} SWITCH_TL46W    SWITCH_TL46W    Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+TP32P0080   U   SW1_IXI     Apem_Switches {C:\users\Public\Documents\PCB Artist\Library} SWITCH_TP32P    SWITCH_TP32P    Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+TP32P008000 U   SW1_IXI     Apem_Switches {C:\users\Public\Documents\PCB Artist\Library} SWITCH_TP32P    SWITCH_TP32P    Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+TP32W0080   U   SW1_IXI     Apem_Switches {C:\users\Public\Documents\PCB Artist\Library} SWITCH_TP32W    SWITCH_TP32W    Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+TP32W008000 U   SW1_IXI     Apem_Switches {C:\users\Public\Documents\PCB Artist\Library} SWITCH_TP32W    SWITCH_TP32W    Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+TP33P0080   U   SW1_IXI     Apem_Switches {C:\users\Public\Documents\PCB Artist\Library} SWITCH_TP32P    SWITCH_TP32P    Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+TP33P008000 U   SW1_IXI     Apem_Switches {C:\users\Public\Documents\PCB Artist\Library} SWITCH_TP32P    SWITCH_TP32P    Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+TP33W0080   U   SW1_IXI     Apem_Switches {C:\users\Public\Documents\PCB Artist\Library} SWITCH_TP32W    SWITCH_TP32W    Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+TP33W008000 U   SW1_IXI     Apem_Switches {C:\users\Public\Documents\PCB Artist\Library} SWITCH_TP32W    SWITCH_TP32W    Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+TP33WW080   U   SW1_IXI     Apem_Switches {C:\users\Public\Documents\PCB Artist\Library} SWITCH_TP32WW   SWITCH_TP32WW   Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+TP33WW08000 U   SW1_IXI     Apem_Switches {C:\users\Public\Documents\PCB Artist\Library} SWITCH_TP32WW   SWITCH_TP32WW   Apem_Switches {C:\users\Public\Documents\PCB Artist\Library}
+
+Library : connector    {C:\users\Public\Documents\PCB Artist\Library}
+
+
+=======================================================================
+
+Component Ref  Scm Symbol Scm Library                                             Package Pcb Symbol Pcb Library
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1WP       PL   1P                                                                 DSC     1          discrete {C:\users\Public\Documents\PCB Artist\Library}
+2WP       PL   2P                                                                 DSC     2          discrete {C:\users\Public\Documents\PCB Artist\Library}
+3WP       PL   3P                                                                 DSC     3          discrete {C:\users\Public\Documents\PCB Artist\Library}
+4WP       PL   4P                                                                 DSC     4          discrete {C:\users\Public\Documents\PCB Artist\Library}
+5WP       PL   5P                                                                 DSC     5          discrete {C:\users\Public\Documents\PCB Artist\Library}
+26WDP     PL   13P                                                                DSC     26         discrete {C:\users\Public\Documents\PCB Artist\Library}
+6464F     CONN 64PIN      discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     6464F      discrete {C:\users\Public\Documents\PCB Artist\Library}
+6464M     PL   64PIN      discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     6464M      discrete {C:\users\Public\Documents\PCB Artist\Library}
+6496F     CONN 64PIN      discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     6496F      discrete {C:\users\Public\Documents\PCB Artist\Library}
+6496M     CONN 64PIN      discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     6496M      discrete {C:\users\Public\Documents\PCB Artist\Library}
+9696F     CONN 96PIN      discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     9696F      discrete {C:\users\Public\Documents\PCB Artist\Library}
+9696M     CONN 96PIN      discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     9696M      discrete {C:\users\Public\Documents\PCB Artist\Library}
+D9F       CONN 9PIN       discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     D9F        discrete {C:\users\Public\Documents\PCB Artist\Library}
+D9M       CONN 9PIN       discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     D9M        discrete {C:\users\Public\Documents\PCB Artist\Library}
+D15F      CONN 15PIN      discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     D15F       discrete {C:\users\Public\Documents\PCB Artist\Library}
+D15M      CONN 15PIN      discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     D15M       discrete {C:\users\Public\Documents\PCB Artist\Library}
+D25F      CONN 25PIN      discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     D25F       discrete {C:\users\Public\Documents\PCB Artist\Library}
+D25M      CONN 25PIN      discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     D25M       discrete {C:\users\Public\Documents\PCB Artist\Library}
+D990F     CONN 9PIN       discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     D990F      discrete {C:\users\Public\Documents\PCB Artist\Library}
+D990M     CONN 9PIN       discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     D990M      discrete {C:\users\Public\Documents\PCB Artist\Library}
+D1590F    CONN 15PIN      discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     D1590F     discrete {C:\users\Public\Documents\PCB Artist\Library}
+D1590M    CONN 15PIN      discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     D1590M     discrete {C:\users\Public\Documents\PCB Artist\Library}
+D2590F    CONN 25PIN      discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     D2590F     discrete {C:\users\Public\Documents\PCB Artist\Library}
+D2590M    CONN 25PIN      discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     D2590M     discrete {C:\users\Public\Documents\PCB Artist\Library}
+
+Library : Diode    {C:\users\Public\Documents\PCB Artist\Library}
+
+
+===================================================================
+
+Component Ref Scm Symbol Scm Library                                          Package Pcb Symbol Pcb Library
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1N746     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N747     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N748     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N749     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N750     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N751     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N752     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N753     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N754     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N755     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N756     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N757     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N758     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N759     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N821     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N823     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N825     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N827     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N829     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N957     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N958     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N959     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N960     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N961     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N962     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N963     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N964     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N965     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N966     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N967     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N968     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N969     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N970     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N971     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N972     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N973     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N974     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N975     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N976     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N977     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N978     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N979     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N980     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N981     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N982     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N983     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N984     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N985     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N986     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N987     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N988     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N989     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N990     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N991     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N992     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N3016    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DO-13   DO-13
+1N3017    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DO-13   DO-13
+1N3018    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DO-13   DO-13
+1N3019    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DO-13   DO-13
+1N3020    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DO-13   DO-13
+1N3021    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DO-13   DO-13
+1N3022    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DO-13   DO-13
+1N3023    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DO-13   DO-13
+1N3024    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DO-13   DO-13
+1N3025    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DO-13   DO-13
+1N3026    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DO-13   DO-13
+1N3027    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DO-13   DO-13
+1N3028    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DO-13   DO-13
+1N3029    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DO-13   DO-13
+1N3030    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DO-13   DO-13
+1N3031    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DO-13   DO-13
+1N3032    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DO-13   DO-13
+1N3033    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DO-13   DO-13
+1N3034    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DO-13   DO-13
+1N3035    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DO-13   DO-13
+1N3036    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DO-13   DO-13
+1N3037    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DO-13   DO-13
+1N3038    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DO-13   DO-13
+1N3039    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DO-13   DO-13
+1N3040    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DO-13   DO-13
+1N3041    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DO-13   DO-13
+1N3042    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DO-13   DO-13
+1N3043    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DO-13   DO-13
+1N3044    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DO-13   DO-13
+1N3045    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DO-13   DO-13
+1N3046    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DO-13   DO-13
+1N3047    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DO-13   DO-13
+1N3048    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DO-13   DO-13
+1N3049    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DO-13   DO-13
+1N3050    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DO-13   DO-13
+1N3051    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DO-13   DO-13
+1N3821    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DO-13   DO-13
+1N3822    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DO-13   DO-13
+1N3823    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DO-13   DO-13
+1N3824    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DO-13   DO-13
+1N3825    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DO-13   DO-13
+1N3826    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DO-13   DO-13
+1N3827    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DO-13   DO-13
+1N3828    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DO-13   DO-13
+1N3829    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DO-13   DO-13
+1N3830    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DO-13   DO-13
+1N4001    D   DIODE-2    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N4002    D   DIODE-2    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N4003    D   DIODE-2    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N4004    D   DIODE-2    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N4005    D   DIODE-2    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N4006    D   DIODE-2    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N4007    D   DIODE-2    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N4099    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4100    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4101    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4102    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4103    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4104    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4105    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4106    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4107    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4108    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4109    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4110    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4111    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4112    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4113    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4114    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4115    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4116    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4117    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4118    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4119    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4120    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4121    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4122    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4123    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4124    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4125    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4126    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4127    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4128    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4129    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4130    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4131    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4132    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4133    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4134    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4135    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4370    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4371    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4372    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4565    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4566    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4567    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4568    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4569    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4570    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4571    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4572    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4573    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4574    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4575    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4576    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4577    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4578    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4579    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4580    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4581    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4582    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4583    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4584    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4614    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4615    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4616    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4617    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4618    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4619    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4620    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4621    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4622    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4623    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4624    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4625    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4626    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4627    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4678    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4679    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4680    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4681    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4682    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4683    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4684    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4685    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4686    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4687    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4688    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4689    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4690    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4691    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4692    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4693    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4694    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4695    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4696    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4697    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4698    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4699    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4700    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4701    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4702    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4703    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4704    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4705    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4706    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4707    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4708    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4709    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4710    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4711    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4712    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4713    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4714    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4715    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4716    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4717    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N4728    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N4729    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N4730    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N4731    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N4732    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N4733    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N4734    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N4735    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N4736    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N4737    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N4738    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N4739    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N4740    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N4741    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N4742    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N4743    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N4744    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N4745    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N4746    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N4747    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N4748    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N4749    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N4750    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N4751    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N4752    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N4753    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N4754    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N4755    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N4756    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N4757    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N4758    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N4759    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N4760    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N4761    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N4762    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N4763    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N4764    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5221    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5222    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5223    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5224    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5225    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5226    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5227    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5228    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5229    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5230    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5231    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5232    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5233    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5234    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5235    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5236    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5237    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5238    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5239    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5240    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5241    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5242    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5243    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5244    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5245    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5246    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5247    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5248    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5249    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5250    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5251    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5252    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5253    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5254    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5255    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5256    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5257    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5258    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5259    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5260    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5261    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5262    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5263    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5264    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5265    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5266    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5267    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5268    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5269    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5270    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5271    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5272    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5273    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5274    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5275    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5276    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5277    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5278    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5279    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5280    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5281    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5283    D   DIODE-2    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5284    D   DIODE-2    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5285    D   DIODE-2    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5286    D   DIODE-2    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5287    D   DIODE-2    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5288    D   DIODE-2    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5289    D   DIODE-2    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5290    D   DIODE-2    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5291    D   DIODE-2    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5292    D   DIODE-2    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5293    D   DIODE-2    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5294    D   DIODE-2    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5295    D   DIODE-2    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5296    D   DIODE-2    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5297    D   DIODE-2    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5298    D   DIODE-2    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5299    D   DIODE-2    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5300    D   DIODE-2    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5301    D   DIODE-2    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5302    D   DIODE-2    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5303    D   DIODE-2    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5304    D   DIODE-2    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5305    D   DIODE-2    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5306    D   DIODE-2    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5307    D   DIODE-2    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5308    D   DIODE-2    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5309    D   DIODE-2    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5310    D   DIODE-2    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5311    D   DIODE-2    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5312    D   DIODE-2    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5313    D   DIODE-2    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5314    D   DIODE-2    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5518    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5519    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5520    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5521    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5522    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5523    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5524    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5525    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5526    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5527    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5528    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5529    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5530    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5531    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5532    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5533    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5534    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5535    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5536    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5537    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5538    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5539    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5540    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5541    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5542    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5543    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5544    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5545    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5546    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5913    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5914    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5915    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5916    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5917    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5918    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5919    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5920    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5921    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5922    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5923    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5924    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5925    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5926    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5927    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5928    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5929    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5930    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5931    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5932    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5933    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5934    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5935    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5936    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5937    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5938    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5939    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5940    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5941    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5942    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5943    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5944    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5945    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5946    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5947    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5948    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5949    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5950    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5951    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5952    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5953    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5954    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5955    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5956    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+1N5985    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5986    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5987    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5988    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5989    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5990    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5991    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5992    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5993    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5994    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5995    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5996    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5997    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5998    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N5999    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N6000    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N6001    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N6002    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N6003    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N6004    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N6005    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N6006    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N6007    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N6008    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N6009    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N6010    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N6011    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N6012    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N6013    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N6014    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N6015    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N6016    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N6017    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N6018    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N6019    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N6020    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N6021    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N6022    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N6023    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N6024    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+1N6025    D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+MBR030    D   DIODE-2    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+MBR040    D   DIODE-2    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+MBRL120   D   DIODE-2    Diode {C:\users\Public\Documents\PCB Artist\Library} MLL41   MLL41
+MBRL130   D   DIODE-2    Diode {C:\users\Public\Documents\PCB Artist\Library} MLL41   MLL41
+MBRL140   D   DIODE-2    Diode {C:\users\Public\Documents\PCB Artist\Library} MLL41   MLL41
+MCL1300   D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+MCL1301   D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+MCL1302   D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+MCL1303   D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+MCL1304   D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+MLL4728   D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} MLL41   MLL41
+MLL4729   D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} MLL41   MLL41
+MLL4730   D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} MLL41   MLL41
+MLL4731   D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} MLL41   MLL41
+MLL4732   D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} MLL41   MLL41
+MLL4733   D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} MLL41   MLL41
+MLL4734   D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} MLL41   MLL41
+MLL4735   D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} MLL41   MLL41
+MLL4736   D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} MLL41   MLL41
+MLL4737   D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} MLL41   MLL41
+MLL4738   D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} MLL41   MLL41
+MLL4739   D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} MLL41   MLL41
+MLL4740   D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} MLL41   MLL41
+MLL4741   D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} MLL41   MLL41
+MLL4742   D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} MLL41   MLL41
+MLL4743   D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} MLL41   MLL41
+MLL4744   D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} MLL41   MLL41
+MLL4745   D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} MLL41   MLL41
+MLL4746   D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} MLL41   MLL41
+MLL4747   D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} MLL41   MLL41
+MLL4748   D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} MLL41   MLL41
+MLL4749   D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} MLL41   MLL41
+MLL4750   D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} MLL41   MLL41
+MLL4751   D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} MLL41   MLL41
+MLL4752   D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} MLL41   MLL41
+MLL4753   D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} MLL41   MLL41
+MLL4754   D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} MLL41   MLL41
+MLL4755   D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} MLL41   MLL41
+MLL4756   D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} MLL41   MLL41
+MLL4757   D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} MLL41   MLL41
+MLL4758   D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} MLL41   MLL41
+MLL4759   D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} MLL41   MLL41
+MLL4760   D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} MLL41   MLL41
+MLL4761   D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} MLL41   MLL41
+MLL4762   D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} MLL41   MLL41
+MLL4763   D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} MLL41   MLL41
+MLL4764   D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} MLL41   MLL41
+MZ605     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+MZ610     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+MZ620     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+MZ640     D   DIODE-1    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD04  DIOD04     discrete {C:\users\Public\Documents\PCB Artist\Library}
+MZ2361    D   DIODE-2    Diode {C:\users\Public\Documents\PCB Artist\Library} DIOD05  DIOD05
+
+Library : discrete    {C:\users\Public\Documents\PCB Artist\Library}
+
+
+======================================================================
+
+Component Ref  Scm Symbol Scm Library                                             Package Pcb Symbol  Pcb Library
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+7SEG      DISP 7SEG2      discrete {C:\users\Public\Documents\PCB Artist\Library} DIP     LED10DIL300 discrete {C:\users\Public\Documents\PCB Artist\Library}
+Battery   BAT  Battery    discrete {C:\users\Public\Documents\PCB Artist\Library} MISC    Battery     discrete {C:\users\Public\Documents\PCB Artist\Library}
+C         C    C          discrete {C:\users\Public\Documents\PCB Artist\Library} SM      C0805
+                                                                                  DSC     DISC03      discrete {C:\users\Public\Documents\PCB Artist\Library}
+CP        C    CP         discrete {C:\users\Public\Documents\PCB Artist\Library} SM      C3527
+                                                                                  DSCV    CAPP3V      discrete {C:\users\Public\Documents\PCB Artist\Library}
+CP-SM     C    CP         discrete {C:\users\Public\Documents\PCB Artist\Library} SM      C3527
+                                                                                  DSCV    CAPP3V      discrete {C:\users\Public\Documents\PCB Artist\Library}
+CP1       C    CP         discrete {C:\users\Public\Documents\PCB Artist\Library} DSCV    CAPP1V      discrete {C:\users\Public\Documents\PCB Artist\Library}
+CP3       C    CP         discrete {C:\users\Public\Documents\PCB Artist\Library} DSCV    CAPP3V      discrete {C:\users\Public\Documents\PCB Artist\Library}
+CP4       C    CP         discrete {C:\users\Public\Documents\PCB Artist\Library} DSCV    CAPP4V      discrete {C:\users\Public\Documents\PCB Artist\Library}
+CP5       C    CP         discrete {C:\users\Public\Documents\PCB Artist\Library} DSCV    CAPP5V      discrete {C:\users\Public\Documents\PCB Artist\Library}
+CP6       C    CP         discrete {C:\users\Public\Documents\PCB Artist\Library} DSCV    CAPP6V      discrete {C:\users\Public\Documents\PCB Artist\Library}
+CT1       C    CT         discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     CT3         discrete {C:\users\Public\Documents\PCB Artist\Library}
+                                                                                  DSCV    CT5         discrete {C:\users\Public\Documents\PCB Artist\Library}
+                                                                                  MISC    CT1         discrete {C:\users\Public\Documents\PCB Artist\Library}
+CT2       C    CT         discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     CT4         discrete {C:\users\Public\Documents\PCB Artist\Library}
+                                                                                  DSCV    CT6         discrete {C:\users\Public\Documents\PCB Artist\Library}
+                                                                                  MISC    CT2         discrete {C:\users\Public\Documents\PCB Artist\Library}
+CV1       C    CV         discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     CV1         discrete {C:\users\Public\Documents\PCB Artist\Library}
+D         D    D          discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     DIOD03      discrete {C:\users\Public\Documents\PCB Artist\Library}
+                                                                                  MISC    DIOD04      discrete {C:\users\Public\Documents\PCB Artist\Library}
+D-SM      D    D          discrete {C:\users\Public\Documents\PCB Artist\Library} SM      0805
+                                                                                  DSC     DIOD03      discrete {C:\users\Public\Documents\PCB Artist\Library}
+                                                                                  MISC    DIOD04      discrete {C:\users\Public\Documents\PCB Artist\Library}
+DPDT      SW   SPDT       switch {C:\users\Public\Documents\PCB Artist\Library}   DSC     DPDTHH      discrete {C:\users\Public\Documents\PCB Artist\Library}
+                                                                                  DSCV    DPDTV       discrete {C:\users\Public\Documents\PCB Artist\Library}
+                                                                                  MISC    DPDTHV      discrete {C:\users\Public\Documents\PCB Artist\Library}
+FUSE      FS   FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     FUSE        discrete {C:\users\Public\Documents\PCB Artist\Library}
+                                                                                  MISC    FUSE1       discrete {C:\users\Public\Documents\PCB Artist\Library}
+FUSE2     FS   FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     FUSE2       discrete {C:\users\Public\Documents\PCB Artist\Library}
+                                                                                  MISC    FUSE4       discrete {C:\users\Public\Documents\PCB Artist\Library}
+FUSE3     FS   FUSE2      discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     FUSE3       discrete {C:\users\Public\Documents\PCB Artist\Library}
+L         L    L          discrete {C:\users\Public\Documents\PCB Artist\Library} SM      0805
+                                                                                  DSC     DISC04L     discrete {C:\users\Public\Documents\PCB Artist\Library}
+LED       LED  LED        discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     LEDT175     discrete {C:\users\Public\Documents\PCB Artist\Library}
+                                                                                  MISC    LEDT1       discrete {C:\users\Public\Documents\PCB Artist\Library}
+NFET      Q    NFET       discrete {C:\users\Public\Documents\PCB Artist\Library} SM      SOT23
+                                                                                  DSC     TO18        discrete {C:\users\Public\Documents\PCB Artist\Library}
+NMOS      Q    NMOS       discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     TO220       discrete {C:\users\Public\Documents\PCB Artist\Library}
+NPNTRAN   Q    NPNTRAN    discrete {C:\users\Public\Documents\PCB Artist\Library} SM      SOT23
+                                                                                  DSC     TO18        discrete {C:\users\Public\Documents\PCB Artist\Library}
+PFET      Q    PFET       discrete {C:\users\Public\Documents\PCB Artist\Library} SM      SOT23
+                                                                                  DSC     TO92        discrete {C:\users\Public\Documents\PCB Artist\Library}
+PMOS      Q    PMOS       discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     TO220       discrete {C:\users\Public\Documents\PCB Artist\Library}
+PNPTRAN   Q    PNPTRAN    discrete {C:\users\Public\Documents\PCB Artist\Library} SM      SOT23
+                                                                                  DSC     TO39        discrete {C:\users\Public\Documents\PCB Artist\Library}
+PRESET    VR   RP         discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     POT1H       discrete {C:\users\Public\Documents\PCB Artist\Library}
+R         R    R          discrete {C:\users\Public\Documents\PCB Artist\Library} SM      0805
+                                                                                  DSC     DISC04      discrete {C:\users\Public\Documents\PCB Artist\Library}
+R-SM      R    R          discrete {C:\users\Public\Documents\PCB Artist\Library} SM      0805
+                                                                                  DSC     DISC04      discrete {C:\users\Public\Documents\PCB Artist\Library}
+R3        R    R          discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     RSIL6       discrete {C:\users\Public\Documents\PCB Artist\Library}
+R3C       R    R          discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     RSIL4       discrete {C:\users\Public\Documents\PCB Artist\Library}
+R4        R    R          discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     RSIL8       discrete {C:\users\Public\Documents\PCB Artist\Library}
+R4C       R    R          discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     RSIL5       discrete {C:\users\Public\Documents\PCB Artist\Library}
+R5        R    R          discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     RSIL10      discrete {C:\users\Public\Documents\PCB Artist\Library}
+R5C       R    R          discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     RSIL6       discrete {C:\users\Public\Documents\PCB Artist\Library}
+R6C       R    R          discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     RSIL7       discrete {C:\users\Public\Documents\PCB Artist\Library}
+R7C       R    R          discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     RSIL8       discrete {C:\users\Public\Documents\PCB Artist\Library}
+R8C       R    R          discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     RSIL9       discrete {C:\users\Public\Documents\PCB Artist\Library}
+R9C       R    R          discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     RSIL10      discrete {C:\users\Public\Documents\PCB Artist\Library}
+RA        R    RA         discrete {C:\users\Public\Documents\PCB Artist\Library} SM      0805
+                                                                                  DSC     DISC04A     discrete {C:\users\Public\Documents\PCB Artist\Library}
+RA-SM     R    RA         discrete {C:\users\Public\Documents\PCB Artist\Library} SM      0805
+RA3       R    RA         discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     RSIL6       discrete {C:\users\Public\Documents\PCB Artist\Library}
+RA3C      R    RA         discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     RSIL4       discrete {C:\users\Public\Documents\PCB Artist\Library}
+RA4       R    RA         discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     RSIL8       discrete {C:\users\Public\Documents\PCB Artist\Library}
+RA4C      R    RA         discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     RSIL5       discrete {C:\users\Public\Documents\PCB Artist\Library}
+RA5       R    RA         discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     RSIL10      discrete {C:\users\Public\Documents\PCB Artist\Library}
+RA5C      R    RA         discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     RSIL6       discrete {C:\users\Public\Documents\PCB Artist\Library}
+RA6C      R    RA         discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     RSIL7       discrete {C:\users\Public\Documents\PCB Artist\Library}
+RA7C      R    RA         discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     RSIL8       discrete {C:\users\Public\Documents\PCB Artist\Library}
+RA8C      R    RA         discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     RSIL9       discrete {C:\users\Public\Documents\PCB Artist\Library}
+RA9C      R    RA         discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     RSIL10      discrete {C:\users\Public\Documents\PCB Artist\Library}
+RA_2POT   R    RVA        discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     POT5H       discrete {C:\users\Public\Documents\PCB Artist\Library}
+RA_POT    R    RVA        discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     POT4H       discrete {C:\users\Public\Documents\PCB Artist\Library}
+                                                                                  DSCV    POT4V       discrete {C:\users\Public\Documents\PCB Artist\Library}
+RA_PRE    R    RPA        discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     POT1H       discrete {C:\users\Public\Documents\PCB Artist\Library}
+                                                                                  DSCV    POT1V       discrete {C:\users\Public\Documents\PCB Artist\Library}
+RA_PREC   R    RPA        discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     POT2H       discrete {C:\users\Public\Documents\PCB Artist\Library}
+                                                                                  DSCV    POT2V       discrete {C:\users\Public\Documents\PCB Artist\Library}
+RA_PREM   R    RPA        discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     POT3H       discrete {C:\users\Public\Documents\PCB Artist\Library}
+                                                                                  DSCV    POT3V       discrete {C:\users\Public\Documents\PCB Artist\Library}
+R_2POT    R    RV         discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     POT5H       discrete {C:\users\Public\Documents\PCB Artist\Library}
+R_POT     R    RV         discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     POT4H       discrete {C:\users\Public\Documents\PCB Artist\Library}
+                                                                                  DSCV    POT4V       discrete {C:\users\Public\Documents\PCB Artist\Library}
+R_PRE     R    RP         discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     POT1H       discrete {C:\users\Public\Documents\PCB Artist\Library}
+                                                                                  DSCV    POT1V       discrete {C:\users\Public\Documents\PCB Artist\Library}
+R_PREC    R    RP         discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     POT2H       discrete {C:\users\Public\Documents\PCB Artist\Library}
+                                                                                  DSCV    POT2V       discrete {C:\users\Public\Documents\PCB Artist\Library}
+R_PREM    R    RP         discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     POT3H       discrete {C:\users\Public\Documents\PCB Artist\Library}
+                                                                                  DSCV    POT3V       discrete {C:\users\Public\Documents\PCB Artist\Library}
+SCR       D    SCR        discrete {C:\users\Public\Documents\PCB Artist\Library} SM      SOT23
+SPDT      SW   SPDT       switch {C:\users\Public\Documents\PCB Artist\Library}   DSC     SPDTHH      discrete {C:\users\Public\Documents\PCB Artist\Library}
+                                                                                  DSCV    SPDTV       discrete {C:\users\Public\Documents\PCB Artist\Library}
+                                                                                  MISC    SPDTHV      discrete {C:\users\Public\Documents\PCB Artist\Library}
+SW_FSM2JH SW   PUSH-NO    switch {C:\users\Public\Documents\PCB Artist\Library}   DISC    FSM2JH      discrete {C:\users\Public\Documents\PCB Artist\Library}
+TRIAC     D    TRIAC      discrete {C:\users\Public\Documents\PCB Artist\Library} SM      SOT23
+                                                                                  DSC     TO92        discrete {C:\users\Public\Documents\PCB Artist\Library}
+XTAL      XTAL XTAL       discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     HC18U       discrete {C:\users\Public\Documents\PCB Artist\Library}
+ZENER     ZD   ZENERD     discrete {C:\users\Public\Documents\PCB Artist\Library} DSC     DIOD03      discrete {C:\users\Public\Documents\PCB Artist\Library}
+                                                                                  MISC    DIOD04      discrete {C:\users\Public\Documents\PCB Artist\Library}
+
+Library : Finder_Relays    {C:\users\Public\Documents\PCB Artist\Library}
+
+
+===========================================================================
+
+Component        Ref Scm Symbol     Scm Library                                           Package          Pcb Symbol       Pcb Library
+----------------------------------------------------------------------------------------------------------------------------------------------------
+30.22.7.005.0010 U   RELAY_SW2_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_30XXX      RELAY_30XXX
+30.22.7.012.0010 U   RELAY_SW2_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_30XXX      RELAY_30XXX
+30.22.7.024.0010 U   RELAY_SW2_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_30XXX      RELAY_30XXX
+32.21.7.005.2000 U   RELAY_SW1_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_32XXX      RELAY_32XXX
+32.21.7.012.2000 U   RELAY_SW1_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_32XXX      RELAY_32XXX
+32.21.7.024.2000 U   RELAY_SW1_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_32XXX      RELAY_32XXX
+34.51.7.005.0010 U   RELAY_SW1_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_34.51      RELAY_34.51
+34.51.7.024.0019 U   RELAY_SW1_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_34.51      RELAY_34.51
+34.81.7.005.8240 U   RELAY_SW1_C1_A Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_34.81      RELAY_34.81
+34.81.7.005.9024 U   RELAY_SW1_C1_A Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_34.81      RELAY_34.81
+34.81.7.012.9024 U   RELAY_SW1_C1_A Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_34.81      RELAY_34.81
+34.81.7.024.8240 U   RELAY_SW1_C1_A Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_34.81      RELAY_34.81
+34.81.7.024.9024 U   RELAY_SW1_C1_A Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_34.81      RELAY_34.81
+36.11.9.005.0000 U   RELAY_SW1_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_36.11.0000 RELAY_36.11.0000
+36.11.9.012.0000 U   RELAY_SW1_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_36.11.0000 RELAY_36.11.0000
+36.11.9.024.0000 U   RELAY_SW1_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_36.11.0000 RELAY_36.11.0000
+36.11.9.024.0300 U   RELAY_SW1_C1_A Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_36.11.0300 RELAY_36.11.0300
+40.31.7.012.0000 U   RELAY_SW1_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_40.31      RELAY_40.31
+40.31.7.024.0000 U   RELAY_SW1_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_40.31      RELAY_40.31
+40.31.8.012.0000 U   RELAY_SW1_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_40.31      RELAY_40.31
+40.31.8.024.0000 U   RELAY_SW1_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_40.31      RELAY_40.31
+40.31.8.110.0000 U   RELAY_SW1_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_40.31      RELAY_40.31
+40.31.8.230.0000 U   RELAY_SW1_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_40.31      RELAY_40.31
+40.31.7006.0000  U   RELAY_SW1_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_40.31      RELAY_40.31
+40.51.9.012.0000 U   RELAY_SW1_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_40.51      RELAY_40.51
+40.51.9024.000   U   RELAY_SW1_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_40.51      RELAY_40.51
+40.52.7.006.0000 U   RELAY_SW2_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_40.52      RELAY_40.52
+40.52.7.012.0000 U   RELAY_SW2_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_40.52      RELAY_40.52
+40.52.7.024.0000 U   RELAY_SW2_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_40.52      RELAY_40.52
+40.52.7.048.0000 U   RELAY_SW2_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_40.52      RELAY_40.52
+40.52.8.012.0000 U   RELAY_SW2_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_40.52      RELAY_40.52
+40.52.8.024.0000 U   RELAY_SW2_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_40.52      RELAY_40.52
+40.52.8.110.0000 U   RELAY_SW2_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_40.52      RELAY_40.52
+40.52.8.230.0000 U   RELAY_SW2_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_40.52      RELAY_40.52
+40.61.7.006.0000 U   RELAY_SW1_C1_B Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_40.61      RELAY_40.61
+40.61.7.012.0000 U   RELAY_SW1_C1_B Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_40.61      RELAY_40.61
+40.61.7.024.0000 U   RELAY_SW1_C1_B Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_40.61      RELAY_40.61
+40.61.7.048.0000 U   RELAY_SW1_C1_B Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_40.61      RELAY_40.61
+40.61.8.012.0000 U   RELAY_SW1_C1_B Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_40.61      RELAY_40.61
+40.61.8.024.0000 U   RELAY_SW1_C1_B Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_40.61      RELAY_40.61
+40.61.8.110.0000 U   RELAY_SW1_C1_B Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_40.61      RELAY_40.61
+40.61.8.230.0000 U   RELAY_SW1_C1_B Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_40.61      RELAY_40.61
+40.61.9.012.0000 U   RELAY_SW1_C1_B Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_40.61      RELAY_40.61
+41.31.9.024.0010 U   RELAY_SW1_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_41.31      RELAY_41.31
+41.52.9.012.0010 U   RELAY_SW2_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_41.52      RELAY_41.52
+41.52.9.024.0010 U   RELAY_SW2_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_41.52      RELAY_41.52
+41.61.9.012.0010 U   RELAY_SW1_C1_B Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_41.61      RELAY_41.61
+41.61.9.024.0010 U   RELAY_SW1_C1_B Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_41.61      RELAY_41.61
+43.41.7.012.2000 U   RELAY_SW1_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_43.41      RELAY_43.41
+43.41.7.024.2000 U   RELAY_SW1_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_43.41      RELAY_43.41
+44.62.7.006.4000 U   RELAY_SW2_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_44.62      RELAY_44.62
+44.62.7.012.4000 U   RELAY_SW2_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_44.62      RELAY_44.62
+44.62.7.024.4000 U   RELAY_SW2_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_44.62      RELAY_44.62
+44.62.7.048.4000 U   RELAY_SW2_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_44.62      RELAY_44.62
+45.71.7.012.0310 U   RELAY_SW1_C1_C Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_45.71      RELAY_45.71
+45.71.7.024.0310 U   RELAY_SW1_C1_C Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_45.71      RELAY_45.71
+46.52.8.024.0040 U   RELAY_SW2_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_46.52      RELAY_46.52
+46.52.8.024.0054 U   RELAY_SW2_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_46.52      RELAY_46.52
+46.52.8.110.0040 U   RELAY_SW2_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_46.52      RELAY_46.52
+46.52.8.110.0054 U   RELAY_SW2_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_46.52      RELAY_46.52
+46.52.8.230.0040 U   RELAY_SW2_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_46.52      RELAY_46.52
+46.52.8.230.0054 U   RELAY_SW2_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_46.52      RELAY_46.52
+46.52.9.012.0040 U   RELAY_SW2_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_46.52      RELAY_46.52
+46.52.9.012.0074 U   RELAY_SW2_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_46.52      RELAY_46.52
+46.52.9.024.0040 U   RELAY_SW2_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_46.52      RELAY_46.52
+46.52.9024.0074  U   RELAY_SW2_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_46.52      RELAY_46.52
+46.61.8.024.0040 U   RELAY_SW1_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_46.61      RELAY_46.61
+46.61.8.024.0054 U   RELAY_SW1_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_46.61      RELAY_46.61
+46.61.8.110.0040 U   RELAY_SW1_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_46.61      RELAY_46.61
+46.61.8.110.0054 U   RELAY_SW1_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_46.61      RELAY_46.61
+46.61.8.230.0040 U   RELAY_SW1_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_46.61      RELAY_46.61
+46.61.8.230.0054 U   RELAY_SW1_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_46.61      RELAY_46.61
+46.61.9.012.0040 U   RELAY_SW1_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_46.61      RELAY_46.61
+46.61.9.012.0074 U   RELAY_SW1_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_46.61      RELAY_46.61
+46.61.9.024.0040 U   RELAY_SW1_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_46.61      RELAY_46.61
+46.61.9.024.0074 U   RELAY_SW1_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_46.61      RELAY_46.61
+55.14.8.024.0000 U   RELAY_SW4_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_55.14      RELAY_55.14
+55.14.8.110.0000 U   RELAY_SW4_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_55.14      RELAY_55.14
+55.14.8.230.0000 U   RELAY_SW4_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_55.14      RELAY_55.14
+55.14.9.012.0000 U   RELAY_SW4_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_55.14      RELAY_55.14
+55.14.9.024.0000 U   RELAY_SW4_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_55.14      RELAY_55.14
+55.33.8024.0010  U   RELAY_SW3_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_55.33      RELAY_55.33
+55.33.8230.0010  U   RELAY_SW3_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_55.33      RELAY_55.33
+55.33.9012.0010  U   RELAY_SW3_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_55.33      RELAY_55.33
+55.33.9024.0010  U   RELAY_SW3_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_55.33      RELAY_55.33
+55.34.8.024.0040 U   RELAY_SW4_C1_A Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_55.34      RELAY_55.34
+55.34.8.110.0040 U   RELAY_SW4_C1_A Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_55.34      RELAY_55.34
+55.34.8.230.0040 U   RELAY_SW4_C1_A Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_55.34      RELAY_55.34
+55.34.9.012.0040 U   RELAY_SW4_C1_A Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_55.34      RELAY_55.34
+55.34.9.024.0040 U   RELAY_SW4_C1_A Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_55.34      RELAY_55.34
+56.32.8.024.0040 U   RELAY_SW2_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_56.32      RELAY_56.32
+56.32.8.110.0040 U   RELAY_SW2_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_56.32      RELAY_56.32
+56.32.8.230.0040 U   RELAY_SW2_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_56.32      RELAY_56.32
+56.32.9.012.0040 U   RELAY_SW2_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_56.32      RELAY_56.32
+56.32.9.024.0040 U   RELAY_SW2_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_56.32      RELAY_56.32
+62.32.8230.0010  U   RELAY_SW2_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_62.32      RELAY_62.32
+3451.7012.0010   U   RELAY_SW1_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_34.51      RELAY_34.51
+3451.7024.0010   U   RELAY_SW1_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_34.51      RELAY_34.51
+3451.7060.0010   U   RELAY_SW1_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_34.51      RELAY_34.51
+4452 9012        U   RELAY_SW2_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_44.52      RELAY_44.52
+4452 9024        U   RELAY_SW2_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_44.52      RELAY_44.52
+4452 9048        U   RELAY_SW2_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_44.52      RELAY_44.52
+4661.8012.0040   U   RELAY_SW1_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_46.61      RELAY_46.61
+5532.8024.0040   U   RELAY_55.32    Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_55.32      RELAY_55.32
+5532.8230.0040   U   RELAY_55.32    Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_55.32      RELAY_55.32
+5532.9012.0040   U   RELAY_55.32    Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_55.32      RELAY_55.32
+5532.9024.0040   U   RELAY_55.32    Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_55.32      RELAY_55.32
+5532.9048.0040   U   RELAY_55.32    Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_55.32      RELAY_55.32
+5534.9048.0040   U   RELAY_SW4_C1_A Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_55.34      RELAY_55.34
+501290051000     U   RELAY_SW2_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_50XXX      RELAY_50XXX
+501290121000     U   RELAY_SW2_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_50XXX      RELAY_50XXX
+501290241000     U   RELAY_SW2_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_50XXX      RELAY_50XXX
+501290481000     U   RELAY_SW2_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_50XXX      RELAY_50XXX
+501291101000     U   RELAY_SW2_C1   Relays {C:\users\Public\Documents\PCB Artist\Library} RELAY_50XXX      RELAY_50XXX
+
+Library : Fuse    {C:\users\Public\Documents\PCB Artist\Library}
+
+
+==================================================================
+
+Component    Ref Scm Symbol Scm Library                                             Package    Pcb Symbol Pcb Library
+----------------------------------------------------------------------------------------------------------------------------------
+491-1A       FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE Axial FUSE Axial
+491-1.25A    FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE Axial FUSE Axial
+491-2A       FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE Axial FUSE Axial
+491-2.5A     FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE Axial FUSE Axial
+491-3A       FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE Axial FUSE Axial
+491-3.15a    FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE Axial FUSE Axial
+491-4A       FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE Axial FUSE Axial
+491-5A       FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE Axial FUSE Axial
+491-250mA    FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE Axial FUSE Axial
+491-300mA    FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE Axial FUSE Axial
+491-400mA    FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE Axial FUSE Axial
+491-500mA    FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE Axial FUSE Axial
+491-630mA    FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE Axial FUSE Axial
+491-750mA    FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE Axial FUSE Axial
+491-800mA    FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE Axial FUSE Axial
+1608FF-1A    FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} C0603      C0603
+1608FF-2A    FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} C0603      C0603
+1608FF-2.5A  FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} C0603      C0603
+1608FF-3A    FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} C0603      C0603
+1608FF-3.5A  FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} C0603      C0603
+1608FF-4A    FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} C0603      C0603
+1608FF-250mA FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} C0603      C0603
+1608FF-375mA FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} C0603      C0603
+1608FF-500mA FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} C0603      C0603
+1608FF-750mA FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} C0603      C0603
+3216CP-1A    FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} C1206      C1206
+3216CP-2A    FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} C1206      C1206
+3216CP-2.5A  FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} C1206      C1206
+3216CP-3A    FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} C1206      C1206
+3216CP-4A    FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} C1206      C1206
+3216CP-4.5A  FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} C1206      C1206
+3216CP-5A    FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} C1206      C1206
+3216CP-250mA FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} C1206      C1206
+3216CP-375mA FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} C1206      C1206
+3216CP-500mA FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} C1206      C1206
+3216CP-750mA FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} C1206      C1206
+3216FF-1A    FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} C1206      C1206
+3216FF-2A    FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} C1206      C1206
+3216FF-2.5A  FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} C1206      C1206
+3216FF-3A    FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} C1206      C1206
+3216FF-4A    FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} C1206      C1206
+3216FF-4.5A  FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} C1206      C1206
+3216FF-5A    FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} C1206      C1206
+3216FF-250mA FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} C1206      C1206
+3216FF-375mA FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} C1206      C1206
+3216FF-500mA FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} C1206      C1206
+3216FF-750mA FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} C1206      C1206
+19275-1A     FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE Axial FUSE Axial
+19275-2A     FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE Axial FUSE Axial
+19275-2.5A   FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE Axial FUSE Axial
+19275-3A     FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE Axial FUSE Axial
+19275-3.5A   FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE Axial FUSE Axial
+19275-4A     FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE Axial FUSE Axial
+19275-5A     FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE Axial FUSE Axial
+19275-7A     FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE Axial FUSE Axial
+19275-10A    FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE Axial FUSE Axial
+19275-15A    FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE Axial FUSE Axial
+19275-63mA   FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE Axial FUSE Axial
+19275-125mA  FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE Axial FUSE Axial
+19275-250mA  FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE Axial FUSE Axial
+19275-375mA  FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE Axial FUSE Axial
+19275-500mA  FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE Axial FUSE Axial
+19275-750mA  FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE Axial FUSE Axial
+19370K-1A    FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TR5   FUSE TR5
+19370K-1.25A FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TR5   FUSE TR5
+19370K-2A    FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TR5   FUSE TR5
+19370K-3.15A FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TR5   FUSE TR5
+19370K-4A    FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TR5   FUSE TR5
+19370K-5A    FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TR5   FUSE TR5
+19370K-50mA  FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TR5   FUSE TR5
+19370K-100mA FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TR5   FUSE TR5
+19370K-125mA FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TR5   FUSE TR5
+19370K-160mA FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TR5   FUSE TR5
+19370K-200mA FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TR5   FUSE TR5
+19370K-250mA FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TR5   FUSE TR5
+19370K-315mA FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TR5   FUSE TR5
+19370K-500mA FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TR5   FUSE TR5
+19372K-1A    FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TR5   FUSE TR5
+19372K-1.25A FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TR5   FUSE TR5
+19372K-2A    FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TR5   FUSE TR5
+19372K-2.5A  FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TR5   FUSE TR5
+19372K-3.15A FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TR5   FUSE TR5
+19372K-4A    FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TR5   FUSE TR5
+19372K-5A    FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TR5   FUSE TR5
+19372K-50mA  FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TR5   FUSE TR5
+19372K-100mA FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TR5   FUSE TR5
+19372K-125mA FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TR5   FUSE TR5
+19372K-160mA FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TR5   FUSE TR5
+19372K-200mA FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TR5   FUSE TR5
+19372K-250mA FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TR5   FUSE TR5
+19372K-315mA FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TR5   FUSE TR5
+19372K-500mA FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TR5   FUSE TR5
+19372K-630mA FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TR5   FUSE TR5
+19372K-800mA FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TR5   FUSE TR5
+19395-1A     FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TE5   FUSE TE5
+19395-1.25A  FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TE5   FUSE TE5
+19395-2A     FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TE5   FUSE TE5
+19395-3.15A  FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TE5   FUSE TE5
+19395-4A     FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TE5   FUSE TE5
+19395-5A     FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TE5   FUSE TE5
+19395-50mA   FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TE5   FUSE TE5
+19395-100mA  FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TE5   FUSE TE5
+19395-125mA  FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TE5   FUSE TE5
+19395-160mA  FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TE5   FUSE TE5
+19395-200mA  FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TE5   FUSE TE5
+19395-250mA  FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TE5   FUSE TE5
+19395-315mA  FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TE5   FUSE TE5
+19395-500mA  FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TE5   FUSE TE5
+19396-1A     FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TE5   FUSE TE5
+19396-1.25A  FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TE5   FUSE TE5
+19396-2A     FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TE5   FUSE TE5
+19396-2.5A   FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TE5   FUSE TE5
+19396-3.15A  FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TE5   FUSE TE5
+19396-4A     FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TE5   FUSE TE5
+19396-5A     FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TE5   FUSE TE5
+19396-50mA   FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TE5   FUSE TE5
+19396-100mA  FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TE5   FUSE TE5
+19396-125mA  FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TE5   FUSE TE5
+19396-160mA  FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TE5   FUSE TE5
+19396-200mA  FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TE5   FUSE TE5
+19396-250mA  FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TE5   FUSE TE5
+19396-315mA  FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TE5   FUSE TE5
+19396-500mA  FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TE5   FUSE TE5
+19396-630mA  FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TE5   FUSE TE5
+19396-800mA  FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE TE5   FUSE TE5
+MCR-1A       FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE Axial FUSE Axial
+MCR-2A       FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE Axial FUSE Axial
+MCR-2.5A     FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE Axial FUSE Axial
+MCR-3A       FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE Axial FUSE Axial
+MCR-3.5A     FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE Axial FUSE Axial
+MCR-4A       FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE Axial FUSE Axial
+MCR-5A       FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE Axial FUSE Axial
+MCR-7A       FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE Axial FUSE Axial
+MCR-10A      FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE Axial FUSE Axial
+MCR-63mA     FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE Axial FUSE Axial
+MCR-125mA    FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE Axial FUSE Axial
+MCR-250mA    FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE Axial FUSE Axial
+MCR-375mA    FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE Axial FUSE Axial
+MCR-500mA    FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE Axial FUSE Axial
+MCR-750mA    FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} FUSE Axial FUSE Axial
+MF-R020      FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} MF-R-1     MF-R-1
+MF-R025      FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} MF-R-1     MF-R-1
+MF-R030      FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} MF-R-1     MF-R-1
+MF-R040      FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} MF-R-1     MF-R-1
+MF-R050      FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} MF-R-1     MF-R-1
+MF-R065      FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} MF-R-1     MF-R-1
+MF-R075      FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} MF-R-1     MF-R-1
+MF-R090      FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} MF-R-1     MF-R-1
+MF-R110      FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} MF-R-1     MF-R-1
+MF-R135      FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} MF-R-1     MF-R-1
+MF-R160      FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} MF-R-1     MF-R-1
+MF-R185      FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} MF-R-1     MF-R-1
+MF-R250      FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} MF-R-1     MF-R-1
+MF-R400      FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} MF-R-2     MF-R-2
+MF-R600      FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} MF-R-3     MF-R-3
+MF-R700      FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} MF-R-3     MF-R-3
+MF-R800      FS  FUSE       discrete {C:\users\Public\Documents\PCB Artist\Library} MF-R-3     MF-R-3
+
+Library : hybrid    {C:\users\Public\Documents\PCB Artist\Library}
+
+
+====================================================================
+
+Component Ref Scm Symbol Scm Library                                       Package Pcb Symbol Pcb Library
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+555       U   TIM8P      ic {C:\users\Public\Documents\PCB Artist\Library} DIL     8DIL
+                                                                           SOL     SO8
+                                                                           MISC    TO99
+556       U   TIM8P      ic {C:\users\Public\Documents\PCB Artist\Library} DIL     14DIL
+                                                                           SOL     SO14
+7805      U   VREG       ic {C:\users\Public\Documents\PCB Artist\Library} DSC     TO220      discrete {C:\users\Public\Documents\PCB Artist\Library}
+                                                                           MISC    TO3        discrete {C:\users\Public\Documents\PCB Artist\Library}
+7806      U   VREG       ic {C:\users\Public\Documents\PCB Artist\Library} DSC     TO220      discrete {C:\users\Public\Documents\PCB Artist\Library}
+                                                                           MISC    TO3        discrete {C:\users\Public\Documents\PCB Artist\Library}
+7808      U   VREG       ic {C:\users\Public\Documents\PCB Artist\Library} DSC     TO220      discrete {C:\users\Public\Documents\PCB Artist\Library}
+                                                                           MISC    TO3        discrete {C:\users\Public\Documents\PCB Artist\Library}
+7812      U   VREG       ic {C:\users\Public\Documents\PCB Artist\Library} DSC     TO220      discrete {C:\users\Public\Documents\PCB Artist\Library}
+                                                                           MISC    TO3        discrete {C:\users\Public\Documents\PCB Artist\Library}
+7815      U   VREG       ic {C:\users\Public\Documents\PCB Artist\Library} DSC     TO220      discrete {C:\users\Public\Documents\PCB Artist\Library}
+                                                                           MISC    TO3        discrete {C:\users\Public\Documents\PCB Artist\Library}
+7818      U   VREG       ic {C:\users\Public\Documents\PCB Artist\Library} DSC     TO220      discrete {C:\users\Public\Documents\PCB Artist\Library}
+                                                                           MISC    TO3        discrete {C:\users\Public\Documents\PCB Artist\Library}
+7824      U   VREG       ic {C:\users\Public\Documents\PCB Artist\Library} DSC     TO220      discrete {C:\users\Public\Documents\PCB Artist\Library}
+                                                                           MISC    TO3        discrete {C:\users\Public\Documents\PCB Artist\Library}
+7905      U   VREG       ic {C:\users\Public\Documents\PCB Artist\Library} DSC     TO220      discrete {C:\users\Public\Documents\PCB Artist\Library}
+                                                                           MISC    TO3        discrete {C:\users\Public\Documents\PCB Artist\Library}
+7908      U   VREG       ic {C:\users\Public\Documents\PCB Artist\Library} DSC     TO220      discrete {C:\users\Public\Documents\PCB Artist\Library}
+                                                                           MISC    TO3        discrete {C:\users\Public\Documents\PCB Artist\Library}
+7912      U   VREG       ic {C:\users\Public\Documents\PCB Artist\Library} DSC     TO220      discrete {C:\users\Public\Documents\PCB Artist\Library}
+                                                                           MISC    TO3        discrete {C:\users\Public\Documents\PCB Artist\Library}
+7915      U   VREG       ic {C:\users\Public\Documents\PCB Artist\Library} DSC     TO220      discrete {C:\users\Public\Documents\PCB Artist\Library}
+                                                                           MISC    TO3        discrete {C:\users\Public\Documents\PCB Artist\Library}
+7918      U   VREG       ic {C:\users\Public\Documents\PCB Artist\Library} DSC     TO220      discrete {C:\users\Public\Documents\PCB Artist\Library}
+                                                                           MISC    TO3        discrete {C:\users\Public\Documents\PCB Artist\Library}
+7924      U   VREG       ic {C:\users\Public\Documents\PCB Artist\Library} DSC     TO220      discrete {C:\users\Public\Documents\PCB Artist\Library}
+                                                                           MISC    TO3        discrete {C:\users\Public\Documents\PCB Artist\Library}
+LM317     U   VREG       ic {C:\users\Public\Documents\PCB Artist\Library} DSC     TO220      discrete {C:\users\Public\Documents\PCB Artist\Library}
+                                                                           MISC    TO3        discrete {C:\users\Public\Documents\PCB Artist\Library}
+LM723     U   VREG1      ic {C:\users\Public\Documents\PCB Artist\Library} DIL     14DIL
+                                                                           SOL     SO14
+NE555D    U   NE555      ic {C:\users\Public\Documents\PCB Artist\Library} SOL     MS-012-AA
+NE555P    U   NE555      ic {C:\users\Public\Documents\PCB Artist\Library} DIP     8DIL
+
+Library : Lattice    {C:\users\Public\Documents\PCB Artist\Library}
+
+
+=====================================================================
+
+Component        Ref Scm Symbol       Scm Library                                            Package Pcb Symbol Pcb Library
+----------------------------------------------------------------------------------------------------------------------------------------
+GAL16V8-25LD     U   GAL16V8-25LC20   Lattice {C:\users\Public\Documents\PCB Artist\Library} DIL     20DIL
+GAL16V8-25LJ     U   GAL16V8-25LC20   Lattice {C:\users\Public\Documents\PCB Artist\Library} LCC     LCC20
+GAL16V8-25LR     U   GAL16V8-25LC20   Lattice {C:\users\Public\Documents\PCB Artist\Library} LCC     LCC20
+GAL16V8A-10LR    U   GAL16V8-25LC20   Lattice {C:\users\Public\Documents\PCB Artist\Library} LCC     LCC20
+GAL16V8A-12LD    U   GAL16V8-25LC20   Lattice {C:\users\Public\Documents\PCB Artist\Library} DIL     20DIL
+GAL16V8A-12LJ    U   GAL16V8-25LC20   Lattice {C:\users\Public\Documents\PCB Artist\Library} LCC     LCC20
+GAL16V8A-12LR    U   GAL16V8-25LC20   Lattice {C:\users\Public\Documents\PCB Artist\Library} LCC     LCC20
+GAL16V8A-15LD    U   GAL16V8-25LC20   Lattice {C:\users\Public\Documents\PCB Artist\Library} DIL     20DIL
+GAL16V8A-15LJ    U   GAL16V8-25LC20   Lattice {C:\users\Public\Documents\PCB Artist\Library} LCC     LCC20
+GAL16V8A-15LR    U   GAL16V8-25LC20   Lattice {C:\users\Public\Documents\PCB Artist\Library} LCC     LCC20
+GAL16V8A-20LD    U   GAL16V8-25LC20   Lattice {C:\users\Public\Documents\PCB Artist\Library} DIL     20DIL
+GAL16V8A-20LJ    U   GAL16V8-25LC20   Lattice {C:\users\Public\Documents\PCB Artist\Library} LCC     LCC20
+GAL16V8A-20LR    U   GAL16V8-25LC20   Lattice {C:\users\Public\Documents\PCB Artist\Library} DIL     20DIL
+GAL16V8A-25LJ    U   GAL16V8-25LC20   Lattice {C:\users\Public\Documents\PCB Artist\Library} LCC     LCC20
+GAL16V8A-25LR    U   GAL16V8-25LC20   Lattice {C:\users\Public\Documents\PCB Artist\Library} LCC     LCC20
+GAL16V8A-30LD    U   GAL16V8-25LC20   Lattice {C:\users\Public\Documents\PCB Artist\Library} DIL     20DIL
+GAL16V8A-30LR    U   GAL16V8-25LC20   Lattice {C:\users\Public\Documents\PCB Artist\Library} LCC     LCC20
+GAL16V8B-7LJ     U   GAL16V8-25LC20   Lattice {C:\users\Public\Documents\PCB Artist\Library} LCC     LCC20
+GAL16V8B-10L     U   GAL16V8-25LC20   Lattice {C:\users\Public\Documents\PCB Artist\Library} LCC     LCC20
+GAL16V8B-10LD    U   GAL16V8-25LC20   Lattice {C:\users\Public\Documents\PCB Artist\Library} DIL     20DIL
+GAL16V8B-10LJ    U   GAL16V8-25LC20   Lattice {C:\users\Public\Documents\PCB Artist\Library} LCC     LCC20
+GAL16V8B-15LJ    U   GAL16V8-25LC20   Lattice {C:\users\Public\Documents\PCB Artist\Library} LCC     LCC20
+GAL16V8B-25LJ    U   GAL16V8-25LC20   Lattice {C:\users\Public\Documents\PCB Artist\Library} LCC     LCC20
+GAL16V8C-5LJ     U   GAL16V8-25LC20   Lattice {C:\users\Public\Documents\PCB Artist\Library} LCC     LCC20
+GAL20RA10-12LJ   U   GAL20RA10-12LJ28 Lattice {C:\users\Public\Documents\PCB Artist\Library} LCC     LCC28
+GAL20RA10-15LJ   U   GAL20RA10-12LJ28 Lattice {C:\users\Public\Documents\PCB Artist\Library} LCC     LCC28
+GAL20RA10-20LJ   U   GAL20RA10-12LJ28 Lattice {C:\users\Public\Documents\PCB Artist\Library} LCC     LCC28
+GAL20RA10-30LJ   U   GAL20RA10-12LJ28 Lattice {C:\users\Public\Documents\PCB Artist\Library} LCC     LCC28
+GAL20RA10B10LJ   U   GAL20RA10-12LJ28 Lattice {C:\users\Public\Documents\PCB Artist\Library} LCC     LCC28
+GAL20V8-25LR     U   GAL20V8-25LR28   Lattice {C:\users\Public\Documents\PCB Artist\Library} LCC     LCC28
+GAL20V8-35LJ     U   GAL20V8-25LR28   Lattice {C:\users\Public\Documents\PCB Artist\Library} LCC     LCC28
+GAL20V8-35LR     U   GAL20V8-25LR28   Lattice {C:\users\Public\Documents\PCB Artist\Library} LCC     LCC28
+GAL20V8A-10LJ    U   GAL20V8-25LR28   Lattice {C:\users\Public\Documents\PCB Artist\Library} LCC     LCC28
+GAL20V8A-10LR    U   GAL20V8-25LR28   Lattice {C:\users\Public\Documents\PCB Artist\Library} LCC     LCC28
+GAL20V8A-12LJ    U   GAL20V8-25LR28   Lattice {C:\users\Public\Documents\PCB Artist\Library} LCC     LCC28
+GAL20V8A-12LR    U   GAL20V8-25LR28   Lattice {C:\users\Public\Documents\PCB Artist\Library} LCC     LCC28
+GAL20V8A-15LJ    U   GAL20V8-25LR28   Lattice {C:\users\Public\Documents\PCB Artist\Library} LCC     LCC28
+GAL20V8A-15LR    U   GAL20V8-25LR28   Lattice {C:\users\Public\Documents\PCB Artist\Library} LCC     LCC28
+GAL20V8A-20LJ    U   GAL20V8-25LR28   Lattice {C:\users\Public\Documents\PCB Artist\Library} LCC     LCC28
+GAL20V8A-20LR    U   GAL20V8-25LR28   Lattice {C:\users\Public\Documents\PCB Artist\Library} LCC     LCC28
+GAL20V8A-25LJ    U   GAL20V8-25LR28   Lattice {C:\users\Public\Documents\PCB Artist\Library} LCC     LCC28
+GAL20V8A-30LR    U   GAL20V8-25LR28   Lattice {C:\users\Public\Documents\PCB Artist\Library} LCC     LCC28
+GAL20V8B-7LJ     U   GAL20V8-25LR28   Lattice {C:\users\Public\Documents\PCB Artist\Library} LCC     LCC28
+GAL20V8B-10LJ    U   GAL20V8-25LR28   Lattice {C:\users\Public\Documents\PCB Artist\Library} LCC     LCC28
+GAL20V8B-15LJ    U   GAL20V8-25LR28   Lattice {C:\users\Public\Documents\PCB Artist\Library} LCC     LCC28
+GAL20V8C-5LJ     U   GAL20V8-25LR28   Lattice {C:\users\Public\Documents\PCB Artist\Library} LCC     LCC28
+GAL20VP8B-15LJ   U   GAL20V8-25LR28   Lattice {C:\users\Public\Documents\PCB Artist\Library} LCC     LCC28
+GAL20VP8B-25LJ   U   GAL20V8-25LR28   Lattice {C:\users\Public\Documents\PCB Artist\Library} LCC     LCC28
+GAL20XV10B-10LJ  U   GAL20V8-25LR28   Lattice {C:\users\Public\Documents\PCB Artist\Library} LCC     LCC28
+GAL20XV10B-15L

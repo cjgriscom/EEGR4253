@@ -1,0 +1,90 @@
+MDF Database:  version 1.0
+MDF_INFO | MCE_CJG | XC9572-7-PC84
+MACROCELL | 3 | 0 | CPU_CLK_pre
+ATTRIBUTES | 8848306 | 0
+OUTPUTMC | 1 | 3 | 0
+INPUTS | 2 | CPU_CLK_pre_cmp_eq0000  | CPU_CLK_pre.LFBK
+INPUTMC | 2 | 1 | 14 | 3 | 0
+EQ | 4 | 
+   CPU_CLK.D = Gnd;
+   CPU_CLK.CLK = Gnd;
+   CPU_CLK.AP = CPU_CLK_pre_cmp_eq0000 & !CPU_CLK_pre.LFBK;
+   CPU_CLK.AR = CPU_CLK_pre_cmp_eq0000 & CPU_CLK_pre.LFBK;
+
+MACROCELL | 1 | 14 | CPU_CLK_pre_cmp_eq0000
+ATTRIBUTES | 199424 | 0
+OUTPUTMC | 5 | 3 | 0 | 1 | 13 | 1 | 15 | 1 | 16 | 1 | 17
+INPUTS | 4 | prescaler_cpu<1>.LFBK  | prescaler_cpu<2>.LFBK  | prescaler_cpu<3>.LFBK  | prescaler_cpu<0>.LFBK
+INPUTMC | 4 | 1 | 15 | 1 | 16 | 1 | 17 | 1 | 13
+EQ | 2 | 
+   CPU_CLK_pre_cmp_eq0000 = prescaler_cpu<0>.LFBK & !prescaler_cpu<1>.LFBK & 
+	!prescaler_cpu<2>.LFBK & prescaler_cpu<3>.LFBK;
+
+MACROCELL | 1 | 13 | prescaler_cpu<0>
+ATTRIBUTES | 199424 | 0
+OUTPUTMC | 5 | 1 | 14 | 1 | 13 | 1 | 15 | 1 | 16 | 1 | 17
+INPUTS | 2 | prescaler_cpu<0>.LFBK  | CPU_CLK_pre_cmp_eq0000.LFBK
+INPUTMC | 2 | 1 | 13 | 1 | 14
+EQ | 2 | 
+   prescaler_cpu<0> = !prescaler_cpu<0>.LFBK & 
+	!CPU_CLK_pre_cmp_eq0000.LFBK;
+
+MACROCELL | 1 | 15 | prescaler_cpu<1>
+ATTRIBUTES | 199424 | 0
+OUTPUTMC | 4 | 1 | 14 | 1 | 15 | 1 | 16 | 1 | 17
+INPUTS | 3 | prescaler_cpu<0>.LFBK  | prescaler_cpu<1>.LFBK  | CPU_CLK_pre_cmp_eq0000.LFBK
+INPUTMC | 3 | 1 | 13 | 1 | 15 | 1 | 14
+EQ | 4 | 
+   prescaler_cpu<1> = prescaler_cpu<0>.LFBK & !prescaler_cpu<1>.LFBK & 
+	!CPU_CLK_pre_cmp_eq0000.LFBK
+	# !prescaler_cpu<0>.LFBK & prescaler_cpu<1>.LFBK & 
+	!CPU_CLK_pre_cmp_eq0000.LFBK;
+
+MACROCELL | 1 | 16 | prescaler_cpu<2>
+ATTRIBUTES | 199424 | 0
+OUTPUTMC | 3 | 1 | 14 | 1 | 16 | 1 | 17
+INPUTS | 4 | prescaler_cpu<0>.LFBK  | prescaler_cpu<2>.LFBK  | prescaler_cpu<1>.LFBK  | CPU_CLK_pre_cmp_eq0000.LFBK
+INPUTMC | 4 | 1 | 13 | 1 | 16 | 1 | 15 | 1 | 14
+EQ | 6 | 
+   prescaler_cpu<2> = !prescaler_cpu<0>.LFBK & prescaler_cpu<2>.LFBK & 
+	!CPU_CLK_pre_cmp_eq0000.LFBK
+	# !prescaler_cpu<1>.LFBK & prescaler_cpu<2>.LFBK & 
+	!CPU_CLK_pre_cmp_eq0000.LFBK
+	# prescaler_cpu<0>.LFBK & prescaler_cpu<1>.LFBK & 
+	!prescaler_cpu<2>.LFBK & !CPU_CLK_pre_cmp_eq0000.LFBK;
+
+MACROCELL | 1 | 17 | prescaler_cpu<3>
+ATTRIBUTES | 199424 | 0
+OUTPUTMC | 2 | 1 | 14 | 1 | 17
+INPUTS | 5 | prescaler_cpu<0>.LFBK  | prescaler_cpu<3>.LFBK  | prescaler_cpu<1>.LFBK  | prescaler_cpu<2>.LFBK  | CPU_CLK_pre_cmp_eq0000.LFBK
+INPUTMC | 5 | 1 | 13 | 1 | 17 | 1 | 15 | 1 | 16 | 1 | 14
+EQ | 9 | 
+   prescaler_cpu<3> = !prescaler_cpu<0>.LFBK & prescaler_cpu<3>.LFBK & 
+	!CPU_CLK_pre_cmp_eq0000.LFBK
+	# !prescaler_cpu<1>.LFBK & prescaler_cpu<3>.LFBK & 
+	!CPU_CLK_pre_cmp_eq0000.LFBK
+	# !prescaler_cpu<2>.LFBK & prescaler_cpu<3>.LFBK & 
+	!CPU_CLK_pre_cmp_eq0000.LFBK
+	# prescaler_cpu<0>.LFBK & prescaler_cpu<1>.LFBK & 
+	prescaler_cpu<2>.LFBK & !prescaler_cpu<3>.LFBK & 
+	!CPU_CLK_pre_cmp_eq0000.LFBK;
+
+MACROCELL | 1 | 10 | DUART_IACK_OBUF
+ATTRIBUTES | 396034 | 0
+INPUTS | 3 | FC2  | FC1  | FC0
+INPUTP | 3 | 46 | 49 | 44
+EQ | 1 | 
+   !DUART_IACK = FC2 & FC1 & FC0;
+
+MACROCELL | 0 | 6 | Q2_Enable_OBUF
+ATTRIBUTES | 396034 | 0
+INPUTS | 0
+EQ | 1 | 
+   Q2_Enable = Vcc;
+
+PIN | FC2 | 64 | 0 | N/A | 46 | 1 | 1 | 10
+PIN | FC1 | 64 | 0 | N/A | 49 | 1 | 1 | 10
+PIN | FC0 | 64 | 0 | N/A | 44 | 1 | 1 | 10
+PIN | CPU_CLK | 536871040 | 0 | N/A | 60
+PIN | DUART_IACK | 536871040 | 0 | N/A | 3
+PIN | Q2_Enable | 536871040 | 0 | N/A | 22

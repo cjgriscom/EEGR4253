@@ -1,0 +1,23 @@
+Pin Freeze File:  version P.20131013
+
+957284 XC9572-7-PC84
+FC0 S:PIN32
+FC1 S:PIN36
+FC2 S:PIN33
+CPU_CLK S:PIN46
+DUART_IACK S:PIN77
+Q2_Enable S:PIN11
+
+
+;The remaining section of the .gyd file is for documentation purposes only.
+;It shows where your internal equations were placed in the last successful fit.
+
+PARTITION FB1_7 Q2_Enable_OBUF
+
+PARTITION FB2_11 DUART_IACK_OBUF
+PARTITION FB2_14 prescaler_cpu<0> CPU_CLK_pre_cmp_eq0000 prescaler_cpu<1> prescaler_cpu<2>
+		 prescaler_cpu<3>
+
+PARTITION FB4_1 CPU_CLK_pre
+
+

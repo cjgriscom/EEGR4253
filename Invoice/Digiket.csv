@@ -1,0 +1,29 @@
+Web ID,Access ID,Salesorder Number,Shipping Method,Payment Method,
+162836272,55061,49131690,U.S. Postal Service First Class Mail* (order by 8:00 PM CT),VISA,
+
+Shipping Address
+First Name,Last Name,Company,Mail Stop,Address Line 1,Address Line 2,City,State,Postal Code,Country,Email Address,Telephone,
+Chandler,Griscom CPO#1965,LeTourneau University,,LeTourneau University,2100 S Mobberly Ave,Longview,TX,75602,USA,cjgriscom@gmail.com,4846835249,
+
+Billing Address
+First Name,Last Name,Company,Mail Stop,Address Line 1,Address Line 2,City,State,Postal Code,Country,Email Address,Telephone,
+Chandler,Griscom,,,9 Country Club Rd.,,Coatesville,PA,19320,USA,,4846835249,
+
+Index,Quantity,Part Number,Description,Customer Reference,Available Quantity,Backorder Quantity,Unit Price USD,Extended Price USD,
+1,2,AE10059-ND,CONN SOCKET PLCC 68POS TIN,,2,0,1.42000,2.84,
+2,2,AE10057-ND,CONN SOCKET PLCC 44POS TIN,,2,0,1.02000,2.04,
+3,1,XC1194-ND,OSC XO 80.000MHZ TTL PC PIN,,1,0,2.37000,2.37,
+4,1,XC1158-ND,OSC XO 3.6864MHZ HCMOS TTL PC,,1,0,2.47000,2.47,
+5,1,A109020-ND,CONN D-SUB PLUG 9POS R/A SOLDER,,1,0,1.54000,1.54,
+6,4,SST39SF040-70-4C-PHE-ND,IC FLASH 4MBIT 70NS 32DIP,,4,0,1.67000,6.68,
+7,2,1450-1238-5-ND,IC SRAM 4MBIT 12NS 44SOJ,,2,0,4.98000,9.96,
+8,2,296-27963-5-ND,IC DUAL RS232 ESD-PROT 16-DIP,,2,0,1.37000,2.74,
+9,10,3M9580-ND,SHUNT JUMPER .1" BLACK GOLD,,10,0,0.09400,0.94,
+10,1,EJ508A-ND,CONN PWR JACK 2.1X5.5MM SOLDER,,1,0,0.85000,0.85,
+11,2,SW415-ND,SWITCH TACTILE SPST-NO 0.05A 24V,,2,0,0.76000,1.52,
+12,1,AE11110-ND,IC PLCC SOCKET 84POS TIN,,1,0,1.37000,1.37,
+13,1,LT323AT#PBF-ND,IC REG LDO 5V 3A TO220-3,,1,0,4.27000,4.27,
+,,,,,,Subtotal,39.59
+,,,,,,Shipping,unknown
+,,,,,,Estimated Sales Tax,3.27
+,,,,,,Total,unknown

@@ -1,0 +1,357 @@
+NDS Database:  version P.20131013
+
+NDS_INFO | xc9500 | 957284 | XC9572-7-PC84
+
+DEVICE | 9572 | 957284 | 
+
+NETWORK | MCE_CJG | 0 | 0 | 201342983
+
+MACROCELL_INSTANCE | PrldLow+OptxMapped+ClkInv | CPU_CLK_pre | MCE_CJG_COPY_0_COPY_0 | 2222982144 | 2 | 3
+INPUT_NODE_TYPE | 1 | 100 | NOTYPE
+NODE | CPU_CLK_pre_cmp_eq0000 | 422 | ? | 0 | 16 | MCE_CJG_COPY_0_COPY_0 | NULL | CPU_CLK_pre_cmp_eq0000.Q | CPU_CLK_pre_cmp_eq0000 | 1 | 0 | MC_UIM
+INPUT_NODE_TYPE | 1 | 100 | NOTYPE
+NODE | CPU_CLK_pre.FBK | 473 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | CPU_CLK_pre.Q | CPU_CLK_pre | 5 | 0 | MC_FBK
+OUTPUT_NODE_TYPE | 0 | 0 | MC_Q
+NODE | CPU_CLK_pre$Q | 420 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | CPU_CLK_pre.Q | CPU_CLK_pre | 0 | 0 | MC_Q
+OUTPUT_NODE_TYPE | 1 | 0 | MC_UIM
+NODE | CPU_CLK_pre | 421 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | CPU_CLK_pre.Q | CPU_CLK_pre | 1 | 0 | MC_UIM
+OUTPUT_NODE_TYPE | 5 | 0 | MC_FBK
+NODE | CPU_CLK_pre.FBK | 473 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | CPU_CLK_pre.Q | CPU_CLK_pre | 5 | 0 | MC_FBK
+
+SIGNAL_INSTANCE | CPU_CLK_pre.SI | CPU_CLK_pre | 0 | 2 | 5
+INPUT_NODE_TYPE | 1 | 100 | NOTYPE
+NODE | CPU_CLK_pre_cmp_eq0000 | 422 | ? | 0 | 16 | MCE_CJG_COPY_0_COPY_0 | NULL | CPU_CLK_pre_cmp_eq0000.Q | CPU_CLK_pre_cmp_eq0000 | 1 | 0 | MC_UIM
+INPUT_NODE_TYPE | 1 | 100 | NOTYPE
+NODE | CPU_CLK_pre.FBK | 473 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | CPU_CLK_pre.Q | CPU_CLK_pre | 5 | 0 | MC_FBK
+OUTPUT_NODE_TYPE | 1 | 9 | MC_SI_D1
+SIGNAL | NODE | CPU_CLK_pre.D1 | 439 | ? | 0 | 4096 | CPU_CLK_pre | NULL | NULL | CPU_CLK_pre.SI | 1 | 9 | MC_SI_D1
+SPPTERM | 0 | IV_ZERO
+OUTPUT_NODE_TYPE | 2 | 9 | MC_SI_D2
+SIGNAL | NODE | CPU_CLK_pre.D2 | 440 | ? | 0 | 6144 | CPU_CLK_pre | NULL | NULL | CPU_CLK_pre.SI | 2 | 9 | MC_SI_D2
+SPPTERM | 0 | IV_ZERO
+OUTPUT_NODE_TYPE | 3 | 9 | MC_SI_CLKF
+SIGNAL | NODE | CPU_CLK_pre.CLKF | 441 | ? | 0 | 6144 | CPU_CLK_pre | NULL | NULL | CPU_CLK_pre.SI | 3 | 9 | MC_SI_CLKF
+SPPTERM | 0 | IV_ZERO
+OUTPUT_NODE_TYPE | 5 | 9 | MC_SI_SETF
+SIGNAL | NODE | CPU_CLK_pre.SETF | 442 | ? | 0 | 4096 | CPU_CLK_pre | NULL | NULL | CPU_CLK_pre.SI | 5 | 9 | MC_SI_SETF
+SPPTERM | 2 | IV_TRUE | CPU_CLK_pre_cmp_eq0000 | IV_FALSE | CPU_CLK_pre.FBK
+OUTPUT_NODE_TYPE | 6 | 9 | MC_SI_RSTF
+SIGNAL | NODE | CPU_CLK_pre.RSTF | 443 | ? | 0 | 4096 | CPU_CLK_pre | NULL | NULL | CPU_CLK_pre.SI | 6 | 9 | MC_SI_RSTF
+SPPTERM | 2 | IV_TRUE | CPU_CLK_pre_cmp_eq0000 | IV_TRUE | CPU_CLK_pre.FBK
+
+SRFF_INSTANCE | CPU_CLK_pre.REG | CPU_CLK_pre | 0 | 4 | 1
+INPUT_NODE_TYPE | 0 | 8 | SRFF_D
+NODE | CPU_CLK_pre.D | 438 | ? | 0 | 0 | CPU_CLK_pre | NULL | NULL | CPU_CLK_pre.XOR | 0 | 7 | ALU_F
+INPUT_NODE_TYPE | 1 | 8 | SRFF_C
+SIGNAL | NODE | CPU_CLK_pre.CLKF | 441 | ? | 0 | 6144 | CPU_CLK_pre | NULL | NULL | CPU_CLK_pre.SI | 3 | 9 | MC_SI_CLKF
+SPPTERM | 0 | IV_ZERO
+INPUT_NODE_TYPE | 2 | 8 | SRFF_S
+SIGNAL | NODE | CPU_CLK_pre.SETF | 442 | ? | 0 | 4096 | CPU_CLK_pre | NULL | NULL | CPU_CLK_pre.SI | 5 | 9 | MC_SI_SETF
+SPPTERM | 2 | IV_TRUE | CPU_CLK_pre_cmp_eq0000 | IV_FALSE | CPU_CLK_pre.FBK
+INPUT_NODE_TYPE | 3 | 8 | SRFF_R
+SIGNAL | NODE | CPU_CLK_pre.RSTF | 443 | ? | 0 | 4096 | CPU_CLK_pre | NULL | NULL | CPU_CLK_pre.SI | 6 | 9 | MC_SI_RSTF
+SPPTERM | 2 | IV_TRUE | CPU_CLK_pre_cmp_eq0000 | IV_TRUE | CPU_CLK_pre.FBK
+OUTPUT_NODE_TYPE | 0 | 8 | SRFF_Q
+NODE | CPU_CLK_pre.Q | 444 | ? | 0 | 0 | CPU_CLK_pre | NULL | NULL | CPU_CLK_pre.REG | 0 | 8 | SRFF_Q
+
+MACROCELL_INSTANCE | OptxMapped+ClkInv | CPU_CLK_pre_cmp_eq0000 | MCE_CJG_COPY_0_COPY_0 | 2222981120 | 4 | 2
+INPUT_NODE_TYPE | 1 | 100 | NOTYPE
+NODE | prescaler_cpu<1>.FBK | 475 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | prescaler_cpu<1>.Q | prescaler_cpu<1> | 5 | 0 | MC_FBK
+INPUT_NODE_TYPE | 1 | 100 | NOTYPE
+NODE | prescaler_cpu<2>.FBK | 476 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | prescaler_cpu<2>.Q | prescaler_cpu<2> | 5 | 0 | MC_FBK
+INPUT_NODE_TYPE | 1 | 100 | NOTYPE
+NODE | prescaler_cpu<3>.FBK | 477 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | prescaler_cpu<3>.Q | prescaler_cpu<3> | 5 | 0 | MC_FBK
+INPUT_NODE_TYPE | 1 | 100 | NOTYPE
+NODE | prescaler_cpu<0>.FBK | 474 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | prescaler_cpu<0>.Q | prescaler_cpu<0> | 5 | 0 | MC_FBK
+OUTPUT_NODE_TYPE | 1 | 0 | MC_UIM
+NODE | CPU_CLK_pre_cmp_eq0000 | 422 | ? | 0 | 16 | MCE_CJG_COPY_0_COPY_0 | NULL | CPU_CLK_pre_cmp_eq0000.Q | CPU_CLK_pre_cmp_eq0000 | 1 | 0 | MC_UIM
+OUTPUT_NODE_TYPE | 5 | 0 | MC_FBK
+NODE | CPU_CLK_pre_cmp_eq0000.FBK | 478 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | CPU_CLK_pre_cmp_eq0000.Q | CPU_CLK_pre_cmp_eq0000 | 5 | 0 | MC_FBK
+
+SIGNAL_INSTANCE | CPU_CLK_pre_cmp_eq0000.SI | CPU_CLK_pre_cmp_eq0000 | 0 | 4 | 2
+INPUT_NODE_TYPE | 1 | 100 | NOTYPE
+NODE | prescaler_cpu<1>.FBK | 475 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | prescaler_cpu<1>.Q | prescaler_cpu<1> | 5 | 0 | MC_FBK
+INPUT_NODE_TYPE | 1 | 100 | NOTYPE
+NODE | prescaler_cpu<2>.FBK | 476 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | prescaler_cpu<2>.Q | prescaler_cpu<2> | 5 | 0 | MC_FBK
+INPUT_NODE_TYPE | 1 | 100 | NOTYPE
+NODE | prescaler_cpu<3>.FBK | 477 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | prescaler_cpu<3>.Q | prescaler_cpu<3> | 5 | 0 | MC_FBK
+INPUT_NODE_TYPE | 1 | 100 | NOTYPE
+NODE | prescaler_cpu<0>.FBK | 474 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | prescaler_cpu<0>.Q | prescaler_cpu<0> | 5 | 0 | MC_FBK
+OUTPUT_NODE_TYPE | 1 | 9 | MC_SI_D1
+SIGNAL | NODE | CPU_CLK_pre_cmp_eq0000.D1 | 446 | ? | 0 | 4096 | CPU_CLK_pre_cmp_eq0000 | NULL | NULL | CPU_CLK_pre_cmp_eq0000.SI | 1 | 9 | MC_SI_D1
+SPPTERM | 0 | IV_ZERO
+OUTPUT_NODE_TYPE | 2 | 9 | MC_SI_D2
+SIGNAL | NODE | CPU_CLK_pre_cmp_eq0000.D2 | 447 | ? | 0 | 4096 | CPU_CLK_pre_cmp_eq0000 | NULL | NULL | CPU_CLK_pre_cmp_eq0000.SI | 2 | 9 | MC_SI_D2
+SPPTERM | 4 | IV_TRUE | prescaler_cpu<0>.FBK | IV_FALSE | prescaler_cpu<1>.FBK | IV_FALSE | prescaler_cpu<2>.FBK | IV_TRUE | prescaler_cpu<3>.FBK
+
+SRFF_INSTANCE | CPU_CLK_pre_cmp_eq0000.REG | CPU_CLK_pre_cmp_eq0000 | 0 | 1 | 1
+INPUT_NODE_TYPE | 0 | 8 | SRFF_D
+NODE | CPU_CLK_pre_cmp_eq0000.D | 445 | ? | 0 | 0 | CPU_CLK_pre_cmp_eq0000 | NULL | NULL | CPU_CLK_pre_cmp_eq0000.XOR | 0 | 7 | ALU_F
+OUTPUT_NODE_TYPE | 0 | 8 | SRFF_Q
+NODE | CPU_CLK_pre_cmp_eq0000.Q | 448 | ? | 0 | 0 | CPU_CLK_pre_cmp_eq0000 | NULL | NULL | CPU_CLK_pre_cmp_eq0000.REG | 0 | 8 | SRFF_Q
+
+MACROCELL_INSTANCE | OptxMapped+ClkInv | prescaler_cpu<0> | MCE_CJG_COPY_0_COPY_0 | 2222981120 | 2 | 2
+INPUT_NODE_TYPE | 1 | 100 | NOTYPE
+NODE | prescaler_cpu<0>.FBK | 474 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | prescaler_cpu<0>.Q | prescaler_cpu<0> | 5 | 0 | MC_FBK
+INPUT_NODE_TYPE | 1 | 100 | NOTYPE
+NODE | CPU_CLK_pre_cmp_eq0000.FBK | 478 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | CPU_CLK_pre_cmp_eq0000.Q | CPU_CLK_pre_cmp_eq0000 | 5 | 0 | MC_FBK
+OUTPUT_NODE_TYPE | 1 | 0 | MC_UIM
+NODE | prescaler_cpu<0> | 423 | ? | 0 | 16 | MCE_CJG_COPY_0_COPY_0 | NULL | prescaler_cpu<0>.Q | prescaler_cpu<0> | 1 | 0 | MC_UIM
+OUTPUT_NODE_TYPE | 5 | 0 | MC_FBK
+NODE | prescaler_cpu<0>.FBK | 474 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | prescaler_cpu<0>.Q | prescaler_cpu<0> | 5 | 0 | MC_FBK
+
+SIGNAL_INSTANCE | prescaler_cpu<0>.SI | prescaler_cpu<0> | 0 | 2 | 2
+INPUT_NODE_TYPE | 1 | 100 | NOTYPE
+NODE | prescaler_cpu<0>.FBK | 474 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | prescaler_cpu<0>.Q | prescaler_cpu<0> | 5 | 0 | MC_FBK
+INPUT_NODE_TYPE | 1 | 100 | NOTYPE
+NODE | CPU_CLK_pre_cmp_eq0000.FBK | 478 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | CPU_CLK_pre_cmp_eq0000.Q | CPU_CLK_pre_cmp_eq0000 | 5 | 0 | MC_FBK
+OUTPUT_NODE_TYPE | 1 | 9 | MC_SI_D1
+SIGNAL | NODE | prescaler_cpu<0>.D1 | 450 | ? | 0 | 4096 | prescaler_cpu<0> | NULL | NULL | prescaler_cpu<0>.SI | 1 | 9 | MC_SI_D1
+SPPTERM | 0 | IV_ZERO
+OUTPUT_NODE_TYPE | 2 | 9 | MC_SI_D2
+SIGNAL | NODE | prescaler_cpu<0>.D2 | 451 | ? | 0 | 4096 | prescaler_cpu<0> | NULL | NULL | prescaler_cpu<0>.SI | 2 | 9 | MC_SI_D2
+SPPTERM | 2 | IV_FALSE | prescaler_cpu<0>.FBK | IV_FALSE | CPU_CLK_pre_cmp_eq0000.FBK
+
+SRFF_INSTANCE | prescaler_cpu<0>.REG | prescaler_cpu<0> | 0 | 1 | 1
+INPUT_NODE_TYPE | 0 | 8 | SRFF_D
+NODE | prescaler_cpu<0>.D | 449 | ? | 0 | 0 | prescaler_cpu<0> | NULL | NULL | prescaler_cpu<0>.XOR | 0 | 7 | ALU_F
+OUTPUT_NODE_TYPE | 0 | 8 | SRFF_Q
+NODE | prescaler_cpu<0>.Q | 452 | ? | 0 | 0 | prescaler_cpu<0> | NULL | NULL | prescaler_cpu<0>.REG | 0 | 8 | SRFF_Q
+
+MACROCELL_INSTANCE | OptxMapped+ClkInv | prescaler_cpu<1> | MCE_CJG_COPY_0_COPY_0 | 2222981120 | 3 | 2
+INPUT_NODE_TYPE | 1 | 100 | NOTYPE
+NODE | prescaler_cpu<0>.FBK | 474 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | prescaler_cpu<0>.Q | prescaler_cpu<0> | 5 | 0 | MC_FBK
+INPUT_NODE_TYPE | 1 | 100 | NOTYPE
+NODE | prescaler_cpu<1>.FBK | 475 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | prescaler_cpu<1>.Q | prescaler_cpu<1> | 5 | 0 | MC_FBK
+INPUT_NODE_TYPE | 1 | 100 | NOTYPE
+NODE | CPU_CLK_pre_cmp_eq0000.FBK | 478 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | CPU_CLK_pre_cmp_eq0000.Q | CPU_CLK_pre_cmp_eq0000 | 5 | 0 | MC_FBK
+OUTPUT_NODE_TYPE | 1 | 0 | MC_UIM
+NODE | prescaler_cpu<1> | 424 | ? | 0 | 16 | MCE_CJG_COPY_0_COPY_0 | NULL | prescaler_cpu<1>.Q | prescaler_cpu<1> | 1 | 0 | MC_UIM
+OUTPUT_NODE_TYPE | 5 | 0 | MC_FBK
+NODE | prescaler_cpu<1>.FBK | 475 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | prescaler_cpu<1>.Q | prescaler_cpu<1> | 5 | 0 | MC_FBK
+
+SIGNAL_INSTANCE | prescaler_cpu<1>.SI | prescaler_cpu<1> | 0 | 3 | 2
+INPUT_NODE_TYPE | 1 | 100 | NOTYPE
+NODE | prescaler_cpu<0>.FBK | 474 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | prescaler_cpu<0>.Q | prescaler_cpu<0> | 5 | 0 | MC_FBK
+INPUT_NODE_TYPE | 1 | 100 | NOTYPE
+NODE | prescaler_cpu<1>.FBK | 475 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | prescaler_cpu<1>.Q | prescaler_cpu<1> | 5 | 0 | MC_FBK
+INPUT_NODE_TYPE | 1 | 100 | NOTYPE
+NODE | CPU_CLK_pre_cmp_eq0000.FBK | 478 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | CPU_CLK_pre_cmp_eq0000.Q | CPU_CLK_pre_cmp_eq0000 | 5 | 0 | MC_FBK
+OUTPUT_NODE_TYPE | 1 | 9 | MC_SI_D1
+SIGNAL | NODE | prescaler_cpu<1>.D1 | 454 | ? | 0 | 4096 | prescaler_cpu<1> | NULL | NULL | prescaler_cpu<1>.SI | 1 | 9 | MC_SI_D1
+SPPTERM | 0 | IV_ZERO
+OUTPUT_NODE_TYPE | 2 | 9 | MC_SI_D2
+SIGNAL | NODE | prescaler_cpu<1>.D2 | 455 | ? | 0 | 4096 | prescaler_cpu<1> | NULL | NULL | prescaler_cpu<1>.SI | 2 | 9 | MC_SI_D2
+SPPTERM | 3 | IV_TRUE | prescaler_cpu<0>.FBK | IV_FALSE | prescaler_cpu<1>.FBK | IV_FALSE | CPU_CLK_pre_cmp_eq0000.FBK
+SPPTERM | 3 | IV_FALSE | prescaler_cpu<0>.FBK | IV_TRUE | prescaler_cpu<1>.FBK | IV_FALSE | CPU_CLK_pre_cmp_eq0000.FBK
+
+SRFF_INSTANCE | prescaler_cpu<1>.REG | prescaler_cpu<1> | 0 | 1 | 1
+INPUT_NODE_TYPE | 0 | 8 | SRFF_D
+NODE | prescaler_cpu<1>.D | 453 | ? | 0 | 0 | prescaler_cpu<1> | NULL | NULL | prescaler_cpu<1>.XOR | 0 | 7 | ALU_F
+OUTPUT_NODE_TYPE | 0 | 8 | SRFF_Q
+NODE | prescaler_cpu<1>.Q | 456 | ? | 0 | 0 | prescaler_cpu<1> | NULL | NULL | prescaler_cpu<1>.REG | 0 | 8 | SRFF_Q
+
+MACROCELL_INSTANCE | OptxMapped+ClkInv | prescaler_cpu<2> | MCE_CJG_COPY_0_COPY_0 | 2222981120 | 4 | 2
+INPUT_NODE_TYPE | 1 | 100 | NOTYPE
+NODE | prescaler_cpu<0>.FBK | 474 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | prescaler_cpu<0>.Q | prescaler_cpu<0> | 5 | 0 | MC_FBK
+INPUT_NODE_TYPE | 1 | 100 | NOTYPE
+NODE | prescaler_cpu<2>.FBK | 476 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | prescaler_cpu<2>.Q | prescaler_cpu<2> | 5 | 0 | MC_FBK
+INPUT_NODE_TYPE | 1 | 100 | NOTYPE
+NODE | prescaler_cpu<1>.FBK | 475 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | prescaler_cpu<1>.Q | prescaler_cpu<1> | 5 | 0 | MC_FBK
+INPUT_NODE_TYPE | 1 | 100 | NOTYPE
+NODE | CPU_CLK_pre_cmp_eq0000.FBK | 478 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | CPU_CLK_pre_cmp_eq0000.Q | CPU_CLK_pre_cmp_eq0000 | 5 | 0 | MC_FBK
+OUTPUT_NODE_TYPE | 1 | 0 | MC_UIM
+NODE | prescaler_cpu<2> | 425 | ? | 0 | 16 | MCE_CJG_COPY_0_COPY_0 | NULL | prescaler_cpu<2>.Q | prescaler_cpu<2> | 1 | 0 | MC_UIM
+OUTPUT_NODE_TYPE | 5 | 0 | MC_FBK
+NODE | prescaler_cpu<2>.FBK | 476 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | prescaler_cpu<2>.Q | prescaler_cpu<2> | 5 | 0 | MC_FBK
+
+SIGNAL_INSTANCE | prescaler_cpu<2>.SI | prescaler_cpu<2> | 0 | 4 | 2
+INPUT_NODE_TYPE | 1 | 100 | NOTYPE
+NODE | prescaler_cpu<0>.FBK | 474 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | prescaler_cpu<0>.Q | prescaler_cpu<0> | 5 | 0 | MC_FBK
+INPUT_NODE_TYPE | 1 | 100 | NOTYPE
+NODE | prescaler_cpu<2>.FBK | 476 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | prescaler_cpu<2>.Q | prescaler_cpu<2> | 5 | 0 | MC_FBK
+INPUT_NODE_TYPE | 1 | 100 | NOTYPE
+NODE | prescaler_cpu<1>.FBK | 475 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | prescaler_cpu<1>.Q | prescaler_cpu<1> | 5 | 0 | MC_FBK
+INPUT_NODE_TYPE | 1 | 100 | NOTYPE
+NODE | CPU_CLK_pre_cmp_eq0000.FBK | 478 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | CPU_CLK_pre_cmp_eq0000.Q | CPU_CLK_pre_cmp_eq0000 | 5 | 0 | MC_FBK
+OUTPUT_NODE_TYPE | 1 | 9 | MC_SI_D1
+SIGNAL | NODE | prescaler_cpu<2>.D1 | 458 | ? | 0 | 4096 | prescaler_cpu<2> | NULL | NULL | prescaler_cpu<2>.SI | 1 | 9 | MC_SI_D1
+SPPTERM | 0 | IV_ZERO
+OUTPUT_NODE_TYPE | 2 | 9 | MC_SI_D2
+SIGNAL | NODE | prescaler_cpu<2>.D2 | 459 | ? | 0 | 4096 | prescaler_cpu<2> | NULL | NULL | prescaler_cpu<2>.SI | 2 | 9 | MC_SI_D2
+SPPTERM | 3 | IV_FALSE | prescaler_cpu<0>.FBK | IV_TRUE | prescaler_cpu<2>.FBK | IV_FALSE | CPU_CLK_pre_cmp_eq0000.FBK
+SPPTERM | 3 | IV_FALSE | prescaler_cpu<1>.FBK | IV_TRUE | prescaler_cpu<2>.FBK | IV_FALSE | CPU_CLK_pre_cmp_eq0000.FBK
+SPPTERM | 4 | IV_TRUE | prescaler_cpu<0>.FBK | IV_TRUE | prescaler_cpu<1>.FBK | IV_FALSE | prescaler_cpu<2>.FBK | IV_FALSE | CPU_CLK_pre_cmp_eq0000.FBK
+
+SRFF_INSTANCE | prescaler_cpu<2>.REG | prescaler_cpu<2> | 0 | 1 | 1
+INPUT_NODE_TYPE | 0 | 8 | SRFF_D
+NODE | prescaler_cpu<2>.D | 457 | ? | 0 | 0 | prescaler_cpu<2> | NULL | NULL | prescaler_cpu<2>.XOR | 0 | 7 | ALU_F
+OUTPUT_NODE_TYPE | 0 | 8 | SRFF_Q
+NODE | prescaler_cpu<2>.Q | 460 | ? | 0 | 0 | prescaler_cpu<2> | NULL | NULL | prescaler_cpu<2>.REG | 0 | 8 | SRFF_Q
+
+MACROCELL_INSTANCE | OptxMapped+ClkInv | prescaler_cpu<3> | MCE_CJG_COPY_0_COPY_0 | 2222981120 | 5 | 2
+INPUT_NODE_TYPE | 1 | 100 | NOTYPE
+NODE | prescaler_cpu<0>.FBK | 474 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | prescaler_cpu<0>.Q | prescaler_cpu<0> | 5 | 0 | MC_FBK
+INPUT_NODE_TYPE | 1 | 100 | NOTYPE
+NODE | prescaler_cpu<3>.FBK | 477 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | prescaler_cpu<3>.Q | prescaler_cpu<3> | 5 | 0 | MC_FBK
+INPUT_NODE_TYPE | 1 | 100 | NOTYPE
+NODE | prescaler_cpu<1>.FBK | 475 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | prescaler_cpu<1>.Q | prescaler_cpu<1> | 5 | 0 | MC_FBK
+INPUT_NODE_TYPE | 1 | 100 | NOTYPE
+NODE | prescaler_cpu<2>.FBK | 476 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | prescaler_cpu<2>.Q | prescaler_cpu<2> | 5 | 0 | MC_FBK
+INPUT_NODE_TYPE | 1 | 100 | NOTYPE
+NODE | CPU_CLK_pre_cmp_eq0000.FBK | 478 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | CPU_CLK_pre_cmp_eq0000.Q | CPU_CLK_pre_cmp_eq0000 | 5 | 0 | MC_FBK
+OUTPUT_NODE_TYPE | 1 | 0 | MC_UIM
+NODE | prescaler_cpu<3> | 426 | ? | 0 | 16 | MCE_CJG_COPY_0_COPY_0 | NULL | prescaler_cpu<3>.Q | prescaler_cpu<3> | 1 | 0 | MC_UIM
+OUTPUT_NODE_TYPE | 5 | 0 | MC_FBK
+NODE | prescaler_cpu<3>.FBK | 477 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | prescaler_cpu<3>.Q | prescaler_cpu<3> | 5 | 0 | MC_FBK
+
+SIGNAL_INSTANCE | prescaler_cpu<3>.SI | prescaler_cpu<3> | 0 | 5 | 2
+INPUT_NODE_TYPE | 1 | 100 | NOTYPE
+NODE | prescaler_cpu<0>.FBK | 474 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | prescaler_cpu<0>.Q | prescaler_cpu<0> | 5 | 0 | MC_FBK
+INPUT_NODE_TYPE | 1 | 100 | NOTYPE
+NODE | prescaler_cpu<3>.FBK | 477 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | prescaler_cpu<3>.Q | prescaler_cpu<3> | 5 | 0 | MC_FBK
+INPUT_NODE_TYPE | 1 | 100 | NOTYPE
+NODE | prescaler_cpu<1>.FBK | 475 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | prescaler_cpu<1>.Q | prescaler_cpu<1> | 5 | 0 | MC_FBK
+INPUT_NODE_TYPE | 1 | 100 | NOTYPE
+NODE | prescaler_cpu<2>.FBK | 476 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | prescaler_cpu<2>.Q | prescaler_cpu<2> | 5 | 0 | MC_FBK
+INPUT_NODE_TYPE | 1 | 100 | NOTYPE
+NODE | CPU_CLK_pre_cmp_eq0000.FBK | 478 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | CPU_CLK_pre_cmp_eq0000.Q | CPU_CLK_pre_cmp_eq0000 | 5 | 0 | MC_FBK
+OUTPUT_NODE_TYPE | 1 | 9 | MC_SI_D1
+SIGNAL | NODE | prescaler_cpu<3>.D1 | 462 | ? | 0 | 4096 | prescaler_cpu<3> | NULL | NULL | prescaler_cpu<3>.SI | 1 | 9 | MC_SI_D1
+SPPTERM | 0 | IV_ZERO
+OUTPUT_NODE_TYPE | 2 | 9 | MC_SI_D2
+SIGNAL | NODE | prescaler_cpu<3>.D2 | 463 | ? | 0 | 4096 | prescaler_cpu<3> | NULL | NULL | prescaler_cpu<3>.SI | 2 | 9 | MC_SI_D2
+SPPTERM | 3 | IV_FALSE | prescaler_cpu<0>.FBK | IV_TRUE | prescaler_cpu<3>.FBK | IV_FALSE | CPU_CLK_pre_cmp_eq0000.FBK
+SPPTERM | 3 | IV_FALSE | prescaler_cpu<1>.FBK | IV_TRUE | prescaler_cpu<3>.FBK | IV_FALSE | CPU_CLK_pre_cmp_eq0000.FBK
+SPPTERM | 3 | IV_FALSE | prescaler_cpu<2>.FBK | IV_TRUE | prescaler_cpu<3>.FBK | IV_FALSE | CPU_CLK_pre_cmp_eq0000.FBK
+SPPTERM | 5 | IV_TRUE | prescaler_cpu<0>.FBK | IV_TRUE | prescaler_cpu<1>.FBK | IV_TRUE | prescaler_cpu<2>.FBK | IV_FALSE | prescaler_cpu<3>.FBK | IV_FALSE | CPU_CLK_pre_cmp_eq0000.FBK
+
+SRFF_INSTANCE | prescaler_cpu<3>.REG | prescaler_cpu<3> | 0 | 1 | 1
+INPUT_NODE_TYPE | 0 | 8 | SRFF_D
+NODE | prescaler_cpu<3>.D | 461 | ? | 0 | 0 | prescaler_cpu<3> | NULL | NULL | prescaler_cpu<3>.XOR | 0 | 7 | ALU_F
+OUTPUT_NODE_TYPE | 0 | 8 | SRFF_Q
+NODE | prescaler_cpu<3>.Q | 464 | ? | 0 | 0 | prescaler_cpu<3> | NULL | NULL | prescaler_cpu<3>.REG | 0 | 8 | SRFF_Q
+
+INPUT_INSTANCE | 0 | 0 | NULL | FC2_IBUF | MCE_CJG_COPY_0_COPY_0 | 0 | 1 | 1
+INPUT_NODE_TYPE | 0 | 5 | II_IN
+NODE | FC2 | 435 | PI | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | NULL | NULL | 0 | 100 | NOTYPE
+OUTPUT_NODE_TYPE | 0 | 5 | II_IMUX
+NODE | FC2_IBUF | 427 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | NULL | FC2_IBUF | 0 | 5 | II_IMUX
+
+INPUT_INSTANCE | 0 | 0 | NULL | FC1_IBUF | MCE_CJG_COPY_0_COPY_0 | 0 | 1 | 1
+INPUT_NODE_TYPE | 0 | 5 | II_IN
+NODE | FC1 | 436 | PI | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | NULL | NULL | 0 | 100 | NOTYPE
+OUTPUT_NODE_TYPE | 0 | 5 | II_IMUX
+NODE | FC1_IBUF | 428 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | NULL | FC1_IBUF | 0 | 5 | II_IMUX
+
+INPUT_INSTANCE | 0 | 0 | NULL | FC0_IBUF | MCE_CJG_COPY_0_COPY_0 | 0 | 1 | 1
+INPUT_NODE_TYPE | 0 | 5 | II_IN
+NODE | FC0 | 437 | PI | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | NULL | NULL | 0 | 100 | NOTYPE
+OUTPUT_NODE_TYPE | 0 | 5 | II_IMUX
+NODE | FC0_IBUF | 429 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | NULL | FC0_IBUF | 0 | 5 | II_IMUX
+
+MACROCELL_INSTANCE | Inv+OptxMapped | DUART_IACK_OBUF | MCE_CJG_COPY_0_COPY_0 | 2155872512 | 3 | 2
+INPUT_NODE_TYPE | 1 | 100 | NOTYPE
+NODE | FC2_IBUF | 427 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | NULL | FC2_IBUF | 0 | 5 | II_IMUX
+INPUT_NODE_TYPE | 1 | 100 | NOTYPE
+NODE | FC1_IBUF | 428 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | NULL | FC1_IBUF | 0 | 5 | II_IMUX
+INPUT_NODE_TYPE | 1 | 100 | NOTYPE
+NODE | FC0_IBUF | 429 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | NULL | FC0_IBUF | 0 | 5 | II_IMUX
+OUTPUT_NODE_TYPE | 0 | 0 | MC_Q
+NODE | DUART_IACK_OBUF | 430 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | DUART_IACK_OBUF.Q | DUART_IACK_OBUF | 0 | 0 | MC_Q
+OUTPUT_NODE_TYPE | 1 | 0 | MC_UIM
+NODE | DUART_IACK_OBUF.UIM | 479 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | DUART_IACK_OBUF.Q | DUART_IACK_OBUF | 1 | 0 | MC_UIM
+
+SIGNAL_INSTANCE | DUART_IACK_OBUF.SI | DUART_IACK_OBUF | 0 | 3 | 2
+INPUT_NODE_TYPE | 1 | 100 | NOTYPE
+NODE | FC2_IBUF | 427 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | NULL | FC2_IBUF | 0 | 5 | II_IMUX
+INPUT_NODE_TYPE | 1 | 100 | NOTYPE
+NODE | FC1_IBUF | 428 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | NULL | FC1_IBUF | 0 | 5 | II_IMUX
+INPUT_NODE_TYPE | 1 | 100 | NOTYPE
+NODE | FC0_IBUF | 429 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | NULL | FC0_IBUF | 0 | 5 | II_IMUX
+OUTPUT_NODE_TYPE | 1 | 9 | MC_SI_D1
+SIGNAL | NODE | DUART_IACK_OBUF.D1 | 466 | ? | 0 | 4096 | DUART_IACK_OBUF | NULL | NULL | DUART_IACK_OBUF.SI | 1 | 9 | MC_SI_D1
+SPPTERM | 0 | IV_ZERO
+OUTPUT_NODE_TYPE | 2 | 9 | MC_SI_D2
+SIGNAL | NODE | DUART_IACK_OBUF.D2 | 467 | ? | 0 | 4096 | DUART_IACK_OBUF | NULL | NULL | DUART_IACK_OBUF.SI | 2 | 9 | MC_SI_D2
+SPPTERM | 3 | IV_TRUE | FC2_IBUF | IV_TRUE | FC1_IBUF | IV_TRUE | FC0_IBUF
+
+SRFF_INSTANCE | DUART_IACK_OBUF.REG | DUART_IACK_OBUF | 0 | 1 | 1
+INPUT_NODE_TYPE | 0 | 8 | SRFF_D
+NODE | DUART_IACK_OBUF.D | 465 | ? | 0 | 0 | DUART_IACK_OBUF | NULL | NULL | DUART_IACK_OBUF.XOR | 0 | 7 | ALU_F
+OUTPUT_NODE_TYPE | 0 | 8 | SRFF_Q
+NODE | DUART_IACK_OBUF.Q | 468 | ? | 0 | 0 | DUART_IACK_OBUF | NULL | NULL | DUART_IACK_OBUF.REG | 0 | 8 | SRFF_Q
+
+MACROCELL_INSTANCE | FbkInv+Merge+OptxMapped | Q2_Enable_OBUF | MCE_CJG_COPY_0_COPY_0 | 2155907072 | 0 | 2
+OUTPUT_NODE_TYPE | 0 | 0 | MC_Q
+NODE | Q2_Enable_OBUF | 431 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | Q2_Enable_OBUF.Q | Q2_Enable_OBUF | 0 | 0 | MC_Q
+OUTPUT_NODE_TYPE | 1 | 0 | MC_UIM
+NODE | Q2_Enable_OBUF.UIM | 480 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | Q2_Enable_OBUF.Q | Q2_Enable_OBUF | 1 | 0 | MC_UIM
+
+SIGNAL_INSTANCE | Q2_Enable_OBUF.SI | Q2_Enable_OBUF | 0 | 0 | 2
+OUTPUT_NODE_TYPE | 1 | 9 | MC_SI_D1
+SIGNAL | NODE | Q2_Enable_OBUF.D1 | 470 | ? | 0 | 4096 | Q2_Enable_OBUF | NULL | NULL | Q2_Enable_OBUF.SI | 1 | 9 | MC_SI_D1
+SPPTERM | 0 | IV_ZERO
+OUTPUT_NODE_TYPE | 2 | 9 | MC_SI_D2
+SIGNAL | NODE | Q2_Enable_OBUF.D2 | 471 | ? | 0 | 4096 | Q2_Enable_OBUF | NULL | NULL | Q2_Enable_OBUF.SI | 2 | 9 | MC_SI_D2
+SPPTERM | 0 | IV_DC
+
+SRFF_INSTANCE | Q2_Enable_OBUF.REG | Q2_Enable_OBUF | 0 | 1 | 1
+INPUT_NODE_TYPE | 0 | 8 | SRFF_D
+NODE | Q2_Enable_OBUF.D | 469 | ? | 0 | 0 | Q2_Enable_OBUF | NULL | NULL | Q2_Enable_OBUF.XOR | 0 | 7 | ALU_F
+OUTPUT_NODE_TYPE | 0 | 8 | SRFF_Q
+NODE | Q2_Enable_OBUF.Q | 472 | ? | 0 | 0 | Q2_Enable_OBUF | NULL | NULL | Q2_Enable_OBUF.REG | 0 | 8 | SRFF_Q
+
+OUTPUT_INSTANCE | 0 | CPU_CLK | MCE_CJG_COPY_0_COPY_0 | 3 | 1 | 1
+INPUT_NODE_TYPE | 0 | 6 | OI_IN
+NODE | CPU_CLK_pre$Q | 420 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | CPU_CLK_pre.Q | CPU_CLK_pre | 0 | 0 | MC_Q
+OUTPUT_NODE_TYPE | 0 | 6 | OI_OUT
+NODE | CPU_CLK | 432 | PO | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | NULL | CPU_CLK | 0 | 6 | OI_OUT
+
+OUTPUT_INSTANCE | 0 | DUART_IACK | MCE_CJG_COPY_0_COPY_0 | 3 | 1 | 1
+INPUT_NODE_TYPE | 0 | 6 | OI_IN
+NODE | DUART_IACK_OBUF | 430 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | DUART_IACK_OBUF.Q | DUART_IACK_OBUF | 0 | 0 | MC_Q
+OUTPUT_NODE_TYPE | 0 | 6 | OI_OUT
+NODE | DUART_IACK | 433 | PO | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | NULL | DUART_IACK | 0 | 6 | OI_OUT
+
+OUTPUT_INSTANCE | 0 | Q2_Enable | MCE_CJG_COPY_0_COPY_0 | 3 | 1 | 1
+INPUT_NODE_TYPE | 0 | 6 | OI_IN
+NODE | Q2_Enable_OBUF | 431 | ? | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | Q2_Enable_OBUF.Q | Q2_Enable_OBUF | 0 | 0 | MC_Q
+OUTPUT_NODE_TYPE | 0 | 6 | OI_OUT
+NODE | Q2_Enable | 434 | PO | 0 | 0 | MCE_CJG_COPY_0_COPY_0 | NULL | NULL | Q2_Enable | 0 | 6 | OI_OUT
+
+FB_INSTANCE | FOOBAR1_ | MCE_CJG_COPY_0_COPY_0 | 0 | 0 | 0
+FBPIN | 7 | Q2_Enable_OBUF | 1 | NULL | 0 | Q2_Enable | 1 | 11 | 49152
+
+FB_INSTANCE | FOOBAR2_ | MCE_CJG_COPY_0_COPY_0 | 0 | 0 | 0
+FBPIN | 11 | DUART_IACK_OBUF | 1 | NULL | 0 | DUART_IACK | 1 | 77 | 53248
+FBPIN | 14 | prescaler_cpu<0> | 1 | NULL | 0 | NULL | 0 | 81 | 49152
+FBPIN | 15 | CPU_CLK_pre_cmp_eq0000 | 1 | NULL | 0 | NULL | 0 | 83 | 49152
+FBPIN | 16 | prescaler_cpu<1> | 1 | NULL | 0 | NULL | 0 | 82 | 49152
+FBPIN | 17 | prescaler_cpu<2> | 1 | NULL | 0 | NULL | 0 | 84 | 49152
+FBPIN | 18 | prescaler_cpu<3> | 1 | NULL | 0 | NULL | 0
+
+FB_INSTANCE | FOOBAR3_ | MCE_CJG_COPY_0_COPY_0 | 0 | 0 | 0
+FBPIN | 4 | NULL | 0 | FC0_IBUF | 1 | NULL | 0 | 32 | 49152
+FBPIN | 11 | NULL | 0 | FC2_IBUF | 1 | NULL | 0 | 33 | 49152
+FBPIN | 14 | NULL | 0 | FC1_IBUF | 1 | NULL | 0 | 36 | 49152
+
+FB_INSTANCE | FOOBAR4_ | MCE_CJG_COPY_0_COPY_0 | 0 | 0 | 0
+FBPIN | 1 | CPU_CLK_pre | 1 | NULL | 0 | CPU_CLK | 1 | 46 | 49152
+
+FB_INSTANCE | INPUTPINS_FOOBAR5_ | MCE_CJG_COPY_0_COPY_0 | 0 | 0 | 0
+
+BUSINFO | A2<3:0> | 4 | 0 | 0 | A2<0> | 3 | A2<1> | 2 | A2<2> | 1 | A2<3> | 0
+BUSINFO | D<7:0> | 8 | 0 | 0 | D<0> | 7 | D<1> | 6 | D<2> | 5 | D<3> | 4 | D<4> | 3 | D<5> | 2 | D<6> | 1 | D<7> | 0
+BUSINFO | GPIO<15:0> | 16 | 0 | 0 | GPIO<0> | 15 | GPIO<10> | 5 | GPIO<11> | 4 | GPIO<12> | 3 | GPIO<13> | 2 | GPIO<14> | 1 | GPIO<15> | 0 | GPIO<1> | 14 | GPIO<2> | 13 | GPIO<3> | 12 | GPIO<4> | 11 | GPIO<5> | 10 | GPIO<6> | 9 | GPIO<7> | 8 | GPIO<8> | 7 | GPIO<9> | 6
+
+FB_ORDER_OF_INPUTS | FOOBAR2_ | 13 | prescaler_cpu<0>.FBK | NULL | 14 | CPU_CLK_pre_cmp_eq0000.FBK | NULL | 15 | prescaler_cpu<1>.FBK | NULL | 16 | prescaler_cpu<2>.FBK | NULL | 17 | prescaler_cpu<3>.FBK | NULL
+FB_ORDER_OF_INPUTS | FOOBAR2_ | 20 | FC0 | 32 | 24 | FC1 | 36 | 33 | FC2 | 33
+
+FB_IMUX_INDEX | FOOBAR2_ | -1 | -1 | -1 | -1 | -1 | -1 | -1 | -1 | -1 | -1 | -1 | -1 | -1 | 13 | 14 | 15 | 16 | 17 | -1 | -1 | 110 | -1 | -1 | -1 | 104 | -1 | -1 | -1 | -1 | -1 | -1 | -1 | -1 | 86 | -1 | -1
+
+
+FB_ORDER_OF_INPUTS | FOOBAR4_ | 0 | CPU_CLK_pre.FBK | NULL | 1 | CPU_CLK_pre_cmp_eq0000 | NULL
+
+FB_IMUX_INDEX | FOOBAR4_ | 0 | 999 | -1 | -1 | -1 | -1 | -1 | -1 | -1 | -1 | -1 | -1 | -1 | -1 | -1 | -1 | -1 | -1 | -1 | -1 | -1 | -1 | -1 | -1 | -1 | -1 | -1 | -1 | -1 | -1 | -1 | -1 | -1 | -1 | -1 | -1
+

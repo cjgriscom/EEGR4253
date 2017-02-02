@@ -1,0 +1,35 @@
++5V||#=1=+V||@Manufacturer=||@Manufacturer Part Number=||@Distributor=||@Distributor Part Number=
+1-1634580-2||#SOL=11=1-1634580-2||@Manufacturer=TE Connectivity||@Manufacturer Part Number=1-1634580-2||@Distributor=||@Distributor Part Number=||@Value=Serial
+1PinHeader||#SOL=1=1PinHeader||@Manufacturer=||@Manufacturer Part Number=||@Distributor=||@Distributor Part Number=
+1uFCeramic||#SOL=2=1uFCeramic||@Manufacturer=||@Manufacturer Part Number=||@Distributor=||@Distributor Part Number=||@Value=1uF
+3PinHeader||#SOL=3=Header3||@Manufacturer=||@Manufacturer Part Number=||@Distributor=||@Distributor Part Number=
+4pinHeader||#SOL=4=Header4||@Manufacturer=||@Manufacturer Part Number=||@Distributor=||@Distributor Part Number=
+6pinHeader||#SOL=6=JTAG-22-28-4061||@Manufacturer=||@Manufacturer Part Number=||@Distributor=||@Distributor Part Number=
+22-28-4061||#SIP=6=JTAG-22-28-4061||@Manufacturer=Molex/Waldom||@Manufacturer Part Number=22-28-4061||@Value=JTAG||@Distributor=||@Distributor Part Number=
+4952||#USER=1=TP4952||@Manufacturer=Keystone||@Manufacturer Part Number=4952||@Value=Test Point||@Distributor=||@Distributor Part Number=
+APT3216LVBC/D||#SOL=2=CC1206_71N_PAN||@Manufacturer=Kingbright||@Manufacturer Part Number=APT3216LVBC/D||@Distributor=||@Distributor Part Number=||@Value=Blue 2mA
+AS7C4098A-12JIN||#SOL=44=AS7C4098A-12JIN||@Manufacturer=Alliance||@Manufacturer Part Number=AS7C4098A-12JIN||@Distributor=||@Distributor Part Number=||@Value=RAM 256Kx16
+B3S-1000||#SOIC-16=4=SW836CT||@Manufacturer=Omron||@Manufacturer Part Number=B3S-1000||@Value=Push Button||@Distributor=||@Distributor Part Number=
+ByteConnector||#SOL=8=Header8||@Manufacturer=||@Manufacturer Part Number=||@Distributor=||@Distributor Part Number=
+CE_OE||#SOL=2=Header2||@Manufacturer=||@Manufacturer Part Number=||@Distributor=||@Distributor Part Number=
+CPU_Status||#SOL=3=Header3||@Manufacturer=||@Manufacturer Part Number=||@Distributor=||@Distributor Part Number=
+ECS-2200BX-036||#DIL=4=ECS-2100AX Series||@Manufacturer=ECS Inc.||@Manufacturer Part Number=ECS-2200BX-036||@Distributor=||@Distributor Part Number=||@Value=3.63MHz
+ECS-2200BX-800||#DIL=4=ECS-2100AX Series||@Manufacturer=ECS Inc.||@Manufacturer Part Number=ECS-2200BX-800||@Distributor=||@Distributor Part Number=||@Value=80MHz
+EJ508A||#USER=3=EJ508A||@Manufacturer=MPD||@Manufacturer Part Number=EJ508A||@Distributor=||@Distributor Part Number=
+FG16X5R1E476MRT00||#SOL=2=FG16X5R1E476MRT00||@Manufacturer=TDK||@Manufacturer Part Number=FG16X5R1E476MRT00||@Distributor=||@Distributor Part Number=||@Value=47uF 25V
+FROM||#=1=FROM||@Manufacturer=||@Manufacturer Part Number=||@Distributor=||@Distributor Part Number=
+GND||#=1=GND||@Manufacturer=||@Manufacturer Part Number=||@Distributor=||@Distributor Part Number=
+GRM21BR60J226ME39L||#SOL=2=CC0805_53N_MUR||@Manufacturer=Murata||@Manufacturer Part Number=GRM21BR60J226ME39L||@Distributor=||@Distributor Part Number=||@Value=22uF 6.3V
+GRM21BR61C105KA01L||#SOL=2=CC0805_53N_MUR||@Manufacturer=Murata||@Manufacturer Part Number=GRM21BR61C105KA01L||@Distributor=||@Distributor Part Number=||@Value=1uF 6.3V
+LETTER||#MISC=0=LETTER||@Manufacturer=||@Manufacturer Part Number=||@Distributor=||@Distributor Part Number=
+LT323||#SOL=3=TO220-3_T||@Manufacturer=Linear Technology||@Manufacturer Part Number=LT323AT||@Distributor=||@Distributor Part Number=||@Value=5V Regulator
+MAX232EPE||#DIP=16=DIP-16||@Manufacturer=||@Manufacturer Part Number=||@Distributor=||@Distributor Part Number=
+MC68HC000 in A-CCS 068-Z-T||#USER=68=PLCC-Socket-68||@Manufacturer=Freescale||@Manufacturer Part Number=MC68HC000||@Distributor=||@Distributor Part Number=||@Value=20MHz
+MC68681L||#DIL=40=DIP-40||@Manufacturer=Freescale||@Manufacturer Part Number=MC68681L||@Distributor=||@Distributor Part Number=||@Value=DUART
+SerialB||#SOL=4=Header4||@Manufacturer=||@Manufacturer Part Number=||@Distributor=||@Distributor Part Number=
+SLA1200||#SOL=3=SLA1200||@Manufacturer=Apem||@Manufacturer Part Number=SLA1200||@Distributor=||@Distributor Part Number=||@Value=SPDT
+SST39SF040-70-4C-PHE||#SOL=40=ZIF-40||@Manufacturer=Microchip Technology||@Manufacturer Part Number=SST39SF040-70-4C-PHE||@Distributor=||@Distributor Part Number=||@Value=Flash 512Kx8 70NS
+TO||#=1=TO||@Manufacturer=||@Manufacturer Part Number=||@Distributor=||@Distributor Part Number=
+UDS_LDS||#SOL=2=Header2||@Manufacturer=||@Manufacturer Part Number=||@Distributor=||@Distributor Part Number=
+Vdd||#=1=+V||@Manufacturer=||@Manufacturer Part Number=||@Distributor=||@Distributor Part Number=
+XC9572-7PC84C in A-CCS 084-Z-T||#USER=84=PLCC-Socket-84||@Manufacturer=Xilinx||@Manufacturer Part Number=XC9572-7PC84C||@Distributor=||@Distributor Part Number=||@Value=7ns

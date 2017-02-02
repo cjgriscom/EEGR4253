@@ -1,0 +1,556 @@
+ 
+cpldfit:  version P.20131013                        Xilinx Inc.
+                                  Fitter Report
+Design Name: MCE_CJG                             Date:  2- 2-2017, 12:10PM
+Device Used: XC9572-7-PC84
+Fitting Status: Successful
+
+*************************  Mapped Resource Summary  **************************
+
+Macrocells     Product Terms    Function Block   Registers      Pins           
+Used/Tot       Used/Tot         Inps Used/Tot    Used/Tot       Used/Tot       
+8  /72  ( 11%) 14  /360  (  4%) 10 /144 (  7%)   1  /72  (  1%) 6  /69  (  9%)
+
+** Function Block Resources **
+
+Function    Mcells      FB Inps     Signals     Pterms      IO          
+Block       Used/Tot    Used/Tot    Used        Used/Tot    Used/Tot    
+FB1           1/18        0/36        0           0/90       1/18
+FB2           6/18        8/36        8          12/90       1/17
+FB3           0/18        0/36        0           0/90       0/17
+FB4           1/18        2/36        2           2/90       1/17
+             -----       -----                   -----       -----     
+              8/72       10/144                  14/360      3/69 
+
+* - Resource is exhausted
+
+** Global Control Resources **
+
+Global clock net(s) unused.
+Global output enable net(s) unused.
+Global set/reset net(s) unused.
+
+** Pin Resources **
+
+Signal Type    Required     Mapped  |  Pin Type            Used    Total 
+------------------------------------|------------------------------------
+Input         :    3           3    |  I/O              :     5      63
+Output        :    3           3    |  GCK/IO           :     0       3
+Bidirectional :    0           0    |  GTS/IO           :     1       2
+GCK           :    0           0    |  GSR/IO           :     0       1
+GTS           :    0           0    |
+GSR           :    0           0    |
+                 ----        ----
+        Total      6           6
+
+** Power Data **
+
+There are 8 macrocells in high performance mode (MCHP).
+There are 0 macrocells in low power mode (MCLP).
+End of Mapped Resource Summary
+**************************  Errors and Warnings  ***************************
+
+WARNING:Cpld - Unable to retrieve the path to the iSE Project Repository. Will
+   use the default filename of 'MCE_CJG.ise'.
+INFO:Cpld - Inferring BUFG constraint for signal 'GPIO<0>' based upon the LOC
+   constraint 'P10'. It is recommended that you declare this BUFG explicitedly
+   in your design. Note that for certain device families the output of a BUFG
+   constraint can not drive a gated clock, and the BUFG constraint will be
+   ignored.
+INFO:Cpld - Inferring BUFG constraint for signal 'GPIO<8>' based upon the LOC
+   constraint 'P12'. It is recommended that you declare this BUFG explicitedly
+   in your design. Note that for certain device families the output of a BUFG
+   constraint can not drive a gated clock, and the BUFG constraint will be
+   ignored.
+INFO:Cpld - Inferring BUFG constraint for signal 'Q2_Clock' based upon the LOC
+   constraint 'P9'. It is recommended that you declare this BUFG explicitedly in
+   your design. Note that for certain device families the output of a BUFG
+   constraint can not drive a gated clock, and the BUFG constraint will be
+   ignored.
+WARNING:Cpld:936 - The output buffer 'Speaker_OBUF' is missing an input and will
+   be deleted.
+WARNING:Cpld:936 - The output buffer 'ROM_WE_OBUF' is missing an input and will
+   be deleted.
+WARNING:Cpld:936 - The output buffer 'ROM_OE_OBUF' is missing an input and will
+   be deleted.
+WARNING:Cpld:936 - The output buffer 'ROM_CE_OBUF' is missing an input and will
+   be deleted.
+WARNING:Cpld:936 - The output buffer 'RAM_WE_OBUF' is missing an input and will
+   be deleted.
+WARNING:Cpld:936 - The output buffer 'RAM_UB_OBUF' is missing an input and will
+   be deleted.
+WARNING:Cpld:936 - The output buffer 'RAM_OE_OBUF' is missing an input and will
+   be deleted.
+WARNING:Cpld:936 - The output buffer 'RAM_LB_OBUF' is missing an input and will
+   be deleted.
+WARNING:Cpld:936 - The output buffer 'RAM_CE_OBUF' is missing an input and will
+   be deleted.
+WARNING:Cpld:936 - The output buffer 'DUART_RW_OBUF' is missing an input and
+   will be deleted.
+WARNING:Cpld:936 - The output buffer 'DUART_RESET_OBUF' is missing an input and
+   will be deleted.
+WARNING:Cpld:936 - The output buffer 'DUART_CS_OBUF' is missing an input and
+   will be deleted.
+WARNING:Cpld:936 - The output buffer 'CPU_RESET_OBUF' is missing an input and
+   will be deleted.
+WARNING:Cpld:936 - The output buffer 'CPU_IPL2_OBUF' is missing an input and
+   will be deleted.
+WARNING:Cpld:936 - The output buffer 'CPU_IPL1_OBUF' is missing an input and
+   will be deleted.
+WARNING:Cpld:936 - The output buffer 'CPU_IPL0_OBUF' is missing an input and
+   will be deleted.
+WARNING:Cpld:936 - The output buffer 'CPU_HALT_OBUF' is missing an input and
+   will be deleted.
+WARNING:Cpld:936 - The output buffer 'CPU_DTACK_OBUF' is missing an input and
+   will be deleted.
+WARNING:Cpld:936 - The output buffer 'CPU_BR_OBUF' is missing an input and will
+   be deleted.
+WARNING:Cpld:936 - The output buffer 'CPU_BERR_OBUF' is missing an input and
+   will be deleted.
+WARNING:Cpld:1007 - Removing unused input(s) 'A2<0>'.  The input(s) are unused
+   after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'A2<1>'.  The input(s) are unused
+   after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'A2<2>'.  The input(s) are unused
+   after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'A2<3>'.  The input(s) are unused
+   after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'CPU_AS'.  The input(s) are unused
+   after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'CPU_BGACK'.  The input(s) are
+   unused after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'CPU_BG'.  The input(s) are unused
+   after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'CPU_LDS'.  The input(s) are unused
+   after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'CPU_RW'.  The input(s) are unused
+   after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'CPU_UDS'.  The input(s) are unused
+   after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'D<0>'.  The input(s) are unused
+   after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'D<1>'.  The input(s) are unused
+   after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'D<2>'.  The input(s) are unused
+   after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'D<3>'.  The input(s) are unused
+   after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'D<4>'.  The input(s) are unused
+   after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'D<5>'.  The input(s) are unused
+   after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'D<6>'.  The input(s) are unused
+   after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'D<7>'.  The input(s) are unused
+   after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'DUART_CLK'.  The input(s) are
+   unused after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'DUART_DTACK'.  The input(s) are
+   unused after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'DUART_IRQ'.  The input(s) are
+   unused after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'DUART_OP4'.  The input(s) are
+   unused after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'DUART_OP5'.  The input(s) are
+   unused after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'DUART_OP6'.  The input(s) are
+   unused after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'DUART_OP7'.  The input(s) are
+   unused after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'GPIO<0>'.  The input(s) are unused
+   after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'GPIO<10>'.  The input(s) are
+   unused after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'GPIO<11>'.  The input(s) are
+   unused after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'GPIO<12>'.  The input(s) are
+   unused after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'GPIO<13>'.  The input(s) are
+   unused after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'GPIO<14>'.  The input(s) are
+   unused after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'GPIO<15>'.  The input(s) are
+   unused after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'GPIO<1>'.  The input(s) are unused
+   after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'GPIO<2>'.  The input(s) are unused
+   after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'GPIO<3>'.  The input(s) are unused
+   after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'GPIO<4>'.  The input(s) are unused
+   after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'GPIO<5>'.  The input(s) are unused
+   after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'GPIO<6>'.  The input(s) are unused
+   after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'GPIO<7>'.  The input(s) are unused
+   after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'GPIO<8>'.  The input(s) are unused
+   after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'GPIO<9>'.  The input(s) are unused
+   after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'Q2_Clock'.  The input(s) are
+   unused after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'Reset_In'.  The input(s) are
+   unused after optimization. Please verify functionality via simulation.
+WARNING:Cpld - The signal(s) 'prescaler_cpu<0>' are in combinational feedback
+   loops.
+   These signals may cause hazards/glitches. Apply the NOREDUCE parameter to the
+   hazard reduction circuitry.
+   Timing analysis of paths involving this node may be inaccurate or incomplete.
+WARNING:Cpld - The signal(s) 'CPU_CLK_pre_cmp_eq0000' are in combinational
+   feedback loops.
+   These signals may cause hazards/glitches. Apply the NOREDUCE parameter to the
+   hazard reduction circuitry.
+   Timing analysis of paths involving this node may be inaccurate or incomplete.
+WARNING:Cpld - The signal(s) 'prescaler_cpu<3>' are in combinational feedback
+   loops.
+   These signals may cause hazards/glitches. Apply the NOREDUCE parameter to the
+   hazard reduction circuitry.
+   Timing analysis of paths involving this node may be inaccurate or incomplete.
+WARNING:Cpld - The signal(s) 'prescaler_cpu<2>' are in combinational feedback
+   loops.
+   These signals may cause hazards/glitches. Apply the NOREDUCE parameter to the
+   hazard reduction circuitry.
+   Timing analysis of paths involving this node may be inaccurate or incomplete.
+WARNING:Cpld - The signal(s) 'prescaler_cpu<1>' are in combinational feedback
+   loops.
+   These signals may cause hazards/glitches. Apply the NOREDUCE parameter to the
+   hazard reduction circuitry.
+   Timing analysis of paths involving this node may be inaccurate or incomplete.
+*************************  Summary of Mapped Logic  ************************
+
+** 3 Outputs **
+
+Signal                  Total Total Loc     Pin  Pin     Pin     Pwr  Slew Reg Init
+Name                    Pts   Inps          No.  Type    Use     Mode Rate State
+Q2_Enable               0     0     FB1_7   11   I/O     O       STD  FAST 
+DUART_IACK              1     3     FB2_11  77   GTS/I/O O       STD  FAST 
+CPU_CLK                 2     2     FB4_1   46   I/O     O       STD  FAST RESET
+
+** 5 Buried Nodes **
+
+Signal                  Total Total Loc     Pwr  Reg Init
+Name                    Pts   Inps          Mode State
+prescaler_cpu<0>        1     2     FB2_14  STD  
+CPU_CLK_pre_cmp_eq0000  1     4     FB2_15  STD  
+prescaler_cpu<1>        2     3     FB2_16  STD  
+prescaler_cpu<2>        3     4     FB2_17  STD  
+prescaler_cpu<3>        4     5     FB2_18  STD  
+
+** 3 Inputs **
+
+Signal                  Loc     Pin  Pin     Pin     
+Name                            No.  Type    Use     
+FC0                     FB3_4   32   I/O     I
+FC2                     FB3_11  33   I/O     I
+FC1                     FB3_14  36   I/O     I
+
+Legend:
+Pin No. - ~ - User Assigned
+**************************  Function Block Details  ************************
+Legend:
+Total Pt     - Total product terms used by the macrocell signal
+Imp Pt       - Product terms imported from other macrocells
+Exp Pt       - Product terms exported to other macrocells
+               in direction shown
+Unused Pt    - Unused local product terms remaining in macrocell
+Loc          - Location where logic was mapped in device
+Pin Type/Use - I  - Input             GCK - Global Clock
+               O  - Output            GTS - Global Output Enable
+              (b) - Buried macrocell  GSR - Global Set/Reset
+X(@)         - Signal used as input (wire-AND input) to the macrocell logic.
+               The number of Signals Used may exceed the number of FB Inputs
+               Used due to wire-ANDing in the switch matrix.
+Pin No.      - ~  - User Assigned
+*********************************** FB1  ***********************************
+Number of function block inputs used/remaining:               0/36
+Number of signals used by logic mapping into function block:  0
+Signal              Total   Imp   Exp Unused  Loc     Pin   Pin     Pin
+Name                Pt      Pt    Pt  Pt               #    Type    Use
+(unused)              0       0     0   5     FB1_1   4     I/O     
+(unused)              0       0     0   5     FB1_2   1     I/O     
+(unused)              0       0     0   5     FB1_3   6     I/O     
+(unused)              0       0     0   5     FB1_4   7     I/O     
+(unused)              0       0     0   5     FB1_5   2     I/O     
+(unused)              0       0     0   5     FB1_6   3     I/O     
+Q2_Enable             0       0     0   5     FB1_7   11    I/O     O
+(unused)              0       0     0   5     FB1_8   5     I/O     
+(unused)              0       0     0   5     FB1_9   9     GCK/I/O 
+(unused)              0       0     0   5     FB1_10  13    I/O     
+(unused)              0       0     0   5     FB1_11  10    GCK/I/O 
+(unused)              0       0     0   5     FB1_12  18    I/O     
+(unused)              0       0     0   5     FB1_13  20    I/O     
+(unused)              0       0     0   5     FB1_14  12    GCK/I/O 
+(unused)              0       0     0   5     FB1_15  14    I/O     
+(unused)              0       0     0   5     FB1_16  23    I/O     
+(unused)              0       0     0   5     FB1_17  15    I/O     
+(unused)              0       0     0   5     FB1_18  24    I/O     
+
+Signals Used by Logic in Function Block
+
+Signal                        1         2         3         4 Signals FB
+Name                0----+----0----+----0----+----0----+----0 Used    Inputs
+Q2_Enable            ........................................ 0       0
+                    0----+----1----+----2----+----3----+----4
+                              0         0         0         0
+*********************************** FB2  ***********************************
+Number of function block inputs used/remaining:               8/28
+Number of signals used by logic mapping into function block:  8
+Signal              Total   Imp   Exp Unused  Loc     Pin   Pin     Pin
+Name                Pt      Pt    Pt  Pt               #    Type    Use
+(unused)              0       0     0   5     FB2_1   63    I/O     
+(unused)              0       0     0   5     FB2_2   69    I/O     
+(unused)              0       0     0   5     FB2_3   67    I/O     
+(unused)              0       0     0   5     FB2_4   68    I/O     
+(unused)              0       0     0   5     FB2_5   70    I/O     
+(unused)              0       0     0   5     FB2_6   71    I/O     
+(unused)              0       0     0   5     FB2_7   76    GTS/I/O 
+(unused)              0       0     0   5     FB2_8   72    I/O     
+(unused)              0       0     0   5     FB2_9   74    GSR/I/O 
+(unused)              0       0     0   5     FB2_10  75    I/O     
+DUART_IACK            1       0     0   4     FB2_11  77    GTS/I/O O
+(unused)              0       0     0   5     FB2_12  79    I/O     
+(unused)              0       0     0   5     FB2_13  80    I/O     
+prescaler_cpu<0>      1       0     0   4     FB2_14  81    I/O     (b)
+CPU_CLK_pre_cmp_eq0000
+                      1       0     0   4     FB2_15  83    I/O     (b)
+prescaler_cpu<1>      2       0     0   3     FB2_16  82    I/O     (b)
+prescaler_cpu<2>      3       0     0   2     FB2_17  84    I/O     (b)
+prescaler_cpu<3>      4       0     0   1     FB2_18        (b)     (b)
+
+Signals Used by Logic in Function Block
+  1: CPU_CLK_pre_cmp_eq0000.LFBK   4: FC2                     7: prescaler_cpu<2>.LFBK 
+  2: FC0                           5: prescaler_cpu<0>.LFBK   8: prescaler_cpu<3>.LFBK 
+  3: FC1                           6: prescaler_cpu<1>.LFBK 
+
+Signal                        1         2         3         4 Signals FB
+Name                0----+----0----+----0----+----0----+----0 Used    Inputs
+DUART_IACK           .XXX.................................... 3       3
+prescaler_cpu<0>     X...X................................... 2       2
+CPU_CLK_pre_cmp_eq0000 
+                     ....XXXX................................ 4       4
+prescaler_cpu<1>     X...XX.................................. 3       3
+prescaler_cpu<2>     X...XXX................................. 4       4
+prescaler_cpu<3>     X...XXXX................................ 5       5
+                    0----+----1----+----2----+----3----+----4
+                              0         0         0         0
+*********************************** FB3  ***********************************
+Number of function block inputs used/remaining:               0/36
+Number of signals used by logic mapping into function block:  0
+Signal              Total   Imp   Exp Unused  Loc     Pin   Pin     Pin
+Name                Pt      Pt    Pt  Pt               #    Type    Use
+(unused)              0       0     0   5     FB3_1   25    I/O     
+(unused)              0       0     0   5     FB3_2   17    I/O     
+(unused)              0       0     0   5     FB3_3   31    I/O     
+(unused)              0       0     0   5     FB3_4   32    I/O     I
+(unused)              0       0     0   5     FB3_5   19    I/O     
+(unused)              0       0     0   5     FB3_6   34    I/O     
+(unused)              0       0     0   5     FB3_7   35    I/O     
+(unused)              0       0     0   5     FB3_8   21    I/O     
+(unused)              0       0     0   5     FB3_9   26    I/O     
+(unused)              0       0     0   5     FB3_10  40    I/O     
+(unused)              0       0     0   5     FB3_11  33    I/O     I
+(unused)              0       0     0   5     FB3_12  41    I/O     
+(unused)              0       0     0   5     FB3_13  43    I/O     
+(unused)              0       0     0   5     FB3_14  36    I/O     I
+(unused)              0       0     0   5     FB3_15  37    I/O     
+(unused)              0       0     0   5     FB3_16  45    I/O     
+(unused)              0       0     0   5     FB3_17  39    I/O     
+(unused)              0       0     0   5     FB3_18        (b)     
+*********************************** FB4  ***********************************
+Number of function block inputs used/remaining:               2/34
+Number of signals used by logic mapping into function block:  2
+Signal              Total   Imp   Exp Unused  Loc     Pin   Pin     Pin
+Name                Pt      Pt    Pt  Pt               #    Type    Use
+CPU_CLK               2       0     0   3     FB4_1   46    I/O     O
+(unused)              0       0     0   5     FB4_2   44    I/O     
+(unused)              0       0     0   5     FB4_3   51    I/O     
+(unused)              0       0     0   5     FB4_4   52    I/O     
+(unused)              0       0     0   5     FB4_5   47    I/O     
+(unused)              0       0     0   5     FB4_6   54    I/O     
+(unused)              0       0     0   5     FB4_7   55    I/O     
+(unused)              0       0     0   5     FB4_8   48    I/O     
+(unused)              0       0     0   5     FB4_9   50    I/O     
+(unused)              0       0     0   5     FB4_10  57    I/O     
+(unused)              0       0     0   5     FB4_11  53    I/O     
+(unused)              0       0     0   5     FB4_12  58    I/O     
+(unused)              0       0     0   5     FB4_13  61    I/O     
+(unused)              0       0     0   5     FB4_14  56    I/O     
+(unused)              0       0     0   5     FB4_15  65    I/O     
+(unused)              0       0     0   5     FB4_16  62    I/O     
+(unused)              0       0     0   5     FB4_17  66    I/O     
+(unused)              0       0     0   5     FB4_18        (b)     
+
+Signals Used by Logic in Function Block
+  1: CPU_CLK_pre.LFBK   2: CPU_CLK_pre_cmp_eq0000 
+
+Signal                        1         2         3         4 Signals FB
+Name                0----+----0----+----0----+----0----+----0 Used    Inputs
+CPU_CLK              XX...................................... 2       2
+                    0----+----1----+----2----+----3----+----4
+                              0         0         0         0
+*******************************  Equations  ********************************
+
+********** Mapped Logic **********
+
+FDCPE_CPU_CLK: FDCPE port map (CPU_CLK,'0','0',CPU_CLK_CLR,CPU_CLK_PRE);
+CPU_CLK_CLR <= (CPU_CLK_pre_cmp_eq0000 AND CPU_CLK_pre.LFBK);
+CPU_CLK_PRE <= (CPU_CLK_pre_cmp_eq0000 AND NOT CPU_CLK_pre.LFBK);
+
+
+CPU_CLK_pre_cmp_eq0000 <= (prescaler_cpu(0).LFBK AND NOT prescaler_cpu(1).LFBK AND 
+	NOT prescaler_cpu(2).LFBK AND prescaler_cpu(3).LFBK);
+
+
+DUART_IACK <= NOT ((FC2 AND FC1 AND FC0));
+
+
+Q2_Enable <= '1';
+
+
+prescaler_cpu(0) <= (NOT prescaler_cpu(0).LFBK AND 
+	NOT CPU_CLK_pre_cmp_eq0000.LFBK);
+
+
+prescaler_cpu(1) <= ((prescaler_cpu(0).LFBK AND NOT prescaler_cpu(1).LFBK AND 
+	NOT CPU_CLK_pre_cmp_eq0000.LFBK)
+	OR (NOT prescaler_cpu(0).LFBK AND prescaler_cpu(1).LFBK AND 
+	NOT CPU_CLK_pre_cmp_eq0000.LFBK));
+
+
+prescaler_cpu(2) <= ((NOT prescaler_cpu(0).LFBK AND prescaler_cpu(2).LFBK AND 
+	NOT CPU_CLK_pre_cmp_eq0000.LFBK)
+	OR (NOT prescaler_cpu(1).LFBK AND prescaler_cpu(2).LFBK AND 
+	NOT CPU_CLK_pre_cmp_eq0000.LFBK)
+	OR (prescaler_cpu(0).LFBK AND prescaler_cpu(1).LFBK AND 
+	NOT prescaler_cpu(2).LFBK AND NOT CPU_CLK_pre_cmp_eq0000.LFBK));
+
+
+prescaler_cpu(3) <= ((NOT prescaler_cpu(0).LFBK AND prescaler_cpu(3).LFBK AND 
+	NOT CPU_CLK_pre_cmp_eq0000.LFBK)
+	OR (NOT prescaler_cpu(1).LFBK AND prescaler_cpu(3).LFBK AND 
+	NOT CPU_CLK_pre_cmp_eq0000.LFBK)
+	OR (NOT prescaler_cpu(2).LFBK AND prescaler_cpu(3).LFBK AND 
+	NOT CPU_CLK_pre_cmp_eq0000.LFBK)
+	OR (prescaler_cpu(0).LFBK AND prescaler_cpu(1).LFBK AND 
+	prescaler_cpu(2).LFBK AND NOT prescaler_cpu(3).LFBK AND 
+	NOT CPU_CLK_pre_cmp_eq0000.LFBK));
+
+Register Legend:
+ FDCPE (Q,D,C,CLR,PRE); 
+ FTCPE (Q,D,C,CLR,PRE); 
+ LDCP  (Q,D,G,CLR,PRE); 
+
+******************************  Device Pin Out *****************************
+
+Device : XC9572-7-PC84
+
+
+   --------------------------------------------------------------  
+  /11 10 9  8  7  6  5  4  3  2  1  84 83 82 81 80 79 78 77 76 75 \
+ | 12                                                          74 | 
+ | 13                                                          73 | 
+ | 14                                                          72 | 
+ | 15                                                          71 | 
+ | 16                                                          70 | 
+ | 17                                                          69 | 
+ | 18                                                          68 | 
+ | 19                                                          67 | 
+ | 20                                                          66 | 
+ | 21                        XC9572-7-PC84                     65 | 
+ | 22                                                          64 | 
+ | 23                                                          63 | 
+ | 24                                                          62 | 
+ | 25                                                          61 | 
+ | 26                                                          60 | 
+ | 27                                                          59 | 
+ | 28                                                          58 | 
+ | 29                                                          57 | 
+ | 30                                                          56 | 
+ | 31                                                          55 | 
+ | 32                                                          54 | 
+ \ 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 /
+   --------------------------------------------------------------  
+
+
+Pin Signal                         Pin Signal                        
+No. Name                           No. Name                          
+  1 TIE                              43 TIE                           
+  2 TIE                              44 TIE                           
+  3 TIE                              45 TIE                           
+  4 TIE                              46 CPU_CLK                       
+  5 TIE                              47 TIE                           
+  6 TIE                              48 TIE                           
+  7 TIE                              49 GND                           
+  8 GND                              50 TIE                           
+  9 TIE                              51 TIE                           
+ 10 TIE                              52 TIE                           
+ 11 Q2_Enable                        53 TIE                           
+ 12 TIE                              54 TIE                           
+ 13 TIE                              55 TIE                           
+ 14 TIE                              56 TIE                           
+ 15 TIE                              57 TIE                           
+ 16 GND                              58 TIE                           
+ 17 TIE                              59 TDO                           
+ 18 TIE                              60 GND                           
+ 19 TIE                              61 TIE                           
+ 20 TIE                              62 TIE                           
+ 21 TIE                              63 TIE                           
+ 22 VCC                              64 VCC                           
+ 23 TIE                              65 TIE                           
+ 24 TIE                              66 TIE                           
+ 25 TIE                              67 TIE                           
+ 26 TIE                              68 TIE                           
+ 27 GND                              69 TIE                           
+ 28 TDI                              70 TIE                           
+ 29 TMS                              71 TIE                           
+ 30 TCK                              72 TIE                           
+ 31 TIE                              73 VCC                           
+ 32 FC0                              74 TIE                           
+ 33 FC2                              75 TIE                           
+ 34 TIE                              76 TIE                           
+ 35 TIE                              77 DUART_IACK                    
+ 36 FC1                              78 VCC                           
+ 37 TIE                              79 TIE                           
+ 38 VCC                              80 TIE                           
+ 39 TIE                              81 TIE                           
+ 40 TIE                              82 TIE                           
+ 41 TIE                              83 TIE                           
+ 42 GND                              84 TIE                           
+
+
+Legend :  NC  = Not Connected, unbonded pin
+         PGND = Unused I/O configured as additional Ground pin
+         TIE  = Unused I/O floating -- must tie to VCC, GND or other signal
+         VCC  = Dedicated Power Pin
+         GND  = Dedicated Ground Pin
+         TDI  = Test Data In, JTAG pin
+         TDO  = Test Data Out, JTAG pin
+         TCK  = Test Clock, JTAG pin
+         TMS  = Test Mode Select, JTAG pin
+  PROHIBITED  = User reserved pin
+****************************  Compiler Options  ****************************
+
+Following is a list of all global compiler options used by the fitter run.
+
+Device(s) Specified                         : xc9572-7-PC84
+Optimization Method                         : SPEED
+Multi-Level Logic Optimization              : ON
+Ignore Timing Specifications                : OFF
+Default Register Power Up Value             : LOW
+Keep User Location Constraints              : ON
+What-You-See-Is-What-You-Get                : OFF
+Exhaustive Fitting                          : OFF
+Keep Unused Inputs                          : OFF
+Slew Rate                                   : FAST
+Power Mode                                  : STD
+Ground on Unused IOs                        : OFF
+Global Clock Optimization                   : ON
+Global Set/Reset Optimization               : ON
+Global Ouput Enable Optimization            : ON
+FASTConnect/UIM optimzation                 : ON
+Local Feedback                              : ON
+Pin Feedback                                : ON
+Input Limit                                 : 36
+Pterm Limit                                 : 25
