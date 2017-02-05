@@ -1,0 +1,33 @@
+
+  signal div_speaker   : unsigned(20 downto 0) := (others=>'1'); -- Set for 200ms reset delay
+
+  signal prescaler_spk : unsigned(20 downto 0) := (others=>'0');
+
+
+Configurable clock
+-- Generate CPU freq
+  -- 8000000  9  "1001"
+  -- 8888889  8  "1000"
+  -- 10000000 7  "0111"
+  -- 11428571 6  "0110"
+  -- 13333333 5  "0101"
+  -- 16000000 4  "0100"
+  -- 20000000 3  "0011"
+  if prescaler_cpu = "1001" then     -- Set this value to (80000000/freq_desired - 1)
+    prescaler_cpu <= (others => '0');
+    CPU_CLK_pre <= not CPU_CLK_pre;
+  else
+    prescaler_cpu <= prescaler_cpu + "1";
+  end if;
+  
+  
+  
+  -- Generate Speaker Freq and power stability
+  if prescaler_spk = div_speaker then
+    prescaler_spk <= (others => '0');
+    speaker_pre <= not speaker_pre;
+	 power_stable <= '1'; -- Once a full initial division is complete, power should be stable.
+  else
+    prescaler_spk <= prescaler_spk + "1";
+	 power_stable <= power_stable; -- Hold power stable state
+  end if;

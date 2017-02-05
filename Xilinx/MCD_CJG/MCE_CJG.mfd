@@ -1,73 +1,735 @@
 MDF Database:  version 1.0
 MDF_INFO | MCE_CJG | XC9572-7-PC84
-MACROCELL | 3 | 0 | CPU_CLK_pre
-ATTRIBUTES | 8848306 | 0
-OUTPUTMC | 1 | 3 | 0
-INPUTS | 2 | CPU_CLK_pre_cmp_eq0000  | CPU_CLK_pre.LFBK
-INPUTMC | 2 | 1 | 14 | 3 | 0
-EQ | 4 | 
-   CPU_CLK.D = Gnd;
-   CPU_CLK.CLK = Gnd;
-   CPU_CLK.AP = CPU_CLK_pre_cmp_eq0000 & !CPU_CLK_pre.LFBK;
-   CPU_CLK.AR = CPU_CLK_pre_cmp_eq0000 & CPU_CLK_pre.LFBK;
-
-MACROCELL | 1 | 14 | CPU_CLK_pre_cmp_eq0000
-ATTRIBUTES | 199424 | 0
-OUTPUTMC | 5 | 3 | 0 | 1 | 13 | 1 | 15 | 1 | 16 | 1 | 17
-INPUTS | 4 | prescaler_cpu<1>.LFBK  | prescaler_cpu<2>.LFBK  | prescaler_cpu<3>.LFBK  | prescaler_cpu<0>.LFBK
-INPUTMC | 4 | 1 | 15 | 1 | 16 | 1 | 17 | 1 | 13
+MACROCELL | 0 | 17 | IRQ7_and0000
+ATTRIBUTES | 265986 | 0
+INPUTS | 4 | FC2  | FC1  | FC0  | CPLD_mask<5>
+INPUTMC | 1 | 2 | 12
+INPUTP | 3 | 46 | 49 | 44
 EQ | 2 | 
-   CPU_CLK_pre_cmp_eq0000 = prescaler_cpu<0>.LFBK & !prescaler_cpu<1>.LFBK & 
-	!prescaler_cpu<2>.LFBK & prescaler_cpu<3>.LFBK;
+   GPIO_IACK = FC2 & FC1 & FC0;
+   GPIO_IACK.OE = CPLD_mask<5>;
 
-MACROCELL | 1 | 13 | prescaler_cpu<0>
-ATTRIBUTES | 199424 | 0
-OUTPUTMC | 5 | 1 | 14 | 1 | 13 | 1 | 15 | 1 | 16 | 1 | 17
-INPUTS | 2 | prescaler_cpu<0>.LFBK  | CPU_CLK_pre_cmp_eq0000.LFBK
-INPUTMC | 2 | 1 | 13 | 1 | 14
-EQ | 2 | 
-   prescaler_cpu<0> = !prescaler_cpu<0>.LFBK & 
-	!CPU_CLK_pre_cmp_eq0000.LFBK;
+MACROCELL | 3 | 11 | data_out<0>
+ATTRIBUTES | 8652578 | 0
+INPUTS | 9 | CPU_RW  | A23  | GPI<0>  | A2<2>  | A2<1>  | A2<0>  | CPU_AS  | data_out<6>/data_out<6>_TRST  | CPLD_mask<0>.LFBK
+INPUTMC | 2 | 2 | 9 | 3 | 17
+INPUTP | 7 | 55 | 88 | 24 | 89 | 86 | 87 | 61
+EQ | 5 | 
+   D<0>.D = CPU_RW & A23 & GPI<0>
+	# CPU_RW & !A23 & !A2<2> & A2<1> & A2<0> & 
+	CPLD_mask<0>.LFBK;
+   D<0>.CLK = !CPU_AS;
+   D<0>.OE = data_out<6>/data_out<6>_TRST;
 
-MACROCELL | 1 | 15 | prescaler_cpu<1>
-ATTRIBUTES | 199424 | 0
-OUTPUTMC | 4 | 1 | 14 | 1 | 15 | 1 | 16 | 1 | 17
-INPUTS | 3 | prescaler_cpu<0>.LFBK  | prescaler_cpu<1>.LFBK  | CPU_CLK_pre_cmp_eq0000.LFBK
-INPUTMC | 3 | 1 | 13 | 1 | 15 | 1 | 14
-EQ | 4 | 
-   prescaler_cpu<1> = prescaler_cpu<0>.LFBK & !prescaler_cpu<1>.LFBK & 
-	!CPU_CLK_pre_cmp_eq0000.LFBK
-	# !prescaler_cpu<0>.LFBK & prescaler_cpu<1>.LFBK & 
-	!CPU_CLK_pre_cmp_eq0000.LFBK;
+MACROCELL | 1 | 14 | data_out<1>
+ATTRIBUTES | 8652578 | 0
+INPUTS | 9 | CPU_RW  | A23  | GPI<1>  | A2<2>  | CPLD_mask<1>  | A2<1>  | A2<0>  | CPU_AS  | data_out<6>/data_out<6>_TRST
+INPUTMC | 2 | 2 | 17 | 2 | 9
+INPUTP | 7 | 55 | 88 | 26 | 89 | 86 | 87 | 61
+EQ | 5 | 
+   D<1>.D = CPU_RW & A23 & GPI<1>
+	# CPU_RW & !A23 & !A2<2> & CPLD_mask<1> & A2<1> & 
+	A2<0>;
+   D<1>.CLK = !CPU_AS;
+   D<1>.OE = data_out<6>/data_out<6>_TRST;
 
-MACROCELL | 1 | 16 | prescaler_cpu<2>
-ATTRIBUTES | 199424 | 0
-OUTPUTMC | 3 | 1 | 14 | 1 | 16 | 1 | 17
-INPUTS | 4 | prescaler_cpu<0>.LFBK  | prescaler_cpu<2>.LFBK  | prescaler_cpu<1>.LFBK  | CPU_CLK_pre_cmp_eq0000.LFBK
-INPUTMC | 4 | 1 | 13 | 1 | 16 | 1 | 15 | 1 | 14
-EQ | 6 | 
-   prescaler_cpu<2> = !prescaler_cpu<0>.LFBK & prescaler_cpu<2>.LFBK & 
-	!CPU_CLK_pre_cmp_eq0000.LFBK
-	# !prescaler_cpu<1>.LFBK & prescaler_cpu<2>.LFBK & 
-	!CPU_CLK_pre_cmp_eq0000.LFBK
-	# prescaler_cpu<0>.LFBK & prescaler_cpu<1>.LFBK & 
-	!prescaler_cpu<2>.LFBK & !CPU_CLK_pre_cmp_eq0000.LFBK;
+MACROCELL | 3 | 12 | data_out<2>
+ATTRIBUTES | 8652578 | 0
+INPUTS | 9 | CPU_RW  | A23  | GPI<2>  | A2<2>  | CPLD_mask<2>  | A2<1>  | A2<0>  | CPU_AS  | data_out<6>/data_out<6>_TRST
+INPUTMC | 2 | 2 | 16 | 2 | 9
+INPUTP | 7 | 55 | 88 | 29 | 89 | 86 | 87 | 61
+EQ | 5 | 
+   D<2>.D = CPU_RW & A23 & GPI<2>
+	# CPU_RW & !A23 & !A2<2> & CPLD_mask<2> & A2<1> & 
+	A2<0>;
+   D<2>.CLK = !CPU_AS;
+   D<2>.OE = data_out<6>/data_out<6>_TRST;
 
-MACROCELL | 1 | 17 | prescaler_cpu<3>
-ATTRIBUTES | 199424 | 0
-OUTPUTMC | 2 | 1 | 14 | 1 | 17
-INPUTS | 5 | prescaler_cpu<0>.LFBK  | prescaler_cpu<3>.LFBK  | prescaler_cpu<1>.LFBK  | prescaler_cpu<2>.LFBK  | CPU_CLK_pre_cmp_eq0000.LFBK
-INPUTMC | 5 | 1 | 13 | 1 | 17 | 1 | 15 | 1 | 16 | 1 | 14
+MACROCELL | 0 | 0 | data_out<3>
+ATTRIBUTES | 8652578 | 0
+INPUTS | 9 | CPU_RW  | A23  | GPI<3>  | A2<2>  | CPLD_mask<3>  | A2<1>  | A2<0>  | CPU_AS  | data_out<6>/data_out<6>_TRST
+INPUTMC | 2 | 2 | 15 | 2 | 9
+INPUTP | 7 | 55 | 88 | 31 | 89 | 86 | 87 | 61
+EQ | 5 | 
+   D<3>.D = CPU_RW & A23 & GPI<3>
+	# CPU_RW & !A23 & !A2<2> & CPLD_mask<3> & A2<1> & 
+	A2<0>;
+   D<3>.CLK = !CPU_AS;
+   D<3>.OE = data_out<6>/data_out<6>_TRST;
+
+MACROCELL | 1 | 0 | data_out<4>
+ATTRIBUTES | 8652578 | 0
+OUTPUTMC | 1 | 1 | 17
+INPUTS | 19 | CPU_RW  | A23  | GPIO_IPL0  | A2<2>  | CPLD_mask<4>  | A2<1>  | A2<0>  | CPU_AS  | data_out<6>/data_out<6>_TRST  | prescaler_irq<14>.LFBK  | prescaler_irq<11>  | prescaler_irq<12>  | prescaler_irq<13>  | prescaler_irq<15>.LFBK  | prescaler_irq<7>.LFBK  | prescaler_irq<8>.LFBK  | prescaler_irq<9>.LFBK  | prescaler_irq<16>  | prescaler_irq<10>.LFBK
+INPUTMC | 12 | 2 | 13 | 2 | 9 | 1 | 12 | 2 | 7 | 2 | 6 | 3 | 7 | 1 | 11 | 1 | 17 | 1 | 4 | 1 | 1 | 3 | 4 | 1 | 13
+INPUTP | 7 | 55 | 88 | 33 | 89 | 86 | 87 | 61
+EXPORTS | 1 | 1 | 17
 EQ | 9 | 
-   prescaler_cpu<3> = !prescaler_cpu<0>.LFBK & prescaler_cpu<3>.LFBK & 
-	!CPU_CLK_pre_cmp_eq0000.LFBK
-	# !prescaler_cpu<1>.LFBK & prescaler_cpu<3>.LFBK & 
-	!CPU_CLK_pre_cmp_eq0000.LFBK
-	# !prescaler_cpu<2>.LFBK & prescaler_cpu<3>.LFBK & 
-	!CPU_CLK_pre_cmp_eq0000.LFBK
-	# prescaler_cpu<0>.LFBK & prescaler_cpu<1>.LFBK & 
-	prescaler_cpu<2>.LFBK & !prescaler_cpu<3>.LFBK & 
-	!CPU_CLK_pre_cmp_eq0000.LFBK;
+   D<4>.D = CPU_RW & A23 & GPIO_IPL0
+	# CPU_RW & !A23 & !A2<2> & CPLD_mask<4> & A2<1> & 
+	A2<0>;
+   D<4>.CLK = !CPU_AS;
+   D<4>.OE = data_out<6>/data_out<6>_TRST;
+    data_out<4>.EXP  =  prescaler_irq<11> & prescaler_irq<12> & 
+	prescaler_irq<13> & prescaler_irq<16> & !prescaler_irq<10>.LFBK & 
+	!prescaler_irq<14>.LFBK & !prescaler_irq<15>.LFBK & !prescaler_irq<7>.LFBK & 
+	!prescaler_irq<8>.LFBK & !prescaler_irq<9>.LFBK
+
+MACROCELL | 0 | 1 | data_out<5>
+ATTRIBUTES | 8652578 | 0
+INPUTS | 9 | CPU_RW  | A23  | GPIO_IACK.PIN  | A2<2>  | CPLD_mask<5>  | A2<1>  | A2<0>  | CPU_AS  | data_out<6>/data_out<6>_TRST
+INPUTMC | 2 | 2 | 12 | 2 | 9
+INPUTP | 7 | 55 | 88 | 36 | 89 | 86 | 87 | 61
+EQ | 5 | 
+   D<5>.D = CPU_RW & A23 & GPIO_IACK.PIN
+	# CPU_RW & !A23 & !A2<2> & CPLD_mask<5> & A2<1> & 
+	A2<0>;
+   D<5>.CLK = !CPU_AS;
+   D<5>.OE = data_out<6>/data_out<6>_TRST;
+
+MACROCELL | 3 | 15 | data_out<6>
+ATTRIBUTES | 8652578 | 0
+INPUTS | 9 | CPU_RW  | A23  | GPIO_AS.PIN  | A2<2>  | CPLD_mask<6>  | A2<1>  | A2<0>  | CPU_AS  | data_out<6>/data_out<6>_TRST
+INPUTMC | 2 | 2 | 11 | 2 | 9
+INPUTP | 7 | 55 | 88 | 38 | 89 | 86 | 87 | 61
+EQ | 5 | 
+   D<6>.D = CPU_RW & A23 & GPIO_AS.PIN
+	# CPU_RW & !A23 & !A2<2> & CPLD_mask<6> & A2<1> & 
+	A2<0>;
+   D<6>.CLK = !CPU_AS;
+   D<6>.OE = data_out<6>/data_out<6>_TRST;
+
+MACROCELL | 0 | 4 | data_out<7>
+ATTRIBUTES | 8652578 | 0
+INPUTS | 9 | CPU_RW  | A23  | GPIO_DTACK  | A2<2>  | CPLD_mask<7>  | A2<1>  | A2<0>  | CPU_AS  | data_out<6>/data_out<6>_TRST
+INPUTMC | 2 | 2 | 10 | 2 | 9
+INPUTP | 7 | 55 | 88 | 47 | 89 | 86 | 87 | 61
+EQ | 5 | 
+   D<7>.D = CPU_RW & A23 & GPIO_DTACK
+	# CPU_RW & !A23 & !A2<2> & CPLD_mask<7> & A2<1> & 
+	A2<0>;
+   D<7>.CLK = !CPU_AS;
+   D<7>.OE = data_out<6>/data_out<6>_TRST;
+
+MACROCELL | 2 | 8 | GPIO_AS_and0000
+ATTRIBUTES | 265986 | 0
+INPUTS | 3 | CPU_AS  | A23  | CPLD_mask<5>.LFBK
+INPUTMC | 1 | 2 | 12
+INPUTP | 2 | 61 | 88
+EQ | 2 | 
+   GPIO_AS = !CPU_AS & A23;
+   GPIO_AS.OE = CPLD_mask<5>.LFBK;
+
+MACROCELL | 3 | 8 | power_on
+ATTRIBUTES | 4653858 | 0
+OUTPUTMC | 1 | 3 | 2
+INPUTS | 1 | Reset_In
+INPUTP | 1 | 48
+EQ | 2 | 
+   CPU_RESET.T = Vcc;
+   CPU_RESET.CLK = Reset_In;
+
+MACROCELL | 3 | 0 | CPU_CLK_pre
+ATTRIBUTES | 4686594 | 0
+OUTPUTMC | 1 | 3 | 1
+INPUTS | 1 | FC_4_.OUT
+EQ | 2 | 
+   CPU_CLK.T = FC_4_.OUT;
+   CPU_CLK.CLK = Q2_Clock;	// GCK
+GLOBALS | 1 | 2 | Q2_Clock
+
+MACROCELL | 0 | 10 | GPIO_Buf1<0>
+ATTRIBUTES | 4653858 | 0
+OUTPUTMC | 1 | 0 | 10
+INPUTS | 5 | CPU_RW  | A23  | D<0>.PIN  | CPU_AS  | GPIO_Buf1<0>.LFBK
+INPUTMC | 1 | 0 | 10
+INPUTP | 4 | 55 | 88 | 74 | 61
+EQ | 3 | 
+   GPO<0>.T = !CPU_RW & A23 & D<0>.PIN & !GPIO_Buf1<0>.LFBK
+	# !CPU_RW & A23 & !D<0>.PIN & GPIO_Buf1<0>.LFBK;
+   GPO<0>.CLK = !CPU_AS;
+
+MACROCELL | 0 | 9 | GPIO_Buf1<1>
+ATTRIBUTES | 4653858 | 0
+OUTPUTMC | 1 | 0 | 9
+INPUTS | 5 | CPU_RW  | A23  | D<1>.PIN  | CPU_AS  | GPIO_Buf1<1>.LFBK
+INPUTMC | 1 | 0 | 9
+INPUTP | 4 | 55 | 88 | 9 | 61
+EQ | 3 | 
+   GPO<1>.T = !CPU_RW & A23 & D<1>.PIN & !GPIO_Buf1<1>.LFBK
+	# !CPU_RW & A23 & !D<1>.PIN & GPIO_Buf1<1>.LFBK;
+   GPO<1>.CLK = !CPU_AS;
+
+MACROCELL | 0 | 16 | GPIO_Buf1<2>
+ATTRIBUTES | 4653858 | 0
+OUTPUTMC | 1 | 0 | 16
+INPUTS | 5 | CPU_RW  | A23  | D<2>.PIN  | CPU_AS  | GPIO_Buf1<2>.LFBK
+INPUTMC | 1 | 0 | 16
+INPUTP | 4 | 55 | 88 | 77 | 61
+EQ | 3 | 
+   GPO<2>.T = !CPU_RW & A23 & D<2>.PIN & !GPIO_Buf1<2>.LFBK
+	# !CPU_RW & A23 & !D<2>.PIN & GPIO_Buf1<2>.LFBK;
+   GPO<2>.CLK = !CPU_AS;
+
+MACROCELL | 0 | 11 | GPIO_Buf1<3>
+ATTRIBUTES | 4653858 | 0
+OUTPUTMC | 1 | 0 | 11
+INPUTS | 5 | CPU_RW  | A23  | D<3>.PIN  | CPU_AS  | GPIO_Buf1<3>.LFBK
+INPUTMC | 1 | 0 | 11
+INPUTP | 4 | 55 | 88 | 14 | 61
+EQ | 3 | 
+   GPO<3>.T = !CPU_RW & A23 & D<3>.PIN & !GPIO_Buf1<3>.LFBK
+	# !CPU_RW & A23 & !D<3>.PIN & GPIO_Buf1<3>.LFBK;
+   GPO<3>.CLK = !CPU_AS;
+
+MACROCELL | 0 | 12 | GPIO_Buf1<4>
+ATTRIBUTES | 4653858 | 0
+OUTPUTMC | 1 | 0 | 12
+INPUTS | 5 | CPU_RW  | A23  | D<4>.PIN  | CPU_AS  | GPIO_Buf1<4>.LFBK
+INPUTMC | 1 | 0 | 12
+INPUTP | 4 | 55 | 88 | 79 | 61
+EQ | 3 | 
+   GPO<4>.T = !CPU_RW & A23 & D<4>.PIN & !GPIO_Buf1<4>.LFBK
+	# !CPU_RW & A23 & !D<4>.PIN & GPIO_Buf1<4>.LFBK;
+   GPO<4>.CLK = !CPU_AS;
+
+MACROCELL | 0 | 15 | GPIO_Buf1<5>
+ATTRIBUTES | 8848162 | 0
+OUTPUTMC | 1 | 0 | 15
+INPUTS | 7 | A23  | CPU_RW  | CPLD_mask<4>  | A2<0>  | D<5>.PIN  | CPU_AS  | GPIO_Buf1<5>.LFBK
+INPUTMC | 2 | 2 | 13 | 0 | 15
+INPUTP | 5 | 88 | 55 | 87 | 11 | 61
+EQ | 5 | 
+   GPO<5>.D = CPU_RW & GPIO_Buf1<5>.LFBK
+	# !A23 & GPIO_Buf1<5>.LFBK
+	# !CPU_RW & A23 & CPLD_mask<4> & A2<0>
+	# !CPU_RW & A23 & !CPLD_mask<4> & D<5>.PIN;
+   GPO<5>.CLK = !CPU_AS;
+
+MACROCELL | 2 | 0 | GPIO_Buf1<6>
+ATTRIBUTES | 8848162 | 0
+OUTPUTMC | 1 | 2 | 0
+INPUTS | 7 | A23  | CPLD_mask<4>.LFBK  | CPU_RW  | A2<1>  | D<6>.PIN  | CPU_AS  | GPIO_Buf1<6>.LFBK
+INPUTMC | 2 | 2 | 13 | 2 | 0
+INPUTP | 5 | 88 | 55 | 86 | 78 | 61
+EQ | 5 | 
+   GPO<6>.D = CPU_RW & GPIO_Buf1<6>.LFBK
+	# !A23 & GPIO_Buf1<6>.LFBK
+	# !CPU_RW & A23 & D<6>.PIN & !CPLD_mask<4>.LFBK
+	# !CPU_RW & A23 & A2<1> & CPLD_mask<4>.LFBK;
+   GPO<6>.CLK = !CPU_AS;
+
+MACROCELL | 2 | 2 | GPIO_Buf1<7>
+ATTRIBUTES | 8848162 | 0
+OUTPUTMC | 1 | 2 | 2
+INPUTS | 7 | A23  | CPLD_mask<4>.LFBK  | CPU_RW  | A2<2>  | D<7>.PIN  | CPU_AS  | GPIO_Buf1<7>.LFBK
+INPUTMC | 2 | 2 | 13 | 2 | 2
+INPUTP | 5 | 88 | 55 | 89 | 12 | 61
+EQ | 5 | 
+   GPO<7>.D = CPU_RW & GPIO_Buf1<7>.LFBK
+	# !A23 & GPIO_Buf1<7>.LFBK
+	# !CPU_RW & A23 & A2<2> & CPLD_mask<4>.LFBK
+	# !CPU_RW & A23 & D<7>.PIN & !CPLD_mask<4>.LFBK;
+   GPO<7>.CLK = !CPU_AS;
+
+MACROCELL | 0 | 7 | CPU_IPL2_OBUF
+ATTRIBUTES | 396034 | 0
+INPUTS | 2 | DUART_IRQ  | IRQ7
+INPUTMC | 1 | 1 | 16
+INPUTP | 1 | 91
+EQ | 1 | 
+   CPU_IPL2 = DUART_IRQ & IRQ7;
+
+MACROCELL | 2 | 13 | CPLD_mask<4>
+ATTRIBUTES | 4391712 | 0
+OUTPUTMC | 5 | 1 | 0 | 0 | 15 | 2 | 0 | 2 | 2 | 2 | 13
+INPUTS | 8 | CPU_RW  | A23  | A2<2>  | D<4>.PIN  | A2<1>  | A2<0>  | CPU_AS  | CPLD_mask<4>.LFBK
+INPUTMC | 1 | 2 | 13
+INPUTP | 7 | 55 | 88 | 89 | 79 | 86 | 87 | 61
+EQ | 5 | 
+   CPLD_mask<4>.T = !CPU_RW & !A23 & !A2<2> & D<4>.PIN & A2<1> & 
+	A2<0> & !CPLD_mask<4>.LFBK
+	# !CPU_RW & !A23 & !A2<2> & !D<4>.PIN & A2<1> & 
+	A2<0> & CPLD_mask<4>.LFBK;
+   CPLD_mask<4>.CLK = !CPU_AS;
+
+MACROCELL | 2 | 12 | CPLD_mask<5>
+ATTRIBUTES | 4391712 | 0
+OUTPUTMC | 5 | 0 | 17 | 0 | 1 | 0 | 2 | 2 | 8 | 2 | 12
+INPUTS | 8 | CPU_RW  | A23  | A2<2>  | D<5>.PIN  | A2<1>  | A2<0>  | CPU_AS  | CPLD_mask<5>.LFBK
+INPUTMC | 1 | 2 | 12
+INPUTP | 7 | 55 | 88 | 89 | 11 | 86 | 87 | 61
+EQ | 5 | 
+   CPLD_mask<5>.T = !CPU_RW & !A23 & !A2<2> & D<5>.PIN & A2<1> & 
+	A2<0> & !CPLD_mask<5>.LFBK
+	# !CPU_RW & !A23 & !A2<2> & !D<5>.PIN & A2<1> & 
+	A2<0> & CPLD_mask<5>.LFBK;
+   CPLD_mask<5>.CLK = !CPU_AS;
+
+MACROCELL | 2 | 5 | prescaler_cpu<0>
+ATTRIBUTES | 8618752 | 0
+OUTPUTMC | 2 | 2 | 5 | 2 | 4
+INPUTS | 2 | prescaler_cpu<1>.LFBK  | prescaler_cpu<0>.LFBK
+INPUTMC | 2 | 2 | 4 | 2 | 5
+EQ | 2 | 
+   prescaler_cpu<0>.D = !prescaler_cpu<0>.LFBK & !prescaler_cpu<1>.LFBK;
+   prescaler_cpu<0>.CLK = Q2_Clock;	// GCK
+GLOBALS | 1 | 2 | Q2_Clock
+
+MACROCELL | 2 | 4 | prescaler_cpu<1>
+ATTRIBUTES | 8618752 | 0
+OUTPUTMC | 2 | 2 | 5 | 2 | 4
+INPUTS | 2 | prescaler_cpu<1>.LFBK  | prescaler_cpu<0>.LFBK
+INPUTMC | 2 | 2 | 4 | 2 | 5
+EQ | 2 | 
+   prescaler_cpu<1>.D = prescaler_cpu<0>.LFBK & !prescaler_cpu<1>.LFBK;
+   prescaler_cpu<1>.CLK = Q2_Clock;	// GCK
+GLOBALS | 1 | 2 | Q2_Clock
+
+MACROCELL | 0 | 14 | prescaler_irq<0>
+ATTRIBUTES | 4358912 | 0
+OUTPUTMC | 15 | 1 | 15 | 1 | 13 | 2 | 7 | 2 | 6 | 1 | 12 | 1 | 11 | 2 | 3 | 1 | 8 | 1 | 7 | 2 | 1 | 1 | 6 | 1 | 5 | 1 | 17 | 1 | 4 | 1 | 1
+INPUTS | 0
+EQ | 2 | 
+   prescaler_irq<0>.T = Vcc;
+   prescaler_irq<0>.CLK = Q2_Clock;	// GCK
+GLOBALS | 1 | 2 | Q2_Clock
+
+MACROCELL | 2 | 11 | CPLD_mask<6>
+ATTRIBUTES | 4391712 | 0
+OUTPUTMC | 3 | 3 | 15 | 1 | 9 | 2 | 11
+INPUTS | 8 | CPU_RW  | A23  | A2<2>  | D<6>.PIN  | A2<1>  | A2<0>  | CPU_AS  | CPLD_mask<6>.LFBK
+INPUTMC | 1 | 2 | 11
+INPUTP | 7 | 55 | 88 | 89 | 78 | 86 | 87 | 61
+EQ | 5 | 
+   CPLD_mask<6>.T = !CPU_RW & !A23 & !A2<2> & D<6>.PIN & A2<1> & 
+	A2<0> & !CPLD_mask<6>.LFBK
+	# !CPU_RW & !A23 & !A2<2> & !D<6>.PIN & A2<1> & 
+	A2<0> & CPLD_mask<6>.LFBK;
+   CPLD_mask<6>.CLK = !CPU_AS;
+
+MACROCELL | 2 | 10 | CPLD_mask<7>
+ATTRIBUTES | 4391712 | 0
+OUTPUTMC | 3 | 0 | 4 | 0 | 3 | 2 | 10
+INPUTS | 8 | CPU_RW  | A23  | A2<2>  | D<7>.PIN  | A2<1>  | A2<0>  | CPU_AS  | CPLD_mask<7>.LFBK
+INPUTMC | 1 | 2 | 10
+INPUTP | 7 | 55 | 88 | 89 | 12 | 86 | 87 | 61
+EQ | 5 | 
+   CPLD_mask<7>.T = !CPU_RW & !A23 & !A2<2> & D<7>.PIN & A2<1> & 
+	A2<0> & !CPLD_mask<7>.LFBK
+	# !CPU_RW & !A23 & !A2<2> & !D<7>.PIN & A2<1> & 
+	A2<0> & CPLD_mask<7>.LFBK;
+   CPLD_mask<7>.CLK = !CPU_AS;
+
+MACROCELL | 1 | 16 | IRQ7
+ATTRIBUTES | 8618756 | 0
+OUTPUTMC | 5 | 0 | 7 | 3 | 10 | 0 | 2 | 1 | 17 | 1 | 16
+INPUTS | 7 | FC0  | prescaler_irq<5>.LFBK  | FC1  | FC2  | prescaler_irq<6>.LFBK  | DUART_CS_OBUF.EXP  | IRQ7.LFBK
+INPUTMC | 4 | 1 | 6 | 1 | 5 | 1 | 15 | 1 | 16
+INPUTP | 3 | 44 | 49 | 46
+EXPORTS | 1 | 1 | 17
+IMPORTS | 1 | 1 | 15
+EQ | 13 | 
+   !IRQ7.D = !FC2 & !IRQ7.LFBK
+	# !FC1 & !IRQ7.LFBK
+	# !FC0 & !IRQ7.LFBK
+;Imported pterms FB2_16
+	# prescaler_irq<0> & prescaler_irq<11> & 
+	prescaler_irq<12> & prescaler_irq<13> & prescaler_irq<1> & 
+	prescaler_irq<4> & prescaler_irq<16> & !prescaler_irq<10>.LFBK & 
+	!prescaler_irq<14>.LFBK & !prescaler_irq<15>.LFBK & !prescaler_irq<7>.LFBK & 
+	!prescaler_irq<8>.LFBK & !prescaler_irq<9>.LFBK & prescaler_irq<5>.LFBK & 
+	prescaler_irq<6>.LFBK & prescaler_irq<2>.LFBK & prescaler_irq<3>.LFBK;
+   IRQ7.CLK = Q2_Clock;	// GCK
+    IRQ7.EXP  =  !prescaler_irq<5>.LFBK
+	# !prescaler_irq<6>.LFBK
+GLOBALS | 1 | 2 | Q2_Clock
+
+MACROCELL | 1 | 13 | prescaler_irq<10>
+ATTRIBUTES | 4424448 | 0
+OUTPUTMC | 8 | 3 | 4 | 2 | 7 | 2 | 6 | 3 | 7 | 1 | 0 | 1 | 12 | 1 | 11 | 1 | 15
+INPUTS | 10 | prescaler_irq<0>  | prescaler_irq<1>  | prescaler_irq<3>.LFBK  | prescaler_irq<5>.LFBK  | prescaler_irq<4>  | prescaler_irq<6>.LFBK  | prescaler_irq<7>.LFBK  | prescaler_irq<8>.LFBK  | prescaler_irq<9>.LFBK  | prescaler_irq<2>.LFBK
+INPUTMC | 10 | 0 | 14 | 2 | 3 | 1 | 7 | 1 | 6 | 2 | 1 | 1 | 5 | 1 | 17 | 1 | 4 | 1 | 1 | 1 | 8
+EQ | 5 | 
+   prescaler_irq<10>.T = prescaler_irq<0> & prescaler_irq<1> & 
+	prescaler_irq<4> & prescaler_irq<7>.LFBK & prescaler_irq<8>.LFBK & 
+	prescaler_irq<9>.LFBK & prescaler_irq<5>.LFBK & prescaler_irq<6>.LFBK & 
+	prescaler_irq<2>.LFBK & prescaler_irq<3>.LFBK;
+   prescaler_irq<10>.CLK = Q2_Clock;	// GCK
+GLOBALS | 1 | 2 | Q2_Clock
+
+MACROCELL | 2 | 7 | prescaler_irq<11>
+ATTRIBUTES | 4424448 | 0
+OUTPUTMC | 6 | 1 | 15 | 1 | 0 | 1 | 11 | 1 | 12 | 2 | 7 | 2 | 6
+INPUTS | 9 | prescaler_irq<0>  | prescaler_irq<10>  | FC_2_.OUT  | FC_3_.OUT  | prescaler_irq<11>.LFBK  | prescaler_irq<7>  | prescaler_irq<8>  | prescaler_irq<9>  | FC_1_.OUT
+INPUTMC | 6 | 0 | 14 | 1 | 13 | 2 | 7 | 1 | 17 | 1 | 4 | 1 | 1
+EQ | 7 | 
+   prescaler_irq<11>.T = prescaler_irq<0> & prescaler_irq<10> & 
+	prescaler_irq<7> & prescaler_irq<8> & prescaler_irq<9> & FC_1_.OUT & 
+	FC_2_.OUT
+	# prescaler_irq<0> & !prescaler_irq<10> & 
+	!prescaler_irq<7> & !prescaler_irq<8> & !prescaler_irq<9> & FC_1_.OUT & 
+	FC_2_.OUT & FC_3_.OUT & prescaler_irq<11>.LFBK;
+   prescaler_irq<11>.CLK = Q2_Clock;	// GCK
+GLOBALS | 1 | 2 | Q2_Clock
+
+MACROCELL | 2 | 6 | prescaler_irq<12>
+ATTRIBUTES | 4358912 | 0
+OUTPUTMC | 4 | 1 | 15 | 1 | 11 | 1 | 0 | 1 | 12
+INPUTS | 9 | prescaler_irq<0>  | prescaler_irq<10>  | FC_2_.OUT  | FC_3_.OUT  | prescaler_irq<11>.LFBK  | prescaler_irq<7>  | prescaler_irq<8>  | prescaler_irq<9>  | FC_1_.OUT
+INPUTMC | 6 | 0 | 14 | 1 | 13 | 2 | 7 | 1 | 17 | 1 | 4 | 1 | 1
+EQ | 7 | 
+   prescaler_irq<12>.T = prescaler_irq<0> & prescaler_irq<10> & 
+	prescaler_irq<7> & prescaler_irq<8> & prescaler_irq<9> & FC_1_.OUT & 
+	FC_2_.OUT & prescaler_irq<11>.LFBK
+	# prescaler_irq<0> & !prescaler_irq<10> & 
+	!prescaler_irq<7> & !prescaler_irq<8> & !prescaler_irq<9> & FC_1_.OUT & 
+	FC_2_.OUT & FC_3_.OUT & prescaler_irq<11>.LFBK;
+   prescaler_irq<12>.CLK = Q2_Clock;	// GCK
+GLOBALS | 1 | 2 | Q2_Clock
+
+MACROCELL | 3 | 7 | prescaler_irq<13>
+ATTRIBUTES | 4424448 | 0
+OUTPUTMC | 6 | 1 | 15 | 1 | 11 | 1 | 0 | 1 | 12 | 3 | 7 | 3 | 4
+INPUTS | 9 | prescaler_irq<13>.LFBK  | prescaler_irq<10>  | prescaler_irq<16>.LFBK  | prescaler_irq<7>  | prescaler_irq<8>  | prescaler_irq<9>  | prescaler_irq<14>  | prescaler_irq<15>  | FC_5_.OUT
+INPUTMC | 8 | 3 | 7 | 1 | 13 | 3 | 4 | 1 | 17 | 1 | 4 | 1 | 1 | 1 | 12 | 1 | 11
+EQ | 7 | 
+   prescaler_irq<13>.T = prescaler_irq<10> & prescaler_irq<7> & 
+	prescaler_irq<8> & prescaler_irq<9> & FC_5_.OUT
+	# !prescaler_irq<10> & !prescaler_irq<14> & 
+	!prescaler_irq<15> & !prescaler_irq<7> & !prescaler_irq<8> & 
+	!prescaler_irq<9> & FC_5_.OUT & prescaler_irq<13>.LFBK & 
+	prescaler_irq<16>.LFBK;
+   prescaler_irq<13>.CLK = Q2_Clock;	// GCK
+GLOBALS | 1 | 2 | Q2_Clock
+
+MACROCELL | 1 | 12 | prescaler_irq<14>
+ATTRIBUTES | 4424448 | 0
+OUTPUTMC | 5 | 3 | 7 | 3 | 4 | 1 | 0 | 1 | 11 | 1 | 15
+INPUTS | 14 | prescaler_irq<0>  | prescaler_irq<2>.LFBK  | prescaler_irq<11>  | prescaler_irq<12>  | prescaler_irq<13>  | prescaler_irq<1>  | prescaler_irq<3>.LFBK  | prescaler_irq<5>.LFBK  | prescaler_irq<4>  | prescaler_irq<6>.LFBK  | prescaler_irq<7>.LFBK  | prescaler_irq<8>.LFBK  | prescaler_irq<9>.LFBK  | prescaler_irq<10>.LFBK
+INPUTMC | 14 | 0 | 14 | 1 | 8 | 2 | 7 | 2 | 6 | 3 | 7 | 2 | 3 | 1 | 7 | 1 | 6 | 2 | 1 | 1 | 5 | 1 | 17 | 1 | 4 | 1 | 1 | 1 | 13
+EQ | 6 | 
+   prescaler_irq<14>.T = prescaler_irq<0> & prescaler_irq<11> & 
+	prescaler_irq<12> & prescaler_irq<13> & prescaler_irq<1> & 
+	prescaler_irq<4> & prescaler_irq<10>.LFBK & prescaler_irq<7>.LFBK & 
+	prescaler_irq<8>.LFBK & prescaler_irq<9>.LFBK & prescaler_irq<5>.LFBK & 
+	prescaler_irq<6>.LFBK & prescaler_irq<2>.LFBK & prescaler_irq<3>.LFBK;
+   prescaler_irq<14>.CLK = Q2_Clock;	// GCK
+GLOBALS | 1 | 2 | Q2_Clock
+
+MACROCELL | 1 | 11 | prescaler_irq<15>
+ATTRIBUTES | 4424448 | 0
+OUTPUTMC | 4 | 3 | 7 | 3 | 4 | 1 | 0 | 1 | 15
+INPUTS | 15 | prescaler_irq<0>  | prescaler_irq<14>.LFBK  | prescaler_irq<11>  | prescaler_irq<12>  | prescaler_irq<13>  | prescaler_irq<2>.LFBK  | prescaler_irq<1>  | prescaler_irq<3>.LFBK  | prescaler_irq<5>.LFBK  | prescaler_irq<4>  | prescaler_irq<6>.LFBK  | prescaler_irq<7>.LFBK  | prescaler_irq<8>.LFBK  | prescaler_irq<9>.LFBK  | prescaler_irq<10>.LFBK
+INPUTMC | 15 | 0 | 14 | 1 | 12 | 2 | 7 | 2 | 6 | 3 | 7 | 1 | 8 | 2 | 3 | 1 | 7 | 1 | 6 | 2 | 1 | 1 | 5 | 1 | 17 | 1 | 4 | 1 | 1 | 1 | 13
+EQ | 7 | 
+   prescaler_irq<15>.T = prescaler_irq<0> & prescaler_irq<11> & 
+	prescaler_irq<12> & prescaler_irq<13> & prescaler_irq<1> & 
+	prescaler_irq<4> & prescaler_irq<10>.LFBK & prescaler_irq<14>.LFBK & 
+	prescaler_irq<7>.LFBK & prescaler_irq<8>.LFBK & prescaler_irq<9>.LFBK & 
+	prescaler_irq<5>.LFBK & prescaler_irq<6>.LFBK & prescaler_irq<2>.LFBK & 
+	prescaler_irq<3>.LFBK;
+   prescaler_irq<15>.CLK = Q2_Clock;	// GCK
+GLOBALS | 1 | 2 | Q2_Clock
+
+MACROCELL | 2 | 3 | prescaler_irq<1>
+ATTRIBUTES | 4358912 | 0
+OUTPUTMC | 11 | 1 | 15 | 1 | 13 | 1 | 17 | 1 | 1 | 1 | 4 | 1 | 12 | 1 | 11 | 1 | 8 | 1 | 7 | 1 | 6 | 1 | 5
+INPUTS | 1 | prescaler_irq<0>
+INPUTMC | 1 | 0 | 14
+EQ | 2 | 
+   prescaler_irq<1>.T = prescaler_irq<0>;
+   prescaler_irq<1>.CLK = Q2_Clock;	// GCK
+GLOBALS | 1 | 2 | Q2_Clock
+
+MACROCELL | 1 | 8 | prescaler_irq<2>
+ATTRIBUTES | 4424448 | 0
+OUTPUTMC | 10 | 1 | 13 | 1 | 12 | 1 | 11 | 1 | 7 | 1 | 6 | 1 | 5 | 1 | 17 | 1 | 4 | 1 | 1 | 1 | 15
+INPUTS | 2 | prescaler_irq<0>  | prescaler_irq<1>
+INPUTMC | 2 | 0 | 14 | 2 | 3
+EQ | 2 | 
+   prescaler_irq<2>.T = prescaler_irq<0> & prescaler_irq<1>;
+   prescaler_irq<2>.CLK = Q2_Clock;	// GCK
+GLOBALS | 1 | 2 | Q2_Clock
+
+MACROCELL | 1 | 7 | prescaler_irq<3>
+ATTRIBUTES | 4424448 | 0
+OUTPUTMC | 9 | 1 | 13 | 1 | 12 | 1 | 11 | 1 | 6 | 1 | 5 | 1 | 17 | 1 | 4 | 1 | 1 | 1 | 15
+INPUTS | 3 | prescaler_irq<0>  | prescaler_irq<1>  | prescaler_irq<2>.LFBK
+INPUTMC | 3 | 0 | 14 | 2 | 3 | 1 | 8
+EQ | 3 | 
+   prescaler_irq<3>.T = prescaler_irq<0> & prescaler_irq<1> & 
+	prescaler_irq<2>.LFBK;
+   prescaler_irq<3>.CLK = Q2_Clock;	// GCK
+GLOBALS | 1 | 2 | Q2_Clock
+
+MACROCELL | 2 | 1 | prescaler_irq<4>
+ATTRIBUTES | 4358912 | 0
+OUTPUTMC | 9 | 1 | 15 | 1 | 13 | 1 | 4 | 1 | 1 | 1 | 12 | 1 | 11 | 1 | 6 | 1 | 5 | 1 | 17
+INPUTS | 2 | prescaler_irq<0>  | FC_1_.OUT
+INPUTMC | 1 | 0 | 14
+EQ | 2 | 
+   prescaler_irq<4>.T = prescaler_irq<0> & FC_1_.OUT;
+   prescaler_irq<4>.CLK = Q2_Clock;	// GCK
+GLOBALS | 1 | 2 | Q2_Clock
+
+MACROCELL | 1 | 6 | prescaler_irq<5>
+ATTRIBUTES | 4424448 | 0
+OUTPUTMC | 8 | 1 | 16 | 1 | 13 | 1 | 12 | 1 | 11 | 1 | 5 | 1 | 4 | 1 | 1 | 1 | 15
+INPUTS | 5 | prescaler_irq<0>  | prescaler_irq<1>  | prescaler_irq<3>.LFBK  | prescaler_irq<4>  | prescaler_irq<2>.LFBK
+INPUTMC | 5 | 0 | 14 | 2 | 3 | 1 | 7 | 2 | 1 | 1 | 8
+EQ | 3 | 
+   prescaler_irq<5>.T = prescaler_irq<0> & prescaler_irq<1> & 
+	prescaler_irq<4> & prescaler_irq<2>.LFBK & prescaler_irq<3>.LFBK;
+   prescaler_irq<5>.CLK = Q2_Clock;	// GCK
+GLOBALS | 1 | 2 | Q2_Clock
+
+MACROCELL | 1 | 5 | prescaler_irq<6>
+ATTRIBUTES | 4424448 | 0
+OUTPUTMC | 7 | 1 | 16 | 1 | 13 | 1 | 12 | 1 | 11 | 1 | 4 | 1 | 1 | 1 | 15
+INPUTS | 6 | prescaler_irq<0>  | prescaler_irq<1>  | prescaler_irq<3>.LFBK  | prescaler_irq<5>.LFBK  | prescaler_irq<4>  | prescaler_irq<2>.LFBK
+INPUTMC | 6 | 0 | 14 | 2 | 3 | 1 | 7 | 1 | 6 | 2 | 1 | 1 | 8
+EQ | 4 | 
+   prescaler_irq<6>.T = prescaler_irq<0> & prescaler_irq<1> & 
+	prescaler_irq<4> & prescaler_irq<5>.LFBK & prescaler_irq<2>.LFBK & 
+	prescaler_irq<3>.LFBK;
+   prescaler_irq<6>.CLK = Q2_Clock;	// GCK
+GLOBALS | 1 | 2 | Q2_Clock
+
+MACROCELL | 1 | 17 | prescaler_irq<7>
+ATTRIBUTES | 4424448 | 0
+OUTPUTMC | 11 | 3 | 7 | 3 | 4 | 2 | 7 | 2 | 6 | 1 | 0 | 1 | 13 | 1 | 12 | 1 | 11 | 1 | 4 | 1 | 1 | 1 | 15
+INPUTS | 7 | prescaler_irq<0>  | prescaler_irq<1>  | prescaler_irq<3>.LFBK  | prescaler_irq<4>  | data_out<4>.EXP  | IRQ7.EXP  | prescaler_irq<2>.LFBK
+INPUTMC | 7 | 0 | 14 | 2 | 3 | 1 | 7 | 2 | 1 | 1 | 0 | 1 | 16 | 1 | 8
+IMPORTS | 2 | 1 | 0 | 1 | 16
+EQ | 14 | 
+   !prescaler_irq<7>.T = !prescaler_irq<0>
+	# !prescaler_irq<1>
+	# !prescaler_irq<4>
+	# !prescaler_irq<2>.LFBK
+	# !prescaler_irq<3>.LFBK
+;Imported pterms FB2_1
+	# prescaler_irq<11> & prescaler_irq<12> & 
+	prescaler_irq<13> & prescaler_irq<16> & !prescaler_irq<10>.LFBK & 
+	!prescaler_irq<14>.LFBK & !prescaler_irq<15>.LFBK & !prescaler_irq<7>.LFBK & 
+	!prescaler_irq<8>.LFBK & !prescaler_irq<9>.LFBK
+;Imported pterms FB2_17
+	# !prescaler_irq<5>.LFBK
+	# !prescaler_irq<6>.LFBK;
+   prescaler_irq<7>.CLK = Q2_Clock;	// GCK
+GLOBALS | 1 | 2 | Q2_Clock
+
+MACROCELL | 1 | 4 | prescaler_irq<8>
+ATTRIBUTES | 4424448 | 0
+OUTPUTMC | 10 | 3 | 7 | 3 | 4 | 2 | 7 | 2 | 6 | 1 | 0 | 1 | 13 | 1 | 12 | 1 | 11 | 1 | 1 | 1 | 15
+INPUTS | 8 | prescaler_irq<0>  | prescaler_irq<1>  | prescaler_irq<3>.LFBK  | prescaler_irq<5>.LFBK  | prescaler_irq<4>  | prescaler_irq<6>.LFBK  | prescaler_irq<7>.LFBK  | prescaler_irq<2>.LFBK
+INPUTMC | 8 | 0 | 14 | 2 | 3 | 1 | 7 | 1 | 6 | 2 | 1 | 1 | 5 | 1 | 17 | 1 | 8
+EQ | 4 | 
+   prescaler_irq<8>.T = prescaler_irq<0> & prescaler_irq<1> & 
+	prescaler_irq<4> & prescaler_irq<7>.LFBK & prescaler_irq<5>.LFBK & 
+	prescaler_irq<6>.LFBK & prescaler_irq<2>.LFBK & prescaler_irq<3>.LFBK;
+   prescaler_irq<8>.CLK = Q2_Clock;	// GCK
+GLOBALS | 1 | 2 | Q2_Clock
+
+MACROCELL | 1 | 1 | prescaler_irq<9>
+ATTRIBUTES | 4424448 | 0
+OUTPUTMC | 9 | 3 | 7 | 3 | 4 | 2 | 7 | 2 | 6 | 1 | 0 | 1 | 13 | 1 | 12 | 1 | 11 | 1 | 15
+INPUTS | 9 | prescaler_irq<0>  | prescaler_irq<1>  | prescaler_irq<3>.LFBK  | prescaler_irq<5>.LFBK  | prescaler_irq<4>  | prescaler_irq<6>.LFBK  | prescaler_irq<7>.LFBK  | prescaler_irq<8>.LFBK  | prescaler_irq<2>.LFBK
+INPUTMC | 9 | 0 | 14 | 2 | 3 | 1 | 7 | 1 | 6 | 2 | 1 | 1 | 5 | 1 | 17 | 1 | 4 | 1 | 8
+EQ | 5 | 
+   prescaler_irq<9>.T = prescaler_irq<0> & prescaler_irq<1> & 
+	prescaler_irq<4> & prescaler_irq<7>.LFBK & prescaler_irq<8>.LFBK & 
+	prescaler_irq<5>.LFBK & prescaler_irq<6>.LFBK & prescaler_irq<2>.LFBK & 
+	prescaler_irq<3>.LFBK;
+   prescaler_irq<9>.CLK = Q2_Clock;	// GCK
+GLOBALS | 1 | 2 | Q2_Clock
+
+MACROCELL | 3 | 17 | CPLD_mask<0>
+ATTRIBUTES | 4391712 | 0
+OUTPUTMC | 2 | 3 | 11 | 3 | 17
+INPUTS | 8 | CPU_RW  | A23  | A2<2>  | D<0>.PIN  | A2<1>  | A2<0>  | CPU_AS  | CPLD_mask<0>.LFBK
+INPUTMC | 1 | 3 | 17
+INPUTP | 7 | 55 | 88 | 89 | 74 | 86 | 87 | 61
+EQ | 5 | 
+   CPLD_mask<0>.T = !CPU_RW & !A23 & !A2<2> & D<0>.PIN & A2<1> & 
+	A2<0> & !CPLD_mask<0>.LFBK
+	# !CPU_RW & !A23 & !A2<2> & !D<0>.PIN & A2<1> & 
+	A2<0> & CPLD_mask<0>.LFBK;
+   CPLD_mask<0>.CLK = !CPU_AS;
+
+MACROCELL | 2 | 17 | CPLD_mask<1>
+ATTRIBUTES | 4391712 | 0
+OUTPUTMC | 2 | 1 | 14 | 2 | 17
+INPUTS | 8 | CPU_RW  | A23  | A2<2>  | D<1>.PIN  | A2<1>  | A2<0>  | CPU_AS  | CPLD_mask<1>.LFBK
+INPUTMC | 1 | 2 | 17
+INPUTP | 7 | 55 | 88 | 89 | 9 | 86 | 87 | 61
+EQ | 5 | 
+   CPLD_mask<1>.T = !CPU_RW & !A23 & !A2<2> & D<1>.PIN & A2<1> & 
+	A2<0> & !CPLD_mask<1>.LFBK
+	# !CPU_RW & !A23 & !A2<2> & !D<1>.PIN & A2<1> & 
+	A2<0> & CPLD_mask<1>.LFBK;
+   CPLD_mask<1>.CLK = !CPU_AS;
+
+MACROCELL | 2 | 16 | CPLD_mask<2>
+ATTRIBUTES | 4391712 | 0
+OUTPUTMC | 2 | 3 | 12 | 2 | 16
+INPUTS | 8 | CPU_RW  | A23  | A2<2>  | D<2>.PIN  | A2<1>  | A2<0>  | CPU_AS  | CPLD_mask<2>.LFBK
+INPUTMC | 1 | 2 | 16
+INPUTP | 7 | 55 | 88 | 89 | 77 | 86 | 87 | 61
+EQ | 5 | 
+   CPLD_mask<2>.T = !CPU_RW & !A23 & !A2<2> & D<2>.PIN & A2<1> & 
+	A2<0> & !CPLD_mask<2>.LFBK
+	# !CPU_RW & !A23 & !A2<2> & !D<2>.PIN & A2<1> & 
+	A2<0> & CPLD_mask<2>.LFBK;
+   CPLD_mask<2>.CLK = !CPU_AS;
+
+MACROCELL | 2 | 15 | CPLD_mask<3>
+ATTRIBUTES | 4391712 | 0
+OUTPUTMC | 2 | 0 | 0 | 2 | 15
+INPUTS | 8 | CPU_RW  | A23  | A2<2>  | D<3>.PIN  | A2<1>  | A2<0>  | CPU_AS  | CPLD_mask<3>.LFBK
+INPUTMC | 1 | 2 | 15
+INPUTP | 7 | 55 | 88 | 89 | 14 | 86 | 87 | 61
+EQ | 5 | 
+   CPLD_mask<3>.T = !CPU_RW & !A23 & !A2<2> & D<3>.PIN & A2<1> & 
+	A2<0> & !CPLD_mask<3>.LFBK
+	# !CPU_RW & !A23 & !A2<2> & !D<3>.PIN & A2<1> & 
+	A2<0> & CPLD_mask<3>.LFBK;
+   CPLD_mask<3>.CLK = !CPU_AS;
+
+MACROCELL | 3 | 4 | prescaler_irq<16>
+ATTRIBUTES | 4424448 | 0
+OUTPUTMC | 4 | 1 | 15 | 1 | 0 | 3 | 7 | 3 | 4
+INPUTS | 9 | prescaler_irq<13>.LFBK  | prescaler_irq<10>  | prescaler_irq<16>.LFBK  | prescaler_irq<14>  | prescaler_irq<15>  | prescaler_irq<7>  | prescaler_irq<8>  | prescaler_irq<9>  | FC_5_.OUT
+INPUTMC | 8 | 3 | 7 | 1 | 13 | 3 | 4 | 1 | 12 | 1 | 11 | 1 | 17 | 1 | 4 | 1 | 1
+EQ | 8 | 
+   prescaler_irq<16>.T = prescaler_irq<10> & prescaler_irq<14> & 
+	prescaler_irq<15> & prescaler_irq<7> & prescaler_irq<8> & 
+	prescaler_irq<9> & FC_5_.OUT & prescaler_irq<13>.LFBK
+	# !prescaler_irq<10> & !prescaler_irq<14> & 
+	!prescaler_irq<15> & !prescaler_irq<7> & !prescaler_irq<8> & 
+	!prescaler_irq<9> & FC_5_.OUT & prescaler_irq<13>.LFBK & 
+	prescaler_irq<16>.LFBK;
+   prescaler_irq<16>.CLK = Q2_Clock;	// GCK
+GLOBALS | 1 | 2 | Q2_Clock
+
+MACROCELL | 0 | 13 | speaker_pre
+ATTRIBUTES | 4424448 | 0
+OUTPUTMC | 1 | 0 | 3
+INPUTS | 1 | FC_0_.OUT
+EQ | 2 | 
+   speaker_pre.T = FC_0_.OUT;
+   speaker_pre.CLK = Q2_Clock;	// GCK
+GLOBALS | 1 | 2 | Q2_Clock
+
+MACROCELL | 3 | 1 | CPU_DTACK_OBUF
+ATTRIBUTES | 8782626 | 0
+INPUTS | 8 | CPU_AS  | A23  | GPIO_DTACK  | A2<2>  | A2<1>  | A2<0>  | DUART_DTACK  | CPU_CLK_pre.LFBK
+INPUTMC | 1 | 3 | 0
+INPUTP | 7 | 61 | 88 | 47 | 89 | 86 | 87 | 6
+EQ | 4 | 
+   CPU_DTACK.D = CPU_AS
+	# A23 & !GPIO_DTACK
+	# !A23 & !A2<2> & A2<1> & !A2<0> & DUART_DTACK;
+   CPU_DTACK.CLK = !CPU_CLK_pre.LFBK;
+
+MACROCELL | 1 | 3 | DUART_RW_OBUF
+ATTRIBUTES | 396034 | 0
+INPUTS | 6 | CPU_RW  | CPU_AS  | A23  | A2<2>  | A2<1>  | A2<0>
+INPUTP | 6 | 55 | 61 | 88 | 89 | 86 | 87
+EQ | 1 | 
+   !DUART_RW = !CPU_RW & !CPU_AS & !A23 & !A2<2> & A2<1> & !A2<0>;
+
+MACROCELL | 3 | 5 | RAM_LB_OBUF
+ATTRIBUTES | 396034 | 0
+INPUTS | 6 | CPU_AS  | A23  | A2<2>  | A2<1>  | A2<0>  | CPU_LDS
+INPUTP | 6 | 61 | 88 | 89 | 86 | 87 | 54
+EQ | 2 | 
+   !RAM_LB = !CPU_AS & !A23 & !A2<2> & !A2<1> & A2<0> & 
+	!CPU_LDS;
+
+MACROCELL | 3 | 9 | RAM_OE_OBUF
+ATTRIBUTES | 396034 | 0
+INPUTS | 6 | CPU_RW  | CPU_AS  | A23  | A2<2>  | A2<1>  | A2<0>
+INPUTP | 6 | 55 | 61 | 88 | 89 | 86 | 87
+EQ | 1 | 
+   !RAM_OE = CPU_RW & !CPU_AS & !A23 & !A2<2> & !A2<1> & A2<0>;
+
+MACROCELL | 3 | 6 | RAM_UB_OBUF
+ATTRIBUTES | 396034 | 0
+INPUTS | 6 | CPU_AS  | A23  | A2<2>  | A2<1>  | A2<0>  | CPU_UDS
+INPUTP | 6 | 61 | 88 | 89 | 86 | 87 | 52
+EQ | 2 | 
+   !RAM_UB = !CPU_AS & !A23 & !A2<2> & !A2<1> & A2<0> & 
+	!CPU_UDS;
+
+MACROCELL | 3 | 14 | RAM_WE_OBUF
+ATTRIBUTES | 396034 | 0
+INPUTS | 6 | CPU_RW  | CPU_AS  | A23  | A2<2>  | A2<1>  | A2<0>
+INPUTP | 6 | 55 | 61 | 88 | 89 | 86 | 87
+EQ | 1 | 
+   !RAM_WE = !CPU_RW & !CPU_AS & !A23 & !A2<2> & !A2<1> & A2<0>;
+
+MACROCELL | 1 | 2 | ROM_OE_OBUF
+ATTRIBUTES | 396034 | 0
+INPUTS | 6 | CPU_RW  | CPU_AS  | A23  | A2<2>  | A2<1>  | A2<0>
+INPUTP | 6 | 55 | 61 | 88 | 89 | 86 | 87
+EQ | 1 | 
+   !ROM_OE = CPU_RW & !CPU_AS & !A23 & !A2<2> & !A2<1> & !A2<0>;
+
+MACROCELL | 2 | 14 | ROM_WE_OBUF
+ATTRIBUTES | 396034 | 0
+INPUTS | 6 | CPU_RW  | CPU_AS  | A23  | A2<2>  | A2<1>  | A2<0>
+INPUTP | 6 | 55 | 61 | 88 | 89 | 86 | 87
+EQ | 1 | 
+   !ROM_WE = !CPU_RW & !CPU_AS & !A23 & !A2<2> & !A2<1> & !A2<0>;
+
+MACROCELL | 0 | 2 | CPU_IPL0_OBUF
+ATTRIBUTES | 396034 | 0
+INPUTS | 3 | IRQ7  | GPIO_IPL0  | CPLD_mask<5>
+INPUTMC | 2 | 1 | 16 | 2 | 12
+INPUTP | 1 | 33
+EQ | 2 | 
+   CPU_IPL0 = !CPLD_mask<5> & IRQ7
+	# IRQ7 & !GPIO_IPL0;
+
+MACROCELL | 1 | 9 | DUART_RESET_OBUF
+ATTRIBUTES | 396034 | 0
+INPUTS | 2 | CPLD_mask<6>  | CPU_RESET.PIN
+INPUTMC | 1 | 2 | 11
+INPUTP | 1 | 64
+EQ | 1 | 
+   DUART_RESET = !CPLD_mask<6> & CPU_RESET.PIN;
+
+MACROCELL | 0 | 3 | Speaker_OBUF
+ATTRIBUTES | 396034 | 0
+INPUTS | 2 | CPLD_mask<7>  | speaker_pre.LFBK
+INPUTMC | 2 | 2 | 10 | 0 | 13
+EQ | 1 | 
+   Speaker = CPLD_mask<7> & speaker_pre.LFBK;
+
+MACROCELL | 3 | 10 | CPU_IPL2_OBUF$BUF0
+ATTRIBUTES | 396034 | 0
+INPUTS | 2 | DUART_IRQ  | IRQ7
+INPUTMC | 1 | 1 | 16
+INPUTP | 1 | 91
+EQ | 1 | 
+   CPU_IPL1 = DUART_IRQ & IRQ7;
+
+MACROCELL | 1 | 15 | DUART_CS_OBUF
+ATTRIBUTES | 396034 | 0
+OUTPUTMC | 1 | 1 | 16
+INPUTS | 22 | CPU_AS  | A23  | A2<2>  | A2<1>  | A2<0>  | prescaler_irq<0>  | prescaler_irq<14>.LFBK  | prescaler_irq<11>  | prescaler_irq<12>  | prescaler_irq<13>  | prescaler_irq<15>.LFBK  | prescaler_irq<2>.LFBK  | prescaler_irq<1>  | prescaler_irq<3>.LFBK  | prescaler_irq<5>.LFBK  | prescaler_irq<4>  | prescaler_irq<6>.LFBK  | prescaler_irq<7>.LFBK  | prescaler_irq<8>.LFBK  | prescaler_irq<9>.LFBK  | prescaler_irq<16>  | prescaler_irq<10>.LFBK
+INPUTMC | 17 | 0 | 14 | 1 | 12 | 2 | 7 | 2 | 6 | 3 | 7 | 1 | 11 | 1 | 8 | 2 | 3 | 1 | 7 | 1 | 6 | 2 | 1 | 1 | 5 | 1 | 17 | 1 | 4 | 1 | 1 | 3 | 4 | 1 | 13
+INPUTP | 5 | 61 | 88 | 89 | 86 | 87
+EXPORTS | 1 | 1 | 16
+EQ | 7 | 
+   !DUART_CS = !CPU_AS & !A23 & !A2<2> & A2<1> & !A2<0>;
+    DUART_CS_OBUF.EXP  =  prescaler_irq<0> & prescaler_irq<11> & 
+	prescaler_irq<12> & prescaler_irq<13> & prescaler_irq<1> & 
+	prescaler_irq<4> & prescaler_irq<16> & !prescaler_irq<10>.LFBK & 
+	!prescaler_irq<14>.LFBK & !prescaler_irq<15>.LFBK & !prescaler_irq<7>.LFBK & 
+	!prescaler_irq<8>.LFBK & !prescaler_irq<9>.LFBK & prescaler_irq<5>.LFBK & 
+	prescaler_irq<6>.LFBK & prescaler_irq<2>.LFBK & prescaler_irq<3>.LFBK
 
 MACROCELL | 1 | 10 | DUART_IACK_OBUF
 ATTRIBUTES | 396034 | 0
@@ -76,15 +738,108 @@ INPUTP | 3 | 46 | 49 | 44
 EQ | 1 | 
    !DUART_IACK = FC2 & FC1 & FC0;
 
-MACROCELL | 0 | 6 | Q2_Enable_OBUF
+MACROCELL | 3 | 13 | RAM_CE_OBUF
+ATTRIBUTES | 396034 | 0
+INPUTS | 5 | CPU_AS  | A23  | A2<2>  | A2<1>  | A2<0>
+INPUTP | 5 | 61 | 88 | 89 | 86 | 87
+EQ | 1 | 
+   !RAM_CE = !CPU_AS & !A23 & !A2<2> & !A2<1> & A2<0>;
+
+MACROCELL | 3 | 16 | ROM_CE_OBUF
+ATTRIBUTES | 396034 | 0
+INPUTS | 5 | CPU_AS  | A23  | A2<2>  | A2<1>  | A2<0>
+INPUTP | 5 | 61 | 88 | 89 | 86 | 87
+EQ | 1 | 
+   !ROM_CE = !CPU_AS & !A23 & !A2<2> & !A2<1> & !A2<0>;
+
+MACROCELL | 3 | 2 | power_on$BUF0
+ATTRIBUTES | 8782626 | 0
+INPUTS | 2 | Reset_In  | power_on.LFBK
+INPUTMC | 1 | 3 | 8
+INPUTP | 1 | 48
+EQ | 2 | 
+   CPU_HALT.D = !power_on.LFBK;
+   CPU_HALT.CLK = Reset_In;
+
+MACROCELL | 0 | 6 | CPU_BERR_OBUF
 ATTRIBUTES | 396034 | 0
 INPUTS | 0
 EQ | 1 | 
    Q2_Enable = Vcc;
 
-PIN | FC2 | 64 | 0 | N/A | 46 | 1 | 1 | 10
-PIN | FC1 | 64 | 0 | N/A | 49 | 1 | 1 | 10
-PIN | FC0 | 64 | 0 | N/A | 44 | 1 | 1 | 10
+MACROCELL | 3 | 3 | CPU_BERR_OBUF$BUF0
+ATTRIBUTES | 396034 | 0
+INPUTS | 0
+EQ | 1 | 
+   CPU_BERR = Vcc;
+
+MACROCELL | 2 | 9 | data_out<6>/data_out<6>_TRST
+ATTRIBUTES | 133888 | 0
+OUTPUTMC | 8 | 3 | 11 | 1 | 14 | 3 | 12 | 0 | 0 | 1 | 0 | 0 | 1 | 3 | 15 | 0 | 4
+INPUTS | 5 | CPU_RW  | A23  | A2<2>  | A2<1>  | A2<0>
+INPUTP | 5 | 55 | 88 | 89 | 86 | 87
+EQ | 2 | 
+   data_out<6>/data_out<6>_TRST = CPU_RW & A23
+	# CPU_RW & !A2<2> & A2<1> & A2<0>;
+
+PIN | FC2 | 64 | 0 | N/A | 46 | 3 | 0 | 17 | 1 | 16 | 1 | 10
+PIN | FC1 | 64 | 0 | N/A | 49 | 3 | 0 | 17 | 1 | 16 | 1 | 10
+PIN | FC0 | 64 | 0 | N/A | 44 | 3 | 0 | 17 | 1 | 16 | 1 | 10
+PIN | CPU_RW | 64 | 0 | N/A | 55 | 30 | 3 | 11 | 1 | 14 | 3 | 12 | 0 | 0 | 1 | 0 | 0 | 1 | 3 | 15 | 0 | 4 | 0 | 10 | 0 | 9 | 0 | 16 | 0 | 11 | 0 | 12 | 0 | 15 | 2 | 0 | 2 | 2 | 2 | 13 | 2 | 12 | 2 | 11 | 2 | 10 | 3 | 17 | 2 | 17 | 2 | 16 | 2 | 15 | 1 | 3 | 3 | 9 | 3 | 14 | 1 | 2 | 2 | 14 | 2 | 9
+PIN | CPU_AS | 64 | 0 | N/A | 61 | 36 | 3 | 11 | 1 | 14 | 3 | 12 | 0 | 0 | 1 | 0 | 0 | 1 | 3 | 15 | 0 | 4 | 2 | 8 | 0 | 10 | 0 | 9 | 0 | 16 | 0 | 11 | 0 | 12 | 0 | 15 | 2 | 0 | 2 | 2 | 2 | 13 | 2 | 12 | 2 | 11 | 2 | 10 | 3 | 17 | 2 | 17 | 2 | 16 | 2 | 15 | 3 | 1 | 1 | 3 | 3 | 5 | 3 | 9 | 3 | 6 | 3 | 14 | 1 | 2 | 2 | 14 | 1 | 15 | 3 | 13 | 3 | 16
+PIN | A23 | 64 | 0 | N/A | 88 | 37 | 3 | 11 | 1 | 14 | 3 | 12 | 0 | 0 | 1 | 0 | 0 | 1 | 3 | 15 | 0 | 4 | 2 | 8 | 0 | 10 | 0 | 9 | 0 | 16 | 0 | 11 | 0 | 12 | 0 | 15 | 2 | 0 | 2 | 2 | 2 | 13 | 2 | 12 | 2 | 11 | 2 | 10 | 3 | 17 | 2 | 17 | 2 | 16 | 2 | 15 | 3 | 1 | 1 | 3 | 3 | 5 | 3 | 9 | 3 | 6 | 3 | 14 | 1 | 2 | 2 | 14 | 1 | 15 | 3 | 13 | 3 | 16 | 2 | 9
+PIN | GPI<0> | 64 | 0 | N/A | 24 | 1 | 3 | 11
+PIN | A2<0> | 64 | 0 | N/A | 87 | 29 | 3 | 11 | 1 | 14 | 3 | 12 | 0 | 0 | 1 | 0 | 0 | 1 | 3 | 15 | 0 | 4 | 0 | 15 | 2 | 13 | 2 | 12 | 2 | 11 | 2 | 10 | 3 | 17 | 2 | 17 | 2 | 16 | 2 | 15 | 3 | 1 | 1 | 3 | 3 | 5 | 3 | 9 | 3 | 6 | 3 | 14 | 1 | 2 | 2 | 14 | 1 | 15 | 3 | 13 | 3 | 16 | 2 | 9
+PIN | A2<1> | 64 | 0 | N/A | 86 | 29 | 3 | 11 | 1 | 14 | 3 | 12 | 0 | 0 | 1 | 0 | 0 | 1 | 3 | 15 | 0 | 4 | 2 | 0 | 2 | 13 | 2 | 12 | 2 | 11 | 2 | 10 | 3 | 17 | 2 | 17 | 2 | 16 | 2 | 15 | 3 | 1 | 1 | 3 | 3 | 5 | 3 | 9 | 3 | 6 | 3 | 14 | 1 | 2 | 2 | 14 | 1 | 15 | 3 | 13 | 3 | 16 | 2 | 9
+PIN | A2<2> | 64 | 0 | N/A | 89 | 29 | 3 | 11 | 1 | 14 | 3 | 12 | 0 | 0 | 1 | 0 | 0 | 1 | 3 | 15 | 0 | 4 | 2 | 2 | 2 | 13 | 2 | 12 | 2 | 11 | 2 | 10 | 3 | 17 | 2 | 17 | 2 | 16 | 2 | 15 | 3 | 1 | 1 | 3 | 3 | 5 | 3 | 9 | 3 | 6 | 3 | 14 | 1 | 2 | 2 | 14 | 1 | 15 | 3 | 13 | 3 | 16 | 2 | 9
+PIN | GPI<1> | 64 | 0 | N/A | 26 | 1 | 1 | 14
+PIN | GPI<2> | 64 | 0 | N/A | 29 | 1 | 3 | 12
+PIN | GPI<3> | 64 | 0 | N/A | 31 | 1 | 0 | 0
+PIN | GPIO_IPL0 | 64 | 0 | N/A | 33 | 2 | 1 | 0 | 0 | 2
+PIN | GPIO_DTACK | 64 | 0 | N/A | 47 | 2 | 0 | 4 | 3 | 1
+PIN | Reset_In | 64 | 0 | N/A | 48 | 2 | 3 | 8 | 3 | 2
+PIN | Q2_Clock | 4096 | 0 | N/A | 20 | 22 | 3 | 0 | 2 | 5 | 2 | 4 | 0 | 14 | 1 | 16 | 1 | 13 | 2 | 7 | 2 | 6 | 3 | 7 | 1 | 12 | 1 | 11 | 2 | 3 | 1 | 8 | 1 | 7 | 2 | 1 | 1 | 6 | 1 | 5 | 1 | 17 | 1 | 4 | 1 | 1 | 3 | 4 | 0 | 13
+PIN | DUART_IRQ | 64 | 0 | N/A | 91 | 2 | 0 | 7 | 3 | 10
+PIN | DUART_DTACK | 64 | 0 | N/A | 6 | 1 | 3 | 1
+PIN | CPU_LDS | 64 | 0 | N/A | 54 | 1 | 3 | 5
+PIN | CPU_UDS | 64 | 0 | N/A | 52 | 1 | 3 | 6
 PIN | CPU_CLK | 536871040 | 0 | N/A | 60
+PIN | GPO<0> | 536871040 | 0 | N/A | 21
+PIN | GPO<1> | 536871040 | 0 | N/A | 25
+PIN | GPO<2> | 536871040 | 0 | N/A | 27
+PIN | GPO<3> | 536871040 | 0 | N/A | 30
+PIN | GPO<4> | 536871040 | 0 | N/A | 32
+PIN | GPO<5> | 536871040 | 0 | N/A | 35
+PIN | GPO<6> | 536871040 | 0 | N/A | 37
+PIN | GPO<7> | 536871040 | 0 | N/A | 43
+PIN | CPU_IPL2 | 536871040 | 0 | N/A | 15
+PIN | CPU_DTACK | 536871040 | 0 | N/A | 58
+PIN | DUART_RW | 536871040 | 0 | N/A | 85
+PIN | RAM_LB | 536871040 | 0 | N/A | 69
+PIN | RAM_OE | 536871040 | 0 | N/A | 73
+PIN | RAM_UB | 536871040 | 0 | N/A | 70
+PIN | RAM_WE | 536871040 | 0 | N/A | 81
+PIN | ROM_OE | 536871040 | 0 | N/A | 83
+PIN | ROM_WE | 536871040 | 0 | N/A | 50
+PIN | CPU_IPL0 | 536871040 | 0 | N/A | 16
+PIN | DUART_RESET | 536871040 | 0 | N/A | 1
+PIN | Speaker | 536871040 | 0 | N/A | 17
+PIN | CPU_IPL1 | 536871040 | 0 | N/A | 67
+PIN | DUART_CS | 536871040 | 0 | N/A | 8
 PIN | DUART_IACK | 536871040 | 0 | N/A | 3
+PIN | RAM_CE | 536871040 | 0 | N/A | 71
+PIN | ROM_CE | 536871040 | 0 | N/A | 82
+PIN | CPU_HALT | 536871040 | 0 | N/A | 65
 PIN | Q2_Enable | 536871040 | 0 | N/A | 22
+PIN | CPU_BERR | 536871040 | 0 | N/A | 66
+PIN | GPIO_IACK | 536870976 | 0 | N/A | 36 | 1 | 0 | 1
+PIN | D<0> | 536870976 | 0 | N/A | 74 | 2 | 0 | 10 | 3 | 17
+PIN | D<1> | 536870976 | 0 | N/A | 9 | 2 | 0 | 9 | 2 | 17
+PIN | D<2> | 536870976 | 0 | N/A | 77 | 2 | 0 | 16 | 2 | 16
+PIN | D<3> | 536870976 | 0 | N/A | 14 | 2 | 0 | 11 | 2 | 15
+PIN | D<4> | 536870976 | 0 | N/A | 79 | 2 | 0 | 12 | 2 | 13
+PIN | D<5> | 536870976 | 0 | N/A | 11 | 2 | 0 | 15 | 2 | 12
+PIN | D<6> | 536870976 | 0 | N/A | 78 | 2 | 2 | 0 | 2 | 11
+PIN | D<7> | 536870976 | 0 | N/A | 12 | 2 | 2 | 2 | 2 | 10
+PIN | GPIO_AS | 536870976 | 0 | N/A | 38 | 1 | 3 | 15
+PIN | CPU_RESET | 536870976 | 0 | N/A | 64 | 1 | 1 | 9

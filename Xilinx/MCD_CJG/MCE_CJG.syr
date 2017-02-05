@@ -5,14 +5,14 @@ Parameter TMPDIR set to xst/projnav.tmp
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.08 secs
+Total CPU time to Xst completion: 0.10 secs
  
 --> 
 Parameter xsthdpdir set to xst
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.08 secs
+Total CPU time to Xst completion: 0.10 secs
  
 --> 
 Reading design: MCE_CJG.prj
@@ -91,12 +91,6 @@ Analyzing hierarchy for entity <MCE_CJG> in library <work> (architecture <behavi
 *                            HDL Analysis                               *
 =========================================================================
 Analyzing Entity <MCE_CJG> in library <work> (Architecture <behavioral>).
-WARNING:Xst:819 - "/home/chandler/Homeschool/Semester6/Microcomputer/Xilinx/MCD_CJG/MCE_CJG.vhd" line 74: One or more signals are missing in the process sensitivity list. To enable synthesis of FPGA/CPLD hardware, XST will assume that all necessary signals are present in the sensitivity list. Please note that the result of the synthesis may differ from the initial design specification. The missing signals are:
-   <A2>
-WARNING:Xst:819 - "/home/chandler/Homeschool/Semester6/Microcomputer/Xilinx/MCD_CJG/MCE_CJG.vhd" line 93: One or more signals are missing in the process sensitivity list. To enable synthesis of FPGA/CPLD hardware, XST will assume that all necessary signals are present in the sensitivity list. Please note that the result of the synthesis may differ from the initial design specification. The missing signals are:
-   <prescaler_cpu>
-WARNING:Xst:819 - "/home/chandler/Homeschool/Semester6/Microcomputer/Xilinx/MCD_CJG/MCE_CJG.vhd" line 110: One or more signals are missing in the process sensitivity list. To enable synthesis of FPGA/CPLD hardware, XST will assume that all necessary signals are present in the sensitivity list. Please note that the result of the synthesis may differ from the initial design specification. The missing signals are:
-   <prescaler_spk>, <div_speaker>
 Entity <MCE_CJG> analyzed. Unit <MCE_CJG> generated.
 
 
@@ -108,73 +102,33 @@ Performing bidirectional port resolution...
 
 Synthesizing Unit <MCE_CJG>.
     Related source file is "/home/chandler/Homeschool/Semester6/Microcomputer/Xilinx/MCD_CJG/MCE_CJG.vhd".
-WARNING:Xst:1306 - Output <RAM_WE> is never assigned.
 WARNING:Xst:647 - Input <DUART_OP4> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <DUART_OP5> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <DUART_OP6> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <DUART_OP7> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-WARNING:Xst:1306 - Output <ROM_OE> is never assigned.
-WARNING:Xst:1306 - Output <CPU_HALT> is never assigned.
-WARNING:Xst:1306 - Output <DUART_CS> is never assigned.
-WARNING:Xst:2565 - Inout <GPIO<0>> is never assigned.
-WARNING:Xst:2565 - Inout <GPIO<1>> is never assigned.
-WARNING:Xst:1306 - Output <ROM_WE> is never assigned.
 WARNING:Xst:647 - Input <CPU_BG> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-WARNING:Xst:2565 - Inout <GPIO<2>> is never assigned.
-WARNING:Xst:1306 - Output <Speaker> is never assigned.
-WARNING:Xst:2565 - Inout <GPIO<3>> is never assigned.
-WARNING:Xst:2565 - Inout <D<0>> is never assigned.
-WARNING:Xst:647 - Input <CPU_AS> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-WARNING:Xst:647 - Input <CPU_LDS> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-WARNING:Xst:2565 - Inout <GPIO<4>> is never assigned.
 WARNING:Xst:1306 - Output <CPU_BR> is never assigned.
-WARNING:Xst:2565 - Inout <D<1>> is never assigned.
-WARNING:Xst:2565 - Inout <GPIO<5>> is never assigned.
-WARNING:Xst:2565 - Inout <D<2>> is never assigned.
-WARNING:Xst:2565 - Inout <GPIO<6>> is never assigned.
-WARNING:Xst:2565 - Inout <D<3>> is never assigned.
-WARNING:Xst:647 - Input <DUART_DTACK> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-WARNING:Xst:2565 - Inout <GPIO<7>> is never assigned.
-WARNING:Xst:1306 - Output <RAM_CE> is never assigned.
-WARNING:Xst:2565 - Inout <D<4>> is never assigned.
-WARNING:Xst:647 - Input <DUART_IRQ> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-WARNING:Xst:2565 - Inout <GPIO<8>> is never assigned.
-WARNING:Xst:647 - Input <Reset_In> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-WARNING:Xst:2565 - Inout <D<5>> is never assigned.
-WARNING:Xst:1306 - Output <DUART_RESET> is never assigned.
 WARNING:Xst:647 - Input <DUART_CLK> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-WARNING:Xst:2565 - Inout <GPIO<9>> is never assigned.
-WARNING:Xst:2565 - Inout <D<6>> is never assigned.
-WARNING:Xst:647 - Input <CPU_UDS> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-WARNING:Xst:2565 - Inout <D<7>> is never assigned.
-WARNING:Xst:2565 - Inout <GPIO<10>> is never assigned.
-WARNING:Xst:2565 - Inout <GPIO<11>> is never assigned.
-WARNING:Xst:1306 - Output <CPU_IPL0> is never assigned.
-WARNING:Xst:1306 - Output <CPU_IPL1> is never assigned.
-WARNING:Xst:1306 - Output <CPU_IPL2> is never assigned.
-WARNING:Xst:2565 - Inout <GPIO<12>> is never assigned.
-WARNING:Xst:2565 - Inout <GPIO<13>> is never assigned.
-WARNING:Xst:2565 - Inout <GPIO<14>> is never assigned.
-WARNING:Xst:1306 - Output <DUART_RW> is never assigned.
-WARNING:Xst:2565 - Inout <GPIO<15>> is never assigned.
-WARNING:Xst:1306 - Output <RAM_LB> is never assigned.
-WARNING:Xst:1306 - Output <RAM_OE> is never assigned.
-WARNING:Xst:1306 - Output <ROM_CE> is never assigned.
-WARNING:Xst:1306 - Output <CPU_DTACK> is never assigned.
-WARNING:Xst:647 - Input <CPU_RW> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-WARNING:Xst:1306 - Output <CPU_RESET> is never assigned.
-WARNING:Xst:647 - Input <Q2_Clock> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-WARNING:Xst:1306 - Output <RAM_UB> is never assigned.
 WARNING:Xst:647 - Input <CPU_BGACK> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-WARNING:Xst:647 - Input <A2> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-WARNING:Xst:1306 - Output <CPU_BERR> is never assigned.
-WARNING:Xst:653 - Signal <div_speaker> is used but never assigned. This sourceless signal will be automatically connected to value 000000000000000000000000.
-WARNING:Xst:737 - Found 1-bit latch for signal <CPU_CLK_pre>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
-WARNING:Xst:737 - Found 1-bit latch for signal <speaker_pre>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
-    Found 4-bit adder for signal <prescaler_cpu$addsub0000> created at line 106.
-    Found 24-bit adder for signal <prescaler_spk$addsub0000> created at line 116.
+    Found 1-bit register for signal <CPU_DTACK>.
+    Found 8-bit tristate buffer for signal <D>.
+    Found 1-bit tristate buffer for signal <GPIO_IACK>.
+    Found 1-bit tristate buffer for signal <GPIO_AS>.
+    Found 8-bit register for signal <CPLD_mask>.
+    Found 1-bit register for signal <CPU_CLK_pre>.
+    Found 8-bit register for signal <data_out>.
+    Found 8-bit register for signal <GPIO_Buf1>.
+    Found 1-bit register for signal <IRQ7>.
+    Found 1-bit register for signal <power_on>.
+    Found 2-bit register for signal <prescaler_cpu>.
+    Found 2-bit adder for signal <prescaler_cpu$add0000> created at line 190.
+    Found 17-bit up counter for signal <prescaler_irq>.
+    Found 1-bit register for signal <speaker_pre>.
     Summary:
-	inferred   2 Adder/Subtractor(s).
+	inferred   1 Counter(s).
+	inferred  20 D-type flip-flop(s).
+	inferred   1 Adder/Subtractor(s).
+	inferred  10 Tristate(s).
 Unit <MCE_CJG> synthesized.
 
 
@@ -182,11 +136,16 @@ Unit <MCE_CJG> synthesized.
 HDL Synthesis Report
 
 Macro Statistics
-# Adders/Subtractors                                   : 2
- 24-bit adder                                          : 1
- 4-bit adder                                           : 1
-# Latches                                              : 1
- 1-bit latch                                           : 1
+# Adders/Subtractors                                   : 1
+ 2-bit adder                                           : 1
+# Counters                                             : 1
+ 17-bit up counter                                     : 1
+# Registers                                            : 24
+ 1-bit register                                        : 23
+ 8-bit register                                        : 1
+# Tristates                                            : 3
+ 1-bit tristate buffer                                 : 2
+ 8-bit tristate buffer                                 : 1
 
 =========================================================================
 
@@ -199,24 +158,57 @@ Macro Statistics
 Advanced HDL Synthesis Report
 
 Macro Statistics
-# Adders/Subtractors                                   : 2
- 24-bit adder                                          : 1
- 4-bit adder                                           : 1
-# Latches                                              : 1
- 1-bit latch                                           : 1
+# Adders/Subtractors                                   : 1
+ 2-bit adder                                           : 1
+# Counters                                             : 1
+ 17-bit up counter                                     : 1
+# Registers                                            : 20
+ Flip-Flops                                            : 20
 
 =========================================================================
 
 =========================================================================
 *                         Low Level Synthesis                           *
 =========================================================================
-WARNING:Xst:2170 - Unit MCE_CJG : the following signal(s) form a combinatorial loop: prescaler_cpu<3>, CPU_CLK_pre_cmp_eq0000, prescaler_cpu<0>.
-WARNING:Xst:2170 - Unit MCE_CJG : the following signal(s) form a combinatorial loop: prescaler_cpu<0>.
 
 Optimizing unit <MCE_CJG> ...
-WARNING:Xst:2170 - Unit Madd_prescaler_cpu_addsub0000_Mxor_Result<1> : the following signal(s) form a combinatorial loop: Data<1>, MCE_CJG/prescaler_cpu_addsub0000<1>, Result, MCE_CJG/prescaler_cpu<1>.
-WARNING:Xst:2170 - Unit Madd_prescaler_cpu_addsub0000_Mxor_Result<2> : the following signal(s) form a combinatorial loop: Result, Data<1>, MCE_CJG/prescaler_cpu<2>, MCE_CJG/prescaler_cpu_addsub0000<2>.
-WARNING:Xst:2170 - Unit Madd_prescaler_cpu_addsub0000_Mxor_Result<3> : the following signal(s) form a combinatorial loop: MCE_CJG/prescaler_cpu<3>, Data<1>, MCE_CJG/prescaler_cpu_addsub0000<3>, Result.
+  implementation constraint: INIT=r	 : CPLD_mask_2
+  implementation constraint: INIT=r	 : CPLD_mask_3
+  implementation constraint: INIT=r	 : CPLD_mask_4
+  implementation constraint: INIT=r	 : CPLD_mask_5
+  implementation constraint: INIT=r	 : CPLD_mask_6
+  implementation constraint: INIT=r	 : power_on
+  implementation constraint: INIT=r	 : CPLD_mask_7
+  implementation constraint: INIT=r	 : prescaler_cpu_1
+  implementation constraint: INIT=r	 : prescaler_irq_16
+  implementation constraint: INIT=r	 : prescaler_irq_0
+  implementation constraint: INIT=r	 : prescaler_irq_1
+  implementation constraint: INIT=r	 : prescaler_irq_2
+  implementation constraint: INIT=r	 : prescaler_irq_3
+  implementation constraint: INIT=r	 : prescaler_irq_4
+  implementation constraint: INIT=r	 : prescaler_irq_5
+  implementation constraint: INIT=r	 : prescaler_irq_6
+  implementation constraint: INIT=r	 : prescaler_irq_7
+  implementation constraint: INIT=r	 : prescaler_irq_8
+  implementation constraint: INIT=r	 : prescaler_irq_9
+  implementation constraint: INIT=r	 : prescaler_irq_10
+  implementation constraint: INIT=r	 : prescaler_irq_11
+  implementation constraint: INIT=r	 : prescaler_irq_12
+  implementation constraint: INIT=r	 : prescaler_irq_13
+  implementation constraint: INIT=r	 : prescaler_irq_14
+  implementation constraint: INIT=r	 : prescaler_irq_15
+  implementation constraint: INIT=r	 : prescaler_cpu_0
+  implementation constraint: INIT=r	 : GPIO_Buf1_0
+  implementation constraint: INIT=r	 : GPIO_Buf1_1
+  implementation constraint: INIT=r	 : GPIO_Buf1_2
+  implementation constraint: INIT=s	 : IRQ7
+  implementation constraint: INIT=r	 : GPIO_Buf1_3
+  implementation constraint: INIT=r	 : CPLD_mask_0
+  implementation constraint: INIT=r	 : GPIO_Buf1_4
+  implementation constraint: INIT=r	 : GPIO_Buf1_5
+  implementation constraint: INIT=r	 : CPLD_mask_1
+  implementation constraint: INIT=r	 : GPIO_Buf1_6
+  implementation constraint: INIT=r	 : GPIO_Buf1_7
 
 =========================================================================
 *                           Partition Report                            *
@@ -247,29 +239,34 @@ Design Statistics
 # IOs                              : 69
 
 Cell Usage :
-# BELS                             : 23
-#      AND2                        : 9
-#      AND3                        : 1
-#      INV                         : 9
+# BELS                             : 308
+#      AND2                        : 121
+#      AND3                        : 14
+#      AND4                        : 1
+#      AND5                        : 3
+#      AND8                        : 1
+#      INV                         : 107
+#      OR2                         : 42
 #      VCC                         : 1
-#      XOR2                        : 3
-# FlipFlops/Latches                : 1
-#      LD                          : 1
-# IO Buffers                       : 6
-#      IBUF                        : 3
-#      OBUF                        : 3
+#      XOR2                        : 18
+# FlipFlops/Latches                : 48
+#      FD                          : 48
+# IO Buffers                       : 61
+#      IBUF                        : 21
+#      IOBUFE                      : 10
+#      OBUF                        : 30
 =========================================================================
 
 
-Total REAL time to Xst completion: 7.00 secs
-Total CPU time to Xst completion: 6.88 secs
+Total REAL time to Xst completion: 8.00 secs
+Total CPU time to Xst completion: 7.68 secs
  
 --> 
 
 
-Total memory usage is 510616 kilobytes
+Total memory usage is 513980 kilobytes
 
 Number of errors   :    0 (   0 filtered)
-Number of warnings :   71 (   0 filtered)
+Number of warnings :    8 (   0 filtered)
 Number of infos    :    0 (   0 filtered)
 

@@ -16,30 +16,6 @@ Checking Constraint Associations...
 Done...
 
 Checking expanded design ...
-WARNING:NgdBuild:470 - bidirect pad net 'GPIO<0>' has no legal driver
-WARNING:NgdBuild:470 - bidirect pad net 'GPIO<1>' has no legal driver
-WARNING:NgdBuild:470 - bidirect pad net 'GPIO<2>' has no legal driver
-WARNING:NgdBuild:470 - bidirect pad net 'GPIO<3>' has no legal driver
-WARNING:NgdBuild:470 - bidirect pad net 'D<0>' has no legal driver
-WARNING:NgdBuild:470 - bidirect pad net 'GPIO<4>' has no legal driver
-WARNING:NgdBuild:470 - bidirect pad net 'D<1>' has no legal driver
-WARNING:NgdBuild:470 - bidirect pad net 'GPIO<5>' has no legal driver
-WARNING:NgdBuild:470 - bidirect pad net 'D<2>' has no legal driver
-WARNING:NgdBuild:470 - bidirect pad net 'GPIO<6>' has no legal driver
-WARNING:NgdBuild:470 - bidirect pad net 'D<3>' has no legal driver
-WARNING:NgdBuild:470 - bidirect pad net 'GPIO<7>' has no legal driver
-WARNING:NgdBuild:470 - bidirect pad net 'D<4>' has no legal driver
-WARNING:NgdBuild:470 - bidirect pad net 'GPIO<8>' has no legal driver
-WARNING:NgdBuild:470 - bidirect pad net 'D<5>' has no legal driver
-WARNING:NgdBuild:470 - bidirect pad net 'GPIO<9>' has no legal driver
-WARNING:NgdBuild:470 - bidirect pad net 'D<6>' has no legal driver
-WARNING:NgdBuild:470 - bidirect pad net 'D<7>' has no legal driver
-WARNING:NgdBuild:470 - bidirect pad net 'GPIO<10>' has no legal driver
-WARNING:NgdBuild:470 - bidirect pad net 'GPIO<11>' has no legal driver
-WARNING:NgdBuild:470 - bidirect pad net 'GPIO<12>' has no legal driver
-WARNING:NgdBuild:470 - bidirect pad net 'GPIO<13>' has no legal driver
-WARNING:NgdBuild:470 - bidirect pad net 'GPIO<14>' has no legal driver
-WARNING:NgdBuild:470 - bidirect pad net 'GPIO<15>' has no legal driver
 
 Partition Implementation Status
 -------------------------------
@@ -50,12 +26,12 @@ Partition Implementation Status
 
 NGDBUILD Design Results Summary:
   Number of errors:     0
-  Number of warnings:  24
+  Number of warnings:   0
 
-Total memory usage is 387472 kilobytes
+Total memory usage is 388000 kilobytes
 
 Writing NGD file "MCE_CJG.ngd" ...
-Total REAL time to NGDBUILD completion:  5 sec
+Total REAL time to NGDBUILD completion:  4 sec
 Total CPU time to NGDBUILD completion:   4 sec
 
 Writing NGDBUILD log file "MCE_CJG.bld"...
