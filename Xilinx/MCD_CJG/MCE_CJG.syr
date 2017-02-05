@@ -5,14 +5,14 @@ Parameter TMPDIR set to xst/projnav.tmp
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.10 secs
+Total CPU time to Xst completion: 0.09 secs
  
 --> 
 Parameter xsthdpdir set to xst
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.10 secs
+Total CPU time to Xst completion: 0.09 secs
  
 --> 
 Reading design: MCE_CJG.prj
@@ -107,7 +107,6 @@ WARNING:Xst:647 - Input <DUART_OP5> is never used. This port will be preserved a
 WARNING:Xst:647 - Input <DUART_OP6> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <DUART_OP7> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <CPU_BG> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-WARNING:Xst:1306 - Output <CPU_BR> is never assigned.
 WARNING:Xst:647 - Input <DUART_CLK> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <CPU_BGACK> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
     Found 1-bit register for signal <CPU_DTACK>.
@@ -120,14 +119,12 @@ WARNING:Xst:647 - Input <CPU_BGACK> is never used. This port will be preserved a
     Found 8-bit register for signal <GPIO_Buf1>.
     Found 1-bit register for signal <IRQ7>.
     Found 1-bit register for signal <power_on>.
-    Found 2-bit register for signal <prescaler_cpu>.
-    Found 2-bit adder for signal <prescaler_cpu$add0000> created at line 190.
+    Found 2-bit up counter for signal <prescaler_cpu>.
     Found 17-bit up counter for signal <prescaler_irq>.
     Found 1-bit register for signal <speaker_pre>.
     Summary:
-	inferred   1 Counter(s).
-	inferred  20 D-type flip-flop(s).
-	inferred   1 Adder/Subtractor(s).
+	inferred   2 Counter(s).
+	inferred  19 D-type flip-flop(s).
 	inferred  10 Tristate(s).
 Unit <MCE_CJG> synthesized.
 
@@ -136,12 +133,11 @@ Unit <MCE_CJG> synthesized.
 HDL Synthesis Report
 
 Macro Statistics
-# Adders/Subtractors                                   : 1
- 2-bit adder                                           : 1
-# Counters                                             : 1
+# Counters                                             : 2
  17-bit up counter                                     : 1
-# Registers                                            : 24
- 1-bit register                                        : 23
+ 2-bit up counter                                      : 1
+# Registers                                            : 22
+ 1-bit register                                        : 21
  8-bit register                                        : 1
 # Tristates                                            : 3
  1-bit tristate buffer                                 : 2
@@ -158,12 +154,11 @@ Macro Statistics
 Advanced HDL Synthesis Report
 
 Macro Statistics
-# Adders/Subtractors                                   : 1
- 2-bit adder                                           : 1
-# Counters                                             : 1
+# Counters                                             : 2
  17-bit up counter                                     : 1
-# Registers                                            : 20
- Flip-Flops                                            : 20
+ 2-bit up counter                                      : 1
+# Registers                                            : 19
+ Flip-Flops                                            : 19
 
 =========================================================================
 
@@ -172,15 +167,14 @@ Macro Statistics
 =========================================================================
 
 Optimizing unit <MCE_CJG> ...
-  implementation constraint: INIT=r	 : CPLD_mask_2
+  implementation constraint: INIT=s	 : CPLD_mask_2
   implementation constraint: INIT=r	 : CPLD_mask_3
   implementation constraint: INIT=r	 : CPLD_mask_4
   implementation constraint: INIT=r	 : CPLD_mask_5
   implementation constraint: INIT=r	 : CPLD_mask_6
   implementation constraint: INIT=r	 : power_on
-  implementation constraint: INIT=r	 : CPLD_mask_7
-  implementation constraint: INIT=r	 : prescaler_cpu_1
   implementation constraint: INIT=r	 : prescaler_irq_16
+  implementation constraint: INIT=r	 : CPLD_mask_7
   implementation constraint: INIT=r	 : prescaler_irq_0
   implementation constraint: INIT=r	 : prescaler_irq_1
   implementation constraint: INIT=r	 : prescaler_irq_2
@@ -197,13 +191,14 @@ Optimizing unit <MCE_CJG> ...
   implementation constraint: INIT=r	 : prescaler_irq_13
   implementation constraint: INIT=r	 : prescaler_irq_14
   implementation constraint: INIT=r	 : prescaler_irq_15
+  implementation constraint: INIT=r	 : prescaler_cpu_1
   implementation constraint: INIT=r	 : prescaler_cpu_0
   implementation constraint: INIT=r	 : GPIO_Buf1_0
   implementation constraint: INIT=r	 : GPIO_Buf1_1
   implementation constraint: INIT=r	 : GPIO_Buf1_2
   implementation constraint: INIT=s	 : IRQ7
   implementation constraint: INIT=r	 : GPIO_Buf1_3
-  implementation constraint: INIT=r	 : CPLD_mask_0
+  implementation constraint: INIT=s	 : CPLD_mask_0
   implementation constraint: INIT=r	 : GPIO_Buf1_4
   implementation constraint: INIT=r	 : GPIO_Buf1_5
   implementation constraint: INIT=r	 : CPLD_mask_1
@@ -239,34 +234,34 @@ Design Statistics
 # IOs                              : 69
 
 Cell Usage :
-# BELS                             : 308
-#      AND2                        : 121
-#      AND3                        : 14
+# BELS                             : 304
+#      AND2                        : 122
+#      AND3                        : 13
 #      AND4                        : 1
 #      AND5                        : 3
 #      AND8                        : 1
-#      INV                         : 107
-#      OR2                         : 42
+#      INV                         : 104
+#      OR2                         : 40
 #      VCC                         : 1
-#      XOR2                        : 18
+#      XOR2                        : 19
 # FlipFlops/Latches                : 48
 #      FD                          : 48
-# IO Buffers                       : 61
+# IO Buffers                       : 62
 #      IBUF                        : 21
 #      IOBUFE                      : 10
-#      OBUF                        : 30
+#      OBUF                        : 31
 =========================================================================
 
 
 Total REAL time to Xst completion: 8.00 secs
-Total CPU time to Xst completion: 7.68 secs
+Total CPU time to Xst completion: 7.96 secs
  
 --> 
 
 
-Total memory usage is 513980 kilobytes
+Total memory usage is 514164 kilobytes
 
 Number of errors   :    0 (   0 filtered)
-Number of warnings :    8 (   0 filtered)
+Number of warnings :    7 (   0 filtered)
 Number of infos    :    0 (   0 filtered)
 

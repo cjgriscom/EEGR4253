@@ -66,7 +66,7 @@ end MCE_CJG;
 architecture Behavioral of MCE_CJG is
 	signal power_on		: STD_LOGIC := '0'; -- 0 until reset is pressed
 	signal data_out		: unsigned(7 downto 0);
-	signal CPLD_mask		: unsigned(7 downto 0)  := (others=>'0');
+	signal CPLD_mask		: unsigned(7 downto 0)  := "00000101"; -- Pattern for testing
 	signal GPIO_Buf1		: unsigned(7 downto 0)  := (others=>'0');
 	signal prescaler_cpu : unsigned(1 downto 0)  := (others=>'0');
 	signal prescaler_irq : unsigned(16 downto 0) := (others=>'0');
@@ -79,8 +79,8 @@ architecture Behavioral of MCE_CJG is
 begin
 
 -- CPLD MASK --
---     7       6             5            4          3          2          1          0
---    Spk  Reset_UART  En_GPI_FlowCtrl  En_GPO_Addr
+--     7       6             5               4           3          2          1          0
+--    Spk  Reset_UART  En_GPI_FlowCtrl  En_GPO_Addr  En_GPO0_CLK
 
 -- Tri-State Data Bus Control.... double check the RW condditions
 D <= data_out when ((A23 = '1' or A2 = "011") and CPU_RW = '1') else (others=>'Z');
@@ -90,12 +90,16 @@ cpld_write: process (CPU_AS) begin
 		if (A23 = '0' and A2 = "011" and CPU_RW = '0') then -- Read 1XX0 - Mask   or  1XX1 - GPI
 			CPLD_mask <= D;
 		elsif (A23 = '1' and CPU_RW = '0') then
-			GPIO_Buf1(0) <= D(0);
+		   if CPLD_mask(3) = '1' then -- Expose clock
+			   GPIO_Buf1(0) <= CPU_CLK_pre;
+			else
+				GPIO_Buf1(0) <= D(0);
+			end if;
 			GPIO_Buf1(1) <= D(1);
 			GPIO_Buf1(2) <= D(2);
 			GPIO_Buf1(3) <= D(3);
 			GPIO_Buf1(4) <= D(4);
-			if CPLD_mask(4) = '1' then
+			if CPLD_mask(4) = '1' then -- Expose address
 				GPIO_Buf1(5) <= A2(0);
 				GPIO_Buf1(6) <= A2(1);
 				GPIO_Buf1(7) <= A2(2);
@@ -129,6 +133,7 @@ end process cpld_read;
 
 Q2_Enable <= '1';
 CPU_BERR <= '1'; -- No bus errors here!
+CPU_BR <= '1'; -- No bus requests
 CPU_CLK <= CPU_CLK_pre;
 CPU_RESET <= power_on; -- (0 until reset is hit)
 CPU_HALT	<= power_on;  -- (0 until reset is hit)
@@ -180,11 +185,11 @@ begin
 	end if;
 end process resetbutton;
 
-gen_clk : process (Q2_Clock) -- TODO FIXME
+gen_clk : process (Q2_Clock)
 begin
 	if (rising_edge(Q2_Clock)) then -- This CPLD doesn't support dual edge triggering
-		if prescaler_cpu = "10" then -- Generate 13.3Mhz CPU clock
-			prescaler_cpu(1) <= '0';
+		if prescaler_cpu = "11" then -- Generate 10Mhz CPU clock
+			prescaler_cpu <= "00";
 			CPU_CLK_pre <= not CPU_CLK_pre;
 		else
 			prescaler_cpu <= prescaler_cpu + "1";

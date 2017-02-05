@@ -40,6 +40,7 @@ NET FC0         LOC=P32;
 NET FC1         LOC=P36;
 NET FC2         LOC=P33;
 NET GPO[0]      LOC=P10;
+NET GPO[0]      BUFG=CLK;
 NET GPO[1]      LOC=P13;
 NET GPO[2]      LOC=P15;
 NET GPO[3]      LOC=P18;
