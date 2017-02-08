@@ -78,19 +78,19 @@ wysiwyg                            : NO
 *                          HDL Compilation                              *
 =========================================================================
 Compiling vhdl file "/home/chandler/Homeschool/Semester6/Microcomputer/Xilinx/MCD_CJG/MCE_CJG.vhd" in Library work.
-Entity <mce_cjg> compiled.
-Entity <mce_cjg> (Architecture <behavioral>) compiled.
+Entity <MCE_CJG> compiled.
+Entity <MCE_CJG> (Architecture <Behavioral>) compiled.
 
 =========================================================================
 *                     Design Hierarchy Analysis                         *
 =========================================================================
-Analyzing hierarchy for entity <MCE_CJG> in library <work> (architecture <behavioral>).
+Analyzing hierarchy for entity <MCE_CJG> in library <work> (architecture <Behavioral>).
 
 
 =========================================================================
 *                            HDL Analysis                               *
 =========================================================================
-Analyzing Entity <MCE_CJG> in library <work> (Architecture <behavioral>).
+Analyzing Entity <MCE_CJG> in library <work> (Architecture <Behavioral>).
 Entity <MCE_CJG> analyzed. Unit <MCE_CJG> generated.
 
 
@@ -254,12 +254,12 @@ Cell Usage :
 
 
 Total REAL time to Xst completion: 8.00 secs
-Total CPU time to Xst completion: 7.96 secs
+Total CPU time to Xst completion: 8.20 secs
  
 --> 
 
 
-Total memory usage is 514164 kilobytes
+Total memory usage is 514140 kilobytes
 
 Number of errors   :    0 (   0 filtered)
 Number of warnings :    7 (   0 filtered)

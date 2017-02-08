@@ -1,0 +1,8 @@
+INTSTYLE=impact
+INFILE=/home/chandler/Homeschool/Semester6/Microcomputer/Xilinx/MCD_CJG/impact.xsl
+OUTFILE=/home/chandler/Homeschool/Semester6/Microcomputer/Xilinx/MCD_CJG/impact.xsl
+FAMILY=Single
+PART=Single
+WORKINGDIR=/home/chandler/Homeschool/Semester6/Microcomputer/Xilinx/MCD_CJG
+LICENSE=iMPACT
+USER_INFO=iMPACT
