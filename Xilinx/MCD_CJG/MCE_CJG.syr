@@ -5,14 +5,14 @@ Parameter TMPDIR set to xst/projnav.tmp
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.08 secs
+Total CPU time to Xst completion: 0.09 secs
  
 --> 
 Parameter xsthdpdir set to xst
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.08 secs
+Total CPU time to Xst completion: 0.10 secs
  
 --> 
 Reading design: MCE_CJG.prj
@@ -110,7 +110,6 @@ WARNING:Xst:647 - Input <CPU_BG> is never used. This port will be preserved and 
 WARNING:Xst:647 - Input <DUART_CLK> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <CPU_BGACK> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
     Found 1-bit xor2 for signal <CPU_CLK>.
-    Found 1-bit register for signal <CPU_DTACK>.
     Found 8-bit tristate buffer for signal <D>.
     Found 1-bit tristate buffer for signal <GPIO_IACK>.
     Found 1-bit tristate buffer for signal <GPIO_AS>.
@@ -122,7 +121,7 @@ WARNING:Xst:647 - Input <CPU_BGACK> is never used. This port will be preserved a
     Found 1-bit register for signal <IRQ7>.
     Found 1-bit register for signal <power_on>.
     Found 3-bit register for signal <prescaler_cpu>.
-    Found 3-bit adder for signal <prescaler_cpu$add0000> created at line 199.
+    Found 3-bit adder for signal <prescaler_cpu$add0000> created at line 206.
     Found 13-bit up counter for signal <prescaler_irq>.
     Found 1-bit register for signal <speaker_pre>.
     Summary:
@@ -142,8 +141,8 @@ Macro Statistics
  3-bit adder                                           : 1
 # Counters                                             : 1
  13-bit up counter                                     : 1
-# Registers                                            : 26
- 1-bit register                                        : 25
+# Registers                                            : 25
+ 1-bit register                                        : 24
  8-bit register                                        : 1
 # Tristates                                            : 3
  1-bit tristate buffer                                 : 2
@@ -240,17 +239,17 @@ Design Statistics
 # IOs                              : 69
 
 Cell Usage :
-# BELS                             : 300
+# BELS                             : 298
 #      AND2                        : 118
 #      AND3                        : 14
 #      AND5                        : 3
 #      AND8                        : 1
-#      INV                         : 103
+#      INV                         : 101
 #      OR2                         : 42
 #      VCC                         : 1
 #      XOR2                        : 18
-# FlipFlops/Latches                : 46
-#      FD                          : 46
+# FlipFlops/Latches                : 45
+#      FD                          : 45
 # IO Buffers                       : 62
 #      IBUF                        : 21
 #      IOBUFE                      : 10
@@ -258,13 +257,13 @@ Cell Usage :
 =========================================================================
 
 
-Total REAL time to Xst completion: 7.00 secs
-Total CPU time to Xst completion: 7.08 secs
+Total REAL time to Xst completion: 8.00 secs
+Total CPU time to Xst completion: 8.25 secs
  
 --> 
 
 
-Total memory usage is 513384 kilobytes
+Total memory usage is 513268 kilobytes
 
 Number of errors   :    0 (   0 filtered)
 Number of warnings :    7 (   0 filtered)

@@ -11,3 +11,22 @@ cpldfit -intstyle ise -p xc9572-7-PC84 -ofmt vhdl -optimize speed -htmlrpt -loc 
 XSLTProcess MCE_CJG_build.xml 
 tsim -intstyle ise MCE_CJG MCE_CJG.nga 
 hprep6 -s IEEE1149 -n MCE_CJG -i MCE_CJG 
+xst -intstyle ise -ifn "/home/chandler/Homeschool/Semester6/Microcomputer/Xilinx/MCD_CJG/MCE_CJG.xst" -ofn "/home/chandler/Homeschool/Semester6/Microcomputer/Xilinx/MCD_CJG/MCE_CJG.syr" 
+xst -intstyle ise -ifn "/home/chandler/Homeschool/Semester6/Microcomputer/Xilinx/MCD_CJG/MCE_CJG.xst" -ofn "/home/chandler/Homeschool/Semester6/Microcomputer/Xilinx/MCD_CJG/MCE_CJG.syr" 
+ngdbuild -intstyle ise -dd _ngo -uc MCE_CJG.ucf -p xc9572-PC84-7 MCE_CJG.ngc MCE_CJG.ngd  
+cpldfit -intstyle ise -p xc9572-7-PC84 -ofmt vhdl -optimize speed -htmlrpt -loc on -slew fast -init low -inputs 36 -pterms 25 -power std -localfbk -pinfbk MCE_CJG.ngd 
+XSLTProcess MCE_CJG_build.xml 
+tsim -intstyle ise MCE_CJG MCE_CJG.nga 
+hprep6 -s IEEE1149 -n MCE_CJG -i MCE_CJG 
+xst -intstyle ise -ifn "/home/chandler/Homeschool/Semester6/Microcomputer/Xilinx/MCD_CJG/MCE_CJG.xst" -ofn "/home/chandler/Homeschool/Semester6/Microcomputer/Xilinx/MCD_CJG/MCE_CJG.syr" 
+ngdbuild -intstyle ise -dd _ngo -uc MCE_CJG.ucf -p xc9572-PC84-7 MCE_CJG.ngc MCE_CJG.ngd  
+cpldfit -intstyle ise -p xc9572-7-PC84 -ofmt vhdl -optimize speed -htmlrpt -loc on -slew fast -init low -inputs 36 -pterms 25 -power std -localfbk -pinfbk MCE_CJG.ngd 
+XSLTProcess MCE_CJG_build.xml 
+tsim -intstyle ise MCE_CJG MCE_CJG.nga 
+hprep6 -s IEEE1149 -n MCE_CJG -i MCE_CJG 
+xst -intstyle ise -ifn "/home/chandler/Homeschool/Semester6/Microcomputer/Xilinx/MCD_CJG/MCE_CJG.xst" -ofn "/home/chandler/Homeschool/Semester6/Microcomputer/Xilinx/MCD_CJG/MCE_CJG.syr" 
+ngdbuild -intstyle ise -dd _ngo -uc MCE_CJG.ucf -p xc9572-PC84-7 MCE_CJG.ngc MCE_CJG.ngd  
+cpldfit -intstyle ise -p xc9572-7-PC84 -ofmt vhdl -optimize speed -htmlrpt -loc on -slew fast -init low -inputs 36 -pterms 25 -power std -localfbk -pinfbk MCE_CJG.ngd 
+XSLTProcess MCE_CJG_build.xml 
+tsim -intstyle ise MCE_CJG MCE_CJG.nga 
+hprep6 -s IEEE1149 -n MCE_CJG -i MCE_CJG 

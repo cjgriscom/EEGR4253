@@ -142,6 +142,13 @@ DUART_RESET <= power_on and not CPLD_mask(6); -- If mask 6 goes hi, reset duart
 
 Speaker <= speaker_pre and CPLD_mask(7); -- Pipe speaker clock to output pin if enabled (7)
 
+-- DTACK, assuming no delays needed!
+-- Altera says each case is guarenteed mutually exclusive
+CPU_DTACK <= '1'			when CPU_AS = '1' else -- No address selected
+		GPIO_DTACK 			when A23 = '1' else    -- Peripherals
+		DUART_DTACK 		when A2 = "010" else   -- DUART
+		'0';                                     -- RAM, ROM, CPLD-mask
+
 ROM_STROBE	 <= '1' when (CPU_AS = '0' and A23 = '0' and A2 = "000") else '0';
 RAM_STROBE	 <= '1' when (CPU_AS = '0' and A23 = '0' and A2 = "001") else '0';
 DUART_STROBE <= '1' when (CPU_AS = '0' and A23 = '0' and A2 = "010") else '0';
@@ -229,29 +236,5 @@ begin
 	end if;
 end process gen_irq;
 --------------end 16 MHZ CLOCK----------------
-
-gen_dtack : process (CPU_CLK_8pre)
-begin
-	-- Generate DTACK delays
-	-- TODO check if rising or falling edge is better
-	if falling_edge(CPU_CLK_8pre) then
-		if CPU_AS = '0' then
-			---if A23 = '0' and A2 = "000" then -- ROM  elsif
-				
-			if A23 = '0' and A2 = "010" then -- DUART
-				CPU_DTACK <= DUART_DTACK; -- TODO investigate writing to duart
-			elsif A23 = '1' then -- Peripherals
-				CPU_DTACK <= not GPIO_DTACK;
-			else
-				-- ROM: it looks like it takes 2 clock cycles after AS that the CPU latches.
-				-- Instant will probably be fine for both rom and ram, but try later.
-				CPU_DTACK <= '0'; -- RAM and CPLD ops
-			end if;
-		else 
-			CPU_DTACK <= '1';
-		end if;
-	end if;
-end process gen_dtack;
-
 
 end Behavioral;

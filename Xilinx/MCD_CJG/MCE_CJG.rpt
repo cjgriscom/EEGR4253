@@ -1,7 +1,7 @@
  
 cpldfit:  version P.20131013                        Xilinx Inc.
                                   Fitter Report
-Design Name: MCE_CJG                             Date:  2- 8-2017,  5:00PM
+Design Name: MCE_CJG                             Date:  2- 8-2017,  5:54PM
 Device Used: XC9572-7-PC84
 Fitting Status: Successful
 
@@ -9,7 +9,7 @@ Fitting Status: Successful
 
 Macrocells     Product Terms    Function Block   Registers      Pins           
 Used/Tot       Used/Tot         Inps Used/Tot    Used/Tot       Used/Tot       
-70 /72  ( 97%) 170 /360  ( 47%) 125/144 ( 87%)   47 /72  ( 65%) 62 /69  ( 90%)
+70 /72  ( 97%) 169 /360  ( 47%) 125/144 ( 87%)   46 /72  ( 64%) 62 /69  ( 90%)
 
 ** Function Block Resources **
 
@@ -18,9 +18,9 @@ Block       Used/Tot    Used/Tot    Used        Used/Tot    Used/Tot
 FB1          16/18       36/36*      36          44/90      14/18
 FB2          18/18*      32/36       32          41/90       7/17
 FB3          18/18*      31/36       31          54/90       4/17
-FB4          18/18*      26/36       26          31/90      16/17
+FB4          18/18*      26/36       26          30/90      16/17
              -----       -----                   -----       -----     
-             70/72      125/144                 170/360     41/69 
+             70/72      125/144                 169/360     41/69 
 
 * - Resource is exhausted
 
@@ -110,7 +110,7 @@ GPO<7>                        5     7     FB3_3   31   I/O     O       STD  FAST
 GPIO_AS                       2     3     FB3_9   26   I/O     I/O     STD  FAST 
 ROM_WE                        1     6     FB3_15  37   I/O     O       STD  FAST 
 CPU_CLK                       2     2     FB4_1   46   I/O     O       STD  FAST 
-CPU_DTACK                     4     8     FB4_2   44   I/O     O       STD  FAST RESET
+CPU_DTACK                     3     7     FB4_2   44   I/O     O       STD  FAST 
 CPU_HALT                      2     2     FB4_3   51   I/O     O       STD  FAST RESET
 CPU_BERR                      0     0     FB4_4   52   I/O     O       STD  FAST 
 RAM_LB                        1     6     FB4_6   54   I/O     O       STD  FAST 
@@ -390,7 +390,7 @@ Number of signals used by logic mapping into function block:  26
 Signal              Total   Imp   Exp Unused  Loc     Pin   Pin     Pin
 Name                Pt      Pt    Pt  Pt               #    Type    Use
 CPU_CLK               2       0     0   3     FB4_1   46    I/O     O
-CPU_DTACK             4       0     0   1     FB4_2   44    I/O     O
+CPU_DTACK             3       0     0   2     FB4_2   44    I/O     O
 CPU_HALT              2       0     0   3     FB4_3   51    I/O     O
 CPU_BERR              0       0     0   5     FB4_4   52    I/O     O
 CPU_CLK_8pre          1       0     0   4     FB4_5   47    I/O     I
@@ -422,7 +422,7 @@ Signals Used by Logic in Function Block
 Signal                        1         2         3         4 Signals FB
 Name                0----+----0----+----0----+----0----+----0 Used    Inputs
 CPU_CLK              ........XX.............................. 2       2
-CPU_DTACK            XXXX...XX....X.X........................ 8       8
+CPU_DTACK            XXXX...X.....X.X........................ 7       7
 CPU_HALT             ....................X.X................. 2       2
 CPU_BERR             ........................................ 0       0
 CPU_CLK_8pre         .......................XXX.............. 3       3
@@ -512,9 +512,9 @@ FTCPE_CPU_CLK_F_pre: FTCPE port map (CPU_CLK_F_pre,CPU_CLK_F_pre_T,NOT Q2_Clock,
 CPU_CLK_F_pre_T <= (prescaler_cpu(1) AND NOT prescaler_cpu(2) AND 
 	NOT prescaler_cpu(0).LFBK);
 
-FDCPE_CPU_DTACK: FDCPE port map (CPU_DTACK,CPU_DTACK_D,NOT CPU_CLK_8pre.LFBK,'0','0');
-CPU_DTACK_D <= ((CPU_AS)
-	OR (A23 AND NOT GPIO_DTACK)
+
+CPU_DTACK <= ((CPU_AS)
+	OR (A23 AND GPIO_DTACK)
 	OR (NOT A23 AND NOT A2(2) AND A2(1) AND NOT A2(0) AND DUART_DTACK));
 
 FDCPE_CPU_HALT: FDCPE port map (CPU_HALT,NOT power_on.LFBK,Reset_In,'0','0');
