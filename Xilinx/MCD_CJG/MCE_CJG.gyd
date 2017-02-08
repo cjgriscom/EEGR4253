@@ -70,23 +70,23 @@ CPU_HALT S:PIN51
 
 PARTITION FB1_1 data_out<3> data_out<5> CPU_IPL0_OBUF Speaker_OBUF
 		 data_out<7>
-PARTITION FB1_7 CPU_BERR_OBUF CPU_IPL2_OBUF speaker_pre GPIO_Buf1<1>
-		 GPIO_Buf1<0> GPIO_Buf1<3> GPIO_Buf1<4> prescaler_irq<0>
-		 prescaler_cpu<0> GPIO_Buf1<5> GPIO_Buf1<2> IRQ7_and0000
-		
-PARTITION FB2_1 data_out<4> prescaler_irq<9> ROM_OE_OBUF DUART_RW_OBUF
-		 prescaler_irq<8> prescaler_irq<6> prescaler_irq<5> prescaler_irq<4>
-		 prescaler_irq<3> DUART_RESET_OBUF DUART_IACK_OBUF prescaler_irq<15>
-		 prescaler_irq<14> prescaler_irq<10> data_out<1> DUART_CS_OBUF
-		 IRQ7 prescaler_irq<7>
-PARTITION FB3_1 GPIO_Buf1<6> prescaler_irq<2> GPIO_Buf1<7> prescaler_irq<1>
-		 prescaler_cpu<1> prescaler_irq<12> prescaler_irq<11> data_out<6>/data_out<6>_TRST
-		 GPIO_AS_and0000 CPLD_mask<7> CPLD_mask<6> CPLD_mask<5>
-		 CPLD_mask<4> CPLD_mask<3> ROM_WE_OBUF CPLD_mask<2>
+PARTITION FB1_7 CPU_BERR_OBUF CPU_IPL2_OBUF
+PARTITION FB1_10 GPIO_Buf1<1> GPIO_Buf1<0> GPIO_Buf1<3> GPIO_Buf1<4>
+		 prescaler_irq<0> prescaler_irq<1> GPIO_Buf1<5> GPIO_Buf1<2>
+		 IRQ7_and0000
+PARTITION FB2_1 data_out<4> prescaler_cpu<0> ROM_OE_OBUF DUART_RW_OBUF
+		 CPU_CLK_F_pre data_out<6>/data_out<6>_TRST CPLD_mask<7> CPLD_mask<6>
+		 CPLD_mask<5> DUART_RESET_OBUF DUART_IACK_OBUF CPLD_mask<4>
+		 CPLD_mask<3> CPLD_mask<2> data_out<1> DUART_CS_OBUF
 		 CPLD_mask<1> CPLD_mask<0>
-PARTITION FB4_1 CPU_CLK_pre CPU_DTACK_OBUF power_on$BUF0 CPU_BERR_OBUF$BUF1
-		 prescaler_irq<16> RAM_LB_OBUF RAM_UB_OBUF CPU_BERR_OBUF$BUF0
+PARTITION FB3_1 GPIO_Buf1<6> prescaler_cpu<1> GPIO_Buf1<7> speaker_pre
+		 prescaler_irq<7> prescaler_irq<5> prescaler_irq<4> prescaler_irq<3>
+		 GPIO_AS_and0000 prescaler_irq<2> prescaler_irq<9> prescaler_irq<8>
+		 prescaler_irq<12> prescaler_irq<11> ROM_WE_OBUF prescaler_irq<10>
+		 IRQ7 prescaler_irq<6>
+PARTITION FB4_1 CPU_CLK_OBUF CPU_DTACK_OBUF power_on$BUF0 CPU_BERR_OBUF$BUF1
+		 CPU_CLK_8pre RAM_LB_OBUF RAM_UB_OBUF CPU_BERR_OBUF$BUF0
 		 power_on RAM_OE_OBUF CPU_IPL2_OBUF$BUF0 data_out<0>
 		 data_out<2> RAM_CE_OBUF RAM_WE_OBUF data_out<6>
-		 ROM_CE_OBUF prescaler_irq<13>
+		 ROM_CE_OBUF prescaler_cpu<2>
 

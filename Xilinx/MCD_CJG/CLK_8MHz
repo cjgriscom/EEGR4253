@@ -1,0 +1,34 @@
+--------------9 MHZ CLOCK----------------
+CPU_CLK <= CPU_CLK_8pre;
+
+-- 8 MHz divider
+gen_clk : process (Q2_Clock)
+begin
+	if (rising_edge(Q2_Clock)) then -- This CPLD doesn't support dual edge triggering
+		if prescaler_cpu = "100" then -- Generate 8Mhz CPU clock
+			prescaler_cpu(2) <= '0';
+			CPU_CLK_8pre <= not CPU_CLK_8pre;
+		else
+			prescaler_cpu <= prescaler_cpu + "1";
+		end if;
+	end if;
+end process gen_clk;	
+
+-- 8MHz 
+gen_irq : process (CPU_CLK_8pre)
+begin
+	-- Generate periodic interrupt at 1000 Hz
+	if rising_edge(CPU_CLK_8pre) then
+		if prescaler_irq = 7999 then
+			prescaler_irq <= (others => '0');
+			IRQ7 <= '0'; -- Request interrupt
+			speaker_pre <= not speaker_pre; -- Invert speaker clock
+		else
+			if (FC0='1' and FC1='1' and FC2='1') then
+				-- IACK recieved; clear interrupt requests
+				IRQ7 <= '1';
+			end if;
+			prescaler_irq <= prescaler_irq + "1";
+		end if;
+	end if;
+end process gen_irq;

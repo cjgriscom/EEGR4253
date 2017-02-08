@@ -68,13 +68,14 @@ architecture Behavioral of MCE_CJG is
 	signal data_out		: unsigned(7 downto 0);
 	signal CPLD_mask		: unsigned(7 downto 0)  := "00000101"; -- Pattern for testing
 	signal GPIO_Buf1		: unsigned(7 downto 0)  := (others=>'0');
-	signal prescaler_cpu : unsigned(1 downto 0)  := (others=>'0');
-	signal prescaler_irq : unsigned(16 downto 0) := (others=>'0');
+	signal prescaler_cpu : unsigned(2 downto 0)  := (others=>'0');
+	signal prescaler_irq : unsigned(12 downto 0) := (others=>'0');
 	signal RAM_STROBE		: STD_LOGIC;
 	signal ROM_STROBE		: STD_LOGIC;
 	signal DUART_STROBE	: STD_LOGIC;
 	signal IRQ7				: STD_LOGIC := '1'; -- Signal that indicates a high-level interrupt req
-	signal CPU_CLK_pre	: STD_LOGIC;
+	signal CPU_CLK_8pre	: STD_LOGIC;
+	signal CPU_CLK_F_pre	: STD_LOGIC;
 	signal speaker_pre	: STD_LOGIC;
 begin
 
@@ -91,7 +92,7 @@ cpld_write: process (CPU_AS) begin
 			CPLD_mask <= D;
 		elsif (A23 = '1' and CPU_RW = '0') then
 		   if CPLD_mask(3) = '1' then -- Expose clock
-			   GPIO_Buf1(0) <= CPU_CLK_pre;
+			   GPIO_Buf1(0) <= CPU_CLK_8pre xor CPU_CLK_F_pre;
 			else
 				GPIO_Buf1(0) <= D(0);
 			end if;
@@ -134,7 +135,6 @@ end process cpld_read;
 Q2_Enable <= '1';
 CPU_BERR <= '1'; -- No bus errors here!
 CPU_BR <= '1'; -- No bus requests
-CPU_CLK <= CPU_CLK_pre;
 CPU_RESET <= power_on; -- (0 until reset is hit)
 CPU_HALT	<= power_on;  -- (0 until reset is hit)
 
@@ -185,23 +185,56 @@ begin
 	end if;
 end process resetbutton;
 
-gen_clk : process (Q2_Clock)
+--------------16 MHZ CLOCK----------------
+CPU_CLK <= CPU_CLK_8pre xor CPU_CLK_F_pre; -- XOR shifted 8MHz clocks together
+
+-- 8 MHz divider with 16MHz CPU
+gen_count : process (Q2_Clock)
 begin
-	if (rising_edge(Q2_Clock)) then -- This CPLD doesn't support dual edge triggering
-		if prescaler_cpu = "11" then -- Generate 10Mhz CPU clock
-			prescaler_cpu <= "00";
-			CPU_CLK_pre <= not CPU_CLK_pre;
+	if (rising_edge(Q2_Clock)) then
+		if prescaler_cpu = "100" then -- Generate 8Mhz reference clock by dividing by 5
+			prescaler_cpu(2) <= '0';
+			CPU_CLK_8pre <= not CPU_CLK_8pre;
 		else
 			prescaler_cpu <= prescaler_cpu + "1";
 		end if;
 	end if;
-end process gen_clk;
+end process gen_count;	
 
-gen_dtack : process (CPU_CLK_pre)
+gen_fall : process (Q2_Clock) -- Generate offset 8MHz
+begin
+	if (falling_edge(Q2_Clock)) then
+		if prescaler_cpu = "010" then -- In position for a symmetrical shift
+			CPU_CLK_F_pre <= not CPU_CLK_F_pre;
+		end if;
+	end if;
+end process gen_fall;	
+
+-- 8MHz 
+gen_irq : process (CPU_CLK_8pre)
+begin
+	-- Generate periodic interrupt at 1000 Hz
+	if rising_edge(CPU_CLK_8pre) then
+		if prescaler_irq = 7999 then
+			prescaler_irq <= (others => '0');
+			IRQ7 <= '0'; -- Request interrupt
+			speaker_pre <= not speaker_pre; -- Invert speaker clock
+		else
+			if (FC0='1' and FC1='1' and FC2='1') then
+				-- IACK recieved; clear interrupt requests
+				IRQ7 <= '1';
+			end if;
+			prescaler_irq <= prescaler_irq + "1";
+		end if;
+	end if;
+end process gen_irq;
+--------------end 16 MHZ CLOCK----------------
+
+gen_dtack : process (CPU_CLK_8pre)
 begin
 	-- Generate DTACK delays
 	-- TODO check if rising or falling edge is better
-	if falling_edge(CPU_CLK_pre) then
+	if falling_edge(CPU_CLK_8pre) then
 		if CPU_AS = '0' then
 			---if A23 = '0' and A2 = "000" then -- ROM  elsif
 				
@@ -219,24 +252,6 @@ begin
 		end if;
 	end if;
 end process gen_dtack;
-	
-gen_irq : process (Q2_Clock)
-begin
-	-- Generate periodic interrupt at 1000 Hz
-	if rising_edge(Q2_Clock) then
-		if prescaler_irq = 79999 then
-			prescaler_irq <= (others => '0');
-			IRQ7 <= '0'; -- Request interrupt
-			speaker_pre <= not speaker_pre; -- Invert speaker clock
-		else
-			if (FC0='1' and FC1='1' and FC2='1') then
-				-- IACK recieved; clear interrupt requests
-				IRQ7 <= '1';
-			end if;
-			prescaler_irq <= prescaler_irq + "1";
-		end if;
-	end if;
-end process gen_irq;
+
 
 end Behavioral;
-

@@ -3,6 +3,37 @@
 
   signal prescaler_spk : unsigned(20 downto 0) := (others=>'0');
 
+-- 10 MHz CPU
+gen_clk : process (Q2_Clock)
+begin
+	if (rising_edge(Q2_Clock)) then -- This CPLD doesn't support dual edge triggering
+		if prescaler_cpu = "11" then -- Generate 10Mhz CPU clock
+			prescaler_cpu <= "00";
+			CPU_CLK_pre <= not CPU_CLK_pre;
+		else
+			prescaler_cpu <= prescaler_cpu + "1";
+		end if;
+	end if;
+end process gen_clk;
+
+-- Q2-sourced interrupt
+gen_irq : process (Q2_Clock)
+begin
+	-- Generate periodic interrupt at 1000 Hz
+	if rising_edge(Q2_Clock) then
+		if prescaler_irq = 79999 then
+			prescaler_irq <= (others => '0');
+			IRQ7 <= '0'; -- Request interrupt
+			speaker_pre <= not speaker_pre; -- Invert speaker clock
+		else
+			if (FC0='1' and FC1='1' and FC2='1') then
+				-- IACK recieved; clear interrupt requests
+				IRQ7 <= '1';
+			end if;
+			prescaler_irq <= prescaler_irq + "1";
+		end if;
+	end if;
+end process gen_irq;
 
 Configurable clock
 -- Generate CPU freq

@@ -1,7 +1,7 @@
 Release 8.1i - Fit P.20131013
 Copyright(c) 1995-2003 Xilinx Inc. All rights reserved
 
- 2- 8-2017  2:17PM
+ 2- 8-2017  5:00PM
 
 NOTE: This file is designed to be imported into a spreadsheet program
 such as Microsoft Excel for viewing, printing and sorting. The pipe '|'
@@ -63,7 +63,7 @@ P42|GND||GND||||||||||
 P43|TIE||I/O||||||||||
 P44|CPU_DTACK|O|I/O|OUTPUT|||||||||
 P45|TIE||I/O||||||||||
-P46|CPU_CLK|I/O|I/O|BIDIR|||||||||
+P46|CPU_CLK|O|I/O|OUTPUT|||||||||
 P47|CPU_AS|I|I/O|INPUT|||||||||
 P48|CPU_BR|O|I/O|OUTPUT|||||||||
 P49|GND||GND||||||||||
