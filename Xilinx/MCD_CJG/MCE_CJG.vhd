@@ -206,7 +206,7 @@ begin
 			---if A23 = '0' and A2 = "000" then -- ROM  elsif
 				
 			if A23 = '0' and A2 = "010" then -- DUART
-				CPU_DTACK <= DUART_DTACK;
+				CPU_DTACK <= DUART_DTACK; -- TODO investigate writing to duart
 			elsif A23 = '1' then -- Peripherals
 				CPU_DTACK <= not GPIO_DTACK;
 			else
