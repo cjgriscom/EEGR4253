@@ -144,10 +144,10 @@ Speaker <= speaker_pre and CPLD_mask(7); -- Pipe speaker clock to output pin if 
 
 -- DTACK, assuming no delays needed!
 -- Altera says each case is guarenteed mutually exclusive
-CPU_DTACK <= '1'			when CPU_AS = '1' else -- No address selected
-		GPIO_DTACK 			when A23 = '1' else    -- Peripherals
-		DUART_DTACK 		when A2 = "010" else   -- DUART
-		'0';                                     -- RAM, ROM, CPLD-mask
+CPU_DTACK <= '1'   when CPU_AS = '1' else -- No address selected
+		GPIO_DTACK   when A23 = '1' else    -- Peripherals
+		DUART_DTACK  when A2 = "010" else   -- DUART
+		'0';                                -- RAM, ROM, CPLD-mask
 
 ROM_STROBE	 <= '1' when (CPU_AS = '0' and A23 = '0' and A2 = "000") else '0';
 RAM_STROBE	 <= '1' when (CPU_AS = '0' and A23 = '0' and A2 = "001") else '0';
