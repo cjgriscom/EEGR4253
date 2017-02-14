@@ -136,7 +136,7 @@ CPU_BGACK <= '1'; -- No bus grants... 5 hours worth of debugging here -_-
 CPU_RESET <= '0' when reset_db='1' or power_on='0' else 'Z'; -- (0 until reset is hit)
 CPU_HALT	<= '0' when reset_db='1' or power_on='0' else 'Z';  -- (0 until reset is hit)
 
-DUART_RESET <= power_on and not CPLD_mask(6); -- If mask 6 goes hi, reset duart
+DUART_RESET <= '0' when reset_db='1' or power_on='0' else not CPLD_mask(6); -- If mask 6 goes hi, reset duart
 
 Speaker <= speaker_pre and CPLD_mask(7); -- Pipe speaker clock to output pin if enabled (7)
 
@@ -176,9 +176,13 @@ GPIO_IACK  <= (FC0 and FC1 and FC2) when CPLD_mask(5) = '1' else 'Z';
 GPIO_AS    <= (A23 and not CPU_AS) when CPLD_mask(5) = '1' else 'Z';
 
  -- Trigger interrupt; DUART gets level 6, plus optional add CPIO IPLs
-CPU_IPL0 <= IRQ7 and not (CPLD_mask(5) and GPIO_IPL0);
-CPU_IPL1 <= IRQ7 and DUART_IRQ;
-CPU_IPL2 <= IRQ7 and DUART_IRQ;
+--CPU_IPL0 <= IRQ7 and not (CPLD_mask(5) and GPIO_IPL0);
+--CPU_IPL1 <= IRQ7 and DUART_IRQ;
+--CPU_IPL2 <= IRQ7 and DUART_IRQ;
+
+CPU_IPL0 <= '1';
+CPU_IPL1 <= '1';
+CPU_IPL2 <= '1';
 
 GPO <= GPIO_Buf1;
 
@@ -207,10 +211,14 @@ begin
 			prescaler_irq <= (others => '0');
 			speaker_pre <= not speaker_pre; -- Invert speaker clock
 			if Reset_In = '1' then
-				power_on <= not power_on;
+			   if reset_db = '0' then
+					power_on <= not power_on;
+				end if;
+				reset_db <= '1';
+			else
+				reset_db <= '0';
+				IRQ7 <= '0'; -- Trigger interrupt if not resetting
 			end if;
-			reset_db <= Reset_In;
-			IRQ7 <= reset_db; -- Request interrupt if not resetting
 		else
 			if (FC0='1' and FC1='1' and FC2='1') then
 				-- IACK recieved; clear interrupt requests
