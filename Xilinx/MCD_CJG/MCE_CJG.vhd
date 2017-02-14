@@ -82,7 +82,7 @@ begin
 
 -- CPLD MASK --
 --     7       6             5               4           3          2          1          0
---    Spk  Reset_UART  En_GPI_FlowCtrl  En_GPO_Addr  En_GPO0_CLK  -- Persistant Reset Data --
+--    Spk  Reset_UART  En_GPI_FlowCtrl  En_GPO_Addr    ------- Persistant Reset Data -------
 
 -- Tri-State Data Bus Control.... double check the RW condditions
 D <= data_out when ((A23 = '1' or A2 = "011") and CPU_RW = '1') else (others=>'Z');
@@ -92,11 +92,7 @@ cpld_write: process (CPU_AS) begin
 		if (A23 = '0' and A2 = "011" and CPU_RW = '0') then -- Read 1XX0 - Mask   or  1XX1 - GPI
 			CPLD_mask <= D;
 		elsif (A23 = '1' and CPU_RW = '0') then
-		   if CPLD_mask(3) = '1' then -- Expose clock
-			   GPIO_Buf1(0) <= CPU_CLK_8pre xor CPU_CLK_F_pre;
-			else
-				GPIO_Buf1(0) <= D(0);
-			end if;
+			GPIO_Buf1(0) <= D(0);
 			GPIO_Buf1(1) <= D(1);
 			GPIO_Buf1(2) <= D(2);
 			GPIO_Buf1(3) <= D(3);
