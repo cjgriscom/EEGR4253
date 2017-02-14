@@ -88,7 +88,7 @@ begin
 D <= data_out when ((A23 = '1' or A2 = "011") and CPU_RW = '1') else (others=>'Z');
 
 cpld_write: process (CPU_AS) begin
-	if falling_edge(CPU_AS) then -- AS has just activated
+	if rising_edge(CPU_AS) then -- AS has just activated (CPU WRITES ON RISING EDGE)
 		if (A23 = '0' and A2 = "011" and CPU_RW = '0') then -- Read 1XX0 - Mask   or  1XX1 - GPI
 			CPLD_mask <= D;
 		elsif (A23 = '1' and CPU_RW = '0') then
@@ -143,7 +143,7 @@ Speaker <= speaker_pre and CPLD_mask(7); -- Pipe speaker clock to output pin if 
 -- DTACK, assuming no delays needed!
 -- Altera says each case is guarenteed mutually exclusive
 CPU_DTACK <= '1'   when CPU_AS = '1' else -- No address selected
-		GPIO_DTACK   when A23 = '1' else    -- Peripherals
+		GPIO_DTACK   when A23 = '1' and CPLD_mask(4) = '1' else    -- Peripherals with flow control
 		DUART_DTACK  when A2 = "010" else   -- DUART
 		'0';                                -- RAM, ROM, CPLD-mask
 
