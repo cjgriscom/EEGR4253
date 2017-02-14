@@ -113,7 +113,7 @@ end process cpld_write;
 cpld_read: process (CPU_AS) begin
 	if falling_edge(CPU_AS) then
 		if (A23 = '0' and A2 = "011" and CPU_RW = '1') then
-			--data_out <= CPLD_mask; -- TODO expendable
+			data_out <= CPLD_mask; -- TODO expendable
 		elsif (A23 = '1' and CPU_RW = '1') then
 			data_out(0) <= GPI(0);
 			data_out(1) <= GPI(1);
@@ -209,8 +209,8 @@ begin
 			if Reset_In = '1' then
 				power_on <= not power_on;
 			end if;
-			IRQ7 <= Reset_In; -- Request interrupt if not resetting
 			reset_db <= Reset_In;
+			IRQ7 <= reset_db; -- Request interrupt if not resetting
 		else
 			if (FC0='1' and FC1='1' and FC2='1') then
 				-- IACK recieved; clear interrupt requests
