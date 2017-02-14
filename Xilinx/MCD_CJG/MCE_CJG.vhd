@@ -16,16 +16,16 @@ entity MCE_CJG is
 					CPU_AS			: in		STD_LOGIC;
 					CPU_BERR			: out		STD_LOGIC;
 					CPU_BG			: in		STD_LOGIC;
-					CPU_BGACK		: in		STD_LOGIC;
+					CPU_BGACK		: out		STD_LOGIC;
 					CPU_BR			: out		STD_LOGIC;
 					CPU_CLK			: out		STD_LOGIC;
 					CPU_DTACK		: out		STD_LOGIC;
-					CPU_HALT			: out		STD_LOGIC;
+					CPU_HALT			: inout	STD_LOGIC;
 					CPU_IPL0			: out		STD_LOGIC;
 					CPU_IPL1			: out		STD_LOGIC;
 					CPU_IPL2			: out		STD_LOGIC;
 					CPU_LDS			: in		STD_LOGIC;
-					CPU_RESET		: out		STD_LOGIC;
+					CPU_RESET		: inout	STD_LOGIC;
 					CPU_RW			: in		STD_LOGIC;
 					CPU_UDS			: in		STD_LOGIC;
 					D					: inout	unsigned(7 downto 0);
@@ -70,6 +70,7 @@ architecture Behavioral of MCE_CJG is
 	signal GPIO_Buf1		: unsigned(7 downto 0)  := (others=>'0');
 	signal prescaler_cpu : unsigned(2 downto 0)  := (others=>'0');
 	signal prescaler_irq : unsigned(12 downto 0) := (others=>'0');
+	signal reset_db      : STD_LOGIC := '1';
 	signal RAM_STROBE		: STD_LOGIC;
 	signal ROM_STROBE		: STD_LOGIC;
 	signal DUART_STROBE	: STD_LOGIC;
@@ -116,7 +117,7 @@ end process cpld_write;
 cpld_read: process (CPU_AS) begin
 	if falling_edge(CPU_AS) then
 		if (A23 = '0' and A2 = "011" and CPU_RW = '1') then
-			data_out <= CPLD_mask; -- TODO expendable
+			--data_out <= CPLD_mask; -- TODO expendable
 		elsif (A23 = '1' and CPU_RW = '1') then
 			data_out(0) <= GPI(0);
 			data_out(1) <= GPI(1);
@@ -135,8 +136,9 @@ end process cpld_read;
 Q2_Enable <= '1';
 CPU_BERR <= '1'; -- No bus errors here!
 CPU_BR <= '1'; -- No bus requests
-CPU_RESET <= power_on; -- (0 until reset is hit)
-CPU_HALT	<= power_on;  -- (0 until reset is hit)
+CPU_BGACK <= '1'; -- No bus grants... 5 hours worth of debugging here -_-
+CPU_RESET <= '0' when reset_db='1' or power_on='0' else 'Z'; -- (0 until reset is hit)
+CPU_HALT	<= '0' when reset_db='1' or power_on='0' else 'Z';  -- (0 until reset is hit)
 
 DUART_RESET <= power_on and not CPLD_mask(6); -- If mask 6 goes hi, reset duart
 
@@ -184,18 +186,10 @@ CPU_IPL2 <= IRQ7 and DUART_IRQ;
 
 GPO <= GPIO_Buf1;
 
--- Use reset button to toggle power on
-resetbutton : process (Reset_In)
-begin
-	if rising_edge(Reset_In) then
-		power_on <= not power_on;
-	end if;
-end process resetbutton;
+--------------8 MHZ CLOCK----------------
+CPU_CLK <= CPU_CLK_8pre; -- XOR shifted 8MHz clocks together
 
---------------16 MHZ CLOCK----------------
-CPU_CLK <= CPU_CLK_8pre xor CPU_CLK_F_pre; -- XOR shifted 8MHz clocks together
-
--- 8 MHz divider with 16MHz CPU
+-- 8 MHz divider
 gen_count : process (Q2_Clock)
 begin
 	if (rising_edge(Q2_Clock)) then
@@ -208,15 +202,6 @@ begin
 	end if;
 end process gen_count;	
 
-gen_fall : process (Q2_Clock) -- Generate offset 8MHz
-begin
-	if (falling_edge(Q2_Clock)) then
-		if prescaler_cpu = "010" then -- In position for a symmetrical shift
-			CPU_CLK_F_pre <= not CPU_CLK_F_pre;
-		end if;
-	end if;
-end process gen_fall;	
-
 -- 8MHz 
 gen_irq : process (CPU_CLK_8pre)
 begin
@@ -224,8 +209,12 @@ begin
 	if rising_edge(CPU_CLK_8pre) then
 		if prescaler_irq = 7999 then
 			prescaler_irq <= (others => '0');
-			IRQ7 <= '0'; -- Request interrupt
 			speaker_pre <= not speaker_pre; -- Invert speaker clock
+			if Reset_In = '1' then
+				power_on <= not power_on;
+			end if;
+			IRQ7 <= Reset_In; -- Request interrupt if not resetting
+			reset_db <= Reset_In;
 		else
 			if (FC0='1' and FC1='1' and FC2='1') then
 				-- IACK recieved; clear interrupt requests
@@ -235,6 +224,6 @@ begin
 		end if;
 	end if;
 end process gen_irq;
---------------end 16 MHZ CLOCK----------------
+--------------end 8 MHZ CLOCK----------------
 
 end Behavioral;

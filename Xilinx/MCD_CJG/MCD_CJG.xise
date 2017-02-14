@@ -24,6 +24,7 @@
     </file>
     <file xil_pn:name="removed_ucf" xil_pn:type="FILE_USERDOC"/>
     <file xil_pn:name="CLK_8MHz" xil_pn:type="FILE_USERDOC"/>
+    <file xil_pn:name="CLK_16MHz" xil_pn:type="FILE_USERDOC"/>
   </files>
 
   <autoManagedFiles>
