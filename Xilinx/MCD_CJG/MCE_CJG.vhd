@@ -85,13 +85,13 @@ begin
 --    Spk  Reset_UART  En_GPI_FlowCtrl  En_GPO_Addr    ------- Persistant Reset Data -------
 
 -- Tri-State Data Bus Control.... double check the RW condditions
-D <= data_out when ((A23 = '1' or A2 = "011") and CPU_RW = '1') else (others=>'Z');
+D <= data_out when ((A23 = '1' or A2 = "011") and CPU_RW = '1' and power_on = '1') else (others=>'Z');
 
 cpld_write: process (CPU_AS) begin
 	if rising_edge(CPU_AS) then -- AS has just activated (CPU WRITES ON RISING EDGE)
-		if (A23 = '0' and A2 = "011" and CPU_RW = '0') then -- Read 1XX0 - Mask   or  1XX1 - GPI
+		if (A23 = '0' and A2 = "011" and CPU_RW = '0' and power_on = '1') then -- Read 1XX0 - Mask   or  1XX1 - GPI
 			CPLD_mask <= D;
-		elsif (A23 = '1' and CPU_RW = '0') then
+		elsif (A23 = '1' and CPU_RW = '0' and power_on = '1') then
 			GPIO_Buf1(0) <= D(0);
 			GPIO_Buf1(1) <= D(1);
 			GPIO_Buf1(2) <= D(2);
@@ -112,9 +112,9 @@ end process cpld_write;
 
 cpld_read: process (CPU_AS) begin
 	if falling_edge(CPU_AS) then
-		if (A23 = '0' and A2 = "011" and CPU_RW = '1') then
+		if (A23 = '0' and A2 = "011" and CPU_RW = '1' and power_on = '1') then
 			data_out <= CPLD_mask; -- TODO expendable
-		elsif (A23 = '1' and CPU_RW = '1') then
+		elsif (A23 = '1' and CPU_RW = '1' and power_on = '1') then
 			data_out(0) <= GPI(0);
 			data_out(1) <= GPI(1);
 			data_out(2) <= GPI(2);
@@ -138,7 +138,7 @@ CPU_HALT	<= '0' when reset_db='1' or power_on='0' else 'Z';  -- (0 until reset i
 
 DUART_RESET <= '0' when reset_db='1' or power_on='0' else not CPLD_mask(6); -- If mask 6 goes hi, reset duart
 
-Speaker <= speaker_pre and CPLD_mask(7); -- Pipe speaker clock to output pin if enabled (7)
+Speaker <= speaker_pre and CPLD_mask(7) and power_on; -- Pipe speaker clock to output pin if enabled (7)
 
 -- DTACK, assuming no delays needed!
 -- Altera says each case is guarenteed mutually exclusive
@@ -147,9 +147,9 @@ CPU_DTACK <= '1'   when CPU_AS = '1' else -- No address selected
 		DUART_DTACK  when A2 = "010" else   -- DUART
 		'0';                                -- RAM, ROM, CPLD-mask
 
-ROM_STROBE	 <= '1' when (CPU_AS = '0' and A23 = '0' and A2 = "000") else '0';
-RAM_STROBE	 <= '1' when (CPU_AS = '0' and A23 = '0' and A2 = "001") else '0';
-DUART_STROBE <= '1' when (CPU_AS = '0' and A23 = '0' and A2 = "010") else '0';
+ROM_STROBE	 <= '1' when (CPU_AS = '0' and A23 = '0' and A2 = "000" and power_on = '1') else '0';
+RAM_STROBE	 <= '1' when (CPU_AS = '0' and A23 = '0' and A2 = "001" and power_on = '1') else '0';
+DUART_STROBE <= '1' when (CPU_AS = '0' and A23 = '0' and A2 = "010" and power_on = '1') else '0';
 
 -- 50 ns delay between clock pulses
 -- 70 ns delay for read cycle
@@ -169,11 +169,11 @@ RAM_UB <= CPU_UDS when RAM_STROBE = '1' else '1';
 DUART_CS <= not DUART_STROBE;
 DUART_RW <= CPU_RW when DUART_STROBE = '1' else '1';
 
-DUART_IACK <= not (FC0 and FC1 and FC2);
+DUART_IACK <= not (FC0 and FC1 and FC2 and power_on);
 
  -- Active high when enabled, else set to high impedance
-GPIO_IACK  <= (FC0 and FC1 and FC2) when CPLD_mask(5) = '1' else 'Z';
-GPIO_AS    <= (A23 and not CPU_AS) when CPLD_mask(5) = '1' else 'Z';
+GPIO_IACK  <= (FC0 and FC1 and FC2 and power_on) when CPLD_mask(5) = '1' else 'Z';
+GPIO_AS    <= (A23 and not CPU_AS and power_on) when CPLD_mask(5) = '1' else 'Z';
 
  -- Trigger interrupt; DUART gets level 6, plus optional add CPIO IPLs
 --CPU_IPL0 <= IRQ7 and not (CPLD_mask(5) and GPIO_IPL0);
