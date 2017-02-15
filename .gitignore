@@ -1,3 +1,5 @@
+Assembly/*.L68
+Assembly/*.S68
 Xilinx/MCD_CJG/MCE_CJG.bld
 Xilinx/MCD_CJG/MCE_CJG.cmd_log
 Xilinx/MCD_CJG/MCE_CJG.jed

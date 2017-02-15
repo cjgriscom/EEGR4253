@@ -78,14 +78,19 @@ architecture Behavioral of MCE_CJG is
 	signal CPU_CLK_8pre	: STD_LOGIC;
 	signal CPU_CLK_F_pre	: STD_LOGIC;
 	signal speaker_pre	: STD_LOGIC;
+	signal CPU_IACK_ah	: STD_LOGIC;
 begin
 
 -- CPLD MASK --
 --     7       6             5               4           3          2          1          0
 --    Spk  Reset_UART  En_GPI_FlowCtrl  En_GPO_Addr    ------- Persistant Reset Data -------
 
+CPU_IACK_ah <= FC0 and FC1 and FC2;
+
 -- Tri-State Data Bus Control.... double check the RW condditions
-D <= data_out when ((A23 = '1' or A2 = "011") and CPU_RW = '1' and power_on = '1') else (others=>'Z');
+D <= data_out when ((A23 = '1' or A2 = "011" or ((CPU_IACK_ah and (not IRQ7 or ((CPLD_mask(5) and GPIO_IPL0) and DUART_IRQ))) = '1')) 
+					and CPU_RW = '1' and power_on = '1')  -- CPLD/GPIO
+					 else (others=>'Z');
 
 cpld_write: process (CPU_AS) begin
 	if rising_edge(CPU_AS) then -- AS has just activated (CPU WRITES ON RISING EDGE)
@@ -112,9 +117,9 @@ end process cpld_write;
 
 cpld_read: process (CPU_AS) begin
 	if falling_edge(CPU_AS) then
-		if (A23 = '0' and A2 = "011" and CPU_RW = '1' and power_on = '1') then
-			data_out <= CPLD_mask; -- TODO expendable
-		elsif (A23 = '1' and CPU_RW = '1' and power_on = '1') then
+		if (A23 = '0' and A2 = "011" and CPU_IACK_ah = '0') then
+			data_out <= CPLD_mask;
+		elsif (A23 = '1' and CPU_IACK_ah = '0') then
 			data_out(0) <= GPI(0);
 			data_out(1) <= GPI(1);
 			data_out(2) <= GPI(2);
@@ -124,7 +129,15 @@ cpld_read: process (CPU_AS) begin
 			data_out(6) <= GPIO_AS;
 			data_out(7) <= GPIO_DTACK;
 		else 
-			data_out <= (others=>'0');
+			-- Put interrupt vectors here, starts at 64
+			data_out(0) <= not IRQ7; -- 64: GPIO, 65: IRQ7
+			data_out(1) <= '0';
+			data_out(2) <= '0';
+			data_out(3) <= '0';
+			data_out(4) <= '0';
+			data_out(5) <= '0';
+			data_out(6) <= '1'; -- 64 plus xx
+			data_out(7) <= '0';
 		end if;
 	end if;
 end process cpld_read;
@@ -142,14 +155,15 @@ Speaker <= speaker_pre and CPLD_mask(7) and power_on; -- Pipe speaker clock to o
 
 -- DTACK, assuming no delays needed!
 -- Altera says each case is guarenteed mutually exclusive
-CPU_DTACK <= '1'   when CPU_AS = '1' else -- No address selected
+CPU_DTACK <= CPU_AS	 when (CPU_IACK_ah) = '1' else 
+		'1'  			 when CPU_AS = '1' else -- No address selected
 		GPIO_DTACK   when A23 = '1' and CPLD_mask(4) = '1' else    -- Peripherals with flow control
 		DUART_DTACK  when A2 = "010" else   -- DUART
 		'0';                                -- RAM, ROM, CPLD-mask
 
-ROM_STROBE	 <= '1' when (CPU_AS = '0' and A23 = '0' and A2 = "000" and power_on = '1') else '0';
-RAM_STROBE	 <= '1' when (CPU_AS = '0' and A23 = '0' and A2 = "001" and power_on = '1') else '0';
-DUART_STROBE <= '1' when (CPU_AS = '0' and A23 = '0' and A2 = "010" and power_on = '1') else '0';
+ROM_STROBE	 <= '1' when (CPU_AS = '0' and A23 = '0' and A2 = "000" and power_on = '1' and CPU_IACK_ah = '0') else '0';
+RAM_STROBE	 <= '1' when (CPU_AS = '0' and A23 = '0' and A2 = "001" and power_on = '1' and CPU_IACK_ah = '0') else '0';
+DUART_STROBE <= '1' when (CPU_AS = '0' and A23 = '0' and A2 = "010" and power_on = '1' and CPU_IACK_ah = '0') else '0';
 
 -- 50 ns delay between clock pulses
 -- 70 ns delay for read cycle
@@ -169,25 +183,21 @@ RAM_UB <= CPU_UDS when RAM_STROBE = '1' else '1';
 DUART_CS <= not DUART_STROBE;
 DUART_RW <= CPU_RW when DUART_STROBE = '1' else '1';
 
-DUART_IACK <= not (FC0 and FC1 and FC2 and power_on);
+DUART_IACK <= not (CPU_IACK_ah and power_on and IRQ7); -- Prioritize periodic interrupt
 
  -- Active high when enabled, else set to high impedance
-GPIO_IACK  <= (FC0 and FC1 and FC2 and power_on) when CPLD_mask(5) = '1' else 'Z';
+GPIO_IACK  <= (CPU_IACK_ah and power_on and IRQ7 and DUART_IRQ) when CPLD_mask(5) = '1' else 'Z'; -- Prioritize other interrupts
 GPIO_AS    <= (A23 and not CPU_AS and power_on) when CPLD_mask(5) = '1' else 'Z';
 
- -- Trigger interrupt; DUART gets level 6, plus optional add CPIO IPLs
---CPU_IPL0 <= IRQ7 and not (CPLD_mask(5) and GPIO_IPL0);
---CPU_IPL1 <= IRQ7 and DUART_IRQ;
---CPU_IPL2 <= IRQ7 and DUART_IRQ;
-
-CPU_IPL0 <= '1';
-CPU_IPL1 <= '1';
-CPU_IPL2 <= '1';
+ -- Trigger interrupt; DUART gets level 6, plus optional add GPIO IPLs
+CPU_IPL0 <= IRQ7 and not (CPLD_mask(5) and GPIO_IPL0);
+CPU_IPL1 <= IRQ7 and DUART_IRQ;
+CPU_IPL2 <= IRQ7 and DUART_IRQ;
 
 GPO <= GPIO_Buf1;
 
 --------------8 MHZ CLOCK----------------
-CPU_CLK <= CPU_CLK_8pre; -- XOR shifted 8MHz clocks together
+CPU_CLK <= CPU_CLK_8pre;
 
 -- 8 MHz divider
 gen_count : process (Q2_Clock)
@@ -202,7 +212,9 @@ begin
 	end if;
 end process gen_count;	
 
--- 8MHz 
+--------------end 8 MHZ CLOCK----------------
+
+-- 8MHz sourcing
 gen_irq : process (CPU_CLK_8pre)
 begin
 	-- Generate periodic interrupt at 1000 Hz
@@ -220,14 +232,13 @@ begin
 				IRQ7 <= '0'; -- Trigger interrupt if not resetting
 			end if;
 		else
-			if (FC0='1' and FC1='1' and FC2='1') then
-				-- IACK recieved; clear interrupt requests
+			if (CPU_IACK_ah='1' and CPU_AS = '1') then
+				-- IACK recieved AND finished cycle; clear interrupt requests
 				IRQ7 <= '1';
 			end if;
 			prescaler_irq <= prescaler_irq + "1";
 		end if;
 	end if;
 end process gen_irq;
---------------end 8 MHZ CLOCK----------------
 
 end Behavioral;
