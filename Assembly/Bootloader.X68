@@ -3,8 +3,13 @@
 * Author     : Chandler Griscom
 *-----------------------------------------------------------
 
+SIM         EQU 0       ;0 = hardware state, 1 = simulation state
 
-SUPER_STACK EQU $104000
+BUFFER_A_SP EQU $104000
+BUFFER_A_EP EQU $104004
+BUFFER_A_S  EQU $104008
+BUFFER_A_E  EQU $108000
+SUPER_STACK EQU $103FFC
 TIMER_SEC   EQU $100000
 TIMER_MS    EQU $100004
 
@@ -29,11 +34,18 @@ RxRDY       EQU 0       Recieve ready bit position
 TxRDY       EQU 2       Transmit ready bit position
 BAUD        EQU $CC     baud rate value = 19,200 baud
 
+CR          EQU $0D
+LF          EQU $0A 
 
 START       ORG     $000000
             DC.L    SUPER_STACK
             DC.L    MAIN
-         
+            
+            ;ORG     $000084   TRAP vectors   
+            ;DC.L    TRAP_0    33
+            ;DC.L    TRAP_1    34
+            ;DC.L    TRAP_2    35
+            
             ORG     $000100   Interrupt vectors   
             DC.L    IRQ7      64: Should be GPIO IRQ
             DC.L    IRQ7      65: Periodic
@@ -45,15 +57,14 @@ MAIN        CLR.L  TIMER_MS
             CLR.L  TIMER_SEC
             JSR INIT_DUART
             
-LOOP        JSR RAM_TEST
+            MOVE.L #BUFFER_A_S, BUFFER_A_SP Start buffer pointer at beginning
+            MOVE.L #BUFFER_A_S, BUFFER_A_EP Start buffer pointer at beginning     
+            
+LOOP        JSR GETCHAR_A
+            MOVE.L #Hallo, A0
+            JSR PUTSTR
             NOP
             JMP LOOP
-        
-RAM_TEST    
-            
-            NOP
-            
-            RTS
 
 INIT_DUART  ;Reset Duart
             MOVE.B #30, CRA
@@ -72,46 +83,86 @@ INIT_DUART  ;Reset Duart
             MOVE.B #$07,MR2A   07 sets: Normal mode, CTS and RTS disabled, stop bit length = 1
             MOVE.B #$05,CRA    enable Tx and Rx
             MOVE.B 66, IVR     set interrupt vector
-            MOVE.B $22, IMR    set interrupt masks to just RxRDYA, RxRDYB
+            ;JSR EN_DUART_IR    enable DUART interrupts
             
             RTS
             
-; Get_CHAR puts the read character into D2
-GET_CHAR    MOVE.L D1,-(SP) Save working register
+            ;Enable Duart interrupts
+EN_DUART_IR MOVE.B $22, IMR    set interrupt masks to just RxRDYA, RxRDYB
+            RTS
+            
+            ;Disable Duart interrupts
+DS_DUART_IR MOVE.B $00, IMR    set interrupt masks to nothing
+            RTS
+
+; TODO HASCHAR, move getchar code into interrupt
+; Get_CHAR puts the read character into D0
+GETCHAR_A IF.B SIM <EQ> #00 THEN.L  --Hardware Code--
+            MOVE.L D1,-(SP) Save working register
 In_poll_A   MOVE.B SRA, D1  Read the A status register
             BTST #RxRDY, D1 Test reciever ready status
             BEQ In_poll_A   UNTIL char recieved
-            MOVE.B RBA, D2  Read the character into D2
+            MOVE.B RBA, D0  Read the character into D0
             MOVE.L (SP)+, D1 Restore working register
+         ELSE                    --Simulation code--
+            MOVE.L D1, -(SP)
+            MOVE.L #05, D0
+            TRAP   #15
+            MOVE.B D1, D0
+            MOVE.L (SP)+, D1
+         ENDI
             RTS
-            
-PUT_CHAR    MOVE.L D1, -(SP)
-Out_poll_A  MOVE.B SRA, D1          
+
+; PUTCHAR_A outputs D0 to the DUART channel A
+PUTCHAR_A IF.B SIM <EQ> #00 THEN.L  --Hardware Code--
+            MOVE.L D1, -(SP)
+Out_poll_A  MOVE.B SRA, D1   
             BTST   #TxRDY, D1
             BEQ    Out_poll_A
             MOVE.B D0, TBA
             MOVE.L (SP)+, D1
+          ELSE                    --Simulation code--
+            MOVE.L D0, -(SP) ; Task
+            MOVE.L D1, -(SP) ;Char to display
+            MOVE.B D0, D1
+            MOVE.L #06, D0
+            TRAP   #15
+            MOVE.L (SP)+, D1
+            MOVE.L (SP)+, D0
+          ENDI
             RTS
-
-
+            
             ; Periodic interrupt
 IRQ7        MOVE.W  TIMER_MS, D0
             ADD.W   #$1, D0
             MOVE.W  D0, TIMER_MS
             CMPI.W  #$03E7,D0
-            BLS.S   LWR1000
+            BLS.S   IRQ7_QUIT
             CLR.W   TIMER_MS
             MOVE.L  TIMER_SEC, D0
             ADD.L   #$1, D0
             MOVE.L  D0, TIMER_SEC
-           
-LWR1000     RTE  Return from exception
+IRQ7_QUIT   RTE  Return from exception
 
+            ; Print String in A0
+PUTSTR      MOVE.W D0, -(SP)
+            MOVE.W D1, -(SP)
+            CLR.W D1 Length will be stored here
+pst_Next    CMP.W #400, D1 If >= 1024, 
+            BHS pst_Quit   quit
+            MOVE.B (A0)+, D0
+            CMP.W #0, D0   If null,
+            BEQ pst_Quit   quit
+            JSR PUTCHAR_A
+            BRA pst_Next
+pst_Quit    MOVE.W (SP)+, D1
+            MOVE.W (SP)+, D0
+            RTS
+            
             ; DUART Interrupt... TODO check if it's from A or B serial (i.e. don't getchar)
-DUART_IRQ   JSR GET_CHAR
-            MOVE.B D2,D0
-            MOVE.B D2, LED
-            JSR PUT_CHAR
+DUART_IRQ   JSR GETCHAR_A
+            MOVE.B D0, LED
+            JSR PUTCHAR_A
             RTE  Return from exception
             
 * Subroutine DEC2BIN -- Convert ASCII Decimal to Binary
@@ -126,7 +177,11 @@ DEC2BIN:    CMP.B   #$30, D0   ; Check if less than ASCII 0
             RTS
 DEC2BINERR: ORI     #$01, SR   ; Error, set Status Register carry bit               
             RTS
-            
+
+* Subroutine HEX2BIN -- Convert ASCII Hex to Binary
+* Inputs: D0 - ASCII Byte
+* Output: D0 - Converted Binary Byte
+*         Carry Bit - set to 1 on error
 HEX2BIN:    CMP.B   #$30, D0
             BLO     HEX2BINERR ; Less than ASCII 0; error
             CMP.B   #$39, D0
@@ -192,9 +247,12 @@ B2H_End:    ROR.L   #8, D0        ;One more rotate so that D0 is in correct orde
             MOVE.W  (SP)+, D1     ;Restore D1
             RTS
 
+Hallo       DC.B 'Hello World!',CR,LF,0
 
             END     MAIN
             
+
+
 *~Font name~Courier New~
 *~Font size~10~
 *~Tab type~1~
