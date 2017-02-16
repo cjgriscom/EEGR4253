@@ -32,7 +32,7 @@ IVR         EQU $2C0001 Interrupt vector register
 
 RxRDY       EQU 0       Recieve ready bit position
 TxRDY       EQU 2       Transmit ready bit position
-BAUD        EQU $CC     baud rate value = 19,200 baud
+BAUD        EQU $BB     baud rate value = 9600 baud
 
 CR          EQU $0D
 LF          EQU $0A 
@@ -61,10 +61,34 @@ MAIN        CLR.L  TIMER_MS
             MOVE.L #BUFFER_A_S, BUFFER_A_EP Start buffer pointer at beginning     
             
 LOOP        JSR GETCHAR_A
+            MOVE.B D0, D7
             MOVE.L #Hallo, A0
-            JSR PUTSTR
+            CMP.B #$62, D0
+            BNE DOput
+            MOVE.L #Hallo2, A0
+DOput       JSR PUTSTR
+            MOVE.B D7, D0
             NOP
+            NOP
+            JSR PUTCHAR_A
             JMP LOOP
+            
+            
+            ; Print String in A0
+PUTSTR      MOVE.W D0, -(SP)
+            MOVE.W D1, -(SP)
+            CLR.W D1 Length will be stored here
+pst_Next    CMP.W #400, D1 If >= 1024, 
+            BHS pst_Quit   quit
+            MOVE.B (A0)+, D0
+            ADD #1, D1
+            CMP.B #0, D0   If null,
+            BEQ pst_Quit   quit
+            JSR PUTCHAR_A
+            BRA pst_Next
+pst_Quit    MOVE.W (SP)+, D1
+            MOVE.W (SP)+, D0
+            RTS
 
 INIT_DUART  ;Reset Duart
             MOVE.B #30, CRA
@@ -132,8 +156,9 @@ Out_poll_A  MOVE.B SRA, D1
           ENDI
             RTS
             
-            ; Periodic interrupt
-IRQ7        MOVE.W  TIMER_MS, D0
+            ; Periodic interrupt  TODO research if SR needs to be preserved
+IRQ7        MOVE.L D0, -(SP)
+            MOVE.W  TIMER_MS, D0
             ADD.W   #$1, D0
             MOVE.W  D0, TIMER_MS
             CMPI.W  #$03E7,D0
@@ -141,23 +166,10 @@ IRQ7        MOVE.W  TIMER_MS, D0
             CLR.W   TIMER_MS
             MOVE.L  TIMER_SEC, D0
             ADD.L   #$1, D0
+            MOVE.B  D0, LED
             MOVE.L  D0, TIMER_SEC
-IRQ7_QUIT   RTE  Return from exception
-
-            ; Print String in A0
-PUTSTR      MOVE.W D0, -(SP)
-            MOVE.W D1, -(SP)
-            CLR.W D1 Length will be stored here
-pst_Next    CMP.W #400, D1 If >= 1024, 
-            BHS pst_Quit   quit
-            MOVE.B (A0)+, D0
-            CMP.W #0, D0   If null,
-            BEQ pst_Quit   quit
-            JSR PUTCHAR_A
-            BRA pst_Next
-pst_Quit    MOVE.W (SP)+, D1
-            MOVE.W (SP)+, D0
-            RTS
+IRQ7_QUIT   MOVE.L (SP)+, D0
+            RTE  Return from exception
             
             ; DUART Interrupt... TODO check if it's from A or B serial (i.e. don't getchar)
 DUART_IRQ   JSR GETCHAR_A
@@ -247,10 +259,12 @@ B2H_End:    ROR.L   #8, D0        ;One more rotate so that D0 is in correct orde
             MOVE.W  (SP)+, D1     ;Restore D1
             RTS
 
-Hallo       DC.B 'Hello World!',CR,LF,0
+Hallo       DC.B CR,LF,'Hello World!',CR,LF,0
+Hallo2      DC.B CR,LF,'Hello Brian!',CR,LF,0
 
             END     MAIN
             
+
 
 
 *~Font name~Courier New~
