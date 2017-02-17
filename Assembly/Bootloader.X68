@@ -219,8 +219,8 @@ IPL7routine MOVE.L  D0, -(SP)
             ADD.L   #$1, D0
             MOVE.B  D0, LED
             MOVE.L  D0, TIMER_SEC
-            MOVE.L  (SP)+, D0
-IRQ7_QUIT   RTS
+IRQ7_QUIT   MOVE.L  (SP)+, D0
+            RTS
 
 EXCEPTION   MOVE.L #EXPSTRING, A0
             JSR PUTSTR
