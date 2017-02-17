@@ -3,7 +3,7 @@
 * Author     : Chandler Griscom
 *-----------------------------------------------------------
 
-SIM         EQU 1       ;0 = hardware state, 1 = simulation state
+SIM         EQU 0       ;0 = hardware state, 1 = simulation state
 
 ;BUFFER_A_SP EQU $104000
 ;BUFFER_A_EP EQU $104004
@@ -56,14 +56,19 @@ START       ORG     $000000
 
             ORG     $000400  End of vector space
 ; begin program
-MAIN        CLR.L  TIMER_MS
+MAIN                    
+            MOVE.L #IPL7routine, D0
+            MOVE.L D0, BOOTR_IPL7a ; Set the current IPL7 routine to heartbeat
+            CLR.L  TIMER_MS
             CLR.L  TIMER_SEC
+
+            
             JSR INIT_DUART
             
             ;MOVE.L #BUFFER_A_S, BUFFER_A_SP Start buffer pointer at beginning
             ;MOVE.L #BUFFER_A_S, BUFFER_A_EP Start buffer pointer at beginning     
             
-            MOVE.L #IPL7routine, BOOTR_IPL7a ; Set the current IPL7 routine to heartbeat
+
             
 LOOP        JSR GETCHAR_A
             MOVE.L #SRecPrompt, A0 -- Press s to load s record
@@ -191,10 +196,18 @@ Out_poll_A  MOVE.B SRA, D1
             RTS
             
             ; Periodic interrupt  TODO research if SR needs to be preserved
-IRQ7        JMP     (BOOTR_IPL7a)
-
-IPL7routine MOVE.W  SR, -(SP)
+IRQ7        MOVE.W  SR, -(SP)
+            MOVE.L  A0, -(SP)
             MOVE.L  D0, -(SP)
+            LEA     BOOTR_IPL7a, A0
+            MOVE.L  (A0), A0
+            JSR     (A0)
+            MOVE.L  (SP)+, D0            
+            MOVE.L  (SP)+, A0
+            MOVE.W  (SP)+, SR
+            RTE     Return from exception
+
+IPL7routine 
             MOVE.W  TIMER_MS, D0
             ADD.W   #$1, D0
             MOVE.W  D0, TIMER_MS
@@ -205,9 +218,7 @@ IPL7routine MOVE.W  SR, -(SP)
             ADD.L   #$1, D0
             MOVE.B  D0, LED
             MOVE.L  D0, TIMER_SEC
-IRQ7_QUIT   MOVE.L  (SP)+, D0
-            MOVE.W  (SP)+, SR
-            RTE  Return from exception
+IRQ7_QUIT   RTS
             
             ; DUART Interrupt... TODO check if it's from A or B serial (i.e. don't getchar)
 DUART_IRQ   JSR GETCHAR_A
@@ -304,6 +315,8 @@ EOSString   DC.B CR,LF,'End of stream; transferring execution!',CR,LF,0
 
             END     MAIN
             
+
+
 
 
 
