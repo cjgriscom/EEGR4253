@@ -50,20 +50,35 @@ START       ORG     $000000
             
             
             ORG     $000084   TRAP vectors   
-            DC.L    $120000   33: TRAP_0
-            DC.L    $122000   34
-            DC.L    $124000   35
+            DC.L    $112000   33: TRAP_0
+            DC.L    $113000   34
+            DC.L    $114000   35
             
             ORG     $000100   Interrupt vectors   
-            DC.L    IRQ7      64: Should be GPIO IRQ
-            DC.L    IRQ7      65: Periodic
-            DC.L    DUART_IRQ 66: DUART RxRDYA or RXRDYB
+            DC.L    $110000   64: Should be GPIO IRQ
+            DC.L    $110000   65: Periodic
+            DC.L    $111000   66: DUART RxRDYA or RXRDYB
 
             ORG     $000400  End of vector space
 ; begin program
 MAIN                    
             MOVE.L #IPL7routine, D0
             MOVE.L D0, BOOTR_IPL7a ; Set the current IPL7 routine to heartbeat
+            
+            ;110000  40E72F0841F90010400C20504E90205F46DF4E73
+            LEA $00110000, A0
+            MOVE.L INTRAM_0L, D0
+            MOVE.L D0, 0(A0)
+            MOVE.L INTRAM_1L, D0
+            MOVE.L D0, 4(A0)
+            MOVE.L INTRAM_2L, D0
+            MOVE.L D0, 8(A0)
+            MOVE.L INTRAM_3L, D0
+            MOVE.L D0, 12(A0)
+            MOVE.L INTRAM_4L, D0
+            MOVE.L D0, 16(A0)
+
+                        
             CLR.L  TIMER_MS
             CLR.L  TIMER_SEC
 
@@ -407,11 +422,16 @@ SRecInsert  DC.B CR,LF,'Insert next line:',CR,LF,0
 SRecError   DC.B CR,LF,'Error reading S record.',CR,LF,0
 EOSString   DC.B CR,LF,'End of stream; press e to transfer execution!',CR,LF,0
 EXPSTRING   DC.B CR,LF,'Encountered exception; resetting!',CR,LF,0
-
+INTRAM_0L   DC.L $40E72F08
+INTRAM_1L   DC.L $41F90010
+INTRAM_2L   DC.L $400C2050
+INTRAM_3L   DC.L $4E90205F
+INTRAM_4L   DC.L $46DF4E73
 
 
             END     MAIN
             
+
 
 
 
