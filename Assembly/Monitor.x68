@@ -1,6 +1,6 @@
 *-----------------------------------------------------------
-* Program    : Bootloader Program
-* Author     : Chandler Griscom
+* Title      : S Record Test Program
+* Written by : Chandler Griscom
 *-----------------------------------------------------------
 
 SIM         EQU 0       ;0 = hardware state, 1 = simulation state
@@ -39,45 +39,24 @@ BAUD        EQU $BB     baud rate value = 9600 baud
 CR          EQU $0D
 LF          EQU $0A 
 
-START       ORG     $000000
-            DC.L    SUPER_STACK Initial Stack Pointer
-            DC.L    MAIN        Initial PC
-            DC.L    EXCEPTION   Berr
-            DC.L    EXCEPTION   Address Error
-            DC.L    EXCEPTION   Illegal Instruction
-            DC.L    EXCEPTION   Div by zero
-            
-            
-            ORG     $000084   TRAP vectors   
-            DC.L    $112000   33: TRAP_0
-            DC.L    $113000   34
-            DC.L    $114000   35
-            
-            ORG     $000100   Interrupt vectors   
-            DC.L    $110000   64: Should be GPIO IRQ
-            DC.L    $110000   65: Periodic
-            DC.L    $111000   66: DUART RxRDYA or RXRDYB
+DU_IP_Loc   EQU     $111000
+TRAP_0_Loc  EQU     $112000 ; These locs correspond to the current bootloader vectors
+TRAP_1_Loc  EQU     $113000
+TRAP_2_Loc  EQU     $114000
 
-            ORG     $000400  End of vector space
+            ORG     $111000 ; Vector is set in bootloader
+; DUART Interrupt... TODO check if it's from A or B serial (i.e. don't getchar)
+DUART_IRQ   JSR GETCHAR_A
+            MOVE.B D0, LED
+            JSR PUTCHAR_A
+            RTE  Return from exception
+
+            ORG     $160000
 ; begin program
 MAIN                    
             MOVE.L #IPL7routine, D0
             MOVE.L D0, BOOTR_IPL7a ; Set the current IPL7 routine to heartbeat
             
-            ;110000  40E72F0841F90010400C20504E90205F46DF4E73
-            LEA $00110000, A0
-            MOVE.L INTRAM_0L, D0
-            MOVE.L D0, 0(A0)
-            MOVE.L INTRAM_1L, D0
-            MOVE.L D0, 4(A0)
-            MOVE.L INTRAM_2L, D0
-            MOVE.L D0, 8(A0)
-            MOVE.L INTRAM_3L, D0
-            MOVE.L D0, 12(A0)
-            MOVE.L INTRAM_4L, D0
-            MOVE.L D0, 16(A0)
-
-                        
             CLR.L  TIMER_MS
             CLR.L  TIMER_SEC
 
@@ -85,8 +64,6 @@ MAIN
             
             ;MOVE.L #BUFFER_A_S, BUFFER_A_SP Start buffer pointer at beginning
             ;MOVE.L #BUFFER_A_S, BUFFER_A_EP Start buffer pointer at beginning     
-            
-
             
 sLOOP       MOVE.L #SRecPrompt, A0 -- Press s to load s record
             JSR PUTSTR
@@ -298,16 +275,6 @@ Out_poll_A  MOVE.B SRA, D1
             MOVE.L (SP)+, D0
           ENDI
             RTS
-            
-            ; Periodic interrupt  TODO research if SR needs to be preserved
-IRQ7        MOVE.W  SR, -(SP)
-            MOVE.L  A0, -(SP)
-            LEA     BOOTR_IPL7a, A0
-            MOVE.L  (A0), A0
-            JSR     (A0)          
-            MOVE.L  (SP)+, A0
-            MOVE.W  (SP)+, SR
-            RTE     Return from exception
 
 IPL7routine MOVE.L  D0, -(SP)
             MOVE.W  TIMER_MS, D0
@@ -323,16 +290,6 @@ IPL7routine MOVE.L  D0, -(SP)
 IRQ7_QUIT   MOVE.L  (SP)+, D0
             RTS
 
-EXCEPTION   LEA SUPER_STACK, SP
-            MOVE.L #EXPSTRING, A0
-            JSR PUTSTR
-            JMP MAIN
-            
-            ; DUART Interrupt... TODO check if it's from A or B serial (i.e. don't getchar)
-DUART_IRQ   JSR GETCHAR_A
-            MOVE.B D0, LED
-            JSR PUTCHAR_A
-            RTE  Return from exception
             
 * Subroutine DEC2BIN -- Convert ASCII Decimal to Binary
 * Inputs: D0 - ASCII Byte
@@ -416,20 +373,16 @@ B2H_End:    ROR.L   #8, D0        ;One more rotate so that D0 is in correct orde
             MOVE.W  (SP)+, D1     ;Restore D1
             RTS
 
-SRecPrompt  DC.B CR,LF,'Press s to upload an S record.',CR,LF,0
+SRecPrompt  DC.B CR,LF,'MONITOR PROGRAM',CR,LF,'Press s to upload an S record.',CR,LF,0
 SRecInsert  DC.B CR,LF,'Insert next line:',CR,LF,0
 SRecError   DC.B CR,LF,'Error reading S record.',CR,LF,0
 EOSString   DC.B CR,LF,'End of stream; press e to transfer execution!',CR,LF,0
 EXPSTRING   DC.B CR,LF,'Encountered exception; resetting!',CR,LF,0
-INTRAM_0L   DC.L $40E72F08
-INTRAM_1L   DC.L $41F90010
-INTRAM_2L   DC.L $400C2050
-INTRAM_3L   DC.L $4E90205F
-INTRAM_4L   DC.L $46DF4E73
 
 
             END     MAIN
             
+
 
 
 
