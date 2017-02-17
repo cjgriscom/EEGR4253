@@ -74,15 +74,15 @@ architecture Behavioral of MCE_CJG is
 	signal RAM_STROBE		: STD_LOGIC;
 	signal ROM_STROBE		: STD_LOGIC;
 	signal DUART_STROBE	: STD_LOGIC;
-	signal IRQ7				: STD_LOGIC := '1'; -- Signal that indicates a high-level interrupt req
+	signal IPL6				: STD_LOGIC := '1'; -- Signal that indicates a high-level interrupt req
 	signal CPU_CLK_pre	: STD_LOGIC;
 	signal CPU_CLK_F_pre	: STD_LOGIC;
 	signal speaker_pre	: STD_LOGIC;
 	signal CPU_IACK_ah	: STD_LOGIC;
 	signal GPIO_IACK_ah	: STD_LOGIC;
 	signal DUART_IACK_ah	: STD_LOGIC;
-	signal IPL7_IACK_ah	: STD_LOGIC;
-	signal was_IPL7      : STD_LOGIC := '1';
+	signal IPL6_IACK_ah	: STD_LOGIC;
+	signal was_IPL6      : STD_LOGIC := '1';
 begin
 
 -- CPLD MASK --
@@ -90,23 +90,23 @@ begin
 --    Spk  Reset_UART  En_GPI_FlowCtrl  En_GPO_Addr  
 
 CPU_IACK_ah <= FC0 and FC1 and FC2;
-IPL7_IACK_ah <= CPU_IACK_ah and not IRQ7;
-DUART_IACK_ah <= CPU_IACK_ah and IRQ7 and not DUART_IRQ;
-GPIO_IACK_ah <= CPU_IACK_ah and IRQ7 and DUART_IRQ and (CPLD_mask(1) and GPIO_IPL0);
+IPL6_IACK_ah <= CPU_IACK_ah and not IPL6;
+DUART_IACK_ah <= CPU_IACK_ah and IPL6 and not DUART_IRQ;
+GPIO_IACK_ah <= CPU_IACK_ah and IPL6 and DUART_IRQ and (CPLD_mask(1) and GPIO_IPL0);
 
 setlevelrecord: process (CPU_IACK_ah) begin
 	if rising_edge(CPU_IACK_ah) then
 		-- Preserve CPLD-driven interrupt levels to they can be vectored properly
-		if IPL7_IACK_ah = '1' then
-			was_IPL7 <= '1';
+		if IPL6_IACK_ah = '1' then
+			was_IPL6 <= '1';
 		elsif GPIO_IACK_ah = '1' then
-			was_IPL7 <= '0';
+			was_IPL6 <= '0';
 		end if;
 	end if;
 end process setlevelrecord;
 
 -- Tri-State Data Bus Control
-D <= data_out when ( (((A23 = '1' or A2 = "011") and CPU_RW = '1' and CPU_AS='0' and CPU_IACK_ah = '0') or IPL7_IACK_ah = '1' or GPIO_IACK_ah ='1')
+D <= data_out when ( (((A23 = '1' or A2 = "011") and CPU_RW = '1' and CPU_AS='0' and CPU_IACK_ah = '0') or IPL6_IACK_ah = '1' or GPIO_IACK_ah ='1')
 					 and power_on = '1')
 					 else (others=>'Z');
 
@@ -158,7 +158,7 @@ cpld_read: process (CPU_AS) begin
 			data_out(7) <= GPIO_DTACK;
 		else 
 			-- Put interrupt vectors here, starts at 64
-			data_out(0) <= was_IPL7; -- 64: GPIO, 65: IPL7
+			data_out(0) <= was_IPL6; -- 64: GPIO, 65: IPL6
 			data_out(1) <= '0';
 			data_out(2) <= '0';
 			data_out(3) <= '0';
@@ -183,7 +183,7 @@ Speaker <= speaker_pre and CPLD_mask(3) and power_on; -- Pipe speaker clock to o
 
 -- DTACK, assuming no delays needed!
 -- Altera says each case is guarenteed mutually exclusive
-CPU_DTACK <= CPU_AS when (IPL7_IACK_ah or GPIO_IACK_ah) = '1' else -- Interrupts
+CPU_DTACK <= CPU_AS when (IPL6_IACK_ah or GPIO_IACK_ah) = '1' else -- Interrupts
 		DUART_DTACK   when (DUART_IACK_ah = '1') else   -- DUART interrupt
 		'1'  			  when CPU_AS = '1' else -- No address selected
 		GPIO_DTACK    when A23 = '1' and CPLD_mask(0) = '1' else    -- Peripherals with flow control
@@ -218,10 +218,10 @@ DUART_IACK <= not DUART_IACK_ah;
 GPIO_IACK  <= GPIO_IACK_ah when CPLD_mask(1) = '1' else 'Z';
 GPIO_AS    <= (A23 and not CPU_AS and power_on) when CPLD_mask(1) = '1' else 'Z';
 
- -- Trigger interrupt; DUART gets level 6, plus optional add GPIO IPLs
-CPU_IPL0 <= IRQ7 and not (CPLD_mask(1) and GPIO_IPL0);
-CPU_IPL1 <= IRQ7 and DUART_IRQ;
-CPU_IPL2 <= IRQ7 and DUART_IRQ;
+ -- Trigger interrupt; GPIO Level 1, DUART level 2, IPL6
+CPU_IPL0 <= not (CPLD_mask(1) and GPIO_IPL0);
+CPU_IPL1 <= IPL6 and DUART_IRQ;
+CPU_IPL2 <= IPL6;
 
 GPO <= GPIO_Buf1;
 
@@ -256,12 +256,12 @@ begin
 				reset_db <= '1';
 			else
 				reset_db <= '0';
-				IRQ7 <= '0'; -- Trigger interrupt if not resetting
+				IPL6 <= '0'; -- Trigger interrupt if not resetting
 			end if;
 		else
 			if (CPU_IACK_ah='1' and CPU_AS = '1') then
 				-- IACK recieved AND finished cycle; clear interrupt requests
-				IRQ7 <= '1';
+				IPL6 <= '1';
 			end if;
 			prescaler_irq <= prescaler_irq + "1";
 		end if;
