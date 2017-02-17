@@ -3,15 +3,18 @@
 * Author     : Chandler Griscom
 *-----------------------------------------------------------
 
-SIM         EQU 0       ;0 = hardware state, 1 = simulation state
+SIM         EQU 1       ;0 = hardware state, 1 = simulation state
 
-BUFFER_A_SP EQU $104000
-BUFFER_A_EP EQU $104004
-BUFFER_A_S  EQU $104008
-BUFFER_A_E  EQU $108000
-SUPER_STACK EQU $103FFC
-TIMER_SEC   EQU $100000
-TIMER_MS    EQU $100004
+;BUFFER_A_SP EQU $104000
+;BUFFER_A_EP EQU $104004
+;BUFFER_A_S  EQU $104008
+;BUFFER_A_E  EQU $108000
+SUPER_STACK EQU $103F00
+TIMER_SEC   EQU $103F04
+TIMER_MS    EQU $103F08
+
+BOOTR_STRTa EQU $104008 Contains the address of the S record's start address
+BOOTR_IPL7a EQU $10400C Use to set the address of the S record's IPL7 routine. May be modified by S record
 
 CPLD_STATUS EQU $300001
 
@@ -57,22 +60,52 @@ MAIN        CLR.L  TIMER_MS
             CLR.L  TIMER_SEC
             JSR INIT_DUART
             
-            MOVE.L #BUFFER_A_S, BUFFER_A_SP Start buffer pointer at beginning
-            MOVE.L #BUFFER_A_S, BUFFER_A_EP Start buffer pointer at beginning     
+            ;MOVE.L #BUFFER_A_S, BUFFER_A_SP Start buffer pointer at beginning
+            ;MOVE.L #BUFFER_A_S, BUFFER_A_EP Start buffer pointer at beginning     
+            
+            MOVE.L #IPL7routine, BOOTR_IPL7a ; Set the current IPL7 routine to heartbeat
             
 LOOP        JSR GETCHAR_A
-            MOVE.B D0, D7
-            MOVE.L #Hallo, A0
-            CMP.B #$62, D0
-            BNE DOput
-            MOVE.L #Hallo2, A0
-DOput       JSR PUTSTR
-            MOVE.B D7, D0
-            NOP
-            NOP
-            JSR PUTCHAR_A
-            JMP LOOP
+            MOVE.L #SRecPrompt, A0 -- Press s to load s record
+            JSR PUTSTR
+            JSR GETCHAR_A
+            CMP.B #$73, D0 If user says 's', load s record
+            BNE LOOP
             
+NEXTLN      ; If last read was a D8 or D9, break!!!
+            
+            MOVE.L #SRecInsert, A0 -- Read next line
+            JSR PUTSTR
+            JSR GETCHAR_A S
+            JSR GETCHAR_A Code
+            MOVE.B D0, D7 Move code to D7
+            
+            CLR.L D6      Clear D6 for OR operations
+            JSR GETCHAR_A Size MSB_Hex
+            JSR HEX2BIN   Convert size to binary halfbyte
+              BCS ERROR   ERROR HANDLING
+            MOVE.B D0, D6 Copy to D6 for size record
+            LSL.B #4, D6  Shift MSB left by 4
+            JSR GETCHAR_A Size LSB_Hex
+            JSR HEX2BIN   Convert size to binary halfbyte
+              BCS ERROR   ERROR HANDLING
+            OR.B D0, D6   OR it onto D6 for a complete size byte
+            
+            ; Use d5 for loop index
+            CLR.L D5
+SIZELOOP    
+D0          ; Check if D1
+
+
+ERROR       MOVE.L #SRecError, A0
+            JSR PUTSTR
+            JSR LOOP
+            
+EXECUTE     MOVE.L #EOSString, A0 End of stream; transferring execution!!!!
+            JSR PUTSTR
+            MOVE.B #$F0, LED  Turn on all LEDs for warning
+            JSR (BOOTR_STRTa)
+
             
             ; Print String in A0
 PUTSTR      MOVE.W D0, -(SP)
@@ -88,6 +121,7 @@ pst_Next    CMP.W #400, D1 If >= 1024,
             BRA pst_Next
 pst_Quit    MOVE.W (SP)+, D1
             MOVE.W (SP)+, D0
+            MOVE.W (SP)+, SR
             RTS
 
 INIT_DUART  ;Reset Duart
@@ -157,7 +191,10 @@ Out_poll_A  MOVE.B SRA, D1
             RTS
             
             ; Periodic interrupt  TODO research if SR needs to be preserved
-IRQ7        MOVE.L D0, -(SP)
+IRQ7        JMP     (BOOTR_IPL7a)
+
+IPL7routine MOVE.W  SR, -(SP)
+            MOVE.L  D0, -(SP)
             MOVE.W  TIMER_MS, D0
             ADD.W   #$1, D0
             MOVE.W  D0, TIMER_MS
@@ -168,7 +205,8 @@ IRQ7        MOVE.L D0, -(SP)
             ADD.L   #$1, D0
             MOVE.B  D0, LED
             MOVE.L  D0, TIMER_SEC
-IRQ7_QUIT   MOVE.L (SP)+, D0
+IRQ7_QUIT   MOVE.L  (SP)+, D0
+            MOVE.W  (SP)+, SR
             RTE  Return from exception
             
             ; DUART Interrupt... TODO check if it's from A or B serial (i.e. don't getchar)
@@ -259,11 +297,14 @@ B2H_End:    ROR.L   #8, D0        ;One more rotate so that D0 is in correct orde
             MOVE.W  (SP)+, D1     ;Restore D1
             RTS
 
-Hallo       DC.B CR,LF,'Hello World!',CR,LF,0
-Hallo2      DC.B CR,LF,'Hello Brian!',CR,LF,0
+SRecPrompt  DC.B CR,LF,'Press s to upload an S record.',CR,LF,0
+SRecInsert  DC.B CR,LF,'Insert next line:',CR,LF,0
+SRecError   DC.B CR,LF,'Error reading S record.',CR,LF,0
+EOSString   DC.B CR,LF,'End of stream; transferring execution!',CR,LF,0
 
             END     MAIN
             
+
 
 
 
