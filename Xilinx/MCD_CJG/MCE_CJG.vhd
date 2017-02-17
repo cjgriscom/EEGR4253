@@ -82,6 +82,7 @@ architecture Behavioral of MCE_CJG is
 	signal GPIO_IACK_ah	: STD_LOGIC;
 	signal DUART_IACK_ah	: STD_LOGIC;
 	signal IPL7_IACK_ah	: STD_LOGIC;
+	signal was_IPL7      : STD_LOGIC := '1';
 begin
 
 -- CPLD MASK --
@@ -92,6 +93,17 @@ CPU_IACK_ah <= FC0 and FC1 and FC2;
 IPL7_IACK_ah <= CPU_IACK_ah and not IRQ7;
 DUART_IACK_ah <= CPU_IACK_ah and IRQ7 and not DUART_IRQ;
 GPIO_IACK_ah <= CPU_IACK_ah and IRQ7 and DUART_IRQ and (CPLD_mask(1) and GPIO_IPL0);
+
+setlevelrecord: process (CPU_IACK_ah) begin
+	if rising_edge(CPU_IACK_ah) then
+		-- Preserve CPLD-driven interrupt levels to they can be vectored properly
+		if IPL7_IACK_ah = '1' then
+			was_IPL7 <= '1';
+		elsif GPIO_IACK_ah = '1' then
+			was_IPL7 <= '0';
+		end if;
+	end if;
+end process setlevelrecord;
 
 -- Tri-State Data Bus Control
 D <= data_out when ( (((A23 = '1' or A2 = "011") and CPU_RW = '1') or (CPU_IACK_ah ='1' and (IRQ7 and not DUART_IRQ)='0'))
@@ -146,7 +158,7 @@ cpld_read: process (CPU_AS) begin
 			data_out(7) <= GPIO_DTACK;
 		else 
 			-- Put interrupt vectors here, starts at 64
-			data_out(0) <= not IRQ7; -- 64: GPIO, 65: IRQ7
+			data_out(0) <= was_IPL7; -- 64: GPIO, 65: IPL7
 			data_out(1) <= '0';
 			data_out(2) <= '0';
 			data_out(3) <= '0';
