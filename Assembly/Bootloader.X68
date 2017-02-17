@@ -126,7 +126,6 @@ pst_Next    CMP.W #400, D1 If >= 1024,
             BRA pst_Next
 pst_Quit    MOVE.W (SP)+, D1
             MOVE.W (SP)+, D0
-            MOVE.W (SP)+, SR
             RTS
 
 INIT_DUART  ;Reset Duart
