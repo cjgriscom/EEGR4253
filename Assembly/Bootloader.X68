@@ -81,8 +81,10 @@ sLOOP       MOVE.L #SRecPrompt, A0 -- Press s to load s record
             BNE sLOOP
             BRA NEXTLN
             
-            ; Eat carriage return
-CRLF_NEXTLN JSR GETCHAR_A CR
+            ; Eat checksum and carriage return
+CRLF_NEXTLN JSR GETCHAR_A chksum
+            JSR GETCHAR_A chksum    
+            JSR GETCHAR_A CR
             JSR GETCHAR_A LF            
             
 NEXTLN      
@@ -102,6 +104,7 @@ NEXTLN
             JSR HEX2BIN   Convert size to binary halfbyte
               BCS ERROR   ERROR HANDLING
             OR.B D0, D6   OR it onto D6 for a complete size byte
+            SUB.B #1, D6  Subtract 1 to ignore the checksum TODO add checksum functionality
             
             ; Clear working registers
             CLR.L D1
@@ -109,36 +112,8 @@ NEXTLN
 SIZELOOP    CMP.W D6, D5 Break if i >= size
             BHS CRLF_NEXTLN
             ADD #$1, D5 i++
-S0          CMP.B #$30, D7 If this is a S0 record...
-            BNE S1
-            
-            ; S0 Code: Informational Data (echo ASCII)
-            JSR GETCHAR_A Info MSB_Hex
-            JSR HEX2BIN   Convert size to binary halfbyte
-              BCS ERROR   ERROR HANDLING
-            MOVE.B D0, D1 Copy to D1 for info record
-            LSL.B #4, D1  Shift MSB left by 4
-            JSR GETCHAR_A Info LSB_Hex
-            JSR HEX2BIN   Convert info to binary halfbyte
-              BCS ERROR   ERROR HANDLING
-            OR.B D1, D0   OR it onto D6 for a complete size byte
-            JSR PUTCHAR_A
-            
-            ; End S0 Code
-            BRA SIZELOOP Branch back to loop
-S1          CMP.B #$31, D7 If this is a S1 record...
-            BNE S2
-            ; S1 Code
-            BRA SIZELOOP Branch back to loop
-S2          CMP.B #$32, D7 If this is a S2 record...
-            BNE S8
-            ; S2 Code
-            BRA SIZELOOP Branch back to loop
-S8          CMP.B #$38, D7 If this is a S8 record...
-            BNE S9 
-            
-            ; S8 Code: 24-bit address
-S8_Valid    LSL.L #4, D1  Shift total left by 4
+            ; READ AND CONVERT BYTE
+            LSL.L #4, D1  Shift total left by 4
             JSR GETCHAR_A Addr MSB_Hex
             JSR HEX2BIN   Convert addr to binary halfbyte
               BCS ERROR   ERROR HANDLING
@@ -148,13 +123,64 @@ S8_Valid    LSL.L #4, D1  Shift total left by 4
             JSR HEX2BIN   Convert addr to binary halfbyte
               BCS ERROR   ERROR HANDLING
             OR.B D0, D1   Or onto D1 for addr record
+            ; END READ AND CONVERT
+S0          CMP.B #$30, D7 If this is a S0 record...
+            BNE S1
+            
+            ; S0 Code: Informational Data (echo ASCII)
+            MOVE.B D1, D0
+            JSR PUTCHAR_A
+            ; End S0 Code
+            BRA SIZELOOP  Branch back to loop
+
+S1          CMP.B #$31, D7 If this is a S1 record...
+            BNE S2
+            ; S1 Code: 16-bit address data
+            CMP.W #1, D5  If i = 1 (incomplete)
+            BEQ SIZELOOP  Continue
+
+            CMP.W #2, D5  If i = 2 (address is ready for setting)
+            BNE S1_2_Write  Write the data if i /= 3
+            MOVE.L D1, A1 Copy resulting base address to A1
+            CLR.L D1      Clear D1 for next round
+            BRA SIZELOOP  Branch back to loop
+            
+S1_2_Write  ; Else this is i > 3
+            MOVE.B D1, (A1)
+            ADD #1, A1 Advance to next byte
+            CLR.L D1      Clear D1 for next round
+            ; End S1 Code
+            BRA SIZELOOP Branch back to loop
             
             
-            CMP.W D6, D5  Continue if i /= size
+S2          CMP.B #$32, D7 If this is a S2 record...
+            BNE S8
+            
+            ; S2 Code: 24-bit address data
+            CMP.W #1, D5  If i = 1 (incomplete)
+            BEQ SIZELOOP  Continue
+            
+            CMP.W #2, D5  If i = 2 (incomplete)
+            BEQ SIZELOOP  Continue
+
+            CMP.W #3, D5  If i = 3 (address is ready for setting)
+            BNE S1_2_Write  Write the data if i /= 3
+            MOVE.L D1, A1 Copy resulting base address to A1
+            CLR.L D1      Clear D1 for next round
+            BRA SIZELOOP  Branch back to loop
+            
+            
+S8          CMP.B #$38, D7 If this is a S8 record...
+            BNE S9 
+            
+            ; S8 Code: 24-bit address
+S8_Valid    CMP.W D6, D5  Continue if i /= size
             BNE SIZELOOP Else execute record
             
             MOVE.L D1, A1 Move to A1
-            ; Eat carriage return
+            ; Eat carriage return and checksum
+            JSR GETCHAR_A chk
+            JSR GETCHAR_A chk
             JSR GETCHAR_A CR
             JSR GETCHAR_A LF 
             BRA EXECUTE Execute!
@@ -181,7 +207,7 @@ EXECUTE     MOVE.L #EOSString, A0 -- End of stream; press e to begin execution!!
 PUTSTR      MOVE.W D0, -(SP)
             MOVE.W D1, -(SP)
             CLR.W D1 Length will be stored here
-pst_Next    CMP.W #400, D1 If >= 1024, 
+pst_Next    CMP.W #$200, D1 If >= 512, 
             BHS pst_Quit   quit
             MOVE.B (A0)+, D0
             ADD #1, D1
