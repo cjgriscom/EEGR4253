@@ -106,7 +106,7 @@ setlevelrecord: process (CPU_IACK_ah) begin
 end process setlevelrecord;
 
 -- Tri-State Data Bus Control
-D <= data_out when ( (((A23 = '1' or A2 = "011") and CPU_RW = '1') or (CPU_IACK_ah ='1' and (IRQ7 and not DUART_IRQ)='0'))
+D <= data_out when ( (((A23 = '1' or A2 = "011") and CPU_RW = '1' and CPU_AS='0' and CPU_IACK_ah = '0') or IPL7_IACK_ah = '1' or GPIO_IACK_ah ='1')
 					 and power_on = '1')
 					 else (others=>'Z');
 
@@ -212,10 +212,10 @@ RAM_UB <= CPU_UDS when RAM_STROBE = '1' else '1';
 DUART_CS <= not DUART_STROBE;
 DUART_RW <= CPU_RW when DUART_STROBE = '1' else '1';
 
-DUART_IACK <= not (CPU_IACK_ah and power_on and IRQ7);
+DUART_IACK <= not DUART_IACK_ah;
 
  -- Active high when enabled, else set to high impedance
-GPIO_IACK  <= GPIO_IACK_ah when CPLD_mask(1) = '1' else 'Z'; -- Prioritize other interrupts
+GPIO_IACK  <= GPIO_IACK_ah when CPLD_mask(1) = '1' else 'Z';
 GPIO_AS    <= (A23 and not CPU_AS and power_on) when CPLD_mask(1) = '1' else 'Z';
 
  -- Trigger interrupt; DUART gets level 6, plus optional add GPIO IPLs
