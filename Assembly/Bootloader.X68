@@ -74,14 +74,18 @@ MAIN
             
 
             
-LOOP        MOVE.L #SRecPrompt, A0 -- Press s to load s record
+sLOOP       MOVE.L #SRecPrompt, A0 -- Press s to load s record
             JSR PUTSTR
             JSR GETCHAR_A
             CMP.B #$73, D0 If user says 's', load s record
-            BNE LOOP
+            BNE sLOOP
+            BRA NEXTLN
             
-NEXTLN      ; If last read was a D8 or D9, break!!!
+            ; Eat carriage return
+CRLF_NEXTLN JSR GETCHAR_A CR
+            JSR GETCHAR_A LF            
             
+NEXTLN      
             MOVE.L #SRecInsert, A0 -- Read next line
             JSR PUTSTR
             JSR GETCHAR_A S
@@ -99,22 +103,79 @@ NEXTLN      ; If last read was a D8 or D9, break!!!
               BCS ERROR   ERROR HANDLING
             OR.B D0, D6   OR it onto D6 for a complete size byte
             
-            ; Use d5 for loop index
-            CLR.L D5
-SIZELOOP    
-D0          ; Check if D1
-            RTS
-
+            ; Clear working registers
+            CLR.L D1
+            CLR.L D5 ; Use d5 for loop index
+SIZELOOP    CMP.W D6, D5 Break if i >= size
+            BHS CRLF_NEXTLN
+            ADD #$1, D5 i++
+S0          CMP.B #$30, D7 If this is a S0 record...
+            BNE S1
+            
+            ; S0 Code: Informational Data (echo ASCII)
+            JSR GETCHAR_A Info MSB_Hex
+            JSR HEX2BIN   Convert size to binary halfbyte
+              BCS ERROR   ERROR HANDLING
+            MOVE.B D0, D1 Copy to D1 for info record
+            LSL.B #4, D1  Shift MSB left by 4
+            JSR GETCHAR_A Info LSB_Hex
+            JSR HEX2BIN   Convert info to binary halfbyte
+              BCS ERROR   ERROR HANDLING
+            OR.B D1, D0   OR it onto D6 for a complete size byte
+            JSR PUTCHAR_A
+            
+            ; End S0 Code
+            BRA SIZELOOP Branch back to loop
+S1          CMP.B #$31, D7 If this is a S1 record...
+            BNE S2
+            ; S1 Code
+            BRA SIZELOOP Branch back to loop
+S2          CMP.B #$32, D7 If this is a S2 record...
+            BNE S8
+            ; S2 Code
+            BRA SIZELOOP Branch back to loop
+S8          CMP.B #$38, D7 If this is a S8 record...
+            BNE S9 
+            
+            ; S8 Code: 24-bit address
+S8_Valid    LSL.L #4, D1  Shift total left by 4
+            JSR GETCHAR_A Addr MSB_Hex
+            JSR HEX2BIN   Convert addr to binary halfbyte
+              BCS ERROR   ERROR HANDLING
+            OR.B D0, D1   Or onto D1 for addr record
+            LSL.L #4, D1  Shift total left by 4
+            JSR GETCHAR_A Addr LSB_Hex
+            JSR HEX2BIN   Convert addr to binary halfbyte
+              BCS ERROR   ERROR HANDLING
+            OR.B D0, D1   Or onto D1 for addr record
+            
+            
+            CMP.W D6, D5  Continue if i /= size
+            BNE SIZELOOP Else execute record
+            
+            MOVE.L D1, A1 Move to A1
+            ; Eat carriage return
+            JSR GETCHAR_A CR
+            JSR GETCHAR_A LF 
+            BRA EXECUTE Execute!
+            
+            
+S9          CMP.B #$39, D7 If this is a S9 record...
+            BNE ERROR If it's not an S9 at this point something went wrong
+            BRA S8_Valid S8 code does the same thing
+            
+            ; Else Error!
 ERROR       MOVE.L #SRecError, A0
             JSR PUTSTR
-            JSR LOOP
+            JSR sLOOP
             
-EXECUTE     MOVE.L #EOSString, A0 End of stream; transferring execution!!!!
+EXECUTE     MOVE.L #EOSString, A0 -- End of stream; press e to begin execution!!!
             JSR PUTSTR
+            JSR GETCHAR_A
+            CMP.B #$65, D0 If user says 'e', load s record
+            BNE sLOOP Otherwise start over :(
             MOVE.B #$F0, LED  Turn on all LEDs for warning
-            LEA     BOOTR_STRTa, A0
-            MOVE.L  (A0), A0
-            JSR     (A0)
+            JMP     (A1)
             
             ; Print String in A0
 PUTSTR      MOVE.W D0, -(SP)
@@ -222,9 +283,9 @@ IPL7routine MOVE.L  D0, -(SP)
 IRQ7_QUIT   MOVE.L  (SP)+, D0
             RTS
 
-EXCEPTION   MOVE.L #EXPSTRING, A0
+EXCEPTION   LEA SUPER_STACK, SP
+            MOVE.L #EXPSTRING, A0
             JSR PUTSTR
-            LEA SUPER_STACK, SP
             JMP MAIN
             
             ; DUART Interrupt... TODO check if it's from A or B serial (i.e. don't getchar)
@@ -318,7 +379,7 @@ B2H_End:    ROR.L   #8, D0        ;One more rotate so that D0 is in correct orde
 SRecPrompt  DC.B CR,LF,'Press s to upload an S record.',CR,LF,0
 SRecInsert  DC.B CR,LF,'Insert next line:',CR,LF,0
 SRecError   DC.B CR,LF,'Error reading S record.',CR,LF,0
-EOSString   DC.B CR,LF,'End of stream; transferring execution!',CR,LF,0
+EOSString   DC.B CR,LF,'End of stream; press e to transfer execution!',CR,LF,0
 EXPSTRING   DC.B CR,LF,'Encountered exception; resetting!',CR,LF,0
 
 
