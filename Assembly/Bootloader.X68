@@ -34,7 +34,7 @@ IVR         EQU $2C0001 Interrupt vector register
 
 RxRDY       EQU 0       Recieve ready bit position
 TxRDY       EQU 2       Transmit ready bit position
-BAUD        EQU $BB     baud rate value = 9600 baud
+BAUD        EQU $CC     baud rate value = 19200 baud
 
 CR          EQU $0D
 LF          EQU $0A 
@@ -42,19 +42,19 @@ LF          EQU $0A
 START       ORG     $000000
             DC.L    SUPER_STACK Initial Stack Pointer
             DC.L    MAIN        Initial PC
-            DC.L    EXCEPTION   Berr
-            DC.L    EXCEPTION   Address Error
-            DC.L    EXCEPTION   Illegal Instruction
-            DC.L    EXCEPTION   Div by zero
+            DC.L    $116000   Berr
+            DC.L    $116000   Address Error
+            DC.L    $116000   Illegal Instruction
+            DC.L    $116000   Div by zero
             
             
             ORG     $000084   TRAP vectors   
-            DC.L    $112000   33: TRAP_0
-            DC.L    $113000   34
-            DC.L    $114000   35
+            DC.L    $113000   33: TRAP_0
+            DC.L    $114000   34
+            DC.L    $115000   35
             
             ORG     $000100   Interrupt vectors   
-            DC.L    $110000   64: Should be GPIO IRQ
+            DC.L    $112000   64: Should be GPIO IRQ
             DC.L    $110000   65: Periodic
             DC.L    $111000   66: DUART RxRDYA or RXRDYB
 
@@ -62,7 +62,7 @@ START       ORG     $000000
 ; begin program
 MAIN                    
             MOVE.L #IPL7routine, D0
-            MOVE.L D0, BOOTR_IPL7a ; Set the current IPL7 routine to heartbeat
+            MOVE.L D0, BOOTR_IPL7a ; Set the current IPL7 routine to ROM heartbeat
             
             ;110000  40E72F0841F90010400C20504E90205F46DF4E73
             LEA $00110000, A0
@@ -328,12 +328,6 @@ EXCEPTION   LEA SUPER_STACK, SP
             JSR PUTSTR
             JMP MAIN
             
-            ; DUART Interrupt... TODO check if it's from A or B serial (i.e. don't getchar)
-DUART_IRQ   JSR GETCHAR_A
-            MOVE.B D0, LED
-            JSR PUTCHAR_A
-            RTE  Return from exception
-            
 * Subroutine DEC2BIN -- Convert ASCII Decimal to Binary
 * Inputs: D0 - ASCII Byte
 * Output: D0 - Converted Binary Byte
@@ -430,6 +424,7 @@ INTRAM_4L   DC.L $46DF4E73
 
             END     MAIN
             
+
 
 
 
