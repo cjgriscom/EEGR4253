@@ -41,13 +41,18 @@ CR          EQU $0D
 LF          EQU $0A 
 
 START       ORG     $000000
-            DC.L    SUPER_STACK
-            DC.L    MAIN
+            DC.L    SUPER_STACK Initial Stack Pointer
+            DC.L    MAIN        Initial PC
+            DC.L    EXCEPTION   Berr
+            DC.L    EXCEPTION   Address Error
+            DC.L    EXCEPTION   Illegal Instruction
+            DC.L    EXCEPTION   Div by zero
             
-            ;ORG     $000084   TRAP vectors   
-            ;DC.L    TRAP_0    33
-            ;DC.L    TRAP_1    34
-            ;DC.L    TRAP_2    35
+            
+            ORG     $000084   TRAP vectors   
+            DC.L    $120000   33: TRAP_0
+            DC.L    $122000   34
+            DC.L    $124000   35
             
             ORG     $000100   Interrupt vectors   
             DC.L    IRQ7      64: Should be GPIO IRQ
@@ -62,7 +67,6 @@ MAIN
             CLR.L  TIMER_MS
             CLR.L  TIMER_SEC
 
-            
             JSR INIT_DUART
             
             ;MOVE.L #BUFFER_A_S, BUFFER_A_SP Start buffer pointer at beginning
@@ -70,8 +74,7 @@ MAIN
             
 
             
-LOOP        JSR GETCHAR_A
-            MOVE.L #SRecPrompt, A0 -- Press s to load s record
+LOOP        MOVE.L #SRecPrompt, A0 -- Press s to load s record
             JSR PUTSTR
             JSR GETCHAR_A
             CMP.B #$73, D0 If user says 's', load s record
@@ -100,7 +103,7 @@ NEXTLN      ; If last read was a D8 or D9, break!!!
             CLR.L D5
 SIZELOOP    
 D0          ; Check if D1
-
+            RTS
 
 ERROR       MOVE.L #SRecError, A0
             JSR PUTSTR
@@ -109,8 +112,9 @@ ERROR       MOVE.L #SRecError, A0
 EXECUTE     MOVE.L #EOSString, A0 End of stream; transferring execution!!!!
             JSR PUTSTR
             MOVE.B #$F0, LED  Turn on all LEDs for warning
-            JSR (BOOTR_STRTa)
-
+            LEA     BOOTR_STRTa, A0
+            MOVE.L  (A0), A0
+            JSR     (A0)
             
             ; Print String in A0
 PUTSTR      MOVE.W D0, -(SP)
@@ -197,11 +201,9 @@ Out_poll_A  MOVE.B SRA, D1
             ; Periodic interrupt  TODO research if SR needs to be preserved
 IRQ7        MOVE.W  SR, -(SP)
             MOVE.L  A0, -(SP)
-            MOVE.L  D0, -(SP)
             LEA     BOOTR_IPL7a, A0
             MOVE.L  (A0), A0
-            JSR     (A0)
-            MOVE.L  (SP)+, D0            
+            JSR     (A0)          
             MOVE.L  (SP)+, A0
             MOVE.W  (SP)+, SR
             RTE     Return from exception
@@ -218,6 +220,11 @@ IPL7routine
             MOVE.B  D0, LED
             MOVE.L  D0, TIMER_SEC
 IRQ7_QUIT   RTS
+
+EXCEPTION   MOVE.L #EXPSTRING, A0
+            JSR PUTSTR
+            LEA SUPER_STACK, SP
+            JMP MAIN
             
             ; DUART Interrupt... TODO check if it's from A or B serial (i.e. don't getchar)
 DUART_IRQ   JSR GETCHAR_A
@@ -311,9 +318,13 @@ SRecPrompt  DC.B CR,LF,'Press s to upload an S record.',CR,LF,0
 SRecInsert  DC.B CR,LF,'Insert next line:',CR,LF,0
 SRecError   DC.B CR,LF,'Error reading S record.',CR,LF,0
 EOSString   DC.B CR,LF,'End of stream; transferring execution!',CR,LF,0
+EXPSTRING   DC.B CR,LF,'Encountered exception; resetting!',CR,LF,0
+
+
 
             END     MAIN
             
+
 
 
 
