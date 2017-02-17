@@ -208,7 +208,7 @@ IRQ7        MOVE.W  SR, -(SP)
             MOVE.W  (SP)+, SR
             RTE     Return from exception
 
-IPL7routine 
+IPL7routine MOVE.L  D0, -(SP)
             MOVE.W  TIMER_MS, D0
             ADD.W   #$1, D0
             MOVE.W  D0, TIMER_MS
@@ -219,6 +219,7 @@ IPL7routine
             ADD.L   #$1, D0
             MOVE.B  D0, LED
             MOVE.L  D0, TIMER_SEC
+            MOVE.L  (SP)+, D0
 IRQ7_QUIT   RTS
 
 EXCEPTION   MOVE.L #EXPSTRING, A0
