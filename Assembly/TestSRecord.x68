@@ -34,7 +34,7 @@ IVR         EQU $2C0001 Interrupt vector register
 
 RxRDY       EQU 0       Recieve ready bit position
 TxRDY       EQU 2       Transmit ready bit position
-BAUD        EQU $BB     baud rate value = 9600 baud
+BAUD        EQU $CC     baud rate value = 9600 baud
 
 CR          EQU $0D
 LF          EQU $0A 
@@ -84,25 +84,19 @@ pst_Quit    MOVE.W (SP)+, D1
             RTS
 
 INIT_DUART  ;Reset Duart
-            ;MOVE.B #30, CRA
-            ;MOVE.B #20, CRA
-            ;MOVE.B #10, CRA
+            MOVE.B #30, CRA
+            MOVE.B #20, CRA
+            MOVE.B #10, CRA
             
-            ;MOVE.B #$00, ACR Select Baud
-            ;MOVE.B BAUD, CSRA Set Baud to Constant for both rx/tx
-            ;MOVE.B #$93, MR1A Set port A to 8-bit, no parity, 1 stop bit, enable RxRTS
-            ;MOVE.B #$37, MR2A Set normal, TxRTS, TxCTS, 1 stop bit
-            ;MOVE.B #$05, CRA Enable A transmitter/recvr
-           
-            ;MOVE.B #$80,ACR    selects baud rate set 2
-            ;MOVE.B #BAUD,CSRA  set 19.2k baud Rx/Tx
-            ;MOVE.B #$13,MR1A   8-bits, no parity, 1 stop bit
-            ;MOVE.B #$07,MR2A   07 sets: Normal mode, CTS and RTS disabled, stop bit length = 1
-            ;MOVE.B #$05,CRA    enable Tx and Rx
-            MOVE.B #$22, IMR    set interrupt masks to just RxRDYA, RxRDYB
-            MOVE.B #66, IVR     set interrupt vector
+            MOVE.B #$80,ACR    selects baud rate set 2
+            MOVE.B #BAUD,CSRA  set 19.2k baud Rx/Tx
+            MOVE.B #$13,MR1A   8-bits, no parity, 1 stop bit
+            MOVE.B #$07,MR2A   07 sets: Normal mode, CTS and RTS disabled, stop bit length = 1
+            MOVE.B #$05,CRA    enable Tx and Rx
+            MOVE.B 66, IVR
+            MOVE.B #$FF, IMR
             RTS
-            
+
 
 ; TODO HASCHAR, move getchar code into interrupt
 ; Get_CHAR puts the read character into D0
@@ -165,6 +159,7 @@ DUART_IPL   DC.B CR,LF,'Recieved Duart interrupt!',CR,LF,0
 
             END     MAIN
             
+
 
 
 
