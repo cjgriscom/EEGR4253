@@ -3,17 +3,8 @@
 * Author     : Chandler Griscom
 *-----------------------------------------------------------
 
-SIM         EQU 0       ;0 = hardware state, 1 = simulation state
-
-;BUFFER_A_SP EQU $104000
-;BUFFER_A_EP EQU $104004
-;BUFFER_A_S  EQU $104008
-;BUFFER_A_E  EQU $108000
 SUPER_STACK EQU $103F00
-TIMER_SEC   EQU $103F04
-TIMER_MS    EQU $103F08
-
-BOOTR_IPL7a EQU $10400C Use to set the address of the S record's IPL7 routine. May be modified by S record
+DUART_COUNT EQU $103F04
 
 CPLD_STATUS EQU $300001
 
@@ -34,7 +25,7 @@ IVR         EQU $2C0001 Interrupt vector register
 
 RxRDY       EQU 0       Recieve ready bit position
 TxRDY       EQU 2       Transmit ready bit position
-BAUD        EQU $CC     baud rate value = 19200 baud
+BAUD        EQU $CC     baud rate value = 38400 baud
 
 CR          EQU $0D
 LF          EQU $0A 
@@ -60,50 +51,29 @@ START       ORG     $000000
 
             ORG     $000400  End of vector space
 ; begin program
-MAIN                    
-            MOVE.L #IPL7routine, D0
-            MOVE.L D0, BOOTR_IPL7a ; Set the current IPL7 routine to ROM heartbeat
-            
-            ;110000  40E72F0841F90010400C20504E90205F46DF4E73
-            LEA $00110000, A0
-            MOVE.L INTRAM_0L, D0
-            MOVE.L D0, 0(A0)
-            MOVE.L INTRAM_1L, D0
-            MOVE.L D0, 4(A0)
-            MOVE.L INTRAM_2L, D0
-            MOVE.L D0, 8(A0)
-            MOVE.L INTRAM_3L, D0
-            MOVE.L D0, 12(A0)
-            MOVE.L INTRAM_4L, D0
-            MOVE.L D0, 16(A0)
-
+MAIN       
                         
-            CLR.L  TIMER_MS
-            CLR.L  TIMER_SEC
-
+            CLR.L  DUART_COUNT
             JSR INIT_DUART
-            
-            ;MOVE.L #BUFFER_A_S, BUFFER_A_SP Start buffer pointer at beginning
-            ;MOVE.L #BUFFER_A_S, BUFFER_A_EP Start buffer pointer at beginning     
-            
-
             
 sLOOP       MOVE.L #SRecPrompt, A0 -- Press s to load s record
             JSR PUTSTR
             JSR GETCHAR_A
             CMP.B #$73, D0 If user says 's', load s record
             BNE sLOOP
+            MOVE.L #SRecInsert, A0 -- Begin
+            JSR PUTSTR
             BRA NEXTLN
             
             ; Eat checksum and carriage return
-CRLF_NEXTLN JSR GETCHAR_A chksum
+CRLF_NEXTLN MOVE.B #'.', D0
+            JSR PUTCHAR_A
+            JSR GETCHAR_A chksum
             JSR GETCHAR_A chksum    
             JSR GETCHAR_A CR
             JSR GETCHAR_A LF            
             
 NEXTLN      
-            MOVE.L #SRecInsert, A0 -- Read next line
-            JSR PUTSTR
             JSR GETCHAR_A S
             JSR GETCHAR_A Code
             MOVE.B D0, D7 Move code to D7
@@ -244,90 +214,43 @@ INIT_DUART  ;Reset Duart
             ;MOVE.B #$37, MR2A Set normal, TxRTS, TxCTS, 1 stop bit
             ;MOVE.B #$05, CRA Enable A transmitter/recvr
            
-            MOVE.B #$80,ACR    selects baud rate set 2
-            MOVE.B #BAUD,CSRA  set 19.2k baud Rx/Tx
+            MOVE.B #$00,ACR    selects baud rate set 1
+            MOVE.B #BAUD,CSRA  set 38.4k baud Rx/Tx
             MOVE.B #$13,MR1A   8-bits, no parity, 1 stop bit
             MOVE.B #$07,MR2A   07 sets: Normal mode, CTS and RTS disabled, stop bit length = 1
             MOVE.B #$05,CRA    enable Tx and Rx
             MOVE.B 66, IVR     set interrupt vector
-            ;JSR EN_DUART_IR    enable DUART interrupts
             
             RTS
             
-            ;Enable Duart interrupts
-EN_DUART_IR MOVE.B $22, IMR    set interrupt masks to just RxRDYA, RxRDYB
-            RTS
-            
-            ;Disable Duart interrupts
-DS_DUART_IR MOVE.B $00, IMR    set interrupt masks to nothing
-            RTS
+
 
 ; TODO HASCHAR, move getchar code into interrupt
 ; Get_CHAR puts the read character into D0
-GETCHAR_A IF.B SIM <EQ> #00 THEN.L  --Hardware Code--
+GETCHAR_A
             MOVE.L D1,-(SP) Save working register
 In_poll_A   MOVE.B SRA, D1  Read the A status register
             BTST #RxRDY, D1 Test reciever ready status
             BEQ In_poll_A   UNTIL char recieved
             MOVE.B RBA, D0  Read the character into D0
+            MOVE.B DUART_COUNT, D1
+            ADD.B #$1, D1
+            MOVE.B D1, DUART_COUNT
+            MOVE.B D1, LED
             MOVE.L (SP)+, D1 Restore working register
-         ELSE                    --Simulation code--
-            MOVE.L D1, -(SP)
-            MOVE.L #05, D0
-            TRAP   #15
-            MOVE.B D1, D0
-            MOVE.L (SP)+, D1
-         ENDI
             RTS
 
 ; PUTCHAR_A outputs D0 to the DUART channel A
-PUTCHAR_A IF.B SIM <EQ> #00 THEN.L  --Hardware Code--
+PUTCHAR_A
             MOVE.L D1, -(SP)
 Out_poll_A  MOVE.B SRA, D1   
             BTST   #TxRDY, D1
             BEQ    Out_poll_A
             MOVE.B D0, TBA
             MOVE.L (SP)+, D1
-          ELSE                    --Simulation code--
-            MOVE.L D0, -(SP) ; Task
-            MOVE.L D1, -(SP) ;Char to display
-            MOVE.B D0, D1
-            MOVE.L #06, D0
-            TRAP   #15
-            MOVE.L (SP)+, D1
-            MOVE.L (SP)+, D0
-          ENDI
-            RTS
-            
-            ; Periodic interrupt  TODO research if SR needs to be preserved
-IRQ7        MOVE.W  SR, -(SP)
-            MOVE.L  A0, -(SP)
-            LEA     BOOTR_IPL7a, A0
-            MOVE.L  (A0), A0
-            JSR     (A0)          
-            MOVE.L  (SP)+, A0
-            MOVE.W  (SP)+, SR
-            RTE     Return from exception
-
-IPL7routine MOVE.L  D0, -(SP)
-            MOVE.W  TIMER_MS, D0
-            ADD.W   #$1, D0
-            MOVE.W  D0, TIMER_MS
-            CMPI.W  #$03E7,D0
-            BLS.S   IRQ7_QUIT
-            CLR.W   TIMER_MS
-            MOVE.L  TIMER_SEC, D0
-            ADD.L   #$1, D0
-            MOVE.B  D0, LED
-            MOVE.L  D0, TIMER_SEC
-IRQ7_QUIT   MOVE.L  (SP)+, D0
             RTS
 
-EXCEPTION   LEA SUPER_STACK, SP
-            MOVE.L #EXPSTRING, A0
-            JSR PUTSTR
-            JMP MAIN
-            
+
 * Subroutine DEC2BIN -- Convert ASCII Decimal to Binary
 * Inputs: D0 - ASCII Byte
 * Output: D0 - Converted Binary Byte
@@ -411,19 +334,14 @@ B2H_End:    ROR.L   #8, D0        ;One more rotate so that D0 is in correct orde
             RTS
 
 SRecPrompt  DC.B CR,LF,'Press s to upload an S record.',CR,LF,0
-SRecInsert  DC.B CR,LF,'Insert next line:',CR,LF,0
+SRecInsert  DC.B 'Begin:',0
 SRecError   DC.B CR,LF,'Error reading S record.',CR,LF,0
 EOSString   DC.B CR,LF,'End of stream; press e to transfer execution!',CR,LF,0
 EXPSTRING   DC.B CR,LF,'Encountered exception; resetting!',CR,LF,0
-INTRAM_0L   DC.L $40E72F08
-INTRAM_1L   DC.L $41F90010
-INTRAM_2L   DC.L $400C2050
-INTRAM_3L   DC.L $4E90205F
-INTRAM_4L   DC.L $46DF4E73
-
 
             END     MAIN
             
+
 
 
 
