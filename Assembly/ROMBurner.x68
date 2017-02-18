@@ -1,10 +1,7 @@
 *-----------------------------------------------------------
-* Program    : Bootloader Program
-* Author     : Chandler Griscom
+* Title      : ROM Burner
+* Written by : Chandler Griscom
 *-----------------------------------------------------------
-
-SUPER_STACK EQU $103F00
-DUART_COUNT EQU $103F04
 
 CPLD_STATUS EQU $300001
 
@@ -25,55 +22,209 @@ IVR         EQU $2C0001 Interrupt vector register
 
 RxRDY       EQU 0       Recieve ready bit position
 TxRDY       EQU 2       Transmit ready bit position
-BAUD        EQU $CC     baud rate value = 38400 baud
+BAUD        EQU $CC     baud rate value = 19200 baud
 
+BS          EQU $08
 CR          EQU $0D
 LF          EQU $0A 
 
-START       ORG     $000000
-            DC.L    SUPER_STACK Initial Stack Pointer
-            DC.L    MAIN        Initial PC
-            DC.L    $116000   Berr
-            DC.L    $116000   Address Error
-            DC.L    $116000   Illegal Instruction
-            DC.L    $116000   Div by zero
-            
-            
-            ORG     $000084   TRAP vectors   
-            DC.L    $113000   33: TRAP_0
-            DC.L    $114000   34
-            DC.L    $115000   35
-            
-            ORG     $000100   Interrupt vectors   
-            DC.L    $112000   64: Should be GPIO IRQ
-            DC.L    $110000   65: Periodic
-            DC.L    $111000   66: DUART RxRDYA or RXRDYB
+N_CONFIRMS  EQU 2 ; How many times should the toggle bit be verified?
 
-            ORG     $000400  End of vector space
+            ORG     $160000
+
+; D6: Toggle bit status
+; D7: Hotswap mode
+
 ; begin program
-MAIN       
-                        
-            CLR.L  DUART_COUNT
-            JSR INIT_DUART
+; TODO repplace with RAM subroutine
+MAIN        OR.W  #$0700, SR 
+            CLR.B D7 Store hotswap mode here
+            MOVE.L #$2D2F7C5C, D6 Store cycle image here -\|/
             
-sLOOP       MOVE.L #SRecPrompt, A0 -- Press s to load s record
+            
+            JSR INIT_DUART TODO replace with RAM subroutine
+            
+LOOP        MOVE.L #CLS, A0
+            JSR PUTSTR
+            MOVE.L #MAINPrompt, A0
+            JSR PUTSTR
+            
+            
+                        
+            CMP.B #$00, D7 If hotswap mode
+            BNE PrHot
+            
+            
+            JSR ROM_CODES ; Print manufacturer codes
+            MOVE.L #TableString, A0
+            JSR PUTSTR
+            MOVE.L #MANUString, A0
+            JSR PUTSTR
+            JSR PRINT2CODE
+            MOVE.L #IDString, A0
+            JSR PUTSTR
+            MOVE.W D1, D0
+            JSR PRINT2CODE
+            BRA Endl
+PrHot       MOVE.L #HotEnable, A0
+            JSR PUTSTR
+            
+Endl        MOVE.L #EndLine, A0
+            JSR PUTSTR
+            
+            
+            JSR GETCHAR_A
+            
+            CMP.B #$00, D7 If hotswap mode
+            BNE SkipNonHot
+            
+            CMP.B #'s', D0 If user says 's', load s record
+            BEQ S_REC_UP 
+            
+            CMP.B #'c', D0 If user says 'c', enter copy mode
+            BEQ COPY_LO_HI
+            
+SkipNonHot  CMP.B #'h', D0 If user says 'h', hotswap
+            BEQ hotswap
+            BRA LOOP
+            
+PRINT2CODE  JSR BIN2HEX
+            ROL.L #8, D0
+            JSR PUTCHAR_A
+            ROL.L #8, D0
+            JSR PUTCHAR_A
+            MOVE.B #' ', D0
+            JSR PUTCHAR_A
+            ROL.L #8, D0
+            JSR PUTCHAR_A
+            ROL.L #8, D0
+            JSR PUTCHAR_A
+            MOVE.B #CR, D0
+            JSR PUTCHAR_A
+            MOVE.B #LF, D0
+            JSR PUTCHAR_A
+            RTS
+
+presskey    MOVE.L #PressKeyStr, A0
             JSR PUTSTR
             JSR GETCHAR_A
-            CMP.B #$73, D0 If user says 's', load s record
-            BNE sLOOP
-            MOVE.L #SRecInsert, A0 -- Begin
+            BRA LOOP
+
+hotswap     
+            EOR.B #$10, CPLD_STATUS
+            EOR.B #$FF, D7 Toggle hotswap mode
+            BRA LOOP
+
+            
+* Subroutine ROM_PRES_B
+* Keys the 2-cycle software control codes into both rom chips
+ROM_PRES_B  MOVE.W #$AAAA, $00AAAA
+            MOVE.W #$5555, $005554
+            RTS
+            
+* Subroutine ROM_PRES_H
+* Keys the 2-cycle software control codes into high rom chip
+ROM_PRES_H  MOVE.B #$AA, $00AAAA
+            MOVE.B #$55, $005554
+            RTS
+            
+* Subroutine ROM_PRES_L
+* Keys the 2-cycle software control codes into low rom chip
+ROM_PRES_L  MOVE.B #$AA, $00AAAB
+            MOVE.B #$55, $005555
+            RTS
+            
+* Subroutine ROM_CODES
+* Fetches the manufacturer ID byte from 2 ROM chips into D0.W
+* Fetches the software product ID byte from 2 ROM chips into D0.W
+ROM_CODES   JSR ROM_PRES_B
+            MOVE.W #$9090, $00AAAA ;Software entry mode
+           
+            MOVE.W $000000, D0 ; Manu ID (BF)
+            MOVE.W $000002, D1 ; Dev ID (B7)
+            
+            MOVE.W #$F0F0, $00ABC0 ;Exit software entry mode
+            RTS
+            
+ ;----- Copy Routine -----;
+COPY_LO_HI  
+            LEA $000000, A6 Store high-byte toggling address here
+            MOVE.L #ErasingHi, A0
             JSR PUTSTR
-            BRA NEXTLN
+            JSR ROM_PRES_H
+            MOVE.W #$8000, $00AAAA ;Erase High pt1
+            JSR ROM_PRES_H
+            MOVE.W #$1000, $00AAAA ;Erase High pt2
+            JSR CP_toggle   Wait until erased
+            MOVE.L #ErasedHi, A0
+            JSR PUTSTR
+            
+            
+COPY_LOOP   MOVE.L #$100000, D4 ; D4 contains finished address 100000
+COPY_WRITE  JSR ROM_PRES_H
+            MOVE.W #$A000, $00AAAA ;Write pt 1
+            MOVE.B 1(A6), D0 ; Get byte
+            MOVE.B D0, (A6)  ; Write byte
+            
+
+            
+            ; Advance address
+            MOVE.L A6, D1
+            ADDI.L #2, D1
+            MOVE.L D1, A6
+            MOVE.B D1, LED
+            
+
+            ;JSR BIN2HEX
+            ;JSR PUTCHAR_A
+            
+            
+            MOVE.L #$100000, D4 ; REMOVE THIS LINE D4 contains finished address 100000
+            CMP.L D4, D1  ; Is addr exceeding ROM bounds?
+            BEQ COPY_DONE ; Done; return to menu
+            
+            JSR CP_toggle
+COPY_VER   
+            ;CMP.B -2(A6), D0
+            ;BNE COPY_VER
+            ;JSR PRINT2CODE
+            ;JSR PUTCHAR_A
+            BRA COPY_WRITE
+            
+COPY_DONE   BRA PressKey
+            
+; Sub: Wait for toggle bit to stop toggling on hi ROM
+;  A6: the address to be checked
+CP_toggle   MOVE.B #1, D5      Clear D5 (ROL status)
+            MOVE.B (A6), D1    Read toggle bit to D1
+CP_toggle2  ;MOVE.B #'x', D0    TODO remove confirm code
+            ;JSR PUTCHAR_A
+            BTST #N_CONFIRMS, D5        Test bit three (fourth)
+            BNE CP_tog_RET     If that bit is high, confirmation succeeded 3 times
+            MOVE.B D1, D2      Save previous toggle bit
+            MOVE.B (A6), D1    Read new toggle bit to D1
+            EOR.B D1, D2       EOR new byte onto old one
+            BTST #6, D2        If EOR indicates the byts are different (bit6 = 1)
+            BNE CP_toggle2     If same (0), continue.  If different (1), start over
+            ROL.B #1, D5       Rotate D5 bit (same)
+            ;MOVE.B #'0', D0    TODO remove confirm code
+            ;JSR PUTCHAR_A
+            BRA CP_toggle2     Return
+CP_tog_RET  RTS
+ ;----- End Copy Routine -----;
+ 
+ ;----- S Records -----;
+S_REC_UP    BRA NEXTLN
             
             ; Eat checksum and carriage return
-CRLF_NEXTLN MOVE.B #'.', D0
-            JSR PUTCHAR_A
-            JSR GETCHAR_A chksum
+CRLF_NEXTLN JSR GETCHAR_A chksum
             JSR GETCHAR_A chksum    
             JSR GETCHAR_A CR
             JSR GETCHAR_A LF            
             
 NEXTLN      
+            MOVE.L #SRecInsert, A0 -- Read next line
+            JSR PUTSTR
             JSR GETCHAR_A S
             JSR GETCHAR_A Code
             MOVE.B D0, D7 Move code to D7
@@ -177,16 +328,17 @@ S9          CMP.B #$39, D7 If this is a S9 record...
             ; Else Error!
 ERROR       MOVE.L #SRecError, A0
             JSR PUTSTR
-            JSR sLOOP
+            JSR LOOP
             
 EXECUTE     MOVE.L #EOSString, A0 -- End of stream; press e to begin execution!!!
             JSR PUTSTR
             JSR GETCHAR_A
             CMP.B #$65, D0 If user says 'e', load s record
-            BNE sLOOP Otherwise start over :(
+            BNE LOOP Otherwise start over :(
             MOVE.B #$F0, LED  Turn on all LEDs for warning
             JMP     (A1)
-            
+ ;------ S Records ------;
+
             ; Print String in A0
 PUTSTR      MOVE.W D0, -(SP)
             MOVE.W D1, -(SP)
@@ -203,52 +355,41 @@ pst_Quit    MOVE.W (SP)+, D1
             MOVE.W (SP)+, D0
             RTS
 
+; TODO remove after bootloader is finished
 INIT_DUART  ;Reset Duart
             MOVE.B #30, CRA
             MOVE.B #20, CRA
             MOVE.B #10, CRA
             
-            ;MOVE.B #$00, ACR Select Baud
-            ;MOVE.B BAUD, CSRA Set Baud to Constant for both rx/tx
-            ;MOVE.B #$93, MR1A Set port A to 8-bit, no parity, 1 stop bit, enable RxRTS
-            ;MOVE.B #$37, MR2A Set normal, TxRTS, TxCTS, 1 stop bit
-            ;MOVE.B #$05, CRA Enable A transmitter/recvr
-           
             MOVE.B #$00,ACR    selects baud rate set 1
-            MOVE.B #BAUD,CSRA  set 38.4k baud Rx/Tx
+            ;MOVE.B #$80,ACR    selects baud rate set 2
+            MOVE.B #BAUD,CSRA  set 19.2k (1: 36.4k) baud Rx/Tx
             MOVE.B #$13,MR1A   8-bits, no parity, 1 stop bit
             MOVE.B #$07,MR2A   07 sets: Normal mode, CTS and RTS disabled, stop bit length = 1
             MOVE.B #$05,CRA    enable Tx and Rx
-            MOVE.B 66, IVR     set interrupt vector
             
+            MOVE.B #$00,IMR
             RTS
             
 
 
-; TODO HASCHAR, move getchar code into interrupt
-; Get_CHAR puts the read character into D0
-GETCHAR_A
-            MOVE.L D1,-(SP) Save working register
-In_poll_A   MOVE.B SRA, D1  Read the A status register
-            BTST #RxRDY, D1 Test reciever ready status
-            BEQ In_poll_A   UNTIL char recieved
+; GETCHAR puts the read character into D0
+GETCHAR_A   MOVE.B SRA, D0  Read the A status register
+            BTST #RxRDY, D0 Test reciever ready status
+            BEQ GETCHAR_A   UNTIL char recieved
             MOVE.B RBA, D0  Read the character into D0
-            MOVE.B DUART_COUNT, D1
-            ADD.B #$1, D1
-            MOVE.B D1, DUART_COUNT
-            MOVE.B D1, LED
-            MOVE.L (SP)+, D1 Restore working register
             RTS
 
 ; PUTCHAR_A outputs D0 to the DUART channel A
-PUTCHAR_A
-            MOVE.L D1, -(SP)
-Out_poll_A  MOVE.B SRA, D1   
-            BTST   #TxRDY, D1
-            BEQ    Out_poll_A
+PUTCHAR_A   MOVE.W D0, -(SP)
+PUTCHAR_Apl  MOVE.B SRA, D0
+            BTST   #TxRDY, D0
+            BEQ    PUTCHAR_Apl
+            MOVE.W (SP)+, D0
             MOVE.B D0, TBA
-            MOVE.L (SP)+, D1
             RTS
+            
+* TODO Callable RAM routines
 
 
 * Subroutine DEC2BIN -- Convert ASCII Decimal to Binary
@@ -333,12 +474,29 @@ B2H_End:    ROR.L   #8, D0        ;One more rotate so that D0 is in correct orde
             MOVE.W  (SP)+, D1     ;Restore D1
             RTS
 
-SRecPrompt  DC.B CR,LF,'Press s to upload an S record.',CR,LF,0
-SRecInsert  DC.B 'Begin:',0
+MAINPrompt  DC.B       '----- ROM Burner -----',CR,LF
+            DC.B       'b: Upload a boot record',CR,LF
+            DC.B       's: Upload an S record',CR,LF
+            DC.B       'c: Copy low to high',CR,LF
+            DC.B       'h: (Toggle) Hotswap ROM',CR,LF
+            DC.B       'r: Refresh',CR,LF,CR,LF,0
+ENDLine     DC.B       '----------------------',CR,LF,0
+SRecInsert  DC.B CR,LF,'Insert next line:',CR,LF,0
 SRecError   DC.B CR,LF,'Error reading S record.',CR,LF,0
 EOSString   DC.B CR,LF,'End of stream; press e to transfer execution!',CR,LF,0
+HotEnable   DC.B 'HOTSWAPPING ENABLED',CR,LF,'Hold reset button &',CR,LF,'carefully move the',CR,LF,'chips from their',CR,LF,'sockets, then press h.',CR,LF,0
+TableString DC.B 'Chip #:          HI LO',CR,LF,0
+MANUString  DC.B 'Manufacturer ID: ',0
+IDString    DC.B 'Product ID:      ',0
+CLS         DC.B $1B,'[2J',$1B,'[H',0
+PressKeyStr DC.B CR,LF,'Press any key to continue...',CR,LF,0
+ErasingHi   DC.B 'Erasing high...',CR,LF,0
+ErasedHi    DC.B 'Erased high.',CR,LF,0
+
+
             END     MAIN
             
+
 
 
 

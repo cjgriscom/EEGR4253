@@ -9,7 +9,7 @@ echo -n x > /dev/ttyUSB0
 echo -n s > /dev/ttyUSB0
 #cat /dev/ttyUSB0 &
 sleep 0.1
-cat Assembly/Monitor.S68 | while read line
+cat Assembly/ROMBurner.S68 | while read line
 do
    sleep 0.02
    echo $line >> /dev/ttyUSB0 # This echo includes \r but not \n

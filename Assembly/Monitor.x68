@@ -8,7 +8,7 @@ SIM         EQU 0       ;0 = hardware state, 1 = simulation state
 BUFFER_A_SP EQU $104000
 BUFFER_A_EP EQU $104004
 BUFFER_A_S  EQU $104008
-BUFFER_A_E  EQU $104020
+BUFFER_A_E  EQU $104100
 SUPER_STACK EQU $103F00
 TIMER_SEC   EQU $103F04
 TIMER_MS    EQU $103F08
@@ -97,6 +97,25 @@ EXCEPTION   LEA SUPER_STACK, SP
             JMP MAIN
 
             ORG     $160000
+            
+* Subroutine ROM_PRESEQ
+* Keys the 2-cycle software control codes into both rom chips
+ROM_PRESEQ  MOVE.W #$AAAA, $00AAAA
+            MOVE.W #$5555, $005554
+            RTS
+            
+* Subroutine ROM_CODES
+* Fetches the manufacturer ID byte from 2 ROM chips into D0.W
+* Fetches the software product ID byte from 2 ROM chips into D0.W
+ROM_CODES   JSR ROM_PRESEQ
+            MOVE.W #$9090, $00AAAA ;Software entry mode
+           
+            MOVE.W $000000, D0 ; Manu ID (BF)
+            MOVE.W $000002, D1 ; Dev ID (B7)
+            
+            MOVE.W #$F0F0, $00ABC0 ;Exit software entry mode
+            RTS
+            
 ; begin program
 MAIN        ; Init buffers
             MOVE.L #BUFFER_A_S, BUFFER_A_SP
@@ -109,8 +128,39 @@ MAIN        ; Init buffers
             
             JSR DISABLE_I ;Disable all interrupts
 
+            ; ROM Code
+            JSR GETCHAR_A
+            JSR ROM_CODES
             
-sLOOP       MOVE.B CPLD_STATUS, LED
+            JSR BIN2HEX
+            ROL.L #8, D0
+            JSR PUTCHAR_A
+            ROL.L #8, D0
+            JSR PUTCHAR_A
+            ROL.L #8, D0
+            JSR PUTCHAR_A
+            ROL.L #8, D0
+            JSR PUTCHAR_A
+            
+            MOVE.W D1, D0
+            JSR BIN2HEX
+            ROL.L #8, D0
+            JSR PUTCHAR_A
+            ROL.L #8, D0
+            JSR PUTCHAR_A
+            ROL.L #8, D0
+            JSR PUTCHAR_A
+            ROL.L #8, D0
+            JSR PUTCHAR_A
+            
+            
+LOOP        JMP LOOP
+            
+sLOOP       MOVE.B LED, D0
+            ADDI #1, D0
+            MOVE.B D0, LED
+            
+            ;MOVE.B CPLD_STATUS, LED
             
             MOVE.L #SRecPrompt, A0 -- Press s to load s record
             JSR PUTSTR
