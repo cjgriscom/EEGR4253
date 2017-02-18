@@ -66,17 +66,18 @@ end MCE_CJG;
 architecture Behavioral of MCE_CJG is
 	signal power_on		: STD_LOGIC := '0'; -- 0 until reset is pressed
 	signal data_out		: unsigned(7 downto 0);
-	signal CPLD_mask		: unsigned(3 downto 0)  := "0000";
+	signal CPLD_mask		: unsigned(4 downto 0)  := "00000";
 	signal GPIO_Buf1		: unsigned(7 downto 0)  := (others=>'0');
 	signal prescaler_cpu : STD_LOGIC := '0';
 	signal prescaler_irq : unsigned(14 downto 0) := (others=>'0');
 	signal reset_db      : STD_LOGIC := '1';
+	signal hotswap_db    : STD_LOGIC := '0';
 	signal RAM_STROBE		: STD_LOGIC;
 	signal ROM_STROBE		: STD_LOGIC;
 	signal DUART_STROBE	: STD_LOGIC;
 	signal IPL6				: STD_LOGIC := '1'; -- Signal that indicates a high-level interrupt req
 	signal CPU_CLK_pre	: STD_LOGIC;
-	signal CPU_CLK_F_pre	: STD_LOGIC;
+	signal CPU_CLK_pre2	: STD_LOGIC;
 	signal speaker_pre	: STD_LOGIC;
 	signal CPU_IACK_ah	: STD_LOGIC;
 	signal GPIO_IACK_ah	: STD_LOGIC;
@@ -86,8 +87,8 @@ architecture Behavioral of MCE_CJG is
 begin
 
 -- CPLD MASK --
---     3       2              1             0
---    Spk  Reset_UART  En_GPI_FlowCtrl  En_GPO_Addr  
+--      4          3       2              1             0
+-- ROM_Hotswap    Spk  Reset_UART  En_GPI_FlowCtrl  Storage  
 
 CPU_IACK_ah <= FC0 and FC1 and FC2;
 IPL6_IACK_ah <= CPU_IACK_ah and not IPL6;
@@ -113,25 +114,19 @@ D <= data_out when ( (((A23 = '1' or A2 = "011") and CPU_RW = '1' and CPU_AS='0'
 cpld_write: process (CPU_AS) begin
 	if rising_edge(CPU_AS) then -- AS has just activated (CPU WRITES ON RISING EDGE)
 		if (A23 = '0' and A2 = "011" and CPU_RW = '0' and power_on = '1') then -- Read 1XX0 - Mask   or  1XX1 - GPI
-			CPLD_mask(0) <= D(0);
 			CPLD_mask(1) <= D(1);
 			CPLD_mask(2) <= D(2);
 			CPLD_mask(3) <= D(3);
+			CPLD_mask(4) <= D(4);
 		elsif (A23 = '1' and CPU_RW = '0' and power_on = '1') then
 			GPIO_Buf1(0) <= D(0);
 			GPIO_Buf1(1) <= D(1);
 			GPIO_Buf1(2) <= D(2);
 			GPIO_Buf1(3) <= D(3);
 			GPIO_Buf1(4) <= D(4);
-			if CPLD_mask(0) = '1' then -- Expose address
-				GPIO_Buf1(5) <= A2(0);
-				GPIO_Buf1(6) <= A2(1);
-				GPIO_Buf1(7) <= A2(2);
-			else
-				GPIO_Buf1(5) <= D(5);
-				GPIO_Buf1(6) <= D(6);
-				GPIO_Buf1(7) <= D(7);
-			end if;
+			GPIO_Buf1(5) <= D(5);
+			GPIO_Buf1(6) <= D(6);
+			GPIO_Buf1(7) <= D(7);
 		end if;
 	end if;
 end process cpld_write;
@@ -139,11 +134,11 @@ end process cpld_write;
 cpld_read: process (CPU_AS) begin
 	if falling_edge(CPU_AS) then
 		if (A23 = '0' and A2 = "011" and CPU_IACK_ah = '0') then
-			data_out(0) <= CPLD_mask(0);
+			data_out(0) <= '0';
 			data_out(1) <= CPLD_mask(1);
 			data_out(2) <= CPLD_mask(2);
 			data_out(3) <= CPLD_mask(3);
-			data_out(4) <= '0';
+			data_out(4) <= CPLD_mask(4);
 			data_out(5) <= '0';
 			data_out(6) <= '0';
 			data_out(7) <= '0';
@@ -171,7 +166,7 @@ cpld_read: process (CPU_AS) begin
 end process cpld_read;
 
 Q2_Enable <= '1';
-CPU_BERR <= '1'; -- No bus errors here!
+CPU_BERR <= '1';
 CPU_BR <= '1'; -- No bus requests
 CPU_BGACK <= '1'; -- No bus grants... 5 hours worth of debugging here -_-
 CPU_RESET <= '0' when reset_db='1' or power_on='0' else 'Z'; -- (0 until reset is hit)
@@ -188,7 +183,8 @@ CPU_DTACK <= CPU_AS when (IPL6_IACK_ah or GPIO_IACK_ah) = '1' else -- Interrupts
 		'1'  			  when CPU_AS = '1' else -- No address selected
 		GPIO_DTACK    when A23 = '1' and CPLD_mask(0) = '1' else    -- Peripherals with flow control
 		DUART_DTACK   when (A2 = "010") else   -- DUART
-		'0';                                 -- RAM, ROM, CPLD-mask
+		CPLD_mask(4)  when (A2 = "000") else -- ROM, take hotswapping into account
+		'0';                                 -- RAM, CPLD-mask
 
 ROM_STROBE	 <= '1' when (CPU_AS = '0' and A23 = '0' and A2 = "000" and power_on = '1' and CPU_IACK_ah = '0') else '0';
 RAM_STROBE	 <= '1' when (CPU_AS = '0' and A23 = '0' and A2 = "001" and power_on = '1' and CPU_IACK_ah = '0') else '0';
@@ -226,7 +222,7 @@ CPU_IPL2 <= IPL6;
 GPO <= GPIO_Buf1;
 
 --------------20 MHZ CLOCK----------------
-CPU_CLK <= CPU_CLK_pre;
+CPU_CLK <= CPU_CLK_pre2;
 
 -- 20 MHz divider
 gen_count : process (Q2_Clock)
@@ -234,6 +230,11 @@ begin
 	if (rising_edge(Q2_Clock)) then
 		if prescaler_cpu = '1' then -- Divides by a total of 4 with inversions
 			CPU_CLK_pre <= not CPU_CLK_pre;
+			if (hotswap_db = '0') then
+				CPU_CLK_pre2 <= not CPU_CLK_pre2;
+			else
+				CPU_CLK_pre2 <= '0';
+			end if;
 		end if;
 		prescaler_cpu <= not prescaler_cpu;
 	end if;
@@ -250,12 +251,17 @@ begin
 			prescaler_irq <= (others => '0');
 			speaker_pre <= not speaker_pre; -- Invert speaker clock
 			if Reset_In = '1' then
-			   if reset_db = '0' then
-					power_on <= not power_on;
+				if CPLD_mask(4) = '1' then
+					hotswap_db <= '1';
+				else
+					if reset_db = '0' then
+						power_on <= not power_on;
+					end if;
+					reset_db <= '1';
 				end if;
-				reset_db <= '1';
 			else
 				reset_db <= '0';
+				hotswap_db <= '0';
 				IPL6 <= '0'; -- Trigger interrupt if not resetting
 			end if;
 		else
