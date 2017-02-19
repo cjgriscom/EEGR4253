@@ -22,7 +22,7 @@ IVR         EQU $2C0001 Interrupt vector register
 
 RxRDY       EQU 0       Recieve ready bit position
 TxRDY       EQU 2       Transmit ready bit position
-BAUD        EQU $CC     baud rate value = 19200 baud
+BAUD        EQU $CC     baud rate value = 38400 baud
 
 BS          EQU $08
 CR          EQU $0D
@@ -34,7 +34,7 @@ N_CONFIRMS  EQU 2 ; How many times should the toggle bit be verified?
 
 ; D6: Toggle bit status
 ; D7: Hotswap mode
-
+; A2: Subroutine address for write operation
 ; begin program
 ; TODO repplace with RAM subroutine
 MAIN        OR.W  #$0700, SR 
@@ -44,7 +44,8 @@ MAIN        OR.W  #$0700, SR
             
             JSR INIT_DUART TODO replace with RAM subroutine
             
-LOOP        MOVE.L #CLS, A0
+LOOP        CLR.B D7 Disable hotswap mode 
+hLOOP       MOVE.L #CLS, A0
             JSR PUTSTR
             MOVE.L #MAINPrompt, A0
             JSR PUTSTR
@@ -65,6 +66,10 @@ LOOP        MOVE.L #CLS, A0
             JSR PUTSTR
             MOVE.W D1, D0
             JSR PRINT2CODE
+            MOVE.L #DatString, A0
+            JSR PUTSTR
+            MOVE.W $000000, D0
+            JSR PRINT2CODE
             BRA Endl
 PrHot       MOVE.L #HotEnable, A0
             JSR PUTSTR
@@ -73,20 +78,24 @@ Endl        MOVE.L #EndLine, A0
             JSR PUTSTR
             
             
-            JSR GETCHAR_A
+LOOP_GET    JSR GETCHAR_A
             
             CMP.B #$00, D7 If hotswap mode
             BNE SkipNonHot
             
-            CMP.B #'s', D0 If user says 's', load s record
-            BEQ S_REC_UP 
+            CMP.B #'b', D0 If user says 'b', load s record
+            BEQ S_REC_BOOT 
             
             CMP.B #'c', D0 If user says 'c', enter copy mode
             BEQ COPY_LO_HI
             
 SkipNonHot  CMP.B #'h', D0 If user says 'h', hotswap
             BEQ hotswap
-            BRA LOOP
+            
+            CMP.B #'r', D0 If user says 'r', refresh
+            BEQ LOOP
+            
+            BRA LOOP_GET
             
 PRINT2CODE  JSR BIN2HEX
             ROL.L #8, D0
@@ -113,7 +122,7 @@ presskey    MOVE.L #PressKeyStr, A0
 hotswap     
             EOR.B #$10, CPLD_STATUS
             EOR.B #$FF, D7 Toggle hotswap mode
-            BRA LOOP
+            BRA hLOOP
 
             
 * Subroutine ROM_PRES_B
@@ -122,17 +131,6 @@ ROM_PRES_B  MOVE.W #$AAAA, $00AAAA
             MOVE.W #$5555, $005554
             RTS
             
-* Subroutine ROM_PRES_H
-* Keys the 2-cycle software control codes into high rom chip
-ROM_PRES_H  MOVE.B #$AA, $00AAAA
-            MOVE.B #$55, $005554
-            RTS
-            
-* Subroutine ROM_PRES_L
-* Keys the 2-cycle software control codes into low rom chip
-ROM_PRES_L  MOVE.B #$AA, $00AAAB
-            MOVE.B #$55, $005555
-            RTS
             
 * Subroutine ROM_CODES
 * Fetches the manufacturer ID byte from 2 ROM chips into D0.W
@@ -146,22 +144,38 @@ ROM_CODES   JSR ROM_PRES_B
             MOVE.W #$F0F0, $00ABC0 ;Exit software entry mode
             RTS
             
- ;----- Copy Routine -----;
-COPY_LO_HI  
-            LEA $000000, A6 Store high-byte toggling address here
+ERASE_HIGH  LEA $000000, A6 Store high-byte toggling address here
             MOVE.L #ErasingHi, A0
             JSR PUTSTR
-            JSR ROM_PRES_H
+            JSR ROM_PRES_B
             MOVE.W #$8000, $00AAAA ;Erase High pt1
-            JSR ROM_PRES_H
+            JSR ROM_PRES_B
             MOVE.W #$1000, $00AAAA ;Erase High pt2
             JSR CP_toggle   Wait until erased
             MOVE.L #ErasedHi, A0
             JSR PUTSTR
+            RTS
             
+ERASE_LOW   LEA $000001, A6 Store low-byte toggling address here
+            MOVE.L #ErasingLo, A0
+            JSR PUTSTR
+            JSR ROM_PRES_B
+            MOVE.W #$0080, $00AAAA ;Erase High pt1
+            JSR ROM_PRES_B
+            MOVE.W #$0010, $00AAAA ;Erase High pt2
+            JSR CP_toggle   Wait until erased
+            MOVE.L #ErasedLo, A0
+            JSR PUTSTR
+            RTS
             
-COPY_LOOP   MOVE.L #$100000, D4 ; D4 contains finished address 100000
-COPY_WRITE  JSR ROM_PRES_H
+ ;----- Copy Routine -----;
+COPY_LO_HI  
+            JSR ERASE_HIGH
+            LEA $000000, A6 Store high-byte toggling address here
+
+            
+COPY_LOOP   
+COPY_WRITE  JSR ROM_PRES_B
             MOVE.W #$A000, $00AAAA ;Write pt 1
             MOVE.B 1(A6), D0 ; Get byte
             MOVE.B D0, (A6)  ; Write byte
@@ -183,37 +197,65 @@ COPY_WRITE  JSR ROM_PRES_H
             CMP.L D4, D1  ; Is addr exceeding ROM bounds?
             BEQ COPY_DONE ; Done; return to menu
             
-            JSR CP_toggle
-COPY_VER   
-            ;CMP.B -2(A6), D0
-            ;BNE COPY_VER
-            ;JSR PRINT2CODE
-            ;JSR PUTCHAR_A
+            JSR CP_toggle ; Verify using toggle bit
+
             BRA COPY_WRITE
             
 COPY_DONE   BRA PressKey
             
 ; Sub: Wait for toggle bit to stop toggling on hi ROM
 ;  A6: the address to be checked
-CP_toggle   MOVE.B #1, D5      Clear D5 (ROL status)
+CP_toggle   MOVE.B #1, D4      Clear D5 (ROL status)
             MOVE.B (A6), D1    Read toggle bit to D1
 CP_toggle2  ;MOVE.B #'x', D0    TODO remove confirm code
             ;JSR PUTCHAR_A
-            BTST #N_CONFIRMS, D5        Test bit three (fourth)
+            BTST #N_CONFIRMS, D4 Test bit for N confirms
             BNE CP_tog_RET     If that bit is high, confirmation succeeded 3 times
             MOVE.B D1, D2      Save previous toggle bit
             MOVE.B (A6), D1    Read new toggle bit to D1
             EOR.B D1, D2       EOR new byte onto old one
-            BTST #6, D2        If EOR indicates the byts are different (bit6 = 1)
+            BTST #6, D2        If EOR indicates the byts are different (toggle bit6 = 1)
             BNE CP_toggle2     If same (0), continue.  If different (1), start over
-            ROL.B #1, D5       Rotate D5 bit (same)
+            ROL.B #1, D4       Rotate D5 bit (same)
             ;MOVE.B #'0', D0    TODO remove confirm code
             ;JSR PUTCHAR_A
             BRA CP_toggle2     Return
 CP_tog_RET  RTS
  ;----- End Copy Routine -----;
  
+* Subroutine WRITE_BYTE
+* D1: Data Byte
+* A1: Address for write
+* D3: Reserved
+WRITE_BYTE  
+            MOVE.L A1, D3
+            BTST #0, D3
+            BNE WRITE_ODD     If set (1), go to odd
+            
+            ;Even/High
+WRITE_EVEN  JSR ROM_PRES_B
+            MOVE.W #$A000, $00AAAA ;Erase High pt2;Write pt 1
+            MOVE.B D1, (A1)  ; Write byte
+            MOVE.L A1, A6 Store toggling address here
+            ;MOVE.B D1, LED ; debug
+            JSR CP_toggle
+            RTS
+            
+            ;Odd/Low
+WRITE_ODD   JSR ROM_PRES_B
+            MOVE.W #$00A0, $00AAAA ;Erase High pt2;Write pt 1
+            MOVE.B D1, (A1)  ; Write byte
+            MOVE.L A1, A6 Store toggling address here
+            ;MOVE.B D1, LED ; debug
+            JSR CP_toggle
+            RTS
+ 
+ 
  ;----- S Records -----;
+S_REC_BOOT  JSR ERASE_HIGH
+            JSR ERASE_LOW
+            LEA WRITE_BYTE, A2 ; Load write procedure into A2
+            
 S_REC_UP    BRA NEXTLN
             
             ; Eat checksum and carriage return
@@ -263,8 +305,7 @@ S0          CMP.B #$30, D7 If this is a S0 record...
             BNE S1
             
             ; S0 Code: Informational Data (echo ASCII)
-            MOVE.B D1, D0
-            JSR PUTCHAR_A
+            NOP
             ; End S0 Code
             BRA SIZELOOP  Branch back to loop
 
@@ -281,7 +322,7 @@ S1          CMP.B #$31, D7 If this is a S1 record...
             BRA SIZELOOP  Branch back to loop
             
 S1_2_Write  ; Else this is i > 3
-            MOVE.B D1, (A1)
+            JSR (A2) ; Jump to previously defined write routine location
             ADD #1, A1 Advance to next byte
             CLR.L D1      Clear D1 for next round
             ; End S1 Code
@@ -314,11 +355,12 @@ S8_Valid    CMP.W D6, D5  Continue if i /= size
             
             MOVE.L D1, A1 Move to A1
             ; Eat carriage return and checksum
+            
             JSR GETCHAR_A chk
             JSR GETCHAR_A chk
             JSR GETCHAR_A CR
             JSR GETCHAR_A LF 
-            BRA EXECUTE Execute!
+            BRA presskey
             
             
 S9          CMP.B #$39, D7 If this is a S9 record...
@@ -330,13 +372,7 @@ ERROR       MOVE.L #SRecError, A0
             JSR PUTSTR
             JSR LOOP
             
-EXECUTE     MOVE.L #EOSString, A0 -- End of stream; press e to begin execution!!!
-            JSR PUTSTR
-            JSR GETCHAR_A
-            CMP.B #$65, D0 If user says 'e', load s record
-            BNE LOOP Otherwise start over :(
-            MOVE.B #$F0, LED  Turn on all LEDs for warning
-            JMP     (A1)
+
  ;------ S Records ------;
 
             ; Print String in A0
@@ -390,20 +426,6 @@ PUTCHAR_Apl  MOVE.B SRA, D0
             RTS
             
 * TODO Callable RAM routines
-
-
-* Subroutine DEC2BIN -- Convert ASCII Decimal to Binary
-* Inputs: D0 - ASCII Byte
-* Output: D0 - Converted Binary Byte
-*         Carry Bit - set to 1 on error
-DEC2BIN:    CMP.B   #$30, D0   ; Check if less than ASCII 0
-            BLO     DEC2BINERR
-            CMP.B   #$39, D0   ; Check if greater than ASCII 9
-            BHI     DEC2BINERR
-            SUB.B   #$30, D0   ; Subtract 30 (ASCII 0) and move on
-            RTS
-DEC2BINERR: ORI     #$01, SR   ; Error, set Status Register carry bit               
-            RTS
 
 * Subroutine HEX2BIN -- Convert ASCII Hex to Binary
 * Inputs: D0 - ASCII Byte
@@ -476,7 +498,6 @@ B2H_End:    ROR.L   #8, D0        ;One more rotate so that D0 is in correct orde
 
 MAINPrompt  DC.B       '----- ROM Burner -----',CR,LF
             DC.B       'b: Upload a boot record',CR,LF
-            DC.B       's: Upload an S record',CR,LF
             DC.B       'c: Copy low to high',CR,LF
             DC.B       'h: (Toggle) Hotswap ROM',CR,LF
             DC.B       'r: Refresh',CR,LF,CR,LF,0
@@ -488,14 +509,19 @@ HotEnable   DC.B 'HOTSWAPPING ENABLED',CR,LF,'Hold reset button &',CR,LF,'carefu
 TableString DC.B 'Chip #:          HI LO',CR,LF,0
 MANUString  DC.B 'Manufacturer ID: ',0
 IDString    DC.B 'Product ID:      ',0
+DatString   DC.B 'Data at $0:      ',0
 CLS         DC.B $1B,'[2J',$1B,'[H',0
 PressKeyStr DC.B CR,LF,'Press any key to continue...',CR,LF,0
 ErasingHi   DC.B 'Erasing high...',CR,LF,0
 ErasedHi    DC.B 'Erased high.',CR,LF,0
+ErasingLo   DC.B 'Erasing low...',CR,LF,0
+ErasedLo    DC.B 'Erased low.',CR,LF,0
 
 
             END     MAIN
             
+
+
 
 
 
