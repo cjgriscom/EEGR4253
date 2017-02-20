@@ -184,8 +184,7 @@ CPU_DTACK <= CPU_AS when (IPL6_IACK_ah or GPIO_IACK_ah) = '1' else -- Interrupts
 		'1'  			  when CPU_AS = '1' else -- No address selected
 		GPIO_DTACK    when A23 = '1' and CPLD_mask(0) = '1' else    -- Peripherals with flow control
 		DUART_DTACK   when (A2 = "010") else   -- DUART
---		CPLD_mask(4)  when (A2 = "000") else -- ROM, take hotswapping into account
-		'0';                                 -- RAM, CPLD-mask
+		'0';                                 -- ROM, RAM, CPLD-mask
 
 ROM_STROBE	 <= '1' when (CPU_AS = '0' and A23 = '0' and A2 = "000" and power_on = '1' and CPU_IACK_ah = '0') else '0';
 RAM_STROBE	 <= '1' when (CPU_AS = '0' and A23 = '0' and A2 = "001" and power_on = '1' and CPU_IACK_ah = '0') else '0';
@@ -215,10 +214,10 @@ DUART_IACK <= not DUART_IACK_ah;
 GPIO_IACK  <= GPIO_IACK_ah when CPLD_mask(1) = '1' else 'Z';
 GPIO_AS    <= (A23 and not CPU_AS and power_on) when CPLD_mask(1) = '1' else 'Z';
 
- -- Trigger interrupt; GPIO Level 1, DUART level 2, IPL6
-CPU_IPL0 <= not (CPLD_mask(1) and GPIO_IPL0);
-CPU_IPL1 <= IPL6 and DUART_IRQ;
-CPU_IPL2 <= IPL6;
+ -- Trigger interrupt; GPIO Level 2, DUART level 4, IPL6
+CPU_IPL0 <= '1';
+CPU_IPL1 <= IPL6 and not (CPLD_mask(1) and GPIO_IPL0 and DUART_IRQ);
+CPU_IPL2 <= IPL6 and DUART_IRQ;
 
 GPO <= GPIO_Buf1;
 
@@ -252,7 +251,7 @@ begin
 			prescaler_irq <= (others => '0');
 			speaker_pre <= not speaker_pre; -- Invert speaker clock
 			if Reset_In = '1' then
-				if CPLD_mask(4) = '1' then
+				if (CPLD_mask(4) xor hotswap_xor) = '1' then
 					hotswap_db <= '1';
 					hotswap_xor <= not hotswap_xor; -- Notifies CPU that hotswap is complete
 				else
