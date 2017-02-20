@@ -72,6 +72,7 @@ architecture Behavioral of MCE_CJG is
 	signal prescaler_irq : unsigned(14 downto 0) := (others=>'0');
 	signal reset_db      : STD_LOGIC := '1';
 	signal hotswap_db    : STD_LOGIC := '0';
+	signal hotswap_xor   : STD_LOGIC := '0';
 	signal RAM_STROBE		: STD_LOGIC;
 	signal ROM_STROBE		: STD_LOGIC;
 	signal DUART_STROBE	: STD_LOGIC;
@@ -117,7 +118,7 @@ cpld_write: process (CPU_AS) begin
 			CPLD_mask(1) <= D(1);
 			CPLD_mask(2) <= D(2);
 			CPLD_mask(3) <= D(3);
-			CPLD_mask(4) <= D(4);
+			CPLD_mask(4) <= D(4) xor hotswap_xor;
 		elsif (A23 = '1' and CPU_RW = '0' and power_on = '1') then
 			GPIO_Buf1(0) <= D(0);
 			GPIO_Buf1(1) <= D(1);
@@ -138,7 +139,7 @@ cpld_read: process (CPU_AS) begin
 			data_out(1) <= CPLD_mask(1);
 			data_out(2) <= CPLD_mask(2);
 			data_out(3) <= CPLD_mask(3);
-			data_out(4) <= CPLD_mask(4);
+			data_out(4) <= CPLD_mask(4) xor hotswap_xor;
 			data_out(5) <= '0';
 			data_out(6) <= '0';
 			data_out(7) <= '0';
@@ -183,7 +184,7 @@ CPU_DTACK <= CPU_AS when (IPL6_IACK_ah or GPIO_IACK_ah) = '1' else -- Interrupts
 		'1'  			  when CPU_AS = '1' else -- No address selected
 		GPIO_DTACK    when A23 = '1' and CPLD_mask(0) = '1' else    -- Peripherals with flow control
 		DUART_DTACK   when (A2 = "010") else   -- DUART
-		CPLD_mask(4)  when (A2 = "000") else -- ROM, take hotswapping into account
+--		CPLD_mask(4)  when (A2 = "000") else -- ROM, take hotswapping into account
 		'0';                                 -- RAM, CPLD-mask
 
 ROM_STROBE	 <= '1' when (CPU_AS = '0' and A23 = '0' and A2 = "000" and power_on = '1' and CPU_IACK_ah = '0') else '0';
@@ -253,6 +254,7 @@ begin
 			if Reset_In = '1' then
 				if CPLD_mask(4) = '1' then
 					hotswap_db <= '1';
+					hotswap_xor <= not hotswap_xor; -- Notifies CPU that hotswap is complete
 				else
 					if reset_db = '0' then
 						power_on <= not power_on;
