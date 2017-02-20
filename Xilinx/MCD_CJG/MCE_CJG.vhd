@@ -251,7 +251,7 @@ begin
 			prescaler_irq <= (others => '0');
 			speaker_pre <= not speaker_pre; -- Invert speaker clock
 			if Reset_In = '1' then
-				if (CPLD_mask(4) xor hotswap_xor) = '1' then
+				if (CPLD_mask(4) xor hotswap_xor) = '1' and hotswap_db = '0' then
 					hotswap_db <= '1';
 					hotswap_xor <= not hotswap_xor; -- Notifies CPU that hotswap is complete
 				else
