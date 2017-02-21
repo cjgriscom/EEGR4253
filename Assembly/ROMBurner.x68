@@ -33,28 +33,16 @@ N_CONFIRMS  EQU 2 ; How many times should the toggle bit be verified?
             ORG     $160000
 
 ; D6: Toggle bit status
-; D7: Hotswap mode
 ; A2: Subroutine address for write operation
 ; begin program
-; TODO repplace with RAM subroutine
 MAIN        OR.W  #$0700, SR 
-            CLR.B D7 Store hotswap mode here
-            MOVE.L #$2D2F7C5C, D6 Store cycle image here -\|/
-            
-            
+
             JSR INIT_DUART TODO replace with RAM subroutine
             
-LOOP        CLR.B D7 Disable hotswap mode 
-hLOOP       MOVE.L #CLS, A0
+LOOP        MOVE.L #CLS, A0
             JSR PUTSTR
             MOVE.L #MAINPrompt, A0
             JSR PUTSTR
-            
-            
-                        
-            CMP.B #$00, D7 If hotswap mode
-            BNE PrHot
-            
             
             JSR ROM_CODES ; Print manufacturer codes
             MOVE.L #TableString, A0
@@ -70,20 +58,13 @@ hLOOP       MOVE.L #CLS, A0
             JSR PUTSTR
             MOVE.W $000000, D0
             JSR PRINT2CODE
-            BRA Endl
-PrHot       MOVE.L #HotEnable, A0
-            JSR PUTSTR
-            
-Endl        MOVE.L #EndLine, A0
+            MOVE.L #EndLine, A0
             JSR PUTSTR
             
             
 LOOP_GET    JSR GETCHAR_A
             
-            CMP.B #$00, D7 If hotswap mode
-            BNE SkipNonHot
-            
-            CMP.B #'b', D0 If user says 'b', load s record
+            CMP.B #'b', D0 If user says 'b', load boot S record
             BEQ S_REC_BOOT 
             
             CMP.B #'c', D0 If user says 'c', enter copy mode
@@ -120,10 +101,20 @@ presskey    MOVE.L #PressKeyStr, A0
             BRA LOOP
 
 hotswap     
-            EOR.B #$10, CPLD_STATUS
-            EOR.B #$FF, D7 Toggle hotswap mode
-            BRA hLOOP
-
+   ;      4          3       2              1             0
+   ;  ROM_Hotswap    Spk  Reset_UART  En_GPI_FlowCtrl    N/A
+            MOVE.B #$AA, D0 LED Code
+            MOVE.L #HotEnable, A0 Notify user of instructions
+            JSR PUTSTR
+            EOR.B #$04, CPLD_STATUS Reset DUART
+            OR.B #$10, CPLD_STATUS Pause CPU
+            
+            ; Wait for reset button press...
+            
+            EOR.B #$04, CPLD_STATUS Resume DUART
+            JSR INIT_DUART
+            MOVE.B CPLD_STATUS, LED
+            BRA LOOP
             
 * Subroutine ROM_PRES_B
 * Keys the 2-cycle software control codes into both rom chips
@@ -142,6 +133,20 @@ ROM_CODES   JSR ROM_PRES_B
             MOVE.W $000002, D1 ; Dev ID (B7)
             
             MOVE.W #$F0F0, $00ABC0 ;Exit software entry mode
+            RTS
+            
+ERASE_BOOT  LEA $000000, A6 Store high-byte toggling address here
+            MOVE.L #ErasingBoot, A0
+            JSR PUTSTR
+            JSR ROM_PRES_B
+            MOVE.W #$8080, $00AAAA ;Erase sector pt1
+            JSR ROM_PRES_B
+            MOVE.W #$3030, (A6) ;Erase sector pt2
+            JSR CP_toggle   Wait until erased
+            LEA $000001, A6 Store low-byte toggling address here
+            JSR CP_toggle   Wait until erased
+            MOVE.L #ErasedBoot, A0
+            JSR PUTSTR
             RTS
             
 ERASE_HIGH  LEA $000000, A6 Store high-byte toggling address here
@@ -252,8 +257,7 @@ WRITE_ODD   JSR ROM_PRES_B
  
  
  ;----- S Records -----;
-S_REC_BOOT  JSR ERASE_HIGH
-            JSR ERASE_LOW
+S_REC_BOOT  JSR ERASE_BOOT
             LEA WRITE_BYTE, A2 ; Load write procedure into A2
             
 S_REC_UP    BRA NEXTLN
@@ -496,16 +500,15 @@ B2H_End:    ROR.L   #8, D0        ;One more rotate so that D0 is in correct orde
             MOVE.W  (SP)+, D1     ;Restore D1
             RTS
 
-MAINPrompt  DC.B       '----- ROM Burner -----',CR,LF
-            DC.B       'b: Upload a boot record',CR,LF
+MAINPrompt  DC.B       '------ ROM Burner ------',CR,LF
+            DC.B       'b: Write the boot record',CR,LF
             DC.B       'c: Copy low to high',CR,LF
-            DC.B       'h: (Toggle) Hotswap ROM',CR,LF
+            DC.B       'h: Pause and hotswap ROM',CR,LF
             DC.B       'r: Refresh',CR,LF,CR,LF,0
-ENDLine     DC.B       '----------------------',CR,LF,0
+ENDLine     DC.B       '------------------------',CR,LF,0
 SRecInsert  DC.B CR,LF,'Insert next line:',CR,LF,0
 SRecError   DC.B CR,LF,'Error reading S record.',CR,LF,0
-EOSString   DC.B CR,LF,'End of stream; press e to transfer execution!',CR,LF,0
-HotEnable   DC.B 'HOTSWAPPING ENABLED',CR,LF,'Hold reset button &',CR,LF,'carefully move the',CR,LF,'chips from their',CR,LF,'sockets, then press h.',CR,LF,0
+HotEnable   DC.B 'HOTSWAPPING ENABLED',CR,LF,'Carefully reseat the',CR,LF,'ROM chips, then press',CR,LF,'the reset button.',CR,LF,0
 TableString DC.B 'Chip #:          HI LO',CR,LF,0
 MANUString  DC.B 'Manufacturer ID: ',0
 IDString    DC.B 'Product ID:      ',0
@@ -516,10 +519,16 @@ ErasingHi   DC.B 'Erasing high...',CR,LF,0
 ErasedHi    DC.B 'Erased high.',CR,LF,0
 ErasingLo   DC.B 'Erasing low...',CR,LF,0
 ErasedLo    DC.B 'Erased low.',CR,LF,0
+ErasingBoot DC.B 'Erasing boot record ($0000 -> $1FFF)...',CR,LF,0
+ErasedBoot  DC.B 'Erased boot record.',CR,LF,0
 
 
             END     MAIN
             
+
+
+
+
 
 
 

@@ -1,8 +1,8 @@
 INTSTYLE=impact
-INFILE=\\letnet.net\fs\profiles\students\documents\chandlergriscom\GitHub\EEGR4253\Xilinx\MCD_CJG\impact.xsl
-OUTFILE=\\letnet.net\fs\profiles\students\documents\chandlergriscom\GitHub\EEGR4253\Xilinx\MCD_CJG\impact.xsl
+INFILE=/home/chandler/Homeschool/Semester6/Microcomputer/Xilinx/MCD_CJG/impact.xsl
+OUTFILE=/home/chandler/Homeschool/Semester6/Microcomputer/Xilinx/MCD_CJG/impact.xsl
 FAMILY=Single
 PART=Single
-WORKINGDIR=\\letnet.net\fs\profiles\students\documents\chandlergriscom\GitHub\EEGR4253\Xilinx\MCD_CJG
+WORKINGDIR=/home/chandler/Homeschool/Semester6/Microcomputer/Xilinx/MCD_CJG
 LICENSE=iMPACT
 USER_INFO=iMPACT

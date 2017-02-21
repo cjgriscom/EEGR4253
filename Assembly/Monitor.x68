@@ -8,7 +8,7 @@ SIM         EQU 0       ;0 = hardware state, 1 = simulation state
 BUFFER_A_SP EQU $104000
 BUFFER_A_EP EQU $104004
 BUFFER_A_S  EQU $104008
-BUFFER_A_E  EQU $104100
+BUFFER_A_E  EQU $104208
 SUPER_STACK EQU $103F00
 TIMER_SEC   EQU $103F04
 TIMER_MS    EQU $103F08
@@ -38,17 +38,27 @@ BAUD        EQU $CC     baud rate value = 19200 baud
 CR          EQU $0D
 LF          EQU $0A 
 
-IPL6_Loc    EQU     $110000
-DU_IP_Loc   EQU     $111000
-GPIO_IP_Loc EQU     $112000
-TRAP_0_Loc  EQU     $113000 ; These locs correspond to the current bootloader vectors
-TRAP_1_Loc  EQU     $114000
-TRAP_2_Loc  EQU     $115000
-EXP_Loc     EQU     $116000
-
-            ORG     $110000 ; Vector is set in bootloader
-IPL6        MOVE.W  SR, -(SP)
-            MOVE.L  D0, -(SP)
+START       ORG     $000000
+            DC.L    SUPER_STACK Initial Stack Pointer
+            DC.L    MAIN        Initial PC
+            DC.L    $001400   Berr
+            DC.L    $001400   Address Error
+            DC.L    $001400   Illegal Instruction
+            DC.L    $001400   Div by zero
+            
+            
+            ORG     $000084   TRAP vectors   
+            DC.L    $113000   33: TRAP_0
+            DC.L    $114000   34
+            DC.L    $115000   35
+            
+            ORG     $000100   Interrupt vectors   
+            DC.L    $112000   64: Should be GPIO IRQ
+            DC.L    $001000   65: Periodic
+            DC.L    $001200   66: DUART RxRDYA or RXRDYB
+            
+            ORG     $001000 ; Vector is set in bootloader
+IPL6        MOVE.L  D0, -(SP)
             MOVE.W  TIMER_MS, D0
             ADD.W   #$1, D0
             MOVE.W  D0, TIMER_MS
@@ -60,44 +70,86 @@ IPL6        MOVE.W  SR, -(SP)
             MOVE.B  D0, LED
             MOVE.L  D0, TIMER_SEC
 IRQ6_QUIT   MOVE.L  (SP)+, D0
-            MOVE.W  (SP)+, SR
             RTE
 
-            ORG     $111000 ; Vector is set in bootloader
-; DUART Interrupt... TODO check if it's from A or B serial (i.e. don't getchar)
-DUART_IRQ   MOVE.W SR, -(SP)
-            MOVE.L D0,-(SP)
+            ORG     $001200 ; Vector is set in bootloader
+
+; DUART Interrupt
+
+DUART_IRQ   MOVE.L D0,-(SP)
             MOVE.L A0,-(SP)
-TestA       MOVE.B IMR, D0    Read the mask register
-            BTST   #1, D0 Test Channel A interrupt (bit 1) bit 5 is B, bit 3 is counterReady
-            BEQ    TestB      If not channel A, goto channel B
-            MOVE.B RBA, D0    Read the character into D0
+TestA       MOVE.B SRA, D0  Read the A status register
+            BTST #RxRDY, D0 Test reciever A ready status
+            BEQ TestB  Goto B if no character in buffer
+            MOVE.B RBA, D0  Else, Read the character into D0
+            JSR PUTCHAR_A ; Echo TODO REMOVE
             
-            ; Circular queue write
+            ; Circular queue write A
             MOVE.L BUFFER_A_EP, A0 Load the end pointer
             MOVE.B D0, (A0)+       Insert the read byte
             CMP.L #BUFFER_A_E, A0 If not at end of buffer,
             BNE BUFFER_A_WF       Branch to finish
             MOVE.L #BUFFER_A_S, A0
 BUFFER_A_WF MOVE.L A0, BUFFER_A_EP
-
-            BRA    DU_Ret Return
             
+            BRA TestA Flush buffer again (if nothing exists it will branch to TestB)
 TestB
             
 DU_Ret      MOVE.L (SP)+, A0
             MOVE.L (SP)+, D0
-            MOVE.W (SP)+, SR
             RTE  Return from exception
             
-            ORG     $116000 ; Vector is set in bootloader
+            ORG     $001400 ; Vector is set in bootloader
 EXCEPTION   LEA SUPER_STACK, SP
             MOVE.L #EXPSTRING, A0
             JSR PUTSTR
             JMP MAIN
 
-            ORG     $160000
             
+            ; Begin program
+            ORG     $000400 ; Vector is set in bootloader
+MAIN        
+
+            ; Init buffers
+            MOVE.L #BUFFER_A_S, BUFFER_A_SP
+            MOVE.L #BUFFER_A_S, BUFFER_A_EP
+            
+            CLR.L  TIMER_MS
+            CLR.L  TIMER_SEC
+
+            JSR INIT_DUART
+
+            JSR ENABLE_I ;Disable all interrupts
+sLOOP       
+            
+            MOVE.L #SRecPrompt, A0 -- Press s to load s record
+            JSR PUTSTR
+getLOOP     JSR GETCHAR_A
+            CMP.B #'s', D0 If user says 's', load s record
+            BEQ S_REC_UP 
+            CMP.B #'i', D0 If user says 'i', disable interrupts
+            BEQ sDISABLE_I 
+            CMP.B #'I', D0 If user says 'I', enable interrupts
+            BEQ sENABLE_I 
+            CMP.B #'r', D0 If user says 'r', refresh
+            BEQ sLOOP
+            BRA getLOOP
+
+sDISABLE_I  JSR DISABLE_I
+            BRA sLOOP
+sENABLE_I   JSR ENABLE_I
+            BRA sLOOP
+            
+
+DISABLE_I   OR.W  #$0700, SR 
+            JSR DS_DUART_IR
+            RTS
+            
+ENABLE_I    AND.W #$F8FF, SR
+            JSR EN_DUART_IR
+            RTS
+
+
 * Subroutine ROM_PRESEQ
 * Keys the 2-cycle software control codes into both rom chips
 ROM_PRESEQ  MOVE.W #$AAAA, $00AAAA
@@ -114,83 +166,6 @@ ROM_CODES   JSR ROM_PRESEQ
             MOVE.W $000002, D1 ; Dev ID (B7)
             
             MOVE.W #$F0F0, $00ABC0 ;Exit software entry mode
-            RTS
-            
-; begin program
-MAIN        ; Init buffers
-            MOVE.L #BUFFER_A_S, BUFFER_A_SP
-            MOVE.L #BUFFER_A_S, BUFFER_A_EP
-
-            CLR.L  TIMER_MS
-            CLR.L  TIMER_SEC
-            
-            JSR INIT_DUART
-            
-            JSR DISABLE_I ;Disable all interrupts
-
-            ; ROM Code
-            JSR GETCHAR_A
-            JSR ROM_CODES
-            
-            JSR BIN2HEX
-            ROL.L #8, D0
-            JSR PUTCHAR_A
-            ROL.L #8, D0
-            JSR PUTCHAR_A
-            ROL.L #8, D0
-            JSR PUTCHAR_A
-            ROL.L #8, D0
-            JSR PUTCHAR_A
-            
-            MOVE.W D1, D0
-            JSR BIN2HEX
-            ROL.L #8, D0
-            JSR PUTCHAR_A
-            ROL.L #8, D0
-            JSR PUTCHAR_A
-            ROL.L #8, D0
-            JSR PUTCHAR_A
-            ROL.L #8, D0
-            JSR PUTCHAR_A
-            
-            
-LOOP        JMP LOOP
-            
-sLOOP       MOVE.B LED, D0
-            ADDI #1, D0
-            MOVE.B D0, LED
-            
-            ;MOVE.B CPLD_STATUS, LED
-            
-            MOVE.L #SRecPrompt, A0 -- Press s to load s record
-            JSR PUTSTR
-            JSR GETCHAR_A
-            CMP.B #'s', D0 If user says 's', load s record
-            BEQ S_REC_UP 
-            CMP.B #'h', D0 If user says 'h', halt execution
-            BEQ hotswap
-            CMP.B #'i', D0 If user says 'i', disable interrupts
-            BEQ sDISABLE_I 
-            CMP.B #'I', D0 If user says 'I', enable interrupts
-            BEQ sENABLE_I 
-            BRA sLOOP
-
-sDISABLE_I  JSR DISABLE_I
-            BRA sLOOP
-sENABLE_I   JSR ENABLE_I
-            BRA sLOOP
-            
-hotswap     MOVE.B CPLD_STATUS, D0
-            EOR.B #$10, D0
-            MOVE.B D0, CPLD_STATUS
-            BRA sLOOP
-
-DISABLE_I   OR.W  #$0700, SR 
-            JSR DS_DUART_IR
-            RTS
-            
-ENABLE_I    AND.W #$F8FF, SR
-            JSR EN_DUART_IR
             RTS
 
  ;----- S Records -----;
@@ -370,7 +345,7 @@ DS_DUART_IR MOVE.B #$00, IMR    set interrupt masks to nothing
 
 ; WARNING WARNING using IF.B sim directives causes ROM access (go figure -_-)
 ; GETCHAR puts the read character into D0
-GETCHAR_A ;IF.B SIM <EQ> #00 THEN.L  --Hardware Code--
+GETCHAR_A IF.B SIM <EQ> #00 THEN.L  --Hardware Code--
             MOVE.L A0,-(SP)
 In_buff_A   MOVE.L BUFFER_A_SP, D0
             CMP.L BUFFER_A_EP, D0
@@ -380,46 +355,47 @@ In_buff_A   MOVE.L BUFFER_A_SP, D0
             CMP.B #$00, DUINT_DISABLE
             BNE In_buff_A ; Interrupts are enabled; don't poll
             
-In_poll_A   MOVE.B SRA, D1  Read the A status register
-            BTST #RxRDY, D1 Test reciever ready status
+In_poll_A   MOVE.B SRA, D0  Read the A status register
+            BTST #RxRDY, D0 Test reciever ready status
             BEQ In_poll_A   UNTIL char recieved
             MOVE.B RBA, D0  Read the character into D0
             JMP READ_RETA
             
             ; Circular queue read
 READ_BUFFA  MOVE.L BUFFER_A_SP, A0 Load the start pointer
-            MOVE.B (A0)+, D0       Insert the read byte
+            MOVE.B (A0)+, D0       Extract the read byte
             CMP.L #BUFFER_A_E, A0 If not at end of buffer,
             BNE BUFFER_A_RF       Branch to finish
             MOVE.L #BUFFER_A_S, A0
 BUFFER_A_RF MOVE.L A0, BUFFER_A_SP
 READ_RETA   MOVE.L (SP)+, A0
-         ;ELSE                    --Simulation code--
-         ;   MOVE.L D1, -(SP)
-         ;   MOVE.L #05, D0
-         ;   TRAP   #15
-         ;   MOVE.B D1, D0
-         ;   MOVE.L (SP)+, D1
-         ;ENDI
+         ELSE                    --Simulation code--
+            MOVE.L D1, -(SP)
+            MOVE.L #05, D0
+            TRAP   #15
+            MOVE.B D1, D0
+            MOVE.L (SP)+, D1
+         ENDI
+            
             RTS
 
 ; PUTCHAR_A outputs D0 to the DUART channel A
-PUTCHAR_A ;IF.B SIM <EQ> #00 THEN.L  --Hardware Code--
+PUTCHAR_A IF.B SIM <EQ> #00 THEN.L  --Hardware Code--
             MOVE.L D1, -(SP)
 Out_poll_A  MOVE.B SRA, D1
             BTST   #TxRDY, D1
             BEQ    Out_poll_A
             MOVE.B D0, TBA
             MOVE.L (SP)+, D1
-          ;ELSE                    --Simulation code--
-          ;  MOVE.L D0, -(SP) ; Task
-          ;  MOVE.L D1, -(SP) ;Char to display
-          ;  MOVE.B D0, D1
-          ;  MOVE.L #06, D0
-          ;  TRAP   #15
-          ;  MOVE.L (SP)+, D1
-          ;  MOVE.L (SP)+, D0
-          ;ENDI
+          ELSE                    --Simulation code--
+            MOVE.L D0, -(SP) ; Task
+            MOVE.L D1, -(SP) ;Char to display
+            MOVE.B D0, D1
+            MOVE.L #06, D0
+            TRAP   #15
+            MOVE.L (SP)+, D1
+            MOVE.L (SP)+, D0
+          ENDI
             RTS
 
 * Subroutine DEC2BIN -- Convert ASCII Decimal to Binary
@@ -524,6 +500,9 @@ EXPSTRING   DC.B CR,LF,'Encountered exception; resetting!',CR,LF,0
 
             END     MAIN
             
+
+
+
 
 
 
