@@ -71,7 +71,6 @@ architecture Behavioral of MCE_CJG is
 	signal prescaler_cpu : STD_LOGIC := '0';
 	signal prescaler_irq : unsigned(14 downto 0) := (others=>'0');
 	signal reset_db      : STD_LOGIC := '1';
-	signal hotswap_db    : STD_LOGIC := '0';
 	signal hotswap_xor   : STD_LOGIC := '0';
 	signal RAM_STROBE		: STD_LOGIC;
 	signal ROM_STROBE		: STD_LOGIC;
@@ -118,7 +117,7 @@ cpld_write: process (CPU_AS) begin
 			CPLD_mask(1) <= D(1);
 			CPLD_mask(2) <= D(2);
 			CPLD_mask(3) <= D(3);
-			CPLD_mask(4) <= D(4) xor hotswap_xor;
+			CPLD_mask(4) <= D(4) xor hotswap_xor; -- Invert hotswap condition if CPU says '1'
 		elsif (A23 = '1' and CPU_RW = '0' and power_on = '1') then
 			GPIO_Buf1(0) <= D(0);
 			GPIO_Buf1(1) <= D(1);
@@ -139,7 +138,7 @@ cpld_read: process (CPU_AS) begin
 			data_out(1) <= CPLD_mask(1);
 			data_out(2) <= CPLD_mask(2);
 			data_out(3) <= CPLD_mask(3);
-			data_out(4) <= CPLD_mask(4) xor hotswap_xor;
+			data_out(4) <= '0';
 			data_out(5) <= '0';
 			data_out(6) <= '0';
 			data_out(7) <= '0';
@@ -170,10 +169,10 @@ Q2_Enable <= '1';
 CPU_BERR <= '1';
 CPU_BR <= '1'; -- No bus requests
 CPU_BGACK <= '1'; -- No bus grants... 5 hours worth of debugging here -_-
-CPU_RESET <= '0' when reset_db='1' or power_on='0' else 'Z'; -- (0 until reset is hit)
-CPU_HALT	<= '0' when reset_db='1' or power_on='0' else 'Z';  -- (0 until reset is hit)
+CPU_RESET <= '0' when power_on='0' else 'Z'; -- (0 until reset is hit)
+CPU_HALT	<= '0' when power_on='0' else 'Z';  -- (0 until reset is hit)
 
-DUART_RESET <= '0' when reset_db='1' or power_on='0' else not CPLD_mask(2); -- If mask 6 goes hi, reset duart
+DUART_RESET <= '0' when power_on='0' else not CPLD_mask(2); -- If mask 6 goes hi, reset duart
 
 Speaker <= speaker_pre and CPLD_mask(3) and power_on; -- Pipe speaker clock to output pin if enabled (7)
 
@@ -230,7 +229,7 @@ begin
 	if (rising_edge(Q2_Clock)) then
 		if prescaler_cpu = '1' then -- Divides by a total of 4 with inversions
 			CPU_CLK_pre <= not CPU_CLK_pre;
-			if (hotswap_db = '0') then
+			if (CPLD_mask(4) xor hotswap_xor) = '0' then -- If states are the same, clock CPU
 				CPU_CLK_pre2 <= not CPU_CLK_pre2;
 			else
 				CPU_CLK_pre2 <= '0';
@@ -251,20 +250,16 @@ begin
 			prescaler_irq <= (others => '0');
 			speaker_pre <= not speaker_pre; -- Invert speaker clock
 			if Reset_In = '1' then
-				if (CPLD_mask(4) xor hotswap_xor) = '1' then
-					hotswap_db <= '1';
-				else
-					if reset_db = '0' then
+				if reset_db = '0' then
+					if (CPLD_mask(4) xor hotswap_xor) = '1' then
+						hotswap_xor <= not hotswap_xor;
+					else
 						power_on <= not power_on;
 					end if;
-					reset_db <= '1';
 				end if;
+				reset_db <= '1';
 			else
-				if hotswap_db = '1' then
-					hotswap_xor <= not hotswap_xor; -- Notifies CPU that hotswap is complete
-				end if;
 				reset_db <= '0';
-				hotswap_db <= '0';
 				IPL6 <= '0'; -- Trigger interrupt if not resetting
 			end if;
 		else
