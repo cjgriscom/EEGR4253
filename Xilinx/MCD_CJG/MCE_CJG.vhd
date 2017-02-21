@@ -251,9 +251,8 @@ begin
 			prescaler_irq <= (others => '0');
 			speaker_pre <= not speaker_pre; -- Invert speaker clock
 			if Reset_In = '1' then
-				if (CPLD_mask(4) xor hotswap_xor) = '1' and hotswap_db = '0' then
+				if (CPLD_mask(4) xor hotswap_xor) = '1' then
 					hotswap_db <= '1';
-					hotswap_xor <= not hotswap_xor; -- Notifies CPU that hotswap is complete
 				else
 					if reset_db = '0' then
 						power_on <= not power_on;
@@ -261,6 +260,9 @@ begin
 					reset_db <= '1';
 				end if;
 			else
+				if hotswap_db = '1' then
+					hotswap_xor <= not hotswap_xor; -- Notifies CPU that hotswap is complete
+				end if;
 				reset_db <= '0';
 				hotswap_db <= '0';
 				IPL6 <= '0'; -- Trigger interrupt if not resetting
