@@ -8,7 +8,7 @@ SIM         EQU 0       ;0 = hardware state, 1 = simulation state
 BUFFER_A_SP EQU $104000
 BUFFER_A_EP EQU $104004
 BUFFER_A_S  EQU $104008
-BUFFER_A_E  EQU $104208
+BUFFER_A_E  EQU $10F000 ; TODO this is really big
 SUPER_STACK EQU $103F00
 TIMER_SEC   EQU $103F04
 TIMER_MS    EQU $103F08
@@ -26,6 +26,14 @@ CRA         EQU $220001 Command Register
 TBA         EQU $230001 Transfer Holding Register
 RBA         EQU $230001 Receive Holding Register
 ACR         EQU $240001 Auxiliary control register
+
+MR1B        EQU $280001 Mode Register1
+MR2B        EQU $280001 points here after MR1A is set
+SRB         EQU $290001 Status Register (read)
+CSRB        EQU $290001 Clock Select Register
+CRB         EQU $2A0001 Command Register
+TBB         EQU $2B0001 Transfer Holding Register
+RBB         EQU $2B0001 Receive Holding Register
 
 IMR         EQU $250001 Interrupt Mask Register
 ICR         EQU $250001 Interrupt control register
@@ -67,7 +75,7 @@ IPL6        MOVE.L  D0, -(SP)
             CLR.W   TIMER_MS
             MOVE.L  TIMER_SEC, D0
             ADD.L   #$1, D0
-            MOVE.B  D0, LED
+            ;MOVE.B  D0, LED
             MOVE.L  D0, TIMER_SEC
 IRQ6_QUIT   MOVE.L  (SP)+, D0
             RTE
@@ -76,20 +84,23 @@ IRQ6_QUIT   MOVE.L  (SP)+, D0
 
 ; DUART Interrupt
 
-DUART_IRQ   MOVE.L D0,-(SP)
+DUART_IRQ   OR.W  #$0700, SR ; Mask ALL (TODO) interrupts  
+            MOVE.L D0,-(SP)
             MOVE.L A0,-(SP)
-TestA       MOVE.B SRA, D0  Read the A status register
+TestA       
+            
+            MOVE.B SRA, D0  Read the A status register
             BTST #RxRDY, D0 Test reciever A ready status
             BEQ TestB  Goto B if no character in buffer
             MOVE.B RBA, D0  Else, Read the character into D0
-            JSR PUTCHAR_A ; Echo TODO REMOVE
+           
             
             ; Circular queue write A
             MOVE.L BUFFER_A_EP, A0 Load the end pointer
             MOVE.B D0, (A0)+       Insert the read byte
             CMP.L #BUFFER_A_E, A0 If not at end of buffer,
             BNE BUFFER_A_WF       Branch to finish
-            MOVE.L #BUFFER_A_S, A0
+            MOVE.L #BUFFER_A_S, A0 Move end pointer to beginning of buffer
 BUFFER_A_WF MOVE.L A0, BUFFER_A_EP
             
             BRA TestA Flush buffer again (if nothing exists it will branch to TestB)
@@ -97,6 +108,7 @@ TestB
             
 DU_Ret      MOVE.L (SP)+, A0
             MOVE.L (SP)+, D0
+            AND.W #$F8FF, SR ; TODO this line is not necessary (?) because RTE pops SR
             RTE  Return from exception
             
             ORG     $001400 ; Vector is set in bootloader
@@ -119,7 +131,7 @@ MAIN
 
             JSR INIT_DUART
 
-            JSR ENABLE_I ;Disable all interrupts
+            JSR DISABLE_I ;Disable all interrupts
 sLOOP       
             
             MOVE.L #SRecPrompt, A0 -- Press s to load s record
@@ -131,9 +143,22 @@ getLOOP     JSR GETCHAR_A
             BEQ sDISABLE_I 
             CMP.B #'I', D0 If user says 'I', enable interrupts
             BEQ sENABLE_I 
+            CMP.B #'B', D0 If user says 'B', test Serial B
+            BEQ SERIAL_BT
             CMP.B #'r', D0 If user says 'r', refresh
             BEQ sLOOP
             BRA getLOOP
+
+SERIAL_BT   MOVE.B LED, D0
+            ADDI.B #1, D0
+            MOVE.B D0, LED
+            JSR GETCHAR_A
+            JSR PUTCHAR_A
+            JSR PUTCHAR_B
+            JSR GETCHAR_B
+            JSR PUTCHAR_A
+
+            BRA sLOOP
 
 sDISABLE_I  JSR DISABLE_I
             BRA sLOOP
@@ -321,13 +346,20 @@ INIT_DUART  ;Reset Duart
             ;MOVE.B #$37, MR2A Set normal, TxRTS, TxCTS, 1 stop bit
             ;MOVE.B #$05, CRA Enable A transmitter/recvr
            
-            MOVE.B #$00,ACR    selects baud rate set 1
-            ;MOVE.B #$80,ACR    selects baud rate set 2
+            MOVE.B #$30,ACR    selects baud rate set 1, counter mode div by 16
+            ;MOVE.B #$B0,ACR    selects baud rate set 2, counter mode div by 16
+            
             MOVE.B #BAUD,CSRA  set 19.2k (1: 36.4k) baud Rx/Tx
             MOVE.B #$13,MR1A   8-bits, no parity, 1 stop bit
             MOVE.B #$07,MR2A   07 sets: Normal mode, CTS and RTS disabled, stop bit length = 1
             MOVE.B #$05,CRA    enable Tx and Rx
-            MOVE.B #66, IVR     set interrupt vector - dec 66
+            
+            MOVE.B #BAUD,CSRB  set 19.2k (1: 36.4k) baud Rx/Tx
+            MOVE.B #$13,MR1B   8-bits, no parity, 1 stop bit
+            MOVE.B #$07,MR2B   07 sets: Normal mode, CTS and RTS disabled, stop bit length = 1
+            MOVE.B #$05,CRB    enable Tx and Rx
+            
+            MOVE.B #66, IVR    set interrupt vector - dec 66
             JSR EN_DUART_IR    enable DUART interrupts
             
             RTS
@@ -342,9 +374,7 @@ DS_DUART_IR MOVE.B #$00, IMR    set interrupt masks to nothing
             CLR.B DUINT_DISABLE
             RTS
 
-
-; WARNING WARNING using IF.B sim directives causes ROM access (go figure -_-)
-; GETCHAR puts the read character into D0
+; GETCHAR_A reads a character from DUART A into D0
 GETCHAR_A IF.B SIM <EQ> #00 THEN.L  --Hardware Code--
             MOVE.L A0,-(SP)
 In_buff_A   MOVE.L BUFFER_A_SP, D0
@@ -376,7 +406,6 @@ READ_RETA   MOVE.L (SP)+, A0
             MOVE.B D1, D0
             MOVE.L (SP)+, D1
          ENDI
-            
             RTS
 
 ; PUTCHAR_A outputs D0 to the DUART channel A
@@ -396,6 +425,23 @@ Out_poll_A  MOVE.B SRA, D1
             MOVE.L (SP)+, D1
             MOVE.L (SP)+, D0
           ENDI
+            RTS
+            
+            ; GETCHAR_B reads a character from DUART B into D0
+GETCHAR_B   MOVE.B SRB, D0  Read the A status register
+            BTST #RxRDY, D0 Test reciever ready status
+            BEQ GETCHAR_B   UNTIL char recieved
+            MOVE.B RBB, D0  Read the character into D0
+            RTS
+
+            
+            ; PUTCHAR_B outputs D0 to the DUART channel B
+PUTCHAR_B   MOVE.L D1, -(SP)
+Out_poll_B  MOVE.B SRB, D1
+            BTST   #TxRDY, D1
+            BEQ    Out_poll_B
+            MOVE.B D0, TBB
+            MOVE.L (SP)+, D1
             RTS
 
 * Subroutine DEC2BIN -- Convert ASCII Decimal to Binary
@@ -484,15 +530,14 @@ SRecPrompt  DC.B CR,LF,'----------- MONITOR PROGRAM -----------',CR,LF
             DC.B       'Press d to edit DUART settings.',CR,LF
             DC.B       'Press v to view a memory address.',CR,LF
             DC.B       'Press e to edit a memory address.',CR,LF
-            DC.B       'Press V to view a memory address range.',CR,LF
-            DC.B       'Press E to edit a memory address range.',CR,LF
             DC.B       'Press s to upload an S record.',CR,LF
             DC.B       'Press x to execute an S record.',CR,LF
             DC.B       'Press i to disable interrupts.',CR,LF
             DC.B       'Press I to enable interrupts.',CR,LF
-            DC.B       'Press h to hotswap ROM.',CR,LF
+            DC.B       'Press B to test serial B.',CR,LF
+            DC.B       'Press r to refresh.',CR,LF
             DC.B       '---------------------------------------',CR,LF,0
-SRecInsert  DC.B CR,LF,'Insert next line:',CR,LF,0
+SRecInsert  DC.B '.',0
 SRecError   DC.B CR,LF,'Error reading S record.',CR,LF,0
 EOSString   DC.B CR,LF,'End of stream; press e to transfer execution!',CR,LF,0
 EXPSTRING   DC.B CR,LF,'Encountered exception; resetting!',CR,LF,0
@@ -500,6 +545,10 @@ EXPSTRING   DC.B CR,LF,'Encountered exception; resetting!',CR,LF,0
 
             END     MAIN
             
+
+
+
+
 
 
 

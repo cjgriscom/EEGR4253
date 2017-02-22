@@ -11,7 +11,7 @@ cat /dev/ttyUSB0 &
 sleep 0.1
 cat Assembly/ROMBurner.S68 | while read line
 do
-   sleep .025
+   sleep .02
    echo $line >> /dev/ttyUSB0 # This echo includes \r but not \n
 done
 sleep 0.2

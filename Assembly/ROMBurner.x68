@@ -506,7 +506,7 @@ MAINPrompt  DC.B       '------ ROM Burner ------',CR,LF
             DC.B       'h: Pause and hotswap ROM',CR,LF
             DC.B       'r: Refresh',CR,LF,CR,LF,0
 ENDLine     DC.B       '------------------------',CR,LF,0
-SRecInsert  DC.B CR,LF,'Insert next line:',CR,LF,0
+SRecInsert  DC.B '.',0
 SRecError   DC.B CR,LF,'Error reading S record.',CR,LF,0
 HotEnable   DC.B 'HOTSWAPPING ENABLED',CR,LF,'Carefully reseat the',CR,LF,'ROM chips, then press',CR,LF,'the reset button.',CR,LF,0
 TableString DC.B 'Chip #:          HI LO',CR,LF,0
@@ -525,6 +525,8 @@ ErasedBoot  DC.B 'Erased boot record.',CR,LF,0
 
             END     MAIN
             
+
+
 
 
 
