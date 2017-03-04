@@ -21,7 +21,14 @@ USR1_ROM    EQU $008000 ; Location of User Program 1
 SUPER_STACK EQU $103F00
 TIMER_SEC   EQU $103F04
 TIMER_MS    EQU $103F08
-DUINT_DISABLE EQU $103F10 ; Interrupts disabled?
+DUINT_DISABLE EQU $103F10 ; Interrupts disabled? -> #$00
+ECHO_MEM    EQU $103F11 ; Echo On -> #$FF
+;MOVE.B #$00, ECHO_MEM ; Turn off echo A
+;MOVE.B #$FF, ECHO_MEM ; Turn on echo A
+TIMER_MEM   EQU $103F12 ; Timer LEDs On -> #$FF
+;MOVE.B #$00, TIMER_MEM ; Turn off timer
+;MOVE.B #$FF, TIMER_MEM ; Turn on timer
+
 
 CPLD_STATUS EQU $300001
 
@@ -58,10 +65,10 @@ LF          EQU $0A
 START       ORG     $000000
             DC.L    SUPER_STACK Initial Stack Pointer
             DC.L    MAIN        Initial PC
-            DC.L    $001400   Berr
-            DC.L    $001400   Address Error
-            DC.L    $001400   Illegal Instruction
-            DC.L    $001400   Div by zero
+            DC.L    EXCEPTION   Berr
+            DC.L    EXCEPTION   Address Error
+            DC.L    EXCEPTION   Illegal Instruction
+            DC.L    EXCEPTION   Div by zero
             
             
             ORG     $000084   TRAP vectors   
@@ -71,10 +78,10 @@ START       ORG     $000000
             
             ORG     $000100   Interrupt vectors   
             DC.L    $112000   64: Should be GPIO IRQ
-            DC.L    $001000   65: Periodic
-            DC.L    $001200   66: DUART RxRDYA or RXRDYB
+            DC.L    IPL6      65: Periodic
+            DC.L    DUART_IRQ   66: DUART RxRDYA or RXRDYB
             
-            ORG     $001000 ; Vector is set in bootloader
+            ORG     $000400 
 IPL6        MOVE.L  D0, -(SP)
             MOVE.W  TIMER_MS, D0
             ADD.W   #$1, D0
@@ -84,12 +91,15 @@ IPL6        MOVE.L  D0, -(SP)
             CLR.W   TIMER_MS
             MOVE.L  TIMER_SEC, D0
             ADD.L   #$1, D0
-            MOVE.B  D0, LED ; TODO Remove
             MOVE.L  D0, TIMER_SEC
+            
+            CMP.B #$FF, TIMER_MEM If timer off,
+            BNE IRQ6_QUIT quit
+            MOVE.B  D0, LED ; Else display the timer LED
+            
+
 IRQ6_QUIT   MOVE.L  (SP)+, D0
             RTE
-
-            ORG     $001200 ; Vector is set in bootloader
 
 ; DUART Interrupt
 
@@ -112,6 +122,10 @@ TestA
             MOVE.L #BUFFER_A_S, A0 Move end pointer to beginning of buffer
 BUFFER_A_WF MOVE.L A0, BUFFER_A_EP
             
+            CMP.B #$FF, ECHO_MEM If echo off,
+            BNE TestA Flush buffer
+            JSr PUTCHAR_A Else putchar
+            
             BRA TestA Flush buffer again (if nothing exists it will branch to TestB)
 TestB
             
@@ -120,27 +134,29 @@ DU_Ret      MOVE.L (SP)+, A0
             AND.W #$F8FF, SR ; TODO this line is not necessary (?) because RTE pops SR
             RTE  Return from exception
             
-            ORG     $001400 ; Vector is set in bootloader
 EXCEPTION   LEA SUPER_STACK, SP
             MOVE.L #EXPSTRING, A0
             JSR PUTSTR
             JMP MAIN
 
             
-            ; Begin program
-            ORG     $000400 ; Vector is set in bootloader
+            ; ***Begin program***
 MAIN        
 
             ; Init buffers
             MOVE.L #BUFFER_A_S, BUFFER_A_SP
             MOVE.L #BUFFER_A_S, BUFFER_A_EP
             
-            ; SRec buffer is initialized by the ROM routine
+            ; ROM buffer is initialized by the ROM routine
             
             CLR.L  TIMER_MS
             CLR.L  TIMER_SEC
 
             JSR INIT_DUART
+            
+            MOVE.B #$00, ECHO_MEM ; Turn off echo A
+            MOVE.B #$FF, TIMER_MEM ; Turn on timer LED
+
 
             JSR ENABLE_I ;Enable all interrupts
             
@@ -149,6 +165,8 @@ mLOOP       MOVE.L #MoniPrompt, A0 ; MAIN MENU
 mgetLOOP    JSR GETCHAR_A
             CMP.B #'a', D0 If user says 'a', administration menu
             BEQ aLOOP
+            CMP.B #'m', D0 If user says 'm', view memory range
+            BEQ view_MEM
             CMP.B #'S', D0 If user says 'S', execute userprog 1
             BEQ upload_USR1
             CMP.B #'x', D0 If user says 'x', execute userprog 1
@@ -162,7 +180,7 @@ mgetLOOP    JSR GETCHAR_A
 aLOOP       MOVE.L #AdminPrompt, A0 ; ADMINISTRATION
             JSR PUTSTR
 agetLOOP    JSR GETCHAR_A
-            CMP.B #'a', D0 If user says 'a', main menu
+            CMP.B #'A', D0 If user says 'A', main menu
             BEQ mLOOP
             CMP.B #'b', D0 If user says 'b', execute ROMBurner
             BEQ exec_ROMB
@@ -172,9 +190,31 @@ agetLOOP    JSR GETCHAR_A
             BEQ sDISABLE_I 
             CMP.B #'I', D0 If user says 'I', enable interrupts
             BEQ sENABLE_I 
+            CMP.B #'t', D0 If user says 't', disable timer
+            BEQ sDISABLE_T 
+            CMP.B #'T', D0 If user says 'T', enable timer
+            BEQ sENABLE_T
             CMP.B #'r', D0 If user says 'r', refresh
             BEQ aLOOP
             BRA agetLOOP
+            
+view_MEM    JSR SCANADDR_A
+            
+            
+            BRA mLOOP
+
+SCANADDR_A  LEA MemPrompt, A0
+            JSR PUTSTR
+            MOVE.B #$FF, ECHO_MEM ; Turn on echo A
+            JSR GETCHAR_A
+            ROL.W #8, D0
+            JSR GETCHAR_A
+            JSR HEX2BIN
+            JSR PUTCHAR_A
+            JSR GETCHAR_A ; WAIT
+            
+            MOVE.B #$00, ECHO_MEM ; Turn off echo A
+            RTS
             
 upload_ROMB MOVE.L #ROMBurn_ROM, D0
             JSR DISABLE_I ; Disable interrupts for uploads
@@ -203,11 +243,15 @@ sDISABLE_I  JSR DISABLE_I
 sENABLE_I   JSR ENABLE_I
             BRA aLOOP
             
+sDISABLE_T  MOVE.B #$00, TIMER_MEM
+            BRA aLOOP
+sENABLE_T   MOVE.B #$FF, TIMER_MEM
+            BRA aLOOP
 
 DISABLE_I   OR.W  #$0700, SR 
             JSR DS_DUART_IR
             RTS
-            
+
 ENABLE_I    AND.W #$F8FF, SR
             JSR EN_DUART_IR
             RTS
@@ -250,6 +294,7 @@ SREx_Loop2  MOVE.B (A1)+, (A0)+ ; Copy data
             DBRA D1, SREx_Loop2 ; Decrement then branch if size != -1
             BRA SREx_Loop1 ; Finished size loop; continue to next piece
 SREx_Exit   JSR (A0) ; Execute the program!!!
+            BRA MAIN
 
 ; Direct RAM upload subroutines
 S_REC_RAM   LEA SR_RAM_S12, A2 ; Load A2 with the S1/S2 routine
@@ -533,16 +578,17 @@ DS_DUART_IR MOVE.B #$00, IMR    set interrupt masks to nothing
 ; GETCHAR_A reads a character from DUART A into D0
 GETCHAR_A IF.B SIM <EQ> #00 THEN.L  --Hardware Code--
             MOVE.L A0,-(SP)
-In_buff_A   MOVE.L BUFFER_A_SP, D0
-            CMP.L BUFFER_A_EP, D0
+            MOVE.L D1, -(SP)
+In_buff_A   MOVE.L BUFFER_A_SP, D1
+            CMP.L BUFFER_A_EP, D1
             BNE READ_BUFFA Start and end pointer are not equal; read buffer character
             
             ; Otherwise poll the DUART
             CMP.B #$00, DUINT_DISABLE
             BNE In_buff_A ; Interrupts are enabled; don't poll
             
-In_poll_A   MOVE.B SRA, D0  Read the A status register
-            BTST #RxRDY, D0 Test reciever ready status
+In_poll_A   MOVE.B SRA, D1  Read the A status register
+            BTST #RxRDY, D1 Test reciever ready status
             BEQ In_poll_A   UNTIL char recieved
             MOVE.B RBA, D0  Read the character into D0
             JMP READ_RETA
@@ -554,7 +600,8 @@ READ_BUFFA  MOVE.L BUFFER_A_SP, A0 Load the start pointer
             BNE BUFFER_A_RF       Branch to finish
             MOVE.L #BUFFER_A_S, A0
 BUFFER_A_RF MOVE.L A0, BUFFER_A_SP
-READ_RETA   MOVE.L (SP)+, A0
+READ_RETA   MOVE.L (SP)+, D1
+            MOVE.L (SP)+, A0
          ELSE                    --Simulation code--
             MOVE.L D1, -(SP)
             MOVE.L #05, D0
@@ -684,7 +731,7 @@ B2H_End:    ROR.L   #8, D0        ;One more rotate so that D0 is in correct orde
                  ;CLR
 MoniPrompt  DC.B $1B,'[2J',$1B,'[H','----------- MONITOR PROGRAM -----------',CR,LF
             DC.B                    'Press a for administrative tasks.',CR,LF
-            DC.B                    'Press S to TEMP srecord.',CR,LF
+            DC.B                    'Press S to ROM the srecord.',CR,LF
             DC.B                    'Press r to view a CPU register.',CR,LF
             DC.B                    'Press R to edit a CPU register.',CR,LF
             DC.B                    'Press m to view a memory address.',CR,LF
@@ -694,12 +741,14 @@ MoniPrompt  DC.B $1B,'[2J',$1B,'[H','----------- MONITOR PROGRAM -----------',CR
             DC.B                    'Press r to refresh.',CR,LF
             DC.B                    '---------------------------------------',CR,LF,0
 AdminPrompt DC.B $1B,'[2J',$1B,'[H','----------- ADMINISTRATION -----------',CR,LF
-            DC.B                    'Press a to return to main menu.',CR,LF
+            DC.B                    'Press A to return to main menu.',CR,LF
             DC.B                    'Press b to run ROMBurner.',CR,LF
             DC.B                    'Press B to upload ROMBurner S Record.',CR,LF
 ;            DC.B                    'Press d to edit DUART settings.',CR,LF
             DC.B                    'Press i to disable interrupts.',CR,LF
             DC.B                    'Press I to enable interrupts.',CR,LF
+            DC.B                    'Press t to disable timer.',CR,LF
+            DC.B                    'Press T to enable timer.',CR,LF
             DC.B                    'Press r to refresh.',CR,LF
             DC.B                    '--------------------------------------',CR,LF,0
 RegPrompt   DC.B $1B,'[2J',$1B,'[H','---------- Select a Register ----------',CR,LF
@@ -708,7 +757,8 @@ RegPrompt   DC.B $1B,'[2J',$1B,'[H','---------- Select a Register ----------',CR
             DC.B                    'Press Ctrl+c to return to main menu.',CR,LF
             DC.B                    '---------------------------------------',CR,LF,0
 MemPrompt   DC.B $1B,'[2J',$1B,'[H','Press Ctrl+c to return to main menu.',CR,LF
-            DC.B                    'Enter a 6-digit hex memory address: ',0
+            DC.B                    'Enter a 6-digit hex memory address: $',0
+MemError    DC.B CR,LF,'Error reading address.',CR,LF,0
 RegSelect   DC.B                    'You selected: ',0
 Contents    DC.B                    'Contents: ',0
 Write1B     DC.B                    'Enter a 2-digit hex value to write: ',0
@@ -716,46 +766,23 @@ Write4B     DC.B                    'Enter an 8-digit hex value to write: ',0
 SRecInsert  DC.B '.',0
 SRecError   DC.B CR,LF,'Error reading S record.',CR,LF,0
 EOSString   DC.B CR,LF,'End of stream; press e to transfer execution!',CR,LF,0
-BurnEnd     DC.B CR,LF,'Reached end of S record; transferring execution...',CR,LF,0
+BurnEnd     DC.B CR,LF,'Reached end of S record.',CR,LF,0
 EXPSTRING   DC.B CR,LF,'Encountered exception; resetting!',CR,LF,0
 PressKey    DC.B CR,LF,'Press any key to continue...',CR,LF,0
+
             
             DC.W $0000 ; Dummy word alignment
-COPYCODE_S  DC.B $61,$00,$00,$1E,$12,$18,$61,$00,$00,$4E,$B5,$C8,$66,$F6,$4E,$75,$33,$FC,$AA,$AA,$00,$00,$AA,$AA
-            DC.B $31,$FC,$55,$55,$55,$54,$4E,$75,$61,$EE,$33,$FC,$80,$80,$00,$00,$AA,$AA,$61,$E4,$32,$BC,$30,$30
-            DC.B $61,$00,$00,$04,$4E,$75,$18,$3C,$00,$01,$12,$11,$08,$04,$00,$02,$66,$00,$00,$12,$14,$01,$12,$11
-            DC.B $B3,$02,$08,$02,$00,$06,$66,$EC,$E3,$1C,$60,$E8,$4E,$75,$26,$09,$08,$03,$00,$00,$66,$00,$00,$12
-            DC.B $61,$AE,$33,$FC,$A0,$00,$00,$00,$AA,$AA,$12,$81,$61,$C8,$4E,$75,$61,$9E,$33,$FC,$00,$A0,$00,$00
-            DC.B $AA,$AA,$12,$81,$61,$B8,$4E,$75
+COPYCODE_S  DC.B $61,$00,$00,$22,$12,$18,$61,$00,$00,$52,$43,$E9,$00,$01,$B5,$C8,$66,$F2,$4E,$75,$33,$FC,$AA,$AA
+            DC.B $00,$00,$AA,$AA,$31,$FC,$55,$55,$55,$54,$4E,$75,$61,$EE,$33,$FC,$80,$80,$00,$00,$AA,$AA,$61,$E4
+            DC.B $32,$BC,$30,$30,$61,$00,$00,$04,$4E,$75,$18,$3C,$00,$01,$12,$11,$08,$04,$00,$02,$66,$00,$00,$12
+            DC.B $14,$01,$12,$11,$B3,$02,$08,$02,$00,$06,$66,$EC,$E3,$1C,$60,$E8,$4E,$75,$26,$09,$08,$03,$00,$00
+            DC.B $66,$00,$00,$12,$61,$AE,$33,$FC,$A0,$00,$00,$00,$AA,$AA,$12,$81,$61,$C8,$4E,$75,$61,$9E,$33,$FC
+            DC.B $00,$A0,$00,$00,$AA,$AA,$12,$81,$61,$B8,$4E,$75
+
 COPYCODE_E  DC.W $0000 ; Dummy word alignment
 
             END     MAIN
             
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

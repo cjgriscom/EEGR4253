@@ -54,10 +54,7 @@ LOOP        MOVE.L #CLS, A0
             JSR PUTSTR
             MOVE.W D1, D0
             JSR PRINT2CODE
-            MOVE.L #DatString, A0
-            JSR PUTSTR
-            MOVE.W $000000, D0
-            JSR PRINT2CODE
+            JSR PRINTDATA
             MOVE.L #EndLine, A0
             JSR PUTSTR
             
@@ -82,6 +79,12 @@ LOOP_GET    JSR GETCHAR_A
             BRA LOOP_GET
             
 RETURN      RTS
+
+PRINTDATA   MOVE.L #DatString, A0
+            JSR PUTSTR
+            MOVE.W $000000, D0
+            JSR PRINT2CODE
+            RTS
             
 PRINT2CODE  JSR BIN2HEX
             ROL.L #8, D0
@@ -152,6 +155,7 @@ ERASE_BOOT  LEA $000000, A6 Store high-byte toggling address here
             JSR CP_toggle   Wait until erased
             MOVE.L #ErasedBoot, A0
             JSR PUTSTR
+            JSR PRINTDATA
             RTS
             
 ERASE_HIGH  LEA $000000, A6 Store high-byte toggling address here
@@ -164,6 +168,7 @@ ERASE_HIGH  LEA $000000, A6 Store high-byte toggling address here
             JSR CP_toggle   Wait until erased
             MOVE.L #ErasedHi, A0
             JSR PUTSTR
+            JSR PRINTDATA
             RTS
             
 ERASE_LOW   LEA $000001, A6 Store low-byte toggling address here
@@ -176,6 +181,7 @@ ERASE_LOW   LEA $000001, A6 Store low-byte toggling address here
             JSR CP_toggle   Wait until erased
             MOVE.L #ErasedLo, A0
             JSR PUTSTR
+            JSR PRINTDATA
             RTS
             
  ;----- Copy Routine -----;
@@ -531,10 +537,6 @@ ErasedBoot  DC.B 'Erased boot record.',CR,LF,0
 
             END     MAIN
             
-
-
-
-
 
 
 

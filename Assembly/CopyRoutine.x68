@@ -13,10 +13,9 @@ N_CONFIRMS  EQU 2 ; How many times should the toggle bit be verified?
 ; begin program
 COPYRR_MAIN
             BSR ERASE_SECT ; Erase initial sector TODO if this is not word-aligned it won't work
-            
 COPYRR_LOOP MOVE.B (A0)+, D1 ; Move data into position for copying
             BSR WRITE_BYTE   ; Write
-            
+            LEA 1(A1), A1 ; Increment A1
             ; TODO further erases
             
             CMP.L A0, A2    ; If start != end,
@@ -33,14 +32,14 @@ ROM_PRES_B  MOVE.W #$AAAA, $00AAAA
 * Subroutine ROM_CODES
 * Fetches the manufacturer ID byte from 2 ROM chips into D0.W
 * Fetches the software product ID byte from 2 ROM chips into D0.W
-ROM_CODES   BSR ROM_PRES_B
-            MOVE.W #$9090, $00AAAA ;Software entry mode
-           
-            MOVE.W $000000, D0 ; Manu ID (BF)
-            MOVE.W $000002, D1 ; Dev ID (B7)
-           
-            MOVE.W #$F0F0, $00ABC0 ;Exit software entry mode
-            RTS
+;ROM_CODES   BSR ROM_PRES_B
+;            MOVE.W #$9090, $00AAAA ;Software entry mode
+;           
+;            MOVE.W $000000, D0 ; Manu ID (BF)
+;            MOVE.W $000002, D1 ; Dev ID (B7)
+;           
+;            MOVE.W #$F0F0, $00ABC0 ;Exit software entry mode
+;            RTS
             
 ERASE_SECT
             BSR ROM_PRES_B
@@ -97,6 +96,8 @@ WRITE_ODD   BSR ROM_PRES_B
 
             END COPYRR_MAIN
             
+
+
 
 
 

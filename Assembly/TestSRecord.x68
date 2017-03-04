@@ -7,10 +7,13 @@ SIM         EQU 0       ;0 = hardware state, 1 = simulation state
 
             ORG     $160000
 ; begin program
-MAIN                    
+MAIN        MOVE.B #$AA, $F00001
+            MOVE.B #$55, $F00001
+            RTS
             
             END     MAIN
             
+
 
 
 
