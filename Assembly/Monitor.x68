@@ -1,5 +1,5 @@
 *-----------------------------------------------------------
-* Title      : S Record Test Program
+* Title      : Monitor Program
 * Written by : Chandler Griscom
 *-----------------------------------------------------------
 
@@ -8,7 +8,16 @@ SIM         EQU 0       ;0 = hardware state, 1 = simulation state
 BUFFER_A_SP EQU $104000
 BUFFER_A_EP EQU $104004
 BUFFER_A_S  EQU $104008
-BUFFER_A_E  EQU $10F000 ; TODO this is really big
+BUFFER_A_E  EQU $104200
+
+BUFFER_R_S  EQU $110004 ; Use to buffer data into RAM before copying to ROM
+BUFFER_R_P  EQU $110000
+
+COPYRR_MAIN EQU $17F000 ; Location of copy ROM routine
+
+ROMBurn_ROM EQU $006000 ; Location of ROMBurner program
+USR1_ROM    EQU $008000 ; Location of User Program 1
+
 SUPER_STACK EQU $103F00
 TIMER_SEC   EQU $103F04
 TIMER_MS    EQU $103F08
@@ -75,7 +84,7 @@ IPL6        MOVE.L  D0, -(SP)
             CLR.W   TIMER_MS
             MOVE.L  TIMER_SEC, D0
             ADD.L   #$1, D0
-            ;MOVE.B  D0, LED
+            MOVE.B  D0, LED ; TODO Remove
             MOVE.L  D0, TIMER_SEC
 IRQ6_QUIT   MOVE.L  (SP)+, D0
             RTE
@@ -126,44 +135,73 @@ MAIN
             MOVE.L #BUFFER_A_S, BUFFER_A_SP
             MOVE.L #BUFFER_A_S, BUFFER_A_EP
             
+            ; SRec buffer is initialized by the ROM routine
+            
             CLR.L  TIMER_MS
             CLR.L  TIMER_SEC
 
             JSR INIT_DUART
 
-            JSR DISABLE_I ;Disable all interrupts
-sLOOP       
+            JSR ENABLE_I ;Enable all interrupts
             
-            MOVE.L #SRecPrompt, A0 -- Press s to load s record
+mLOOP       MOVE.L #MoniPrompt, A0 ; MAIN MENU
             JSR PUTSTR
-getLOOP     JSR GETCHAR_A
+mgetLOOP    JSR GETCHAR_A
+            CMP.B #'a', D0 If user says 'a', administration menu
+            BEQ aLOOP
+            CMP.B #'S', D0 If user says 'S', execute userprog 1
+            BEQ upload_USR1
+            CMP.B #'x', D0 If user says 'x', execute userprog 1
+            BEQ exec_USR1
             CMP.B #'s', D0 If user says 's', load s record
-            BEQ S_REC_UP 
+            BEQ S_REC_RAM
+            CMP.B #'r', D0 If user says 'r', refresh
+            BEQ mLOOP
+            BRA mgetLOOP
+            
+aLOOP       MOVE.L #AdminPrompt, A0 ; ADMINISTRATION
+            JSR PUTSTR
+agetLOOP    JSR GETCHAR_A
+            CMP.B #'a', D0 If user says 'a', main menu
+            BEQ mLOOP
+            CMP.B #'b', D0 If user says 'b', execute ROMBurner
+            BEQ exec_ROMB
+            CMP.B #'B', D0 If user says 'B', write ROMBurner
+            BEQ upload_ROMB
             CMP.B #'i', D0 If user says 'i', disable interrupts
             BEQ sDISABLE_I 
             CMP.B #'I', D0 If user says 'I', enable interrupts
             BEQ sENABLE_I 
-            CMP.B #'B', D0 If user says 'B', test Serial B
-            BEQ SERIAL_BT
             CMP.B #'r', D0 If user says 'r', refresh
-            BEQ sLOOP
-            BRA getLOOP
+            BEQ aLOOP
+            BRA agetLOOP
+            
+upload_ROMB MOVE.L #ROMBurn_ROM, D0
+            JSR DISABLE_I ; Disable interrupts for uploads
+            JSR S_REC_Burn
+            JSR ENABLE_I ;Reenable interrupts
+            BRA aLOOP
+            
+exec_ROMB   MOVE.L #ROMBurn_ROM, D0
+            JSR DISABLE_I ;Disable all interrupts
+            JSR S_REC_Exec
+            JSR ENABLE_I ;Reenable interrupts
+            BRA aLOOP
+            
+upload_USR1 MOVE.L #USR1_ROM, D0
+            JSR DISABLE_I ; Disable interrupts for uploads
+            JSR S_REC_Burn
+            JSR ENABLE_I ;Reenable interrupts
+            BRA mLOOP
 
-SERIAL_BT   MOVE.B LED, D0
-            ADDI.B #1, D0
-            MOVE.B D0, LED
-            JSR GETCHAR_A
-            JSR PUTCHAR_A
-            JSR PUTCHAR_B
-            JSR GETCHAR_B
-            JSR PUTCHAR_A
-
-            BRA sLOOP
+exec_USR1   MOVE.L #USR1_ROM, D0
+            JSR S_REC_Exec
+            BRA mLOOP
 
 sDISABLE_I  JSR DISABLE_I
-            BRA sLOOP
+            BRA aLOOP
 sENABLE_I   JSR ENABLE_I
-            BRA sLOOP
+            BRA aLOOP
             
 
 DISABLE_I   OR.W  #$0700, SR 
@@ -174,26 +212,151 @@ ENABLE_I    AND.W #$F8FF, SR
             JSR EN_DUART_IR
             RTS
 
+; Puts copy RAM to ROM routine into memory
+INIT_COPYRR LEA COPYCODE_S, A0 ; Source
+            LEA COPYRR_MAIN, A1 ; Dest
+            LEA COPYCODE_E, A2 ; End pointer
+            
+* Subroutine COPY_RANGE
+* Copies range A0 through A2 to A1 through (A2-A0)+A1.
+* Must be word-aligned
+COPY_RANGE  MOVE.W (A0)+, (A1)+ ; Copy and advance pointers
+            CMP.L A0, A2 ; If start!=end
+            BNE COPY_RANGE ; Continue copying
+            RTS ; Else return
 
-* Subroutine ROM_PRESEQ
-* Keys the 2-cycle software control codes into both rom chips
-ROM_PRESEQ  MOVE.W #$AAAA, $00AAAA
-            MOVE.W #$5555, $005554
+; ROM upload executor - copies parsed srec to memory
+S_REC_Exec  MOVE.L  D0, A1 ; Copy ROM Address argument tp 
+SREx_Loop1  CLR.L D1
+            MOVE.B (A1)+, D1 ; Grab address from the parsed record - 3b
+            ROR.L #8, D1
+            MOVE.B (A1)+, D1
+            ROR.L #8, D1
+            MOVE.B (A1)+, D1
+            ROR.L #8, D1 ; TODO replace with swap
+            ROR.L #8, D1
+            MOVE.L D1, A0 ; Move retrieved address to A0
+            MOVE.B (A1)+, D1 ; Grab size long
+            ROR.L #8, D1
+            MOVE.B (A1)+, D1
+            ROR.L #8, D1
+            MOVE.B (A1)+, D1
+            ROR.L #8, D1
+            MOVE.B (A1)+, D1
+            ROR.L #8, D1
+            BEQ SREx_Exit ; If size is zero, execution has finished; exit. 
+            SUBI #1, D1 ; decrement size so that we execute N times instead of N+1
+SREx_Loop2  MOVE.B (A1)+, (A0)+ ; Copy data
+            DBRA D1, SREx_Loop2 ; Decrement then branch if size != -1
+            BRA SREx_Loop1 ; Finished size loop; continue to next piece
+SREx_Exit   JSR (A0) ; Execute the program!!!
+
+; Direct RAM upload subroutines
+S_REC_RAM   LEA SR_RAM_S12, A2 ; Load A2 with the S1/S2 routine
+            LEA SR_RAM_S89, A3 ; Load A3 with the S8/S9 routine
+            JSR S_REC_UP
+            JMP mLOOP ; Go back to loop
+            
+SR_RAM_S12  MOVE.B D1, (A1) ; Copy into memory
             RTS
             
-* Subroutine ROM_CODES
-* Fetches the manufacturer ID byte from 2 ROM chips into D0.W
-* Fetches the software product ID byte from 2 ROM chips into D0.W
-ROM_CODES   JSR ROM_PRESEQ
-            MOVE.W #$9090, $00AAAA ;Software entry mode
-           
-            MOVE.W $000000, D0 ; Manu ID (BF)
-            MOVE.W $000002, D1 ; Dev ID (B7)
+SR_RAM_S89  MOVE.L D1, A1 Move to A1
+            MOVE.L #EOSString, A0 -- End of stream; press e to begin execution!!!
+            JSR PUTSTR
+            JSR GETCHAR_A
+            CMP.B #$65, D0 If user says 'e', load s record
+            BNE SR_RAM_Res Otherwise start over :(
+            JMP     (A1)
+SR_RAM_Res  RTS
+
+; ROM upload subroutine
+; Args: D0 contains the beginning ROM address
+S_REC_Burn  MOVE.L  D0, -(SP) ; Store ROM Address argument
+            JSR INIT_COPYRR ; Load the copy RAM to ROM routine into memory
+            LEA SR_Burn_S12, A2 ; Load A2 with the S1/S2 routine
+            LEA SR_Burn_S89, A3 ; Load A3 with the S8/S9 routine
+            MOVE.L #$FFFFFFFF, D3 ; Use D3 for continuity checks! This register is not used elsewhere
+            MOVE.L #BUFFER_R_S, BUFFER_R_P ;ROM Buffer
+            CLR.L D4 ; Clear size storage
+            JSR S_REC_UP ; Upload S Record
+            ; Blank out final null size long
+            MOVE.B #0, (A4)
+            MOVE.B #0, 1(A4)
+            MOVE.B #0, 2(A4)
+            MOVE.B #0, 3(A4)
             
-            MOVE.W #$F0F0, $00ABC0 ;Exit software entry mode
+            CMP.B #$FF, D0
+            BEQ SRecBurnErr ; Error code; don't burn the rom!!
+            
+            LEA BUFFER_R_S, A0 ; Source starts at buffer start
+            MOVE.L  (SP)+, A1 ; Destination: Pop ROM Address argument off the stack
+            MOVE.L BUFFER_R_P, A2 ; Source ends at buffer pointer's final location (postincremented)
+            JSR COPYRR_MAIN ; Copy ram to ROM!
+            
+SRecBurnErr MOVE.L #PressKey, A0 -- Press any key to continue
+            JSR PUTSTR
+            JSR GETCHAR_A
+
+            JMP mLOOP ; Go back to loop
+            
+            ; RAM SRec Buffer
+            ; ADDRESS_3B - SIZE_4B - DATA_SizeBytes - ...(repeat)... - ADDRESS_3B (exec) - Null_5B
+            ;D3 is free for use -- store continuity address
+            ;D4 is free for use -- store size
+            ;A4 is free for use -- store temporary size long pointer
+            
+            ;D1 contains a long address
+SR_Burn_S89 MOVE.L D1, A1 ;Move to A1
+            MOVE.L #BurnEnd, A0 ; Notify end of stream
+            JSR PUTSTR
+            MOVE.B #0, D1 ; Put a null byte into d1
+            ; GOTO S1/2 routine and hope it works
+            
+            ;D6 Contains Record size (excluding checksum)
+            ;D5 contains loop index (will equal address size on first iteration)
+            ;D1 contains a data byte
+            ;A1 contains the target address; use continuity checks
+SR_Burn_S12 MOVE.L BUFFER_R_P, A0 ; Grab the buffer pointer
+            CMP.L D3, A1
+            BEQ SR_Burn_wrB ; Continuity check passed; write byte
+            ; Else, write a new address
+            CMP.L #0, D4 ; D4 is zero upon start
+            BEQ SR_Burn_skS ; Skip writing size if we are just beginning
+            
+            MOVE.B D4, (A4) ; Store size long into reserved address from last time
+            ROR.L #8, D4
+            MOVE.B D4, 1(A4) ; Store size long into reserved address from last time
+            ROR.L #8, D4
+            MOVE.B D4, 2(A4) ; Store size long into reserved address from last time
+            ROR.L #8, D4
+            MOVE.B D4, 3(A4) ; Store size long into reserved address from last time
+            ROR.L #8, D4
+SR_Burn_skS 
+            MOVE.L A1, D3 ; Set continuity address
+            ; Write word one byte at a time to avoid misalignment
+            MOVE.B D3, (A0)+ ; Move current storage address into buffer and advance buffer pointer
+            ROR.L #8, D3
+            MOVE.B D3, (A0)+
+            ROR.L #8, D3
+            MOVE.B D3, (A0)+
+            ROR.L #8, D3
+            ROR.L #8, D3
+            
+            MOVE.L A0, A4    ; Store size long pointer so it can be written later
+            LEA 4(A0), A0 ; Make space for data size byte
+            CLR.B D4 ; Clear size
+            
+SR_Burn_wrB MOVE.B D1, (A0)+ ; Copy data byte into buffer
+            ADD.L #1, D4 ; Increment size
+            ADD.L #1, D3 ; Increment continuity address
+            MOVE.L A0, BUFFER_R_P ; Store the buffer pointer
             RTS
+
+
 
  ;----- S Records -----;
+ ; A2: Location of S1_2_Write
+ ; A3: Location of S8_9_Write
 S_REC_UP    BRA NEXTLN
             
             ; Eat checksum and carriage return
@@ -261,7 +424,7 @@ S1          CMP.B #$31, D7 If this is a S1 record...
             BRA SIZELOOP  Branch back to loop
             
 S1_2_Write  ; Else this is i > 3
-            MOVE.B D1, (A1)
+            JSR (A2) ; Jump to reserved location
             ADD #1, A1 Advance to next byte
             CLR.L D1      Clear D1 for next round
             ; End S1 Code
@@ -291,15 +454,14 @@ S8          CMP.B #$38, D7 If this is a S8 record...
             ; S8 Code: 24-bit address
 S8_Valid    CMP.W D6, D5  Continue if i /= size
             BNE SIZELOOP Else execute record
-            
-            MOVE.L D1, A1 Move to A1
             ; Eat carriage return and checksum
             JSR GETCHAR_A chk
             JSR GETCHAR_A chk
             JSR GETCHAR_A CR
             JSR GETCHAR_A LF 
-            BRA EXECUTE Execute!
             
+            JSR (A3) ; Jump to supplied execution routine.  D1 Contains valid address
+            RTS ; If that sub decides to return, return again            
             
 S9          CMP.B #$39, D7 If this is a S9 record...
             BNE ERROR If it's not an S9 at this point something went wrong
@@ -308,15 +470,9 @@ S9          CMP.B #$39, D7 If this is a S9 record...
             ; Else Error!
 ERROR       MOVE.L #SRecError, A0
             JSR PUTSTR
-            JSR sLOOP
+            MOVE.B #$FF, D0 ; Indicate error
+            RTS ; Return
             
-EXECUTE     MOVE.L #EOSString, A0 -- End of stream; press e to begin execution!!!
-            JSR PUTSTR
-            JSR GETCHAR_A
-            CMP.B #$65, D0 If user says 'e', load s record
-            BNE sLOOP Otherwise start over :(
-            MOVE.B #$F0, LED  Turn on all LEDs for warning
-            JMP     (A1)
  ;------ S Records ------;
 
             ; Print String in A0
@@ -525,26 +681,69 @@ B2H_Byte4:  ROR.W   #4, D1        ;Rotate source to next half-byte
 B2H_End:    ROR.L   #8, D0        ;One more rotate so that D0 is in correct order
             MOVE.W  (SP)+, D1     ;Restore D1
             RTS
-
-SRecPrompt  DC.B CR,LF,'----------- MONITOR PROGRAM -----------',CR,LF
-            DC.B       'Press d to edit DUART settings.',CR,LF
-            DC.B       'Press v to view a memory address.',CR,LF
-            DC.B       'Press e to edit a memory address.',CR,LF
-            DC.B       'Press s to upload an S record.',CR,LF
-            DC.B       'Press x to execute an S record.',CR,LF
-            DC.B       'Press i to disable interrupts.',CR,LF
-            DC.B       'Press I to enable interrupts.',CR,LF
-            DC.B       'Press B to test serial B.',CR,LF
-            DC.B       'Press r to refresh.',CR,LF
-            DC.B       '---------------------------------------',CR,LF,0
+                 ;CLR
+MoniPrompt  DC.B $1B,'[2J',$1B,'[H','----------- MONITOR PROGRAM -----------',CR,LF
+            DC.B                    'Press a for administrative tasks.',CR,LF
+            DC.B                    'Press S to TEMP srecord.',CR,LF
+            DC.B                    'Press r to view a CPU register.',CR,LF
+            DC.B                    'Press R to edit a CPU register.',CR,LF
+            DC.B                    'Press m to view a memory address.',CR,LF
+            DC.B                    'Press M to edit a memory address.',CR,LF
+            DC.B                    'Press s to upload an S record.',CR,LF
+            DC.B                    'Press x to execute an S record.',CR,LF
+            DC.B                    'Press r to refresh.',CR,LF
+            DC.B                    '---------------------------------------',CR,LF,0
+AdminPrompt DC.B $1B,'[2J',$1B,'[H','----------- ADMINISTRATION -----------',CR,LF
+            DC.B                    'Press a to return to main menu.',CR,LF
+            DC.B                    'Press b to run ROMBurner.',CR,LF
+            DC.B                    'Press B to upload ROMBurner S Record.',CR,LF
+;            DC.B                    'Press d to edit DUART settings.',CR,LF
+            DC.B                    'Press i to disable interrupts.',CR,LF
+            DC.B                    'Press I to enable interrupts.',CR,LF
+            DC.B                    'Press r to refresh.',CR,LF
+            DC.B                    '--------------------------------------',CR,LF,0
+RegPrompt   DC.B $1B,'[2J',$1B,'[H','---------- Select a Register ----------',CR,LF
+            DC.B                    'Number:       D0 through D7',CR,LF
+            DC.B                    'Shift+Number: A0 through A7',CR,LF
+            DC.B                    'Press Ctrl+c to return to main menu.',CR,LF
+            DC.B                    '---------------------------------------',CR,LF,0
+MemPrompt   DC.B $1B,'[2J',$1B,'[H','Press Ctrl+c to return to main menu.',CR,LF
+            DC.B                    'Enter a 6-digit hex memory address: ',0
+RegSelect   DC.B                    'You selected: ',0
+Contents    DC.B                    'Contents: ',0
+Write1B     DC.B                    'Enter a 2-digit hex value to write: ',0
+Write4B     DC.B                    'Enter an 8-digit hex value to write: ',0
 SRecInsert  DC.B '.',0
 SRecError   DC.B CR,LF,'Error reading S record.',CR,LF,0
 EOSString   DC.B CR,LF,'End of stream; press e to transfer execution!',CR,LF,0
+BurnEnd     DC.B CR,LF,'Reached end of S record; transferring execution...',CR,LF,0
 EXPSTRING   DC.B CR,LF,'Encountered exception; resetting!',CR,LF,0
-
+PressKey    DC.B CR,LF,'Press any key to continue...',CR,LF,0
+            
+            DC.W $0000 ; Dummy word alignment
+COPYCODE_S  DC.B $61,$00,$00,$1E,$12,$18,$61,$00,$00,$4E,$B5,$C8,$66,$F6,$4E,$75,$33,$FC,$AA,$AA,$00,$00,$AA,$AA
+            DC.B $31,$FC,$55,$55,$55,$54,$4E,$75,$61,$EE,$33,$FC,$80,$80,$00,$00,$AA,$AA,$61,$E4,$32,$BC,$30,$30
+            DC.B $61,$00,$00,$04,$4E,$75,$18,$3C,$00,$01,$12,$11,$08,$04,$00,$02,$66,$00,$00,$12,$14,$01,$12,$11
+            DC.B $B3,$02,$08,$02,$00,$06,$66,$EC,$E3,$1C,$60,$E8,$4E,$75,$26,$09,$08,$03,$00,$00,$66,$00,$00,$12
+            DC.B $61,$AE,$33,$FC,$A0,$00,$00,$00,$AA,$AA,$12,$81,$61,$C8,$4E,$75,$61,$9E,$33,$FC,$00,$A0,$00,$00
+            DC.B $AA,$AA,$12,$81,$61,$B8,$4E,$75
+COPYCODE_E  DC.W $0000 ; Dummy word alignment
 
             END     MAIN
             
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

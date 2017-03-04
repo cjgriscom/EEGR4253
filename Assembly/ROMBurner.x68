@@ -70,13 +70,18 @@ LOOP_GET    JSR GETCHAR_A
             CMP.B #'c', D0 If user says 'c', enter copy mode
             BEQ COPY_LO_HI
             
-SkipNonHot  CMP.B #'h', D0 If user says 'h', hotswap
+            CMP.B #'h', D0 If user says 'h', hotswap
             BEQ hotswap
             
             CMP.B #'r', D0 If user says 'r', refresh
             BEQ LOOP
             
+            CMP.B #'R', D0 If user says 'R', return to monitor
+            BEQ RETURN
+            
             BRA LOOP_GET
+            
+RETURN      RTS
             
 PRINT2CODE  JSR BIN2HEX
             ROL.L #8, D0
@@ -210,7 +215,7 @@ COPY_DONE   BRA PressKey
             
 ; Sub: Wait for toggle bit to stop toggling on hi ROM
 ;  A6: the address to be checked
-CP_toggle   MOVE.B #1, D4      Clear D5 (ROL status)
+CP_toggle   MOVE.B #1, D4      Clear D4 (ROL status)
             MOVE.B (A6), D1    Read toggle bit to D1
 CP_toggle2  ;MOVE.B #'x', D0    TODO remove confirm code
             ;JSR PUTCHAR_A
@@ -221,7 +226,7 @@ CP_toggle2  ;MOVE.B #'x', D0    TODO remove confirm code
             EOR.B D1, D2       EOR new byte onto old one
             BTST #6, D2        If EOR indicates the byts are different (toggle bit6 = 1)
             BNE CP_toggle2     If same (0), continue.  If different (1), start over
-            ROL.B #1, D4       Rotate D5 bit (same)
+            ROL.B #1, D4       Rotate D4 bit (same)
             ;MOVE.B #'0', D0    TODO remove confirm code
             ;JSR PUTCHAR_A
             BRA CP_toggle2     Return
@@ -504,7 +509,8 @@ MAINPrompt  DC.B       '------ ROM Burner ------',CR,LF
             DC.B       'b: Write the boot record',CR,LF
             DC.B       'c: Copy low to high',CR,LF
             DC.B       'h: Pause and hotswap ROM',CR,LF
-            DC.B       'r: Refresh',CR,LF,CR,LF,0
+            DC.B       'r: Refresh',CR,LF
+            DC.B       'R: Exit ROMBurner',CR,LF,CR,LF,0
 ENDLine     DC.B       '------------------------',CR,LF,0
 SRecInsert  DC.B '.',0
 SRecError   DC.B CR,LF,'Error reading S record.',CR,LF,0
@@ -525,6 +531,11 @@ ErasedBoot  DC.B 'Erased boot record.',CR,LF,0
 
             END     MAIN
             
+
+
+
+
+
 
 
 
