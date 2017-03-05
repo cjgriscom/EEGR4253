@@ -136,7 +136,7 @@ DU_Ret      MOVE.L (SP)+, A0
             
 EXCEPTION   LEA SUPER_STACK, SP
             MOVE.L #EXPSTRING, A0
-            JSR PUTSTR
+            JSR PUTSTR_A
             JMP MAIN
 
             
@@ -161,24 +161,30 @@ MAIN
             JSR ENABLE_I ;Enable all interrupts
             
 mLOOP       MOVE.L #MoniPrompt, A0 ; MAIN MENU
-            JSR PUTSTR
+            JSR PUTSTR_A
 mgetLOOP    JSR GETCHAR_A
             CMP.B #'a', D0 If user says 'a', administration menu
             BEQ aLOOP
+            CMP.B #'c', D0 If user says 'c', view registers
+            BEQ view_REG
+            CMP.B #'C', D0 If user says 'C', edit registers
+            BEQ edit_REG
             CMP.B #'m', D0 If user says 'm', view memory range
             BEQ view_MEM
-            CMP.B #'S', D0 If user says 'S', execute userprog 1
+            CMP.B #'M', D0 If user says 'm', edit memory
+            BEQ edit_MEM
+            CMP.B #'S', D0 If user says 'S', upload userprog 1
             BEQ upload_USR1
             CMP.B #'x', D0 If user says 'x', execute userprog 1
             BEQ exec_USR1
-            CMP.B #'s', D0 If user says 's', load s record
+            CMP.B #'s', D0 If user says 's', load and execute s record in RAM
             BEQ S_REC_RAM
             CMP.B #'r', D0 If user says 'r', refresh
             BEQ mLOOP
             BRA mgetLOOP
             
 aLOOP       MOVE.L #AdminPrompt, A0 ; ADMINISTRATION
-            JSR PUTSTR
+            JSR PUTSTR_A
 agetLOOP    JSR GETCHAR_A
             CMP.B #'A', D0 If user says 'A', main menu
             BEQ mLOOP
@@ -198,24 +204,208 @@ agetLOOP    JSR GETCHAR_A
             BEQ aLOOP
             BRA agetLOOP
             
-view_MEM    JSR SCANADDR_A
+edit_REG    LEA RegPrompt, A0 ; Clear the screen
+            JSR PUTSTR_A
+            JSR GETCHAR_A ; Read register ID into D0
+            JSR SCANLADD_A ; Read address into A0
+            BCS viewMem_RET ; Error, return
+ERegD0      CMP.B #'0', D0
+            BNE ERegD1
+            MOVE.L A0, D0
+            BRA viewMem_RET ; Return
+ERegD1      CMP.B #'1', D0
+            BNE ERegD2
+            MOVE.L A0, D1
+            BRA viewMem_RET ; Return
+ERegD2      CMP.B #'2', D0
+            BNE ERegD3
+            MOVE.L A0, D2
+            BRA viewMem_RET ; Return
+ERegD3      CMP.B #'3', D0
+            BNE ERegD4
+            MOVE.L A0, D3
+            BRA viewMem_RET ; Return
+ERegD4      CMP.B #'4', D0
+            BNE ERegD5
+            MOVE.L A0, D4
+            BRA viewMem_RET ; Return
+ERegD5      CMP.B #'5', D0
+            BNE ERegD6
+            MOVE.L A0, D5
+            BRA viewMem_RET ; Return
+ERegD6      CMP.B #'6', D0
+            BNE ERegD7
+            MOVE.L A0, D6
+            BRA viewMem_RET ; Return
+ERegD7      CMP.B #'7', D0
+            BNE ERegA0
+            MOVE.L A0, D7
+            BRA viewMem_RET ; Return
+ERegA0      CMP.B #')', D0
+            BNE ERegA1
+            MOVE.L A0, A0
+            BRA viewMem_RET ; Return
+ERegA1      CMP.B #'!', D0
+            BNE ERegA2
+            MOVE.L A0, A1
+            BRA viewMem_RET ; Return
+ERegA2      CMP.B #'@', D0
+            BNE ERegA3
+            MOVE.L A0, A2
+            BRA viewMem_RET ; Return
+ERegA3      CMP.B #'#', D0
+            BNE ERegA4
+            MOVE.L A0, A3
+            BRA viewMem_RET ; Return
+ERegA4      CMP.B #'$', D0
+            BNE ERegA5
+            MOVE.L A0, A4
+            BRA viewMem_RET ; Return
+ERegA5      CMP.B #'%', D0
+            BNE ERegA6
+            MOVE.L A0, A5
+            BRA viewMem_RET ; Return
+ERegA6      CMP.B #'^', D0
+            BNE ERegA7
+            MOVE.L A0, A6
+            BRA viewMem_RET ; Return
+ERegA7      CMP.B #'&', D0
+            BNE ERegErr
+            MOVE.L A0, A7
+            BRA viewMem_RET ; Return
+ERegErr     LEA RegError, A0
+            JSR PUTSTR_A
+            BRA viewMem_RET ; Error
             
-            
-            BRA mLOOP
+            ; View Registers
+view_REG    LEA RegPrompt, A0 ; Clear the screen
+            JSR PUTSTR_A
+            JSR GETCHAR_A ; Read register ID into D0
+VRegD0      CMP.B #'0', D0
+            BEQ VReg_Print
+VRegD1      MOVE.L D1, A0
+            CMP.B #'1', D0
+            BEQ VReg_Print
+VRegD2      MOVE.L D2, A0
+            CMP.B #'2', D0
+            BEQ VReg_Print
+VRegD3      MOVE.L D3, A0
+            CMP.B #'3', D0
+            BEQ VReg_Print
+VRegD4      MOVE.L D4, A0
+            CMP.B #'4', D0
+            BEQ VReg_Print
+VRegD5      MOVE.L D5, A0
+            CMP.B #'5', D0
+            BEQ VReg_Print
+VRegD6      MOVE.L D6, A0
+            CMP.B #'6', D0
+            BEQ VReg_Print
+VRegD7      MOVE.L D7, A0
+            CMP.B #'7', D0
+            BEQ VReg_Print
+VRegA0      MOVE.L A0, A0
+            CMP.B #')', D0
+            BEQ VReg_Print
+VRegA1      MOVE.L A1, A0
+            CMP.B #'!', D0
+            BEQ VReg_Print
+VRegA2      MOVE.L A2, A0
+            CMP.B #'@', D0
+            BEQ VReg_Print
+VRegA3      MOVE.L A3, A0
+            CMP.B #'#', D0
+            BEQ VReg_Print
+VRegA4      MOVE.L A4, A0
+            CMP.B #'$', D0
+            BEQ VReg_Print
+VRegA5      MOVE.L A5, A0
+            CMP.B #'%', D0
+            BEQ VReg_Print
+VRegA6      MOVE.L A6, A0
+            CMP.B #'^', D0
+            BEQ VReg_Print
+VRegA7      MOVE.L A7, A0
+            CMP.B #'&', D0
+            BEQ VReg_Print
+            LEA RegError, A0
+            JSR PUTSTR_A
+            BRA viewMem_RET ; Error
+VReg_Print  JSR PRINTLADD_A
+            BRA viewMem_RET ; Error
 
-SCANADDR_A  LEA MemPrompt, A0
-            JSR PUTSTR
-            MOVE.B #$FF, ECHO_MEM ; Turn on echo A
-            JSR GETCHAR_A
+edit_MEM    JSR SCANADDR_A
+            BCS viewMem_RET ; Error, return
+            MOVE.B #$FF, ECHO_MEM ; Echo on
+            MOVE.L A0, A1 ; Preserve address
+            MOVE.B (A1), D0
+            LEA Contents, A0
+            JSR PUTSTR_A
+            JSR BIN2HEX
+            ROR.W #8, D0
+            JSR PUTCHAR_A
             ROL.W #8, D0
+            JSR PUTCHAR_A
+            LEA NewContents, A0
+            JSR PUTSTR_A
+            CLR.B D1
             JSR GETCHAR_A
             JSR HEX2BIN
-            JSR PUTCHAR_A
-            JSR GETCHAR_A ; WAIT
+            BCS viewMem_RET ; Error, return
+            LSL.B #4, D0
+            OR.B D0, D1
+            JSR GETCHAR_A
+            JSR HEX2BIN
+            BCS viewMem_RET ; Error, return
+            OR.B D0, D1
+            MOVE.B D1, (A1)
+            MOVE.B #$00, ECHO_MEM ; Echo off
+            BRA viewMem_RET
             
-            MOVE.B #$00, ECHO_MEM ; Turn off echo A
-            RTS
+view_MEM    JSR SCANADDR_A
+            BCS viewMem_RET ; Error, return
+            MOVE.L A0, D3 ; Preserve address
+            ; If address is odd, dec 1
+            BTST #0, D3 ; If bit0 is not set (odd)
+            BEQ viewMem_Vld
+            SUBI.B #1, D3 ; Subtract 1
+viewMem_Vld LEA ClearScr, A0 ; Clear the screen
+            JSR PUTSTR_A
+            MOVE.L D3, A0 ; Fetch address
+            MOVE.W #15, D1 ; D1 contains row size minus one
+viewMem_LoR   MOVE.B #'$', D0 ; Row loop; begin with address
+              JSR PUTCHAR_A
+              JSR PRINTADDR_A ; Print address in A0
+              MOVE.B #':', D0
+              JSR PUTCHAR_A
+              MOVE.W #7, D2 ; D2 contains column size minus one
+viewMem_LoC     MOVE.B #' ', D0 ; Column loop; begin with space
+                JSR PUTCHAR_A
+                MOVE.W (A0)+, D0 ; Load data word
+                JSR BIN2HEX ; Convert word to long hex
+                ROL.L #8, D0
+                JSR PUTCHAR_A
+                ROL.L #8, D0
+                JSR PUTCHAR_A
+                MOVE.B #' ', D0 Separate second word with a space
+                JSR PUTCHAR_A
+                ROL.L #8, D0
+                JSR PUTCHAR_A
+                ROL.L #8, D0
+                JSR PUTCHAR_A
+                
+                DBRA D2, viewMem_LoC ; Loop Col
+              MOVE.B #CR, D0 ; Break line
+              JSR PUTCHAR_A
+              MOVE.B #LF, D0
+              JSR PUTCHAR_A
+              DBRA D1, viewMem_LoR ; Loop Row
             
+viewMem_RET LEA PressKey, A0
+            JSR PUTSTR_A
+            JSR GETCHAR_A
+            BRA mLOOP
+
 upload_ROMB MOVE.L #ROMBurn_ROM, D0
             JSR DISABLE_I ; Disable interrupts for uploads
             JSR S_REC_Burn
@@ -289,12 +479,14 @@ SREx_Loop1  CLR.L D1
             MOVE.B (A1)+, D1
             ROR.L #8, D1
             BEQ SREx_Exit ; If size is zero, execution has finished; exit. 
-            SUBI #1, D1 ; decrement size so that we execute N times instead of N+1
 SREx_Loop2  MOVE.B (A1)+, (A0)+ ; Copy data
-            DBRA D1, SREx_Loop2 ; Decrement then branch if size != -1
+            SUB.L #1,D1 ; Decrement then
+            BNE   SREx_Loop2 ; branch if size != 0 (Didn't use DBRA because it's word-sized)
             BRA SREx_Loop1 ; Finished size loop; continue to next piece
-SREx_Exit   JSR (A0) ; Execute the program!!!
-            BRA MAIN
+SREx_Exit   MOVE.B #$00, TIMER_MEM ; Turn off timer LED
+            JSR (A0) ; Execute the program!!!
+            MOVE.B #$FF, TIMER_MEM ; Turn on timer LED
+            RTS
 
 ; Direct RAM upload subroutines
 S_REC_RAM   LEA SR_RAM_S12, A2 ; Load A2 with the S1/S2 routine
@@ -307,7 +499,7 @@ SR_RAM_S12  MOVE.B D1, (A1) ; Copy into memory
             
 SR_RAM_S89  MOVE.L D1, A1 Move to A1
             MOVE.L #EOSString, A0 -- End of stream; press e to begin execution!!!
-            JSR PUTSTR
+            JSR PUTSTR_A
             JSR GETCHAR_A
             CMP.B #$65, D0 If user says 'e', load s record
             BNE SR_RAM_Res Otherwise start over :(
@@ -339,10 +531,10 @@ S_REC_Burn  MOVE.L  D0, -(SP) ; Store ROM Address argument
             JSR COPYRR_MAIN ; Copy ram to ROM!
             
 SRecBurnErr MOVE.L #PressKey, A0 -- Press any key to continue
-            JSR PUTSTR
+            JSR PUTSTR_A
             JSR GETCHAR_A
 
-            JMP mLOOP ; Go back to loop
+            RTS ; Go back to loop
             
             ; RAM SRec Buffer
             ; ADDRESS_3B - SIZE_4B - DATA_SizeBytes - ...(repeat)... - ADDRESS_3B (exec) - Null_5B
@@ -353,7 +545,7 @@ SRecBurnErr MOVE.L #PressKey, A0 -- Press any key to continue
             ;D1 contains a long address
 SR_Burn_S89 MOVE.L D1, A1 ;Move to A1
             MOVE.L #BurnEnd, A0 ; Notify end of stream
-            JSR PUTSTR
+            JSR PUTSTR_A
             MOVE.B #0, D1 ; Put a null byte into d1
             ; GOTO S1/2 routine and hope it works
             
@@ -412,7 +604,7 @@ CRLF_NEXTLN JSR GETCHAR_A chksum
             
 NEXTLN      
             MOVE.L #SRecInsert, A0 -- Read next line
-            JSR PUTSTR
+            JSR PUTSTR_A
             JSR GETCHAR_A S
             JSR GETCHAR_A Code
             MOVE.B D0, D7 Move code to D7
@@ -514,138 +706,16 @@ S9          CMP.B #$39, D7 If this is a S9 record...
             
             ; Else Error!
 ERROR       MOVE.L #SRecError, A0
-            JSR PUTSTR
+            JSR PUTSTR_A
             MOVE.B #$FF, D0 ; Indicate error
             RTS ; Return
             
  ;------ S Records ------;
 
-            ; Print String in A0
-PUTSTR      MOVE.W D0, -(SP)
-            MOVE.W D1, -(SP)
-            CLR.W D1 Length will be stored here
-pst_Next    CMP.W #$200, D1 If >= 512, 
-            BHS pst_Quit   quit
-            MOVE.B (A0)+, D0
-            ADD #1, D1
-            CMP.B #0, D0   If null,
-            BEQ pst_Quit   quit
-            JSR PUTCHAR_A
-            BRA pst_Next
-pst_Quit    MOVE.W (SP)+, D1
-            MOVE.W (SP)+, D0
-            RTS
 
-INIT_DUART  ;Reset Duart
-            MOVE.B #30, CRA
-            MOVE.B #20, CRA
-            MOVE.B #10, CRA
-            
-            ;MOVE.B #$00, ACR Select Baud
-            ;MOVE.B BAUD, CSRA Set Baud to Constant for both rx/tx
-            ;MOVE.B #$93, MR1A Set port A to 8-bit, no parity, 1 stop bit, enable RxRTS
-            ;MOVE.B #$37, MR2A Set normal, TxRTS, TxCTS, 1 stop bit
-            ;MOVE.B #$05, CRA Enable A transmitter/recvr
-           
-            MOVE.B #$30,ACR    selects baud rate set 1, counter mode div by 16
-            ;MOVE.B #$B0,ACR    selects baud rate set 2, counter mode div by 16
-            
-            MOVE.B #BAUD,CSRA  set 19.2k (1: 36.4k) baud Rx/Tx
-            MOVE.B #$13,MR1A   8-bits, no parity, 1 stop bit
-            MOVE.B #$07,MR2A   07 sets: Normal mode, CTS and RTS disabled, stop bit length = 1
-            MOVE.B #$05,CRA    enable Tx and Rx
-            
-            MOVE.B #BAUD,CSRB  set 19.2k (1: 36.4k) baud Rx/Tx
-            MOVE.B #$13,MR1B   8-bits, no parity, 1 stop bit
-            MOVE.B #$07,MR2B   07 sets: Normal mode, CTS and RTS disabled, stop bit length = 1
-            MOVE.B #$05,CRB    enable Tx and Rx
-            
-            MOVE.B #66, IVR    set interrupt vector - dec 66
-            JSR EN_DUART_IR    enable DUART interrupts
-            
-            RTS
-            
-            ;Enable Duart interrupts
-EN_DUART_IR MOVE.B #$22, IMR    set interrupt masks to just RxRDYA, RxRDYB
-            MOVE.B #$FF, DUINT_DISABLE
-            RTS
-            
-            ;Disable Duart interrupts
-DS_DUART_IR MOVE.B #$00, IMR    set interrupt masks to nothing
-            CLR.B DUINT_DISABLE
-            RTS
+**************** SHARED SUBROUTINES *******************
+        ORG $001000 
 
-; GETCHAR_A reads a character from DUART A into D0
-GETCHAR_A IF.B SIM <EQ> #00 THEN.L  --Hardware Code--
-            MOVE.L A0,-(SP)
-            MOVE.L D1, -(SP)
-In_buff_A   MOVE.L BUFFER_A_SP, D1
-            CMP.L BUFFER_A_EP, D1
-            BNE READ_BUFFA Start and end pointer are not equal; read buffer character
-            
-            ; Otherwise poll the DUART
-            CMP.B #$00, DUINT_DISABLE
-            BNE In_buff_A ; Interrupts are enabled; don't poll
-            
-In_poll_A   MOVE.B SRA, D1  Read the A status register
-            BTST #RxRDY, D1 Test reciever ready status
-            BEQ In_poll_A   UNTIL char recieved
-            MOVE.B RBA, D0  Read the character into D0
-            JMP READ_RETA
-            
-            ; Circular queue read
-READ_BUFFA  MOVE.L BUFFER_A_SP, A0 Load the start pointer
-            MOVE.B (A0)+, D0       Extract the read byte
-            CMP.L #BUFFER_A_E, A0 If not at end of buffer,
-            BNE BUFFER_A_RF       Branch to finish
-            MOVE.L #BUFFER_A_S, A0
-BUFFER_A_RF MOVE.L A0, BUFFER_A_SP
-READ_RETA   MOVE.L (SP)+, D1
-            MOVE.L (SP)+, A0
-         ELSE                    --Simulation code--
-            MOVE.L D1, -(SP)
-            MOVE.L #05, D0
-            TRAP   #15
-            MOVE.B D1, D0
-            MOVE.L (SP)+, D1
-         ENDI
-            RTS
-
-; PUTCHAR_A outputs D0 to the DUART channel A
-PUTCHAR_A IF.B SIM <EQ> #00 THEN.L  --Hardware Code--
-            MOVE.L D1, -(SP)
-Out_poll_A  MOVE.B SRA, D1
-            BTST   #TxRDY, D1
-            BEQ    Out_poll_A
-            MOVE.B D0, TBA
-            MOVE.L (SP)+, D1
-          ELSE                    --Simulation code--
-            MOVE.L D0, -(SP) ; Task
-            MOVE.L D1, -(SP) ;Char to display
-            MOVE.B D0, D1
-            MOVE.L #06, D0
-            TRAP   #15
-            MOVE.L (SP)+, D1
-            MOVE.L (SP)+, D0
-          ENDI
-            RTS
-            
-            ; GETCHAR_B reads a character from DUART B into D0
-GETCHAR_B   MOVE.B SRB, D0  Read the A status register
-            BTST #RxRDY, D0 Test reciever ready status
-            BEQ GETCHAR_B   UNTIL char recieved
-            MOVE.B RBB, D0  Read the character into D0
-            RTS
-
-            
-            ; PUTCHAR_B outputs D0 to the DUART channel B
-PUTCHAR_B   MOVE.L D1, -(SP)
-Out_poll_B  MOVE.B SRB, D1
-            BTST   #TxRDY, D1
-            BEQ    Out_poll_B
-            MOVE.B D0, TBB
-            MOVE.L (SP)+, D1
-            RTS
 
 * Subroutine DEC2BIN -- Convert ASCII Decimal to Binary
 * Inputs: D0 - ASCII Byte
@@ -728,16 +798,280 @@ B2H_Byte4:  ROR.W   #4, D1        ;Rotate source to next half-byte
 B2H_End:    ROR.L   #8, D0        ;One more rotate so that D0 is in correct order
             MOVE.W  (SP)+, D1     ;Restore D1
             RTS
+
+
+; GETCHAR_A reads a character from DUART A into D0
+GETCHAR_A IF.B SIM <EQ> #00 THEN.L  --Hardware Code--
+            MOVE.L A0,-(SP)
+            MOVE.L D1, -(SP)
+In_buff_A   MOVE.L BUFFER_A_SP, D1
+            CMP.L BUFFER_A_EP, D1
+            BNE READ_BUFFA Start and end pointer are not equal; read buffer character
+            
+            ; Otherwise poll the DUART
+            CMP.B #$00, DUINT_DISABLE
+            BNE In_buff_A ; Interrupts are enabled; don't poll
+            
+In_poll_A   MOVE.B SRA, D1  Read the A status register
+            BTST #RxRDY, D1 Test reciever ready status
+            BEQ In_poll_A   UNTIL char recieved
+            MOVE.B RBA, D0  Read the character into D0
+            JMP READ_RETA
+            
+            ; Circular queue read
+READ_BUFFA  MOVE.L BUFFER_A_SP, A0 Load the start pointer
+            MOVE.B (A0)+, D0       Extract the read byte
+            CMP.L #BUFFER_A_E, A0 If not at end of buffer,
+            BNE BUFFER_A_RF       Branch to finish
+            MOVE.L #BUFFER_A_S, A0
+BUFFER_A_RF MOVE.L A0, BUFFER_A_SP
+READ_RETA   MOVE.L (SP)+, D1
+            MOVE.L (SP)+, A0
+         ELSE                    --Simulation code--
+            MOVE.L D1, -(SP)
+            MOVE.L #05, D0
+            TRAP   #15
+            MOVE.B D1, D0
+            MOVE.L (SP)+, D1
+         ENDI
+            RTS
+
+; PUTCHAR_A outputs D0 to the DUART channel A
+PUTCHAR_A IF.B SIM <EQ> #00 THEN.L  --Hardware Code--
+            MOVE.L D1, -(SP)
+Out_poll_A  MOVE.B SRA, D1
+            BTST   #TxRDY, D1
+            BEQ    Out_poll_A
+            MOVE.B D0, TBA
+            MOVE.L (SP)+, D1
+          ELSE                    --Simulation code--
+            MOVE.L D0, -(SP) ; Task
+            MOVE.L D1, -(SP) ;Char to display
+            MOVE.B D0, D1
+            MOVE.L #06, D0
+            TRAP   #15
+            MOVE.L (SP)+, D1
+            MOVE.L (SP)+, D0
+          ENDI
+            RTS
+
+
+
+            ; Print String in A0
+PUTSTR_A    MOVE.W D0, -(SP)
+            MOVE.W D1, -(SP)
+            CLR.W D1 Length will be stored here
+pst_Next    CMP.W #$200, D1 If >= 512, 
+            BHS pst_Quit   quit
+            MOVE.B (A0)+, D0
+            ADD #1, D1
+            CMP.B #0, D0   If null,
+            BEQ pst_Quit   quit
+            JSR PUTCHAR_A
+            BRA pst_Next
+pst_Quit    MOVE.W (SP)+, D1
+            MOVE.W (SP)+, D0
+            RTS
+
+            
+            ; GETCHAR_B reads a character from DUART B into D0
+GETCHAR_B   MOVE.B SRB, D0  Read the A status register
+            BTST #RxRDY, D0 Test reciever ready status
+            BEQ GETCHAR_B   UNTIL char recieved
+            MOVE.B RBB, D0  Read the character into D0
+            RTS
+
+            
+            ; PUTCHAR_B outputs D0 to the DUART channel B
+PUTCHAR_B   MOVE.L D1, -(SP)
+Out_poll_B  MOVE.B SRB, D1
+            BTST   #TxRDY, D1
+            BEQ    Out_poll_B
+            MOVE.B D0, TBB
+            MOVE.L (SP)+, D1
+            RTS
+
+* Subroutine SCANADDR_A *
+* Reads a memory address from the user into A0
+* Sets carry bit on error
+SCANADDR_A  MOVE.W D0, -(SP)
+            MOVE.L D1, -(SP)
+            MOVE.W D2, -(SP)
+            LEA MemPrompt, A0
+            JSR PUTSTR_A
+            MOVE.B #$FF, ECHO_MEM ; Turn on echo A
+            MOVE.W #5, D2 ; Set loop to execute 6 times
+            CLR.L D1 ; Clear D1, the address storage
+ScnAdd_LOOP JSR GETCHAR_A ; Get a character
+            JSR HEX2BIN ; Convert to a value between 0 and 15
+            BCS ScnAdd_ERR ; Error report
+            LSL.L #4, D1 ; Shift D1 left 4 bits
+            OR.B D0, D1 ; Or the 4-bit value onto D1
+            DBRA D2, ScnAdd_LOOP ; Repeat
+            MOVE.B #$00, ECHO_MEM ; Turn off echo A
+            LEA CRLF, A0 ; Break string
+            JSR PUTSTR_A
+            MOVE.L D1, A0 ; Copy result into A0
+            MOVE.W (SP)+, D2 ; Restore stack
+            MOVE.L (SP)+, D1
+            MOVE.W (SP)+, D0
+            RTS
+ScnAdd_ERR  LEA MemError, A0
+            JSR PUTSTR_A
+            MOVE.W (SP)+, D2 ; Restore stack
+            MOVE.L (SP)+, D1
+            MOVE.W (SP)+, D0
+            ORI #$01, SR ; Set carry bit
+            RTS
+            
+            
+* Subroutine SCANLADD_A *
+* Reads 4 bytes into A0
+* Sets carry bit on error
+SCANLADD_A  MOVE.W D0, -(SP)
+            MOVE.L D1, -(SP)
+            MOVE.W D2, -(SP)
+            LEA Write4b, A0
+            JSR PUTSTR_A
+            MOVE.B #$FF, ECHO_MEM ; Turn on echo A
+            MOVE.W #7, D2 ; Set loop to execute 8 times
+            CLR.L D1 ; Clear D1, the address storage
+ScnLad_LOOP JSR GETCHAR_A ; Get a character
+            JSR HEX2BIN ; Convert to a value between 0 and 15
+            BCS ScnLad_ERR ; Error report
+            LSL.L #4, D1 ; Shift D1 left 4 bits
+            OR.B D0, D1 ; Or the 4-bit value onto D1
+            DBRA D2, ScnLad_LOOP ; Repeat
+            MOVE.B #$00, ECHO_MEM ; Turn off echo A
+            LEA CRLF, A0 ; Break string
+            JSR PUTSTR_A
+            MOVE.L D1, A0 ; Copy result into A0
+            MOVE.W (SP)+, D2 ; Restore stack
+            MOVE.L (SP)+, D1
+            MOVE.W (SP)+, D0
+            RTS
+ScnLad_ERR  LEA MemError, A0
+            JSR PUTSTR_A
+            MOVE.W (SP)+, D2 ; Restore stack
+            MOVE.L (SP)+, D1
+            MOVE.W (SP)+, D0
+            ORI #$01, SR ; Set carry bit
+            RTS
+**
+
+* Subroutine PRINTADDR_A *
+* Prints the memory address in A0
+PRINTADDR_A MOVE.W D0, -(SP)
+            MOVE.L D1, -(SP)
+            MOVE.L A0, D1 ; Copy
+            SWAP D1 ; Bring the upper word to the front $xx123456 -> $3456xx12
+            MOVE.W D1, D0
+            JSR BIN2HEX
+            ROR.L #8, D0 ; Grab the upper part of the hex code
+            JSR PUTCHAR_A 
+            ROL.L #8, D0 ; Revert to lower hex char
+            JSR PUTCHAR_A
+            
+            SWAP D1 ; Swap over to the LSB
+            MOVE.W D1, D0
+            JSR BIN2HEX
+            ROL.L #8, D0
+            JSR PUTCHAR_A
+            ROL.L #8, D0
+            JSR PUTCHAR_A
+            ROL.L #8, D0
+            JSR PUTCHAR_A
+            ROL.L #8, D0
+            JSR PUTCHAR_A
+            
+            MOVE.L (SP)+, D1
+            MOVE.W (SP)+, D0
+            RTS
+            
+* Subroutine PRINTLADD_A *
+* Prints the entire A0
+PRINTLADD_A MOVE.W D0, -(SP)
+            MOVE.L D1, -(SP)
+            MOVE.L A0, D1 ; Copy
+            SWAP D1 ; Bring the upper word to the front $xx123456 -> $3456xx12
+            MOVE.W D1, D0
+            JSR BIN2HEX
+            ROL.L #8, D0
+            JSR PUTCHAR_A
+            ROL.L #8, D0
+            JSR PUTCHAR_A
+            ROL.L #8, D0
+            JSR PUTCHAR_A
+            ROL.L #8, D0
+            JSR PUTCHAR_A
+            
+            SWAP D1 ; Swap over to the LSB
+            MOVE.W D1, D0
+            JSR BIN2HEX
+            ROL.L #8, D0
+            JSR PUTCHAR_A
+            ROL.L #8, D0
+            JSR PUTCHAR_A
+            ROL.L #8, D0
+            JSR PUTCHAR_A
+            ROL.L #8, D0
+            JSR PUTCHAR_A
+            
+            MOVE.L (SP)+, D1
+            MOVE.W (SP)+, D0
+            RTS
+
+
+
+INIT_DUART  ;Reset Duart
+            MOVE.B #30, CRA
+            MOVE.B #20, CRA
+            MOVE.B #10, CRA
+            
+            ;MOVE.B #$00, ACR Select Baud
+            ;MOVE.B BAUD, CSRA Set Baud to Constant for both rx/tx
+            ;MOVE.B #$93, MR1A Set port A to 8-bit, no parity, 1 stop bit, enable RxRTS
+            ;MOVE.B #$37, MR2A Set normal, TxRTS, TxCTS, 1 stop bit
+            ;MOVE.B #$05, CRA Enable A transmitter/recvr
+           
+            MOVE.B #$30,ACR    selects baud rate set 1, counter mode div by 16
+            ;MOVE.B #$B0,ACR    selects baud rate set 2, counter mode div by 16
+            
+            MOVE.B #BAUD,CSRA  set 19.2k (1: 36.4k) baud Rx/Tx
+            MOVE.B #$13,MR1A   8-bits, no parity, 1 stop bit
+            MOVE.B #$07,MR2A   07 sets: Normal mode, CTS and RTS disabled, stop bit length = 1
+            MOVE.B #$05,CRA    enable Tx and Rx
+            
+            MOVE.B #BAUD,CSRB  set 19.2k (1: 36.4k) baud Rx/Tx
+            MOVE.B #$13,MR1B   8-bits, no parity, 1 stop bit
+            MOVE.B #$07,MR2B   07 sets: Normal mode, CTS and RTS disabled, stop bit length = 1
+            MOVE.B #$05,CRB    enable Tx and Rx
+            
+            MOVE.B #66, IVR    set interrupt vector - dec 66
+            JSR EN_DUART_IR    enable DUART interrupts
+            
+            RTS
+            
+            ;Enable Duart interrupts
+EN_DUART_IR MOVE.B #$22, IMR    set interrupt masks to just RxRDYA, RxRDYB
+            MOVE.B #$FF, DUINT_DISABLE
+            RTS
+            
+            ;Disable Duart interrupts
+DS_DUART_IR MOVE.B #$00, IMR    set interrupt masks to nothing
+            CLR.B DUINT_DISABLE
+            RTS
+
+
                  ;CLR
 MoniPrompt  DC.B $1B,'[2J',$1B,'[H','----------- MONITOR PROGRAM -----------',CR,LF
             DC.B                    'Press a for administrative tasks.',CR,LF
-            DC.B                    'Press S to ROM the srecord.',CR,LF
-            DC.B                    'Press r to view a CPU register.',CR,LF
-            DC.B                    'Press R to edit a CPU register.',CR,LF
+            DC.B                    'Press c to view a CPU register.',CR,LF
+            DC.B                    'Press C to edit a CPU register.',CR,LF
             DC.B                    'Press m to view a memory address.',CR,LF
             DC.B                    'Press M to edit a memory address.',CR,LF
-            DC.B                    'Press s to upload an S record.',CR,LF
-            DC.B                    'Press x to execute an S record.',CR,LF
+            DC.B                    'Press S to upload an S record.',CR,LF
+            DC.B                    'Press x to execute the S record.',CR,LF
             DC.B                    'Press r to refresh.',CR,LF
             DC.B                    '---------------------------------------',CR,LF,0
 AdminPrompt DC.B $1B,'[2J',$1B,'[H','----------- ADMINISTRATION -----------',CR,LF
@@ -754,16 +1088,17 @@ AdminPrompt DC.B $1B,'[2J',$1B,'[H','----------- ADMINISTRATION -----------',CR,
 RegPrompt   DC.B $1B,'[2J',$1B,'[H','---------- Select a Register ----------',CR,LF
             DC.B                    'Number:       D0 through D7',CR,LF
             DC.B                    'Shift+Number: A0 through A7',CR,LF
-            DC.B                    'Press Ctrl+c to return to main menu.',CR,LF
             DC.B                    '---------------------------------------',CR,LF,0
-MemPrompt   DC.B $1B,'[2J',$1B,'[H','Press Ctrl+c to return to main menu.',CR,LF
-            DC.B                    'Enter a 6-digit hex memory address: $',0
+MemPrompt   DC.B $1B,'[2J',$1B,'[H','Enter a 6-digit hex memory address: $',0
 MemError    DC.B CR,LF,'Error reading address.',CR,LF,0
+RegError    DC.B CR,LF,'Invalid register code.',CR,LF,0
+ClearScr    DC.B $1B,'[2J',$1B,'[H',0
 RegSelect   DC.B                    'You selected: ',0
-Contents    DC.B                    'Contents: ',0
-Write1B     DC.B                    'Enter a 2-digit hex value to write: ',0
-Write4B     DC.B                    'Enter an 8-digit hex value to write: ',0
+Contents    DC.B CR,LF,'Current Contents: ',0
+NewContents DC.B CR,LF,'Enter a 2-digit hex value to write: ',0
+Write4B     DC.B CR,LF,'Enter an 8-digit hex value to write: ',0
 SRecInsert  DC.B '.',0
+CRLF        DC.B CR,LF,0
 SRecError   DC.B CR,LF,'Error reading S record.',CR,LF,0
 EOSString   DC.B CR,LF,'End of stream; press e to transfer execution!',CR,LF,0
 BurnEnd     DC.B CR,LF,'Reached end of S record.',CR,LF,0
@@ -783,6 +1118,9 @@ COPYCODE_E  DC.W $0000 ; Dummy word alignment
 
             END     MAIN
             
+
+
+
 
 
 
