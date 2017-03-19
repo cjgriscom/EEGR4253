@@ -412,8 +412,8 @@ INIT_DUART  ;Reset Duart
             MOVE.B #20, CRA
             MOVE.B #10, CRA
             
-            MOVE.B #$00,ACR    selects baud rate set 1
-            ;MOVE.B #$80,ACR    selects baud rate set 2
+            ;MOVE.B #$00,ACR    selects baud rate set 1
+            MOVE.B #$80,ACR    selects baud rate set 2
             MOVE.B #BAUD,CSRA  set 19.2k (1: 36.4k) baud Rx/Tx
             MOVE.B #$13,MR1A   8-bits, no parity, 1 stop bit
             MOVE.B #$07,MR2A   07 sets: Normal mode, CTS and RTS disabled, stop bit length = 1
@@ -537,6 +537,7 @@ ErasedBoot  DC.B 'Erased boot record.',CR,LF,0
 
             END     MAIN
             
+
 
 
 

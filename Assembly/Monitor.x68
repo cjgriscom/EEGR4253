@@ -1034,8 +1034,8 @@ INIT_DUART  ;Reset Duart
             ;MOVE.B #$37, MR2A Set normal, TxRTS, TxCTS, 1 stop bit
             ;MOVE.B #$05, CRA Enable A transmitter/recvr
            
-            MOVE.B #$30,ACR    selects baud rate set 1, counter mode div by 16
-            ;MOVE.B #$B0,ACR    selects baud rate set 2, counter mode div by 16
+            ;MOVE.B #$30,ACR    selects baud rate set 1, counter mode div by 16
+            MOVE.B #$B0,ACR    selects baud rate set 2, counter mode div by 16
             
             MOVE.B #BAUD,CSRA  set 19.2k (1: 36.4k) baud Rx/Tx
             MOVE.B #$13,MR1A   8-bits, no parity, 1 stop bit
@@ -1118,6 +1118,7 @@ COPYCODE_E  DC.W $0000 ; Dummy word alignment
 
             END     MAIN
             
+
 
 
 

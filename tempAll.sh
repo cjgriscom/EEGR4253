@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-stty -F /dev/ttyUSB0 38400
+stty -F /dev/ttyUSB0 19200
 
 cat /dev/ttyUSB0 &
 echo -n a > /dev/ttyUSB0
@@ -14,4 +14,4 @@ echo -n 'k' > /dev/ttyUSB0
 #echo -n e > /dev/ttyUSB0
 sleep .2
 killall cat
-screen /dev/ttyUSB0 38400
+screen /dev/ttyUSB0 19200
