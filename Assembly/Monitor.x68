@@ -207,6 +207,7 @@ agetLOOP    JSR GETCHAR_A
 edit_REG    LEA RegPrompt, A0 ; Clear the screen
             JSR PUTSTR_A
             JSR GETCHAR_A ; Read register ID into D0
+            JSR REG_sel
             JSR SCANLADD_A ; Read address into A0
             BCS viewMem_RET ; Error, return
 ERegD0      CMP.B #'0', D0
@@ -281,6 +282,7 @@ ERegErr     LEA RegError, A0
 view_REG    LEA RegPrompt, A0 ; Clear the screen
             JSR PUTSTR_A
             JSR GETCHAR_A ; Read register ID into D0
+            JSR REG_sel
 VRegD0      CMP.B #'0', D0
             BEQ VReg_Print
 VRegD1      MOVE.L D1, A0
@@ -333,6 +335,57 @@ VRegA7      MOVE.L A7, A0
             BRA viewMem_RET ; Error
 VReg_Print  JSR PRINTLADD_A
             BRA viewMem_RET ; Error
+
+REG_sel     LEA D0s, A0    
+            CMP.B #'0', D0
+            BEQ SReg_Print
+            LEA D1s, A0  
+            CMP.B #'1', D0
+            BEQ SReg_Print
+            LEA D2s, A0  
+            CMP.B #'2', D0
+            BEQ SReg_Print
+            LEA D3s, A0  
+            CMP.B #'3', D0
+            BEQ SReg_Print
+            LEA D4s, A0  
+            CMP.B #'4', D0
+            BEQ SReg_Print
+            LEA D5s, A0  
+            CMP.B #'5', D0
+            BEQ SReg_Print
+            LEA D6s, A0  
+            CMP.B #'6', D0
+            BEQ SReg_Print
+            LEA D7s, A0  
+            CMP.B #'7', D0
+            BEQ SReg_Print
+            LEA A0s, A0    
+            CMP.B #')', D0
+            BEQ SReg_Print
+            LEA A1s, A0  
+            CMP.B #'!', D0
+            BEQ SReg_Print
+            LEA A2s, A0  
+            CMP.B #'@', D0
+            BEQ SReg_Print
+            LEA A3s, A0  
+            CMP.B #'#', D0
+            BEQ SReg_Print
+            LEA A4s, A0  
+            CMP.B #'$', D0
+            BEQ SReg_Print
+            LEA A5s, A0  
+            CMP.B #'%', D0
+            BEQ SReg_Print
+            LEA A6s, A0  
+            CMP.B #'^', D0
+            BEQ SReg_Print
+            LEA A7s, A0  
+            CMP.B #'&', D0
+            BEQ SReg_Print
+SReg_Print  JSR PUTSTR_A
+            RTS
 
 edit_MEM    JSR SCANADDR_A
             BCS viewMem_RET ; Error, return
@@ -1104,8 +1157,22 @@ EOSString   DC.B CR,LF,'End of stream; press e to transfer execution!',CR,LF,0
 BurnEnd     DC.B CR,LF,'Reached end of S record.',CR,LF,0
 EXPSTRING   DC.B CR,LF,'Encountered exception; resetting!',CR,LF,0
 PressKey    DC.B CR,LF,'Press any key to continue...',CR,LF,0
-
-            
+D0s          DC.B 'Selected D0...',CR,LF,0
+D1s          DC.B 'Selected D1...',CR,LF,0
+D2s          DC.B 'Selected D2...',CR,LF,0
+D3s          DC.B 'Selected D3...',CR,LF,0
+D4s          DC.B 'Selected D4...',CR,LF,0
+D5s          DC.B 'Selected D5...',CR,LF,0
+D6s          DC.B 'Selected D6...',CR,LF,0
+D7s          DC.B 'Selected D7...',CR,LF,0
+A0s          DC.B 'Selected A0...',CR,LF,0
+A1s          DC.B 'Selected A1...',CR,LF,0
+A2s          DC.B 'Selected A2...',CR,LF,0
+A3s          DC.B 'Selected A3...',CR,LF,0
+A4s          DC.B 'Selected A4...',CR,LF,0
+A5s          DC.B 'Selected A5...',CR,LF,0
+A6s          DC.B 'Selected A6...',CR,LF,0
+A7s          DC.B 'Selected A7...',CR,LF,0
             DC.W $0000 ; Dummy word alignment
 COPYCODE_S  DC.B $61,$00,$00,$22,$12,$18,$61,$00,$00,$52,$43,$E9,$00,$01,$B5,$C8,$66,$F2,$4E,$75,$33,$FC,$AA,$AA
             DC.B $00,$00,$AA,$AA,$31,$FC,$55,$55,$55,$54,$4E,$75,$61,$EE,$33,$FC,$80,$80,$00,$00,$AA,$AA,$61,$E4
@@ -1118,6 +1185,8 @@ COPYCODE_E  DC.W $0000 ; Dummy word alignment
 
             END     MAIN
             
+
+
 
 
 

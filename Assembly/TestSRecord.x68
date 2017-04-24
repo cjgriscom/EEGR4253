@@ -65,10 +65,13 @@ CarPrompt   DC.B $1B,'[2J',$1B,'[H','--------- RC Car Controller ---------',CR,L
             DC.B                    'Use w/a/s/d for directional control',CR,LF
             DC.B                    'Press q to stop movement.',CR,LF
             DC.B                    'Press r to exit.',CR,LF
+            DC.B                    'Hello Digital Class.',CR,LF
             DC.B                    '-------------------------------------',CR,LF,0
 
 
             END     MAIN
+
+
 
 
 

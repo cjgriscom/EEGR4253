@@ -14,8 +14,9 @@ cat Assembly/TestSRecord.S68 | while read line
 do
    sleep .1
    echo $line >> /dev/ttyUSB0 # This echo includes \r but not \n
+   echo $line >&2
 done
-sleep 0.2
+sleep 1
 #echo -n e > /dev/ttyUSB0
 sleep 1
 killall cat
