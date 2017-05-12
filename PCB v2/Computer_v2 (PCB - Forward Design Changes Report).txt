@@ -2,22 +2,28 @@ Forward Design Changes Report
 -----------------------------
 
 Report File:        Y:\Homeschool\Semester6\Microcomputer\PCB v2\Computer_v2 (PCB - Forward Design Changes Report).txt
-Report Written:     Thursday, May 11, 2017
+Report Written:     Friday, May 12, 2017
 Project Path:       Y:\Homeschool\Semester6\Microcomputer\PCB v2\Computer.prj
 Design Path:        Y:\Homeschool\Semester6\Microcomputer\PCB v2\Computer_v2.pcb
 Design Title:       
 Created:            5/7/2017 6:59:04 PM
-Last Saved:         5/11/2017 10:58:14 PM
-Editing Time:       4199 min
+Last Saved:         5/12/2017 1:46:05 AM
+Editing Time:       4366 min
 Units:              inches (precision 3)
 
-Added component reference "J1" of component "JMP_25mm", package "USER".
-Added component reference "J2" of component "JMP_25mm", package "USER".
+Disconnected pin "R5-1" from net "CPLD_GPL".
+Disconnected pin "R5-2" from net "N1265".
+Disconnected pin "D15-1" from net "N1265".
+Disconnected pin "D15-2" from net "GND".
 
-Connected pin "J1-1" to net "A1".
-Connected pin "J1-2" to net "A1".
-Connected pin "J2-1" to net "A2".
-Connected pin "J2-2" to net "A2".
+Deleted net "N1265".
+
+Added net "N1270".
+
+Connected pin "R5-1" to net "N1270".
+Connected pin "R5-2" to net "GND".
+Connected pin "D15-1" to net "CPLD_GPL".
+Connected pin "D15-2" to net "N1270".
 
 
 End Of Report.
