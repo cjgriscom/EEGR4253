@@ -1,0 +1,67 @@
+Design Rule Check Report
+------------------------
+
+Report File:        Y:\Homeschool\Semester6\Microcomputer\PCB v2\Computer_v2 (PCB - Design Rule Check Report).txt
+Report Written:     Thursday, May 11, 2017
+Project Path:       Y:\Homeschool\Semester6\Microcomputer\PCB v2\Computer.prj
+Design Path:        Y:\Homeschool\Semester6\Microcomputer\PCB v2\Computer_v2.pcb
+Design Title:       
+Created:            5/7/2017 6:59:04 PM
+Last Saved:         5/11/2017 11:48:47 PM
+Editing Time:       4249 min
+Units:              inches (precision 3)
+
+
+Results
+=======
+
+Gap in Net "A1" between (10.950,8.475) and (10.010,8.685) 
+    A1.
+Gap in Net "A2" between (10.987,8.664) and (10.005,8.595) 
+    A2.
+Single pin net GNE on Pad at 11.325,10.375
+
+Number of errors found : 3
+
+
+Settings
+========
+
+
+Spacings
+
+=========
+
+Tracks        Yes
+Pads and Vias Yes
+Shapes        Yes
+Text          Yes
+Board         Yes
+Drills        Yes
+Components    No
+
+
+Manufacturing
+
+==============
+
+Min Drill Hole Size  Yes
+Min Track Width      Yes
+Min Annular Ring     Yes
+Copper Text In Board Yes
+Mirrored Text        Yes
+Routing Areas        Yes
+Drill Breakout       Yes
+
+
+Nets
+
+=====
+
+Net Completion               Yes
+Dangling Tracks              Yes
+Net Track Length Differences No
+
+
+
+End Of Report.

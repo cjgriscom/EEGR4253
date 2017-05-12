@@ -1,0 +1,632 @@
+Forward Design Changes Report
+-----------------------------
+
+Report File:        Y:\Homeschool\Semester6\Microcomputer\PCB v2\Computer (PCB - Forward Design Changes Report).txt
+Report Written:     Sunday, May 07, 2017
+Project Path:       Y:\Homeschool\Semester6\Microcomputer\PCB v2\Computer.prj
+Design Path:        Y:\Homeschool\Semester6\Microcomputer\PCB v2\Computer.pcb
+Design Title:       
+Created:            1/26/2017 1:31:38 AM
+Last Saved:         2/1/2017 3:25:30 AM
+Editing Time:       6264 min
+Units:              inches (precision 3)
+
+Ignoring PCB only pad CONN1-11 on net "GND"
+Ignoring PCB only pad U10-1 on net "A16"
+Ignoring PCB only pad U10-12 on net "SerialB_RTS"
+Ignoring PCB only pad U10-23 on net "D4"
+Ignoring PCB only pad U10-34 on net "DUART_RESET"
+Ignoring PCB only pad U5-33 on net "A12"
+Ignoring PCB only pad U5-34 on net "A10"
+Ignoring PCB only pad U5-35 on net "A9"
+Ignoring PCB only pad U5-36 on net "A14"
+Ignoring PCB only pad U5-37 on net "A15"
+Ignoring PCB only pad U5-38 on net "A18"
+Ignoring PCB only pad U5-39 on net "ROM_WE"
+Ignoring PCB only pad U5-40 on net "+5V"
+Ignoring PCB only pad U4-33 on net "A12"
+Ignoring PCB only pad U4-34 on net "A10"
+Ignoring PCB only pad U4-35 on net "A9"
+Ignoring PCB only pad U4-36 on net "A14"
+Ignoring PCB only pad U4-37 on net "A15"
+Ignoring PCB only pad U4-38 on net "A18"
+Ignoring PCB only pad U4-39 on net "ROM_WE"
+Ignoring PCB only pad U4-40 on net "+5V"
+Ignoring PCB only pad CONN4-2 on net "N0977"
+Ignoring PCB only pad CONN4-3 on net "N0978"
+Ignoring PCB only pad CONN14-2 on net "GPIO_9"
+Ignoring PCB only pad CONN14-3 on net "GPIO_10"
+Ignoring PCB only pad CONN14-4 on net "GPIO_11"
+Ignoring PCB only pad CONN14-5 on net "GPIO_12"
+Ignoring PCB only pad CONN14-6 on net "GPIO_13"
+Ignoring PCB only pad CONN14-7 on net "GPIO_14"
+Ignoring PCB only pad CONN14-8 on net "GPIO_15"
+
+Disconnected pin "CONN1-7" from net "N0100".
+Disconnected pin "CONN1-8" from net "N0098".
+Disconnected pin "CONN1-3" from net "Tx_In".
+Disconnected pin "CONN1-2" from net "Rx_In".
+Disconnected pin "U6-17" from net "RAM_WE".
+Disconnected pin "U6-39" from net "RAM_LB".
+Disconnected pin "U6-40" from net "RAM_UB".
+Disconnected pin "SW1-2" from net "N0001".
+Disconnected pin "Q2-1" from net "Q2_Tristate".
+Disconnected pin "C2-1" from net "+5V".
+Disconnected pin "C2-2" from net "GND".
+Disconnected pin "U2-2" from net "GND".
+Disconnected pin "U2-3" from net "+5V".
+Disconnected pin "U3-29" from net "N0977".
+Disconnected pin "U3-24" from net "CPU_BERR".
+Disconnected pin "U3-12" from net "CPU_BGACK".
+Disconnected pin "U3-28" from net "N0978".
+Disconnected pin "U3-30" from net "N0976".
+Disconnected pin "U3-11" from net "CPU_BG".
+Disconnected pin "U3-13" from net "CPU_BR".
+Disconnected pin "U10-2" from net "N0969".
+Disconnected pin "U10-3" from net "A17".
+Disconnected pin "U10-4" from net "SerialB_CTS".
+Disconnected pin "U10-5" from net "A18".
+Disconnected pin "U10-6" from net "A19".
+Disconnected pin "U10-7" from net "Serial_CTS".
+Disconnected pin "U10-8" from net "DUART_RW".
+Disconnected pin "U10-9" from net "DUART_DTACK".
+Disconnected pin "U10-10" from net "SerialB_Rx".
+Disconnected pin "U10-11" from net "SerialB_Tx".
+Disconnected pin "U10-14" from net "DUART_OP5".
+Disconnected pin "U10-15" from net "DUART_OP7".
+Disconnected pin "U10-16" from net "D1".
+Disconnected pin "U10-17" from net "D3".
+Disconnected pin "U10-18" from net "D5".
+Disconnected pin "U10-19" from net "D7".
+Disconnected pin "U10-20" from net "GND".
+Disconnected pin "U10-21" from net "DUART_IRQ".
+Disconnected pin "U10-22" from net "D6".
+Disconnected pin "U10-24" from net "D2".
+Disconnected pin "U10-25" from net "D0".
+Disconnected pin "U10-26" from net "DUART_OP6".
+Disconnected pin "U10-27" from net "DUART_OP4".
+Disconnected pin "U10-29" from net "Serial_RTS".
+Disconnected pin "U10-30" from net "Serial_Tx".
+Disconnected pin "U10-31" from net "Serial_Rx".
+Disconnected pin "U10-32" from net "DUART_CLK".
+Disconnected pin "U10-33" from net "GND".
+Disconnected pin "U10-35" from net "DUART_CS".
+Disconnected pin "U10-36" from net "N0968".
+Disconnected pin "U10-37" from net "DUART_IACK".
+Disconnected pin "U10-38" from net "N0967".
+Disconnected pin "U10-39" from net "N0966".
+Disconnected pin "U10-40" from net "+5V".
+Disconnected pin "U5-21" from net "Serial_CTS".
+Disconnected pin "U5-22" from net "Serial_RTS".
+Disconnected pin "U5-23" from net "Serial_Tx".
+Disconnected pin "U5-24" from net "Serial_Rx".
+Disconnected pin "U5-25" from net "D11".
+Disconnected pin "U5-26" from net "D12".
+Disconnected pin "U5-27" from net "D13".
+Disconnected pin "U5-28" from net "D14".
+Disconnected pin "U5-29" from net "D15".
+Disconnected pin "U5-30" from net "ROM_CE".
+Disconnected pin "U5-31" from net "A11".
+Disconnected pin "U5-32" from net "ROM_OE".
+Disconnected pin "U1-33" from net "GPIO_C".
+Disconnected pin "U1-35" from net "Reset_AHigh".
+Disconnected pin "U1-37" from net "ROM_WE".
+Disconnected pin "U1-39" from net "CPU_UDS".
+Disconnected pin "U1-41" from net "CPU_RW".
+Disconnected pin "U1-43" from net "CPU_BGACK".
+Disconnected pin "U1-45" from net "CPU_BG".
+Disconnected pin "U1-47" from net "CPU_AS".
+Disconnected pin "U1-51" from net "CPU_HALT".
+Disconnected pin "U1-53" from net "CPU_IPL1".
+Disconnected pin "U1-75" from net "DUART_RESET".
+Disconnected pin "U1-77" from net "DUART_IACK".
+Disconnected pin "U1-79" from net "DUART_OP6".
+Disconnected pin "U1-81" from net "DUART_OP5".
+Disconnected pin "U1-83" from net "D1".
+Disconnected pin "U1-1" from net "D5".
+Disconnected pin "U1-3" from net "DUART_CLK".
+Disconnected pin "U1-5" from net "CPU_IPL2".
+Disconnected pin "U1-7" from net "Piezo".
+Disconnected pin "U1-9" from net "Q2_Clock".
+Disconnected pin "U1-11" from net "Q2_Tristate".
+Disconnected pin "U1-32" from net "GPIO_A".
+Disconnected pin "U1-26" from net "GPIO_14".
+Disconnected pin "U1-24" from net "GPIO_13".
+Disconnected pin "U1-20" from net "GPIO_4".
+Disconnected pin "U1-18" from net "GPIO_3".
+Disconnected pin "U1-14" from net "GPIO_9".
+Disconnected pin "U1-12" from net "GPIO_8".
+Disconnected pin "U1-34" from net "GPIO_15".
+Disconnected pin "U1-36" from net "GPIO_B".
+Disconnected pin "U1-40" from net "CPU_LDS".
+Disconnected pin "U1-44" from net "CPU_DTACK".
+Disconnected pin "U1-46" from net "CPU_CLK".
+Disconnected pin "U1-48" from net "CPU_BR".
+Disconnected pin "U1-50" from net "CPU_RESET".
+Disconnected pin "U1-52" from net "CPU_BERR".
+Disconnected pin "U1-55" from net "RAM_UB".
+Disconnected pin "U1-31" from net "GPIO_7".
+Disconnected pin "U1-25" from net "GPIO_6".
+Disconnected pin "U1-23" from net "GPIO_5".
+Disconnected pin "U1-21" from net "GPIO_12".
+Disconnected pin "U1-19" from net "GPIO_11".
+Disconnected pin "U1-17" from net "GPIO_10".
+Disconnected pin "U1-15" from net "GPIO_2".
+Disconnected pin "U1-13" from net "GPIO_1".
+Disconnected pin "U1-74" from net "DUART_IRQ".
+Disconnected pin "U1-76" from net "DUART_OP4".
+Disconnected pin "U1-80" from net "DUART_DTACK".
+Disconnected pin "U1-82" from net "DUART_CS".
+Disconnected pin "U1-84" from net "DUART_OP7".
+Disconnected pin "U1-2" from net "D7".
+Disconnected pin "U1-4" from net "D3".
+Disconnected pin "U1-6" from net "CPU_IPL0".
+Disconnected pin "U1-10" from net "GPIO_0".
+Disconnected pin "U1-57" from net "RAM_OE".
+Disconnected pin "U1-61" from net "D2".
+Disconnected pin "U1-63" from net "D4".
+Disconnected pin "U1-65" from net "RAM_WE".
+Disconnected pin "U1-67" from net "ROM_OE".
+Disconnected pin "U1-69" from net "A21".
+Disconnected pin "U1-71" from net "A23".
+Disconnected pin "U1-56" from net "RAM_CE".
+Disconnected pin "U1-58" from net "D0".
+Disconnected pin "U1-62" from net "D6".
+Disconnected pin "U1-66" from net "ROM_CE".
+Disconnected pin "U1-68" from net "DUART_RW".
+Disconnected pin "U1-70" from net "A20".
+Disconnected pin "U1-72" from net "A22".
+Disconnected pin "U1-54" from net "RAM_LB".
+Disconnected pin "U9-1" from net "RS_C1".
+Disconnected pin "U9-2" from net "RS_C6".
+Disconnected pin "U9-3" from net "RS_C2".
+Disconnected pin "U9-4" from net "RS_C3".
+Disconnected pin "U9-5" from net "RS_C4".
+Disconnected pin "U9-6" from net "RS_C5".
+Disconnected pin "U9-7" from net "N0098".
+Disconnected pin "U9-8" from net "N0100".
+Disconnected pin "U9-9" from net "Serial_CTS".
+Disconnected pin "U9-10" from net "Serial_RTS".
+Disconnected pin "U9-11" from net "Serial_Tx".
+Disconnected pin "U9-12" from net "Serial_Rx".
+Disconnected pin "U9-13" from net "Rx_In".
+Disconnected pin "U9-14" from net "Tx_In".
+Disconnected pin "U9-15" from net "GND".
+Disconnected pin "U9-16" from net "+5V".
+Disconnected pin "U4-21" from net "D2".
+Disconnected pin "U4-22" from net "D1".
+Disconnected pin "U4-23" from net "D0".
+Disconnected pin "U4-25" from net "D3".
+Disconnected pin "U4-26" from net "D4".
+Disconnected pin "U4-27" from net "D5".
+Disconnected pin "U4-28" from net "D6".
+Disconnected pin "U4-29" from net "D7".
+Disconnected pin "U4-30" from net "ROM_CE".
+Disconnected pin "U4-31" from net "A11".
+Disconnected pin "U4-32" from net "ROM_OE".
+Disconnected pin "R2-1" from net "N0001".
+Disconnected pin "R2-2" from net "Reset_AHigh".
+Disconnected pin "R3-1" from net "N0001".
+Disconnected pin "C4-1" from net "Reset_AHigh".
+Disconnected pin "C6-1" from net "RS_C1".
+Disconnected pin "C6-2" from net "RS_C2".
+Disconnected pin "C7-1" from net "RS_C3".
+Disconnected pin "C7-2" from net "RS_C4".
+Disconnected pin "C8-1" from net "GND".
+Disconnected pin "C8-2" from net "RS_C6".
+Disconnected pin "C9-1" from net "RS_C5".
+Disconnected pin "C9-2" from net "GND".
+Disconnected pin "R4-1" from net "+5V".
+Disconnected pin "CONN5-3" from net "SerialB_RTS".
+Disconnected pin "CONN5-4" from net "SerialB_CTS".
+Disconnected pin "CONN4-1" from net "N0976".
+Disconnected pin "CONN12-5" from net "CPU_BERR".
+Disconnected pin "CONN14-1" from net "GPIO_8".
+Disconnected pin "CONN17-1" from net "GPIO_A".
+Disconnected pin "CONN17-2" from net "GPIO_B".
+Disconnected pin "CONN17-3" from net "GPIO_C".
+Disconnected pin "R15-1" from net "GPIO_A".
+Disconnected pin "R15-2" from net "N0997".
+Disconnected pin "R16-1" from net "GPIO_B".
+Disconnected pin "R16-2" from net "N0995".
+Disconnected pin "D10-1" from net "N0997".
+Disconnected pin "D11-1" from net "N0995".
+Disconnected pin "R17-1" from net "GPIO_C".
+Disconnected pin "R17-2" from net "N0996".
+Disconnected pin "D12-1" from net "N0996".
+Disconnected pin "R18-1" from net "N0968".
+Disconnected pin "R18-2" from net "+5V".
+Disconnected pin "R19-1" from net "N0967".
+Disconnected pin "R19-2" from net "+5V".
+Disconnected pin "R20-1" from net "N0966".
+Disconnected pin "R20-2" from net "+5V".
+Disconnected pin "R21-1" from net "+5V".
+Disconnected pin "R21-2" from net "N0969".
+Disconnected pin "C3-1" from net "+5V".
+Disconnected pin "C3-2" from net "GND".
+Disconnected pin "R23-1" from net "Reset_AHigh".
+Disconnected pin "R23-2" from net "N0919".
+Disconnected pin "D13-1" from net "N0919".
+Disconnected pin "D13-2" from net "GND".
+
+Deleted component reference "C2".
+Deleted component reference "U9".
+Deleted component reference "R2".
+Deleted component reference "C7".
+Deleted component reference "C8".
+Deleted component reference "C9".
+Deleted component reference "R20".
+Deleted component reference "R21".
+Deleted component reference "C3".
+Deleted component reference "R23".
+Deleted component reference "D13".
+
+Deleted net "N0001".
+Deleted net "RS_C2".
+Deleted net "RS_C1".
+Deleted net "RS_C3".
+Deleted net "RS_C4".
+Deleted net "RS_C6".
+Deleted net "RS_C5".
+Deleted net "N0098".
+Deleted net "N0100".
+Deleted net "ROM_WE".
+Deleted net "RAM_UB".
+Deleted net "RAM_LB".
+Deleted net "Serial_RTS".
+Deleted net "CPU_BR".
+Deleted net "CPU_BGACK".
+Deleted net "CPU_BG".
+Deleted net "CPU_BERR".
+Deleted net "Q2_Tristate".
+Deleted net "Reset_AHigh".
+Deleted net "Serial_CTS".
+Deleted net "DUART_OP5".
+Deleted net "DUART_OP7".
+Deleted net "DUART_OP6".
+Deleted net "DUART_OP4".
+Deleted net "SerialB_CTS".
+Deleted net "SerialB_RTS".
+Deleted net "N0976".
+Deleted net "N0977".
+Deleted net "N0978".
+Deleted net "GPIO_8".
+Deleted net "GPIO_9".
+Deleted net "GPIO_10".
+Deleted net "GPIO_11".
+Deleted net "GPIO_12".
+Deleted net "GPIO_13".
+Deleted net "GPIO_14".
+Deleted net "GPIO_15".
+Deleted net "GPIO_C".
+Deleted net "GPIO_B".
+Deleted net "GPIO_A".
+Deleted net "N0995".
+Deleted net "N0996".
+Deleted net "N0997".
+Deleted net "N0966".
+Deleted net "N0967".
+Deleted net "N0968".
+Deleted net "N0969".
+Deleted net "N0919".
+Deleted net "RAM_WE".
+Deleted net "DUART_RW".
+Deleted net "Piezo".
+
+Changed component reference "U1" from component "XC9572-7PC84C in A-CCS 084-Z-T", package "USER" to component "XC95xx-xPC84C", package "USER".
+Changed component reference "U4" from component "SST39SF040-70-4C-PHE", package "SOL" to component "SST39SF040-70-4C PLCC", package "SOL".
+Changed component reference "U5" from component "SST39SF040-70-4C-PHE", package "SOL" to component "SST39SF040-70-4C PLCC", package "SOL".
+Changed component reference "U10" from component "MC68681L", package "DIL" to component "SCC68681", package "PLCC".
+Added value "Value=DUART" to component reference "U10".
+
+Changed component reference "U3" from component "MC68HC000 in A-CCS 068-Z-T", package "USER" to component "MC68HC000 PLCC68", package "USER".
+Changed component reference "CONN17" from component "3PinHeader", package "SOL" to component "ByteConnector", package "SOL".
+Changed value "Value" on component reference "CONN17" to "GPO 0-7".
+Changed component reference "R15" from component "ERJ-6GEYJ102V", package "RC" to component "ERJ-6GEYJ472V", package "RC".
+Added value "Resistance=4.70K" to component reference "R15".
+
+Changed component reference "R16" from component "ERJ-6GEYJ102V", package "RC" to component "ERJ-6GEYJ472V", package "RC".
+Added value "Resistance=4.70K" to component reference "R16".
+
+Changed component reference "C6" from component "1uFCeramic", package "SOL" to component "GRM21BR61C105KA01L", package "SOL".
+Added value "Manufacturer=Murata" to component reference "C6".
+
+Added value "Manufacturer Part Number=GRM21BR61C105KA01L" to component reference "C6".
+
+Added value "Value=1uF 6.3V" to component reference "C6".
+
+Changed component reference "CONN1" from component "1-1634580-2", package "SOL" to component "MicroUSB_AB_Female", package "USER".
+Added value "Value=USB" to component reference "CONN1".
+
+Added value "Meaning=Rx" to component reference "D10".
+
+Added value "Meaning=Tx" to component reference "D11".
+
+Added value "Meaning=I2C" to component reference "D12".
+
+Changed component reference "CONN4" from component "CPU_Status", package "SOL" to component "1PinHeader", package "SOL".
+Added value "Meaning=5V_Out" to component reference "CONN4".
+
+Changed component reference "CONN14" from component "ByteConnector", package "SOL" to component "1PinHeader", package "SOL".
+Deleted value "Value" from component reference "CONN14".
+
+Added value "Meaning=5V Jump" to component reference "CONN14".
+
+Changed component reference "U2" from component "LT323", package "SOL" to component "lm2596", package "USER".
+Changed component reference "C4" from component "GRM21BR61C105KA01L", package "SOL" to component "FG16X5R1E476MRT00", package "SOL".
+Added value "Manufacturer=TDK" to component reference "C4".
+
+Added value "Manufacturer Part Number=FG16X5R1E476MRT00" to component reference "C4".
+
+Added value "Value=47uF 25V" to component reference "C4".
+
+
+Added net "Reset_In".
+Added net "CPU_FC2".
+Added net "CPU_FC1".
+Added net "CPU_FC0".
+Added net "N1038".
+Added net "N1039".
+Added net "N1040".
+Added net "N1041".
+Added net "N1042".
+Added net "N1043".
+Added net "N1044".
+Added net "N1045".
+Added net "RAM2_CE".
+Added net "N1061".
+Added net "N1063".
+Added net "N1064".
+Added net "N1065".
+Added net "N1067".
+Added net "N1068".
+Added net "N1069".
+Added net "N1070".
+Added net "N1071".
+Added net "N1076".
+Added net "SDA".
+Added net "SDL".
+Added net "5V_Out".
+Added net "N1101".
+Added net "N1113".
+Added net "N1114".
+Added net "N1115".
+Added net "N1116".
+Added net "N1117".
+Added net "N1118".
+
+Added component reference "U7" of component "AS7C4098A-12JIN", package "SOL".
+Added value "Manufacturer=Alliance" to component reference "U7".
+
+Added value "Manufacturer Part Number=AS7C4098A-12JIN" to component reference "U7".
+
+Added value "Value=RAM 256Kx16" to component reference "U7".
+
+Added component reference "U8" of component "MCP2221-I/SL", package "SOIC".
+Added value "Manufacturer=Microchip Technology" to component reference "U8".
+
+Added component reference "C24" of component "GRM21BR61C105KA01L", package "SOL".
+Added value "Manufacturer=Murata" to component reference "C24".
+
+Added value "Manufacturer Part Number=GRM21BR61C105KA01L" to component reference "C24".
+
+Added value "Value=1uF 6.3V" to component reference "C24".
+
+Added component reference "C25" of component "GRM21BR61C105KA01L", package "SOL".
+Added value "Manufacturer=Murata" to component reference "C25".
+
+Added value "Manufacturer Part Number=GRM21BR61C105KA01L" to component reference "C25".
+
+Added value "Value=1uF 6.3V" to component reference "C25".
+
+Added component reference "D1" of component "1N5924", package "DIOD05".
+Added value "Part Number=1n5824" to component reference "D1".
+
+Added component reference "L1" of component "RLB9012-330KL", package "CAN".
+Added value "Value=33uH" to component reference "L1".
+
+Added component reference "CONN19" of component "GPI", package "SOL".
+
+Renamed component reference "D13" to "D13".
+
+Renamed component reference "C23" to "C23".
+
+
+Connected pin "SW1-2" to net "Reset_In".
+Connected pin "Q2-1" to net "+5V".
+Connected pin "R3-1" to net "Reset_In".
+Connected pin "R4-1" to net "5V_Out".
+Connected pin "U4-17" to net "D3".
+Connected pin "U4-18" to net "D4".
+Connected pin "U4-19" to net "D5".
+Connected pin "U4-20" to net "D6".
+Connected pin "U4-21" to net "D7".
+Connected pin "U4-22" to net "ROM_CE".
+Connected pin "U4-23" to net "A11".
+Connected pin "U4-24" to net "ROM_OE".
+Connected pin "U4-25" to net "A12".
+Connected pin "U4-26" to net "A10".
+Connected pin "U4-27" to net "A9".
+Connected pin "U4-28" to net "A14".
+Connected pin "U4-29" to net "A15".
+Connected pin "U4-30" to net "A18".
+Connected pin "U4-31" to net "CPU_RW".
+Connected pin "U4-32" to net "+5V".
+Connected pin "U5-17" to net "D11".
+Connected pin "U5-18" to net "D12".
+Connected pin "U5-19" to net "D13".
+Connected pin "U5-20" to net "D14".
+Connected pin "U5-21" to net "D15".
+Connected pin "U5-22" to net "ROM_CE".
+Connected pin "U5-23" to net "A11".
+Connected pin "U5-24" to net "ROM_OE".
+Connected pin "U5-25" to net "A12".
+Connected pin "U5-26" to net "A10".
+Connected pin "U5-27" to net "A9".
+Connected pin "U5-28" to net "A14".
+Connected pin "U5-29" to net "A15".
+Connected pin "U5-30" to net "A18".
+Connected pin "U5-31" to net "CPU_RW".
+Connected pin "U5-32" to net "+5V".
+Connected pin "U6-17" to net "CPU_RW".
+Connected pin "U6-39" to net "CPU_LDS".
+Connected pin "U6-40" to net "CPU_UDS".
+Connected pin "U10-2" to net "A1".
+Connected pin "U10-3" to net "N1116".
+Connected pin "U10-4" to net "A2".
+Connected pin "U10-5" to net "N1114".
+Connected pin "U10-6" to net "A3".
+Connected pin "U10-7" to net "A4".
+Connected pin "U10-8" to net "N1113".
+Connected pin "U10-9" to net "CPU_RW".
+Connected pin "U10-10" to net "DUART_DTACK".
+Connected pin "U10-11" to net "SerialB_Rx".
+Connected pin "U10-13" to net "SerialB_Tx".
+Connected pin "U10-14" to net "N1039".
+Connected pin "U10-15" to net "N1041".
+Connected pin "U10-16" to net "N1043".
+Connected pin "U10-17" to net "N1045".
+Connected pin "U10-18" to net "D1".
+Connected pin "U10-19" to net "D3".
+Connected pin "U10-20" to net "D5".
+Connected pin "U10-21" to net "D7".
+Connected pin "U10-22" to net "GND".
+Connected pin "U10-24" to net "DUART_IRQ".
+Connected pin "U10-25" to net "D6".
+Connected pin "U10-26" to net "D4".
+Connected pin "U10-27" to net "D2".
+Connected pin "U10-28" to net "D0".
+Connected pin "U10-29" to net "N1044".
+Connected pin "U10-30" to net "N1042".
+Connected pin "U10-31" to net "N1040".
+Connected pin "U10-32" to net "N1038".
+Connected pin "U10-33" to net "Serial_Tx".
+Connected pin "U10-35" to net "Serial_Rx".
+Connected pin "U10-36" to net "DUART_CLK".
+Connected pin "U10-38" to net "DUART_RESET".
+Connected pin "U10-39" to net "DUART_CS".
+Connected pin "U10-40" to net "N1115".
+Connected pin "U10-41" to net "DUART_IACK".
+Connected pin "U10-42" to net "N1118".
+Connected pin "U10-43" to net "N1117".
+Connected pin "U10-44" to net "+5V".
+Connected pin "U3-12" to net "+5V".
+Connected pin "U3-13" to net "+5V".
+Connected pin "U3-22" to net "N1076".
+Connected pin "U3-24" to net "+5V".
+Connected pin "U3-28" to net "CPU_FC2".
+Connected pin "U3-29" to net "CPU_FC1".
+Connected pin "U3-30" to net "CPU_FC0".
+Connected pin "CONN12-5" to net "N1076".
+Connected pin "CONN17-1" to net "N1038".
+Connected pin "CONN17-2" to net "N1039".
+Connected pin "CONN17-3" to net "N1040".
+Connected pin "CONN17-4" to net "N1041".
+Connected pin "CONN17-5" to net "N1042".
+Connected pin "CONN17-6" to net "N1043".
+Connected pin "CONN17-7" to net "N1044".
+Connected pin "CONN17-8" to net "N1045".
+Connected pin "R15-1" to net "+5V".
+Connected pin "R15-2" to net "CPU_RESET".
+Connected pin "R16-1" to net "+5V".
+Connected pin "R16-2" to net "CPU_HALT".
+Connected pin "U7-1" to net "A1".
+Connected pin "U7-2" to net "A2".
+Connected pin "U7-3" to net "A3".
+Connected pin "U7-4" to net "A4".
+Connected pin "U7-5" to net "A5".
+Connected pin "U7-6" to net "RAM2_CE".
+Connected pin "U7-7" to net "D0".
+Connected pin "U7-8" to net "D1".
+Connected pin "U7-9" to net "D2".
+Connected pin "U7-10" to net "D3".
+Connected pin "U7-11" to net "+5V".
+Connected pin "U7-12" to net "GND".
+Connected pin "U7-13" to net "D4".
+Connected pin "U7-14" to net "D5".
+Connected pin "U7-15" to net "D6".
+Connected pin "U7-16" to net "D7".
+Connected pin "U7-17" to net "CPU_RW".
+Connected pin "U7-18" to net "A6".
+Connected pin "U7-19" to net "A7".
+Connected pin "U7-20" to net "A8".
+Connected pin "U7-21" to net "A9".
+Connected pin "U7-22" to net "A10".
+Connected pin "U7-23" to net "A11".
+Connected pin "U7-24" to net "A12".
+Connected pin "U7-25" to net "A13".
+Connected pin "U7-26" to net "A14".
+Connected pin "U7-27" to net "A15".
+Connected pin "U7-29" to net "D8".
+Connected pin "U7-30" to net "D9".
+Connected pin "U7-31" to net "D10".
+Connected pin "U7-32" to net "D11".
+Connected pin "U7-33" to net "+5V".
+Connected pin "U7-34" to net "GND".
+Connected pin "U7-35" to net "D12".
+Connected pin "U7-36" to net "D13".
+Connected pin "U7-37" to net "D14".
+Connected pin "U7-38" to net "D15".
+Connected pin "U7-39" to net "CPU_LDS".
+Connected pin "U7-40" to net "CPU_UDS".
+Connected pin "U7-41" to net "RAM_OE".
+Connected pin "U7-42" to net "A16".
+Connected pin "U7-43" to net "A17".
+Connected pin "U7-44" to net "A18".
+Connected pin "C6-2" to net "+5V".
+Connected pin "C6-1" to net "GND".
+Connected pin "U8-1" to net "+5V".
+Connected pin "U8-2" to net "N1067".
+Connected pin "U8-3" to net "N1069".
+Connected pin "U8-4" to net "DUART_RESET".
+Connected pin "U8-5" to net "Serial_Tx".
+Connected pin "U8-6" to net "Serial_Rx".
+Connected pin "U8-8" to net "N1071".
+Connected pin "U8-9" to net "SDA".
+Connected pin "U8-10" to net "SDL".
+Connected pin "U8-11" to net "N1064".
+Connected pin "U8-12" to net "N1063".
+Connected pin "U8-13" to net "N1061".
+Connected pin "U8-14" to net "GND".
+Connected pin "CONN1-1" to net "N1064".
+Connected pin "CONN1-2" to net "N1063".
+Connected pin "CONN1-3" to net "N1061".
+Connected pin "CONN1-6" to net "GND".
+Connected pin "CONN1-7" to net "GND".
+Connected pin "CONN1-8" to net "GND".
+Connected pin "R17-1" to net "N1067".
+Connected pin "R17-2" to net "N1065".
+Connected pin "D10-1" to net "N1065".
+Connected pin "D11-1" to net "N1068".
+Connected pin "R18-1" to net "N1069".
+Connected pin "R18-2" to net "N1068".
+Connected pin "D12-1" to net "N1070".
+Connected pin "R19-1" to net "N1071".
+Connected pin "R19-2" to net "N1070".
+Connected pin "C24-2" to net "N1064".
+Connected pin "C24-1" to net "GND".
+Connected pin "C25-2" to net "GND".
+Connected pin "C25-1" to net "+5V".
+Connected pin "CONN4-1" to net "5V_Out".
+Connected pin "CONN14-1" to net "+5V".
+Connected pin "U2-2" to net "N1101".
+Connected pin "U2-3" to net "GND".
+Connected pin "U2-6" to net "GND".
+Connected pin "U2-7" to net "GND".
+Connected pin "U2-8" to net "GND".
+Connected pin "U2-4" to net "5V_Out".
+Connected pin "U2-5" to net "GND".
+Connected pin "D1-2" to net "N1101".
+Connected pin "D1-1" to net "GND".
+Connected pin "L1-1" to net "N1101".
+Connected pin "L1-2" to net "5V_Out".
+Connected pin "C4-1" to net "5V_Out".
+Connected pin "CONN19-1" to net "N1113".
+Connected pin "CONN19-2" to net "N1114".
+Connected pin "CONN19-3" to net "N1115".
+Connected pin "CONN19-4" to net "N1116".
+Connected pin "CONN19-5" to net "N1117".
+Connected pin "CONN19-6" to net "N1118".
+
+
+End Of Report.

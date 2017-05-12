@@ -1,0 +1,19 @@
+Design Consistency Status Report
+--------------------------------
+
+Report File:        Y:\Homeschool\Semester6\Microcomputer\PCB v2\Computer (PCB - Design Consistency Status Report).txt
+Report Written:     Sunday, May 07, 2017
+Project Path:       Y:\Homeschool\Semester6\Microcomputer\PCB v2\Computer.prj
+Design Path:        Y:\Homeschool\Semester6\Microcomputer\PCB v2\Computer.pcb
+Design Title:       
+Created:            1/26/2017 1:31:38 AM
+Last Saved:         2/1/2017 3:25:30 AM
+Editing Time:       6264 min
+Units:              inches (precision 3)
+
+
+Checking integrity of Schematic and Pcb designs in project "Computer"
+=====================================================================
+
+
+End Of Report.

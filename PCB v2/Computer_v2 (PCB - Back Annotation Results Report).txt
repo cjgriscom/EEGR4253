@@ -1,0 +1,19 @@
+Back Annotation Results Report
+------------------------------
+
+Report File:        Y:\Homeschool\Semester6\Microcomputer\PCB v2\Computer_v2 (PCB - Back Annotation Results Report).txt
+Report Written:     Thursday, May 11, 2017
+Project Path:       Y:\Homeschool\Semester6\Microcomputer\PCB v2\Computer.prj
+Design Path:        Y:\Homeschool\Semester6\Microcomputer\PCB v2\Computer_v2.pcb
+Design Title:       
+Created:            5/7/2017 6:59:04 PM
+Last Saved:         5/11/2017 7:27:33 PM
+Editing Time:       3988 min
+Units:              inches (precision 3)
+
+Back Annotate renames from the PCB design to all Schematic designs in project "Computer".
+
+Error: Could not find  Net " D16".
+
+
+End Of Report.
