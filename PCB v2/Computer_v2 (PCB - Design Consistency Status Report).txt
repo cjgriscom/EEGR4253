@@ -7,13 +7,71 @@ Project Path:       Y:\Homeschool\Semester6\Microcomputer\PCB v2\Computer.prj
 Design Path:        Y:\Homeschool\Semester6\Microcomputer\PCB v2\Computer_v2.pcb
 Design Title:       
 Created:            5/7/2017 6:59:04 PM
-Last Saved:         5/12/2017 3:18:23 PM
-Editing Time:       5177 min
+Last Saved:         5/13/2017 4:24:59 PM
+Editing Time:       6203 min
 Units:              inches (precision 3)
 
 
-Checking integrity of Schematic "Y:\Homeschool\Semester6\Microcomputer\PCB v2\Computer.sch" with PCB "Y:\Homeschool\Semester6\Microcomputer\PCB v2\Computer_v2.pcb"
-===================================================================================================================================================================
+Checking integrity of Schematic and Pcb designs in project "Computer"
+=====================================================================
+
+Ignoring PCB only pad CONN21-4 on net "ROM_CE"
+
+Disconnect Pin U4-22 from Net "N1135"
+Disconnect Pin U4-24 from Net "N1136"
+Disconnect Pin U4-31 from Net "N1137"
+Disconnect Pin U5-22 from Net "N1135"
+Disconnect Pin U5-24 from Net "N1136"
+Disconnect Pin U5-31 from Net "N1137"
+Disconnect Pin CONN20-1 from Net "ROM_POWER"
+Disconnect Pin CONN20-2 from Net "N1137"
+Disconnect Pin CONN20-3 from Net "N1136"
+Disconnect Pin CONN20-4 from Net "N1135"
+Disconnect Pin CONN21-1 from Net "+5V"
+Disconnect Pin CONN21-2 from Net "CPU_RW"
+Disconnect Pin R5-1 from Net "N1270"
+Disconnect Pin R5-2 from Net "GND"
+Disconnect Pin D15-2 from Net "N1270"
+Disconnect Pin R21-1 from Net "GPIO_12"
+
+Delete Net "N1135"
+Delete Net "N1136"
+Delete Net "N1137"
+Delete Net "N1270"
+
+Delete Component "CONN20" [4pinHeader_SMDBack]
+Delete Component "R5" [ERJ-6GEYJ102V]
+Delete Component "D15" [APT3216LVBC/D]
+
+Rename Net ROM_OE to ROM_OE_Ext
+
+Change component reference "CONN21" to use component "3PinHeader", package "SOL" instead of component "4pinHeader_SMDBack", package "SOL".
+
+Add Net "ROM_CE_Ext"
+Add Net "ROM_CE_Int"
+Add Net "ROM_OE_Int"
+Add Net "ROM_WE_Int"
+Add Net "ROM_WE_Ext"
+
+Connect Pin Q2-3 to Net "Q2_Clock"
+Connect Pin CONN13-1 to Net "GPIO_0"
+Connect Pin CONN13-2 to Net "GPIO_1"
+Connect Pin CONN13-3 to Net "GPIO_2"
+Connect Pin CONN13-4 to Net "GPIO_3"
+Connect Pin CONN13-6 to Net "GPIO_5"
+Connect Pin CONN13-7 to Net "GPIO_6"
+Connect Pin U4-22 to Net "ROM_CE_Int"
+Connect Pin U4-24 to Net "ROM_OE_Int"
+Connect Pin U4-31 to Net "ROM_WE_Int"
+Connect Pin U5-22 to Net "ROM_CE_Int"
+Connect Pin U5-24 to Net "ROM_OE_Int"
+Connect Pin U5-31 to Net "ROM_WE_Int"
+Connect Pin CONN21-1 to Net "ROM_CE_Ext"
+Connect Pin CONN21-2 to Net "ROM_WE_Ext"
+Connect Pin CONN18-7 to Net "GPIO_14"
+Connect Pin CONN22-2 to Net "GPIO_17"
+Connect Pin CONN22-6 to Net "GPIO_21"
+Connect Pin U9-83 to Net "TDO"
 
 
 End Of Report.
