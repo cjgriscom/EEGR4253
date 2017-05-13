@@ -27,14 +27,14 @@ GPIO_4 -- 33
 GPIO_5 -- 32
 GPIO_6 -- 36
 GPIO_7 -- 40
-GPIO_8 -- 20
-GPIO_9 -- 23
-GPIO_10 -- 25
-GPIO_11 -- 34
-GPIO_12 -- 37
-GPIO_13 -- 35
-GPIO_14 -- 39
-GPIO_15 -- 41
+GPIO_8 -- CK -- 20
+GPIO_9 -- RS -- 23
+GPIO_10 -- IA -- 25
+GPIO_11 -- IR -- 34 -- PULLUP
+GPIO_12 -- DA -- 37 -- PULLUP
+GPIO_13 -- AS -- 35
+GPIO_14 -- WE -- 39
+GPIO_15 -- PS -- 41
 GPIO_16 -- 43
 GPIO_17 -- 44
 GPIO_18 -- 45

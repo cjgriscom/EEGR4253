@@ -2,13 +2,13 @@ Design Consistency Status Report
 --------------------------------
 
 Report File:        Y:\Homeschool\Semester6\Microcomputer\PCB v2\Computer_v2 (PCB - Design Consistency Status Report).txt
-Report Written:     Friday, May 12, 2017
+Report Written:     Saturday, May 13, 2017
 Project Path:       Y:\Homeschool\Semester6\Microcomputer\PCB v2\Computer.prj
 Design Path:        Y:\Homeschool\Semester6\Microcomputer\PCB v2\Computer_v2.pcb
 Design Title:       
 Created:            5/7/2017 6:59:04 PM
-Last Saved:         5/12/2017 2:29:12 PM
-Editing Time:       5132 min
+Last Saved:         5/12/2017 3:18:23 PM
+Editing Time:       5177 min
 Units:              inches (precision 3)
 
 

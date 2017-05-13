@@ -2,24 +2,46 @@ Forward Design Changes Report
 -----------------------------
 
 Report File:        Y:\Homeschool\Semester6\Microcomputer\PCB v2\Computer_v2 (PCB - Forward Design Changes Report).txt
-Report Written:     Friday, May 12, 2017
+Report Written:     Saturday, May 13, 2017
 Project Path:       Y:\Homeschool\Semester6\Microcomputer\PCB v2\Computer.prj
 Design Path:        Y:\Homeschool\Semester6\Microcomputer\PCB v2\Computer_v2.pcb
 Design Title:       
 Created:            5/7/2017 6:59:04 PM
-Last Saved:         5/12/2017 2:29:12 PM
-Editing Time:       5132 min
+Last Saved:         5/12/2017 3:18:23 PM
+Editing Time:       5178 min
 Units:              inches (precision 3)
 
-Added component reference "CONN29" of component "1PinHeader", package "SOL".
-Added value "Value=+5V" to component reference "CONN29".
+Added component reference "R21" of component "ERJ-6GEYJ472V", package "RC".
+Added value "Resistance=4.70K" to component reference "R21".
 
-Added component reference "CONN30" of component "1PinHeader", package "SOL".
-Added value "Value=GND" to component reference "CONN30".
+Added component reference "R20" of component "ERJ-6GEYJ472V", package "RC".
+Added value "Resistance=4.70K" to component reference "R20".
 
+Added component reference "U9" of component "XC95144-TQFP-100", package "QFP".
 
-Connected pin "CONN29-1" to net "P_Power_In".
-Connected pin "CONN30-1" to net "GND".
+Connected pin "R21-1" to net "GPIO_12".
+Connected pin "R21-2" to net "+5V".
+Connected pin "R20-1" to net "GPIO_11".
+Connected pin "R20-2" to net "+5V".
+Connected pin "U9-5" to net "+5V".
+Connected pin "U9-21" to net "GND".
+Connected pin "U9-26" to net "+5V".
+Connected pin "U9-31" to net "GND".
+Connected pin "U9-38" to net "+5V".
+Connected pin "U9-44" to net "GND".
+Connected pin "U9-45" to net "TDI".
+Connected pin "U9-47" to net "TMS".
+Connected pin "U9-48" to net "TCK".
+Connected pin "U9-51" to net "+5V".
+Connected pin "U9-57" to net "+5V".
+Connected pin "U9-62" to net "GND".
+Connected pin "U9-69" to net "GND".
+Connected pin "U9-75" to net "GND".
+Connected pin "U9-83" to net "TDO".
+Connected pin "U9-84" to net "GND".
+Connected pin "U9-88" to net "+5V".
+Connected pin "U9-98" to net "+5V".
+Connected pin "U9-100" to net "GND".
 
 
 End Of Report.

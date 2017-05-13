@@ -44,5 +44,7 @@ SST39SF040-70-4C-PHE||#SOL=40=ZIF-40||@Manufacturer=Microchip Technology||@Manuf
 TO||#=1=TO||@Manufacturer=||@Manufacturer Part Number=||@Distributor=||@Distributor Part Number=
 UDS_LDS||#SOL=2=Header2||@Manufacturer=||@Manufacturer Part Number=||@Distributor=||@Distributor Part Number=
 Vdd||#=1=+V||@Manufacturer=||@Manufacturer Part Number=||@Distributor=||@Distributor Part Number=
+VQFP44
 XC95xx-xPC84C||#USER=84=PLCC-84||@Manufacturer=Xilinx||@Manufacturer Part Number=XC9572-7PC84C||@Distributor=||@Distributor Part Number=||@Value=7ns
 XC9572-7PC84C in A-CCS 084-Z-T||#USER=84=PLCC-Socket-84||@Manufacturer=Xilinx||@Manufacturer Part Number=XC9572-7PC84C||@Distributor=||@Distributor Part Number=||@Value=7ns
+XC95144-TQFP-100||#QFP=100=TQFP100||@Manufacturer=||@Manufacturer Part Number=||@Distributor=||@Distributor Part Number=
