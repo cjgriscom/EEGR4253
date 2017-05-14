@@ -1,66 +1,80 @@
-CPLD_LED -- 3
-CPU_FC0 -- 65
-CPU_FC1 -- 66
-CPU_FC2 -- 67
-Reset_in -- 55
-CPU_RW -- 12,5 
-CPU_DTACK -- 82
-CPU_AS -- 81
-CPU_CLK -- 83
-CPU_RESET -- 79
-CPU_HALT -- 80
-CPU_IPL0 -- 68
-CPU_IPL1 -- 71
-CPU_IPL2 -- 72
-RAM_CE -- 1
-RAM_OE -- 84
-RAM2_CE -- 19
-ROM_CE -- 75
-ROM_OE -- 74
-VMA -- 69
-VPA -- 70
-GPIO_0 -- 21
-GPIO_1 -- 24
-GPIO_2 -- 26
-GPIO_3 -- 31
-GPIO_4 -- 33
-GPIO_5 -- 32
-GPIO_6 -- 36
-GPIO_7 -- 40
-GPIO_8 -- CK -- 20
-GPIO_9 -- RS -- 23
-GPIO_10 -- IA -- 25
-GPIO_11 -- IR -- 34 -- PULLUP
-GPIO_12 -- DA -- 37 -- PULLUP
-GPIO_13 -- AS -- 35
-GPIO_14 -- WE -- 39
-GPIO_15 -- PS -- 41
-GPIO_16 -- 43
-GPIO_17 -- 44
-GPIO_18 -- 45
-GPIO_19 -- 46
-GPIO_20 -- 47
-GPIO_21 -- 48
-GPIO_22 -- 50
-GPIO_23 -- 53
-DUART_CS -- 56
-DUART_IACK -- 57
-DUART_RESET -- 54
-DUART_DTACK -- 58
-DUART_IRQ -- IRQ
-A19 -- 6
-A20 -- 7
-A21 -- 9
-A22 -- 63
-A23 -- 11
-Q2_Clock -- 10
-D0 -- 76
-D1 -- 62
-D2 -- 77
-D3 -- 18
-D4 -- 17
-D5 -- 15
-D6 -- 14
-D7 -- 13
-SDA -- 52
-SDL -- 51
+SLAVE -- Pulldown -- 99
+CPU_FC0 -- 
+CPU_FC1 -- 
+CPU_FC2 -- 
+Reset_in -- 
+CPU_RW -- 7
+CPU_DTACK -- 
+CPU_AS -- 
+CPU_CLK -- 
+CPU_UDS -- 
+CPU_LDS -- 
+CPU_RESET -- 
+CPU_HALT -- 
+CPU_IPL0 -- 
+CPU_IPL1 -- 
+CPU_IPL2 -- 
+RAM_CE -- 12
+RAM_OE -- 6
+RAM2_CE -- 91
+ROM_WE_Ext -- 97
+ROM_CE -- Pullup -- 10
+ROM_OE -- Pullup -- 9
+ROM_WE_Int -- 
+VMA -- 
+VPA -- 
+GPIO_0 -- 
+GPIO_1 -- 
+GPIO_2 -- 
+GPIO_3 -- 
+GPIO_4 -- 
+GPIO_5 -- 
+GPIO_6 -- 
+GPIO_7 -- 
+GPIO_8 -- 
+GPIO_9 --  
+GPIO_10 -- 
+GPIO_11 -- 
+GPIO_12 -- 
+GPIO_13 -- 
+GPIO_14 -- 
+GPIO_15 -- 
+GPIO_16 -- 
+GPIO_17 -- 
+GPIO_18 -- 
+GPIO_19 -- 
+GPIO_20 -- 
+GPIO_21 -- 
+GPIO_22 -- 
+GPIO_23 -- 
+DUART_CS -- 
+DUART_IACK -- 
+DUART_RESET -- 
+DUART_DTACK -- 
+DUART_IRQ -- 
+SDA -- Pullup -- 
+SDL -- Pullup -- 
+SDA_2 -- Pullup -- 
+SDL_2 -- Pullup -- 
+A19 -- 
+A20 -- 
+A21 -- 
+A22 -- 
+A23 -- 
+Q2_Clock -- 23
+D0 -- 11
+D1 -- 
+D2 -- 8
+D3 -- 92
+D4 -- 93
+D5 -- 94
+D6 -- 95
+D7 -- 96
+D8 -- 4
+D9 -- 3
+D10 -- 2
+D11 -- 1
+D12 -- 86
+D13 -- 87
+D14 -- 89
+D15 -- 90

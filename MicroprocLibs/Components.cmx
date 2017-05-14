@@ -7,6 +7,7 @@
 4pinHeader_SMDBack||#SOL=4=Header4_SMDBack||@Manufacturer=||@Manufacturer Part Number=||@Distributor=||@Distributor Part Number=
 6pinHeader||#SOL=6=JTAG-22-28-4061||@Manufacturer=||@Manufacturer Part Number=||@Distributor=||@Distributor Part Number=
 7PinHeader||#SIL=7=Header7||@Manufacturer=||@Manufacturer Part Number=||@Distributor=||@Distributor Part Number=
+12RS333C||#CAN=4=12RS333C||@Manufacturer=||@Manufacturer Part Number=||@Distributor=||@Distributor Part Number=
 22-28-4061||#SIP=6=JTAG-22-28-4061||@Manufacturer=Molex/Waldom||@Manufacturer Part Number=22-28-4061||@Value=JTAG||@Distributor=||@Distributor Part Number=
 4952||#USER=1=TP4952||@Manufacturer=Keystone||@Manufacturer Part Number=4952||@Value=Test Point||@Distributor=||@Distributor Part Number=
 APT3216LVBC/D||#SOL=2=CC1206_71N_PAN||@Manufacturer=Kingbright||@Manufacturer Part Number=APT3216LVBC/D||@Distributor=||@Distributor Part Number=||@Value=Blue 2mA
