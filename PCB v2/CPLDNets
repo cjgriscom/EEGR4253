@@ -1,9 +1,9 @@
-SLAVE -- Pulldown -- 99
+SLAVE -- Pulldown -- 
 CPU_FC0 -- 
 CPU_FC1 -- 
 CPU_FC2 -- 
 Reset_in -- 
-CPU_RW -- 7
+CPU_RW -- 
 CPU_DTACK -- 
 CPU_AS -- 
 CPU_CLK -- 
@@ -14,12 +14,12 @@ CPU_HALT --
 CPU_IPL0 -- 
 CPU_IPL1 -- 
 CPU_IPL2 -- 
-RAM_CE -- 12
-RAM_OE -- 6
-RAM2_CE -- 91
-ROM_WE_Ext -- 97
-ROM_CE -- Pullup -- 10
-ROM_OE -- Pullup -- 9
+RAM_CE -- 
+RAM_OE --
+RAM2_CE -- 
+ROM_WE_Ext -- 
+ROM_CE -- Pullup -- 
+ROM_OE -- Pullup -- 
 ROM_WE_Int -- 
 VMA -- 
 VPA -- 
@@ -61,20 +61,20 @@ A20 --
 A21 -- 
 A22 -- 
 A23 -- 
-Q2_Clock -- 23
-D0 -- 11
+Q2_Clock -- 
+D0 -- 
 D1 -- 
-D2 -- 8
-D3 -- 92
-D4 -- 93
-D5 -- 94
-D6 -- 95
-D7 -- 96
-D8 -- 4
-D9 -- 3
-D10 -- 2
-D11 -- 1
-D12 -- 86
-D13 -- 87
-D14 -- 89
-D15 -- 90
+D2 -- 
+D3 -- 
+D4 -- 
+D5 -- 
+D6 -- 
+D7 -- 
+D8 -- 
+D9 -- 
+D10 -- 
+D11 -- 
+D12 -- 
+D13 -- 
+D14 -- 
+D15 -- 
