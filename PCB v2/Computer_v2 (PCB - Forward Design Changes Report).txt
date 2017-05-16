@@ -2,25 +2,16 @@ Forward Design Changes Report
 -----------------------------
 
 Report File:        Y:\Homeschool\Semester6\Microcomputer\PCB v2\Computer_v2 (PCB - Forward Design Changes Report).txt
-Report Written:     Saturday, May 13, 2017
+Report Written:     Tuesday, May 16, 2017
 Project Path:       Y:\Homeschool\Semester6\Microcomputer\PCB v2\Computer.prj
 Design Path:        Y:\Homeschool\Semester6\Microcomputer\PCB v2\Computer_v2.pcb
 Design Title:       
 Created:            5/7/2017 6:59:04 PM
-Last Saved:         5/13/2017 10:18:11 PM
-Editing Time:       6516 min
+Last Saved:         5/16/2017 4:51:31 PM
+Editing Time:       10499 min
 Units:              inches (precision 3)
 
-Added component reference "C29" of component "GRM21BR61C105KA01L", package "SOL".
-Added value "Manufacturer=Murata" to component reference "C29".
-
-Added value "Manufacturer Part Number=GRM21BR61C105KA01L" to component reference "C29".
-
-Added value "Value=1uF 6.3V" to component reference "C29".
-
-
-Connected pin "C29-2" to net "GND".
-Connected pin "C29-1" to net "+5V".
+The designs are the same, so no design changes to forward.
 
 
 End Of Report.

@@ -2,20 +2,20 @@ Design Rule Check Report
 ------------------------
 
 Report File:        Y:\Homeschool\Semester6\Microcomputer\PCB v2\Computer_v2 (PCB - Design Rule Check Report).txt
-Report Written:     Friday, May 12, 2017
+Report Written:     Tuesday, May 16, 2017
 Project Path:       Y:\Homeschool\Semester6\Microcomputer\PCB v2\Computer.prj
 Design Path:        Y:\Homeschool\Semester6\Microcomputer\PCB v2\Computer_v2.pcb
 Design Title:       
 Created:            5/7/2017 6:59:04 PM
-Last Saved:         5/12/2017 3:42:45 AM
-Editing Time:       4482 min
+Last Saved:         5/16/2017 5:15:12 PM
+Editing Time:       10523 min
 Units:              inches (precision 3)
 
 
 Results
 =======
 
-Gap in Net "A1" between (10.950,8.475) and (10.010,8.685) 
+Gap in Net "A1" between (10.960,8.450) and (10.005,8.685) 
     A1.
 Gap in Net "A2" between (10.988,8.548) and (10.005,8.595) 
     A2.
